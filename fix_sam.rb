@@ -4,7 +4,7 @@
 # out: Fixed sam that is valid for compare2truth.pl
 # 1) Readnames end in a for fwd and b for rev
 # 2) Fwd read comes before rev
-# 3) Add missing reads (?)
+# 3) Add missing reads (TODO)
 # 4) NH and IH tag signalising multi-mappers
 #
 ####
