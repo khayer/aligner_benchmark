@@ -36,6 +36,14 @@ def check_hi_tag(fields)
   fields << ih
 end
 
+def rep_line(lines1, lines2)
+  new_line1 = []
+  lines2.each do |l2|
+    new_line1 << lines1[0]
+  end
+  new_line1
+end
+
 def fix_lines(lines,current_name)
   #number_of_hits = lines.length/2+1
   #STDERR.puts number_of_hits
@@ -57,9 +65,14 @@ def fix_lines(lines,current_name)
     i = i+1
   end
   if rev_reads.length != fwd_reads.length
-    STDERR.puts rev_reads.join(":")
-    STDERR.puts fwd_reads.join(":")
-    raise "GSNAP case"
+    #STDERR.puts rev_reads.join(":")
+    #STDERR.puts fwd_reads.join(":")
+    #raise "GSNAP case"
+    if rev_reads.length > fwd_reads.length
+      fwd_reads = rep_line(fwd_reads, rev_reads)
+    else
+      rev_reads = rep_line(rev_reads, fwd_reads)
+    end
   end
   rev_reads.each_with_index do |rev, i|
     fwd = fwd_reads[i]
