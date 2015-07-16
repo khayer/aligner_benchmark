@@ -53,20 +53,34 @@ def fix_lines(lines,current_name)
   i = 0
   # e[-1] information from IH tag if it exists
   #STDERR.puts lines.join(":")
-  lines.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
+  #lines.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
   #STDERR.puts lines.join(":")
   fwd_reads = []
   rev_reads = []
+  fwd_count = 1
+  rev_count = 1
   lines.each do |line|
     l = fix_ab(line,current_name)
     #second = fix_ab(lines[i*2+1],current_name)
     if l[0] =~ /a$/
+      if l[-1] == 0
+        l[-1] = fwd_count
+        l.insert(-2,"HI:i:#{fwd_count}")
+        fwd_count += 1
+      end
       fwd_reads << l
     else
+      if l[-1] == 0
+        l[-1] = rev_count
+        l.insert(-2,"HI:i:#{rev_count}")
+        rev_count += 1
+      end
       rev_reads << l
     end
     i = i+1
   end
+  fwd_reads.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
+  rev_reads.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
   if rev_reads.length != fwd_reads.length
     #STDERR.puts rev_reads.join(":")
     #STDERR.puts fwd_reads.join(":")
