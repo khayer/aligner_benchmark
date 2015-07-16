@@ -39,7 +39,10 @@ end
 def rep_line(lines1, lines2)
   new_line1 = []
   lines2.each do |l2|
-    new_line1 << lines1[0]
+    k = lines1[0]
+    k[6] = l2[2]
+    k[7] = l2[3]
+    new_line1 << k.dup
   end
   new_line1
 end
@@ -112,8 +115,8 @@ while !sam_file.eof?
     current_name = get_name(fields[0])
   end
 
-  STDERR.puts current_name
-  STDERR.puts old_name
+  #STDERR.puts current_name
+  #STDERR.puts old_name
   lines = lines[0...-1] if !sam_file.eof?
   fix_lines(lines,old_name)
   #current_name = fields[0]
