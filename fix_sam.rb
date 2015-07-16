@@ -9,6 +9,11 @@
 #
 ####
 
+def get_name(field_0)
+  field_0 =~ /(\d+)/
+  name = "seq.#{$1}"
+end
+
 def fix_ab(fields,current_name)
   #STDERR.puts fields
   #STDERR.puts (fields[1].to_i & 2**7).to_s(2)
@@ -79,7 +84,7 @@ while !sam_file.eof?
   if current_name == ""
     #line.chomp!
     #fields = line.split("\t")
-    current_name = fields[0][0...-1] if current_name == ""
+    current_name = get_name(fields[0])
     lines = [fields]
   else
     lines << fields
@@ -91,7 +96,7 @@ while !sam_file.eof?
     fields = line.split("\t")
     fields = check_hi_tag(fields)
     lines << fields
-    current_name = fields[0][0...-1]
+    current_name = get_name(fields[0])
   end
 
   STDERR.puts current_name
