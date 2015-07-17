@@ -12,7 +12,7 @@ ARGV[0..-1].each do |arg|
   info << arg.split("/")[0]
   File.open(arg).each do |line|
     line.chomp!
-    fields = line.split("\t")
+    fields = line.split(" ")
     info << fields[-1]
   end
   all << info
