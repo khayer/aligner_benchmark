@@ -47,7 +47,7 @@ for j in 0..10
   end
   res = []
   for i in 0...ARGV.length
-    res << info[i][j]
+    res << all[i][j]
   end 
   print res.join("\t")
   print "\n"
