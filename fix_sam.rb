@@ -14,6 +14,11 @@ def get_name(field_0)
   name = "seq.#{$1}"
 end
 
+def add_empty_lines(current_name)
+  puts "seq.#{current_name}a\t77\t*\t0\t255\t*\t*\t0\t0\tNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\t."
+  puts "seq.#{current_name}b\t141\t*\t0\t255\t*\t*\t0\t0\tNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\t."
+end
+
 def fix_ab(fields,current_name)
   #STDERR.puts fields
   #STDERR.puts (fields[1].to_i & 2**7).to_s(2)
@@ -26,7 +31,7 @@ def fix_ab(fields,current_name)
 end
 
 def check_hi_tag(fields)
-  ih = 0
+  ih = -1
   return fields << ih unless fields[11]
   fields[11..-1].each do |tag|
     if tag =~ /^HI:/
@@ -64,14 +69,14 @@ def fix_lines(lines,current_name)
     l = fix_ab(line,current_name)
     #second = fix_ab(lines[i*2+1],current_name)
     if l[0] =~ /a$/
-      if l[-1] == 0
+      if l[-1] == -1
         l[-1] = fwd_count
         l.insert(-2,"HI:i:#{fwd_count}")
         fwd_count += 1
       end
       fwd_reads << l
     else
-      if l[-1] == 0
+      if l[-1] == -1
         l[-1] = rev_count
         l.insert(-2,"HI:i:#{rev_count}")
         rev_count += 1
@@ -128,6 +133,20 @@ while !sam_file.eof?
     fields = check_hi_tag(fields)
     lines << fields
     current_name = get_name(fields[0])
+  end
+  #STDERR.puts current_name
+  current_name =~ /(\d+)/
+  num = $1.to_i
+  old_name =~ /(\d+)/
+  old_num = $1.to_i
+  #STDERR.puts old_num
+  while !(num <= old_num+1)
+    add_empty_lines(old_num)
+    old_name = "seq.#{old_num+1}"
+    old_num += 1
+    #STDERR.puts "HERE: #{num}"
+    #STDERR.puts "OLD_NAME: #{old_name}"
+    #STDIN.gets
   end
 
   #STDERR.puts current_name
