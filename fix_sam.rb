@@ -27,6 +27,7 @@ end
 
 def check_hi_tag(fields)
   ih = 0
+  return fields << ih unless fields[11]
   fields[11..-1].each do |tag|
     if tag =~ /^HI:/
       tag =~ /(\d+)/
