@@ -10,7 +10,12 @@ all = []
 ARGV[0..-1].each do |arg|
   info = []
   info << arg.split("/")[0]
+  first = true
   File.open(arg).each do |line|
+    if first
+      first = false
+      next
+    end
     line.chomp!
     fields = line.split(" ")
     info << fields[-1]
@@ -31,7 +36,7 @@ File.open(ARGV[0]).each_with_index do |line,j|
   end
   res = []
   for i in 0...ARGV.length
-    res << all[i][j+1]
+    res << all[i][j]
   end
   print res.join("\t")
   print "\n"
