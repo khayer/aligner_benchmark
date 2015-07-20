@@ -1,0 +1,110 @@
+-------
+depth = 1
+total inferred = 156337
+num_true_positive = 135244
+num_false_positive = 21093
+percent_false_positive = 13.49
+-------
+depth = 2
+total inferred = 144859
+num_true_positive = 133004
+num_false_positive = 11855
+percent_false_positive = 8.18
+-------
+depth = 3
+total inferred = 140975
+num_true_positive = 131072
+num_false_positive = 9903
+percent_false_positive = 7.02
+-------
+depth = 4
+total inferred = 138019
+num_true_positive = 129112
+num_false_positive = 8907
+percent_false_positive = 6.45
+-------
+depth = 5
+total inferred = 135377
+num_true_positive = 127069
+num_false_positive = 8308
+percent_false_positive = 6.13
+-------
+depth = 6
+total inferred = 132894
+num_true_positive = 125069
+num_false_positive = 7825
+percent_false_positive = 5.88
+-------
+depth = 7
+total inferred = 130435
+num_true_positive = 122992
+num_false_positive = 7443
+percent_false_positive = 5.7
+-------
+depth = 8
+total inferred = 127980
+num_true_positive = 120851
+num_false_positive = 7129
+percent_false_positive = 5.57
+-------
+depth = 9
+total inferred = 125479
+num_true_positive = 118672
+num_false_positive = 6807
+percent_false_positive = 5.42
+-------
+depth = 10
+total inferred = 123131
+num_true_positive = 116561
+num_false_positive = 6570
+percent_false_positive = 5.33
+-------
+depth = 1
+total spanned = 120021
+false_negative = 815
+percent_false_negative = 0.67
+-------
+depth = 2
+total spanned = 118323
+false_negative = 462
+percent_false_negative = 0.39
+-------
+depth = 3
+total spanned = 116905
+false_negative = 392
+percent_false_negative = 0.33
+-------
+depth = 4
+total spanned = 115447
+false_negative = 359
+percent_false_negative = 0.31
+-------
+depth = 5
+total spanned = 114016
+false_negative = 338
+percent_false_negative = 0.29
+-------
+depth = 6
+total spanned = 112525
+false_negative = 318
+percent_false_negative = 0.28
+-------
+depth = 7
+total spanned = 110975
+false_negative = 305
+percent_false_negative = 0.27
+-------
+depth = 8
+total spanned = 109398
+false_negative = 295
+percent_false_negative = 0.26
+-------
+depth = 9
+total spanned = 107696
+false_negative = 283
+percent_false_negative = 0.26
+-------
+depth = 10
+total spanned = 106035
+false_negative = 270
+percent_false_negative = 0.25
