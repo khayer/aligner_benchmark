@@ -44,11 +44,11 @@ end
 
 def rep_line(lines1, lines2)
   new_line1 = []
-  STDERR.puts lines1
-  STDERR.puts lines2
+  #STDERR.puts lines1
+  #STDERR.puts lines2
   lines2.each do |l2|
     k = lines1[0]
-    STDERR.puts lines1[0]
+    #STDERR.puts lines1[0]
     k[6] = l2[2]
     k[7] = l2[3]
     new_line1 << k.dup
