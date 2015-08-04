@@ -125,6 +125,12 @@ while !sam_file.eof?
   line.chomp!
   fields = line.split("\t")
   fields = check_hi_tag(fields)
+  if lines.length != 0
+    if get_name(lines[0][0]) != get_name(fields[0])
+      fix_lines(lines)
+      current_name = ""
+    end
+  end
   if current_name == ""
     #line.chomp!
     #fields = line.split("\t")
