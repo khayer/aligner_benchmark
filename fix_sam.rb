@@ -83,7 +83,7 @@ def fix_lines(lines,current_name)
   rev_reads = []
   fwd_count = 1
   rev_count = 1
-  STDERR.puts lines.join("NINERRRR")
+  #STDERR.puts lines.join("NINERRRR")
   lines.each do |line|
     l = fix_ab(line,current_name)
     #second = fix_ab(lines[i*2+1],current_name)
