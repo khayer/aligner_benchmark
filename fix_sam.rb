@@ -48,9 +48,9 @@ def rep_line(lines1, lines2)
   #STDERR.puts lines2
   lines2.each do |l2|
     if lines1.length >= 1
-      k = lines1[0]
+      k = lines1[0].dup
     else
-      k = lines2[0]
+      k = lines2[0].dup
       if (k[1].to_i & 2**7).to_s(2)[-8] == "1"
         k[1] = 69
       else
@@ -64,7 +64,7 @@ def rep_line(lines1, lines2)
     #STDERR.puts lines1[0]
     k[6] = l2[2]
     k[7] = l2[3]
-    new_line1 << k.dup
+    new_line1 << k
   end
   new_line1
 end
