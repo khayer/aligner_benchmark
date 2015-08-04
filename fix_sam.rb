@@ -127,7 +127,7 @@ while !sam_file.eof?
   fields = check_hi_tag(fields)
   if lines.length != 0
     if get_name(lines[0][0]) != get_name(fields[0])
-      fix_lines(lines)
+      fix_lines(lines,current_name)
       current_name = ""
     end
   end
