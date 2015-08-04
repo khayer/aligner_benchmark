@@ -94,6 +94,7 @@ def fix_lines(lines,current_name)
     #STDERR.puts rev_reads.join(":")
     #STDERR.puts fwd_reads.join(":")
     #raise "GSNAP case"
+    STDERR.puts rev_reads.join("BUHJA")
     if rev_reads.length > fwd_reads.length
       fwd_reads = rep_line(fwd_reads, rev_reads)
     else
@@ -147,9 +148,9 @@ while !sam_file.eof?
     add_empty_lines(old_num)
     old_name = "seq.#{old_num+1}"
     old_num += 1
-    #STDERR.puts "HERE: #{num}"
-    #STDERR.puts "OLD_NAME: #{old_name}"
-    #STDIN.gets
+    STDERR.puts "HERE: #{num}"
+    STDERR.puts "OLD_NAME: #{old_name}"
+    STDIN.gets
   end
 
   #STDERR.puts current_name
