@@ -106,14 +106,14 @@ def fix_lines(lines,current_name)
   end
   fwd_reads.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
   rev_reads.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
-  STDERR.puts rev_reads.length
-  STDERR.puts fwd_reads.length
-  STDIN.gets
+  #STDERR.puts rev_reads.length
+  #STDERR.puts fwd_reads.length
+  #STDIN.gets
   if rev_reads.length != fwd_reads.length
     #STDERR.puts rev_reads.join(":")
     #STDERR.puts fwd_reads.join(":")
     #raise "GSNAP case"
-    STDERR.puts "BUHJA"
+    #STDERR.puts "BUHJA"
     if rev_reads.length > fwd_reads.length
       fwd_reads = rep_line(fwd_reads, rev_reads)
     else
@@ -173,9 +173,9 @@ while !sam_file.eof?
     add_empty_lines(old_num)
     old_name = "seq.#{old_num+1}"
     old_num += 1
-    STDERR.puts "HERE: #{num}"
-    STDERR.puts "OLD_NAME: #{old_name}"
-    STDIN.gets
+    #STDERR.puts "HERE: #{num}"
+    #STDERR.puts "OLD_NAME: #{old_name}"
+    #STDIN.gets
   end
 
   #STDERR.puts current_name
