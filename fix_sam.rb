@@ -52,8 +52,10 @@ def rep_line(lines1, lines2)
     else
       k = lines2[0].dup
       if (k[1].to_i & 2**7).to_s(2)[-8] == "1"
+        k[0].sub(/b$/,"a")
         k[1] = 69
       else
+        k[0].sub(/a$/,"b")
         k[1] = 133
       end
       k[2] = "*"
@@ -111,7 +113,7 @@ def fix_lines(lines,current_name)
     #STDERR.puts rev_reads.join(":")
     #STDERR.puts fwd_reads.join(":")
     #raise "GSNAP case"
-    STDERR.puts rev_reads.join("BUHJA")
+    STDERR.puts "BUHJA"
     if rev_reads.length > fwd_reads.length
       fwd_reads = rep_line(fwd_reads, rev_reads)
     else
