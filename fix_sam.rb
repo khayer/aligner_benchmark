@@ -68,6 +68,7 @@ def fix_lines(lines,current_name)
   rev_reads = []
   fwd_count = 1
   rev_count = 1
+  STDERR.puts lines.join("NINERRRR")
   lines.each do |line|
     l = fix_ab(line,current_name)
     #second = fix_ab(lines[i*2+1],current_name)
@@ -90,6 +91,9 @@ def fix_lines(lines,current_name)
   end
   fwd_reads.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
   rev_reads.sort_by! {|e| [e[-1], e[2], e[3].to_i]}
+  STDERR.puts rev_reads.length
+  STDERR.puts fwd_reads.length
+  STDIN.gets
   if rev_reads.length != fwd_reads.length
     #STDERR.puts rev_reads.join(":")
     #STDERR.puts fwd_reads.join(":")
