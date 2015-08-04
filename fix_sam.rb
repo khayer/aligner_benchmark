@@ -47,7 +47,20 @@ def rep_line(lines1, lines2)
   #STDERR.puts lines1
   #STDERR.puts lines2
   lines2.each do |l2|
-    k = lines1[0]
+    if lines1.length >= 1
+      k = lines1[0]
+    else
+      k = lines2[0]
+      if (k[1].to_i & 2**7).to_s(2)[-8] == "1"
+        k[1] = 69
+      else
+        k[1] = 133
+      end
+      k[2] = "*"
+      k[3] = 0
+      k[4] = 255
+      k[5] = "*"
+    end
     #STDERR.puts lines1[0]
     k[6] = l2[2]
     k[7] = l2[3]
