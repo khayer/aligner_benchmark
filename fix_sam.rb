@@ -146,7 +146,7 @@ while !sam_file.eof?
     if get_name(lines[0][0]) != get_name(fields[0])
       fix_lines(lines,current_name)
       current_name =~ /(\d+)/
-      num_out = $1.to_i
+      num_out = $1.to_i+1
       current_name = ""
     end
   end
