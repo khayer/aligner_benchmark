@@ -174,7 +174,7 @@ while !sam_file.eof?
   old_num = $1.to_i
   num_out ||= old_num
   #STDERR.puts old_num
-  while !(old_num  <= num_out+1)
+  while !(old_num  <= num_out)
     add_empty_lines(num_out)
     num_out = "seq.#{num_out+1}"
     num_out += 1
