@@ -140,9 +140,13 @@ while !sam_file.eof?
   line.chomp!
   fields = line.split("\t")
   fields = check_hi_tag(fields)
+  num_out = nil
   if lines.length != 0
+    #Contextmap2 case
     if get_name(lines[0][0]) != get_name(fields[0])
       fix_lines(lines,current_name)
+      current_name =~ /(\d+)/
+      num_out = $1.to_i
       current_name = ""
     end
   end
@@ -168,7 +172,16 @@ while !sam_file.eof?
   num = $1.to_i
   old_name =~ /(\d+)/
   old_num = $1.to_i
+  num_out ||= old_num
   #STDERR.puts old_num
+  while !(num_out  <= old_num+1)
+    add_empty_lines(num_out)
+    num_out = "seq.#{num_out+1}"
+    num_out += 1
+    #STDERR.puts "HERE: #{num}"
+    #STDERR.puts "OLD_NAME: #{old_name}"
+    #STDIN.gets
+  end
   while !(num <= old_num+1)
     add_empty_lines(old_num)
     old_name = "seq.#{old_num+1}"
