@@ -176,7 +176,7 @@ while !sam_file.eof?
   #STDERR.puts old_num
   while !(old_num  <= num_out)
     add_empty_lines(num_out)
-    num_out = "seq.#{num_out+1}"
+    #num_out = "seq.#{num_out+1}"
     num_out += 1
     #STDERR.puts "HERE: #{num}"
     #STDERR.puts "OLD_NAME: #{old_name}"
