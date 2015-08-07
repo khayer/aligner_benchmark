@@ -1,11 +1,11 @@
 #####
 #
-# Expects sam sorted by read name!
-# out: Fixed sam that is valid for compare2truth.pl
-# 1) Readnames end in a for fwd and b for rev
-# 2) Fwd read comes before rev
-# 3) Add missing reads
-# 4) NH and IH tag signalizing multi-mappers
+#   Runs the statistics for a given dataset
+#   IN: dataset_name source_of_tree
+#   out:
+#   1) Sorted and appropriate sam files
+#   2) runs compare2truth
+#   3) runs compare junctions
 #
 ####
 
