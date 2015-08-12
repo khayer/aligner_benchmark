@@ -127,7 +127,7 @@ class Job
 end
 
 def check_if_results_exist(stats_path)
-  File.exists?("#{stats_path}/comp_res.txt") && File.exists?("#{stats_path}/junctions_stats.txt")
+  File.exist?("#{stats_path}/comp_res.txt") && File.exist?("#{stats_path}/junctions_stats.txt")
 end
 
 def get_truth_files(options, source_of_tree, dataset)
@@ -203,12 +203,12 @@ def run_contextmap2(options, source_of_tree, dataset)
   raise "Trouble finding #{dataset}: #{l}" if l.length != 1
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/contextmap2.sh"))
-  return unless File.exists?("#{l}/mapping.sam")
+  return unless File.exist?("#{l}/mapping.sam")
   options[:stats_path] = "#{options[:out_directory]}/contextmap2/"
   begin
     Dir.mkdir(options[:stats_path])
   rescue SystemCallError
-    if Dir.exists?(options[:stats_path])
+    if Dir.exist?(options[:stats_path])
       logger.warn("Directory #{options[:stats_path]} exists!")
     else
       logger.error("Can't create directory #{options[:stats_path]}!")
@@ -241,13 +241,13 @@ def run_crac(options, source_of_tree, dataset)
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/crac.sh"))
   Dir.glob("#{l}/*").each do |p|
     if File.directory? p
-      next unless File.exists?("#{p}/output.sam")
+      next unless File.exist?("#{p}/output.sam")
       $logger.debug(p)
       options[:stats_path] = "#{options[:out_directory]}/crac/#{p.split("/")[-1]}".gsub(/[()]/,"")
       begin
         Dir.mkdir(options[:stats_path])
       rescue SystemCallError
-        if Dir.exists?(options[:stats_path])
+        if Dir.exist?(options[:stats_path])
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
@@ -263,7 +263,7 @@ def run_crac(options, source_of_tree, dataset)
       begin
         Dir.mkdir(options[:stats_path])
       rescue SystemCallError
-        if Dir.exists?(options[:stats_path])
+        if Dir.exist?(options[:stats_path])
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
@@ -297,12 +297,12 @@ def run_gsnap(options, source_of_tree, dataset)
   raise "Trouble finding #{dataset}: #{l}" if l.length != 1
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/gsnap.sh"))
-  return unless File.exists?("#{l}/output.sam")
+  return unless File.exist?("#{l}/output.sam")
   options[:stats_path] = "#{options[:out_directory]}/gsnap/"
   begin
     Dir.mkdir(options[:stats_path])
   rescue SystemCallError
-    if Dir.exists?(options[:stats_path])
+    if Dir.exist?(options[:stats_path])
       logger.warn("Directory #{options[:stats_path]} exists!")
     else
       logger.error("Can't create directory #{options[:stats_path]}!")
@@ -336,13 +336,20 @@ def run_star(options, source_of_tree, dataset)
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/star.sh"))
   Dir.glob("#{l}/*").each do |p|
     if File.directory? p
-      next unless File.exists?("#{p}/*Aligned.out.sam")
+      cmd = "find #{p} -name \"Aligned.out.sam\""
+      $logger.debug(cmd)
+      l = `#{cmd}`
+      l = l.split("\n")
+      raise "Trouble finding #{dataset}: #{l}" if l.length > 1
+      next if l.length < 1
+      l = l[0]
+      next unless File.exist?("#{l}")
       $logger.debug(p)
       options[:stats_path] = "#{options[:out_directory]}/star/#{p.split("/")[-1]}".gsub(/[()]/,"")
       begin
         Dir.mkdir(options[:stats_path])
       rescue SystemCallError
-        if Dir.exists?(options[:stats_path])
+        if Dir.exist?(options[:stats_path])
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
@@ -358,7 +365,7 @@ def run_star(options, source_of_tree, dataset)
       begin
         Dir.mkdir(options[:stats_path])
       rescue SystemCallError
-        if Dir.exists?(options[:stats_path])
+        if Dir.exist?(options[:stats_path])
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
@@ -394,14 +401,14 @@ def run_tophat2(options, source_of_tree, dataset)
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/tophat2.sh"))
   Dir.glob("#{l}/*").each do |p|
     next unless File.directory? p
-    next unless File.exists?("#{p}/unmapped.bam")
-    next unless File.exists?("#{p}/accepted_hits.bam")
+    next unless File.exist?("#{p}/unmapped.bam")
+    next unless File.exist?("#{p}/accepted_hits.bam")
     $logger.debug(p)
     options[:stats_path] = "#{options[:out_directory]}/tophat2/#{p.split("/")[-1]}".gsub(/[()]/,"")
     begin
       Dir.mkdir(options[:stats_path])
     rescue SystemCallError
-      if Dir.exists?(options[:stats_path])
+      if Dir.exist?(options[:stats_path])
         logger.warn("Directory #{options[:stats_path]} exists!")
       else
         logger.error("Can't create directory #{options[:stats_path]}!")
@@ -436,7 +443,7 @@ def run(argv)
   begin
     Dir.mkdir(options[:out_directory])
   rescue SystemCallError
-    if Dir.exists?(options[:out_directory])
+    if Dir.exist?(options[:out_directory])
       logger.warn("Directory #{options[:out_directory]} exists!")
     else
       logger.error("Can't create directory #{options[:out_directory]}!")
@@ -469,7 +476,7 @@ def run(argv)
     begin
       Dir.mkdir("#{options[:out_directory]}/#{alg}")
     rescue SystemCallError
-      if Dir.exists?("#{options[:out_directory]}/#{alg}")
+      if Dir.exist?("#{options[:out_directory]}/#{alg}")
         logger.warn("Directory #{options[:out_directory]}/#{alg} exists!")
       else
         logger.error("Can't create directory #{options[:out_directory]}/#{alg}!")
