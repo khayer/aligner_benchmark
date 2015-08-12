@@ -361,6 +361,42 @@ def run_hisat(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
+def run_mapsplice2(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/mapsplice2/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/mapsplice2.sh"))
+  return unless File.exist?("#{l}/alignments.sam")
+  options[:stats_path] = "#{options[:out_directory]}/mapsplice2/"
+  begin
+    Dir.mkdir(options[:stats_path])
+  rescue SystemCallError
+    if Dir.exist?(options[:stats_path])
+      logger.warn("Directory #{options[:stats_path]} exists!")
+    else
+      logger.error("Can't create directory #{options[:stats_path]}!")
+      raise("Trouble creating directory, log for details.")
+    end
+  end
+
+  return if check_if_results_exist(options[:stats_path])
+  clean_files(options[:stats_path])
+  options[:tool_result_path] = l
+  shell_file = "#{options[:jobs_path]}/mapsplice2_statistics_#{options[:species]}_#{dataset}.sh"
+  o = File.open(shell_file,"w")
+  o.puts(erubis.evaluate(options))
+  o.close()
+  Dir.chdir "#{options[:jobs_path]}"
+  $logger.debug(Dir.pwd)
+  cmd = "bsub < #{shell_file}"
+  jobnumber = submit(cmd,options)
+  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  $logger.debug(options[:jobs])
+end
+
 def run_star(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/star/alignment -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
