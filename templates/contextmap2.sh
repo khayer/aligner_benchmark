@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 #BSUB -J contextmap2_stats              # LSF job name
 #BSUB -o contextmap2_stats.%J.out       # Name of the job output file
 #BSUB -e contextmap2_stats.%J.error     # Name of the job error file
