@@ -528,6 +528,8 @@ def run(argv)
       run_gsnap(options, source_of_tree, dataset)
     when :hisat
       run_hisat(options, source_of_tree, dataset)
+    when :mapsplice2
+      run_mapsplice2(options, source_of_tree, dataset)
     when :star
       run_star(options, source_of_tree, dataset)
     when :tophat2
