@@ -1,15 +1,15 @@
 ###
-# 
-# IN: 
+#
+# IN:
 # [hayer@consign aligner_benchmark]$ ls */comp_res.txt
 #     gsnap/comp_res.txt  hisat/comp_res.txt  mapsplice2/comp_res.txt
-# OUT: Summary 
+# OUT: Summary
 #
 ###
 all = []
 ARGV[0..-1].each do |arg|
   info = []
-  info << arg.split("/")[0]
+  info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
   File.open(arg).each do |line|
     line.chomp!
     fields = line.split(" ")
@@ -48,7 +48,7 @@ for j in 0..10
   res = []
   for i in 0...ARGV.length
     res << all[i][j]
-  end 
+  end
   print res.join("\t")
   print "\n"
 end
