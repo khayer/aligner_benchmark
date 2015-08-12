@@ -119,7 +119,7 @@ class Job
       $logger.error("Jobnumber #{@jobnumber} not found! #{self}")
       @status = "EXIT"
     else
-      l = l.delete(" ")
+      l = l.delete(" \n")
       @status = l.split("Status")[1].split(",")[0].gsub(/\W/,"")
     end
   end
