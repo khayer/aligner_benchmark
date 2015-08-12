@@ -195,6 +195,42 @@ def clean_files(path)
 
 end
 
+def run_contextmap2(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/contextmap2/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/contextmap2.sh"))
+  return unless File.exists?("#{l}/mapping.sam")
+  options[:stats_path] = "#{options[:out_directory]}/contextmap2/"
+  begin
+    Dir.mkdir(options[:stats_path])
+  rescue SystemCallError
+    if Dir.exists?(options[:stats_path])
+      logger.warn("Directory #{options[:stats_path]} exists!")
+    else
+      logger.error("Can't create directory #{options[:stats_path]}!")
+      raise("Trouble creating directory, log for detials.")
+    end
+  end
+
+  return if check_if_results_exist(options[:stats_path])
+  clean_files(options[:stats_path])
+  options[:tool_result_path] = l
+  shell_file = "#{options[:jobs_path]}/contextmap2_statistics_#{options[:species]}_#{dataset}.sh"
+  o = File.open(shell_file,"w")
+  o.puts(erubis.evaluate(options))
+  o.close()
+  Dir.chdir "#{options[:jobs_path]}"
+  $logger.debug(Dir.pwd)
+  cmd = "bsub < #{shell_file}"
+  jobnumber = submit(cmd,options)
+  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  $logger.debug(options[:jobs])
+end
+
 def run_crac(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/crac/alignment -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
@@ -222,6 +258,18 @@ def run_crac(options, source_of_tree, dataset)
       shell_file = "#{options[:jobs_path]}/crac_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
     else
       next unless p =~ /output\.sam$/
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/crac/".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exists?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for detials.")
+        end
+      end
       options[:tool_result_path] = p.gsub(/output\.sam$/,"")
       shell_file = "#{options[:jobs_path]}/crac_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
@@ -241,16 +289,16 @@ def run_crac(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
-def run_contextmap2(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/contextmap2/alignment -name \"*#{options[:species]}*#{dataset}*\""
+def run_gsnap(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/gsnap/alignment -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   raise "Trouble finding #{dataset}: #{l}" if l.length != 1
   l = l[0]
-  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/contextmap2.sh"))
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/gsnap.sh"))
   return unless File.exists?("#{l}/mapping.sam")
-  options[:stats_path] = "#{options[:out_directory]}/contextmap2/"
+  options[:stats_path] = "#{options[:out_directory]}/gsnap/"
   begin
     Dir.mkdir(options[:stats_path])
   rescue SystemCallError
@@ -265,7 +313,7 @@ def run_contextmap2(options, source_of_tree, dataset)
   return if check_if_results_exist(options[:stats_path])
   clean_files(options[:stats_path])
   options[:tool_result_path] = l
-  shell_file = "#{options[:jobs_path]}/contextmap2_statistics_#{options[:species]}_#{dataset}.sh"
+  shell_file = "#{options[:jobs_path]}/gsnap_statistics_#{options[:species]}_#{dataset}.sh"
   o = File.open(shell_file,"w")
   o.puts(erubis.evaluate(options))
   o.close()
@@ -374,6 +422,8 @@ def run(argv)
       run_contextmap2(options, source_of_tree, dataset)
     when :crac
       run_crac(options, source_of_tree, dataset)
+    when :gsnap
+      run_gsnap(options, source_of_tree, dataset)
     when :tophat2
       run_tophat2(options, source_of_tree, dataset)
     when :star
