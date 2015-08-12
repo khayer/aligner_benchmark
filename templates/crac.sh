@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 #BSUB -J crac_stats              # LSF job name
 #BSUB -o crac_stats.%J.out       # Name of the job output file
 #BSUB -e crac_stats.%J.error     # Name of the job error file
@@ -6,7 +6,7 @@
 
 cd <%= @stats_path %>
 
-grep -v "^@" <%= @tool_result_path %>/mapping.sam | sort -t'.' -k 2n > output.sam
+ln -s <%= @tool_result_path %>/output.sam output.sam
 ruby <%= @aligner_benchmark %>/fix_sam.rb output.sam > fixed.sam
 perl <%= @aligner_benchmark %>/perl_scripts/compare2truth.pl <%= @cig_file %> fixed.sam -noHtag > comp_res.txt
 perl <%= @aligner_benchmark %>/perl_scripts/sam2junctions.pl fixed.sam > inferred_junctions.txt
