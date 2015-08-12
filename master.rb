@@ -189,6 +189,46 @@ def submit(cmd, options)
   num
 end
 
+def clean_files(path)
+
+end
+
+def run_contextmap2(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/contextmap2/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/contextmap2.sh"))
+  return unless File.exists?("#{l}/mapping.sam")
+  options[:stats_path] = "#{options[:out_directory]}/contextmap2/"
+  begin
+    Dir.mkdir(options[:stats_path])
+  rescue SystemCallError
+    if Dir.exists?(options[:stats_path])
+      logger.warn("Directory #{options[:stats_path]} exists!")
+    else
+      logger.error("Can't create directory #{options[:stats_path]}!")
+      raise("Trouble creating directory, log for detials.")
+    end
+  end
+
+  return if check_if_results_exist(options[:stats_path])
+  clean_files(options[:stats_path])
+  options[:tool_result_path] = l
+  shell_file = "#{options[:jobs_path]}/contextmap2_statistics_#{options[:species]}_#{dataset}.sh"
+  o = File.open(shell_file,"w")
+  o.puts(erubis.evaluate(options))
+  o.close()
+  Dir.chdir "#{options[:jobs_path]}"
+  $logger.debug(Dir.pwd)
+  cmd = "bsub < #{shell_file}"
+  jobnumber = submit(cmd,options)
+  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  $logger.debug(options[:jobs])
+end
+
 def run_tophat2(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/tophat2/alignment -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
@@ -215,6 +255,7 @@ def run_tophat2(options, source_of_tree, dataset)
     end
 
     next if check_if_results_exist(options[:stats_path])
+    clean_files(options[:stats_path])
 
     options[:tool_result_path] = p
     shell_file = "#{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
@@ -281,6 +322,8 @@ def run(argv)
       end
     end
     case alg
+    when :contextmap2
+      run_contextmap2(options, source_of_tree, dataset)
     when :tophat2
       run_tophat2(options, source_of_tree, dataset)
     when :star
