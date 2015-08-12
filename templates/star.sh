@@ -6,7 +6,7 @@
 
 cd <%= @stats_path %>
 
-grep -v "^@" <%= @tool_result_path %>/mapping.sam | sort -t'.' -k 2n > output.sam
+grep -v "^@" <%= @tool_result_path %>/*Aligned.out.sam | sort -t'.' -k 2n > output.sam
 ruby <%= @aligner_benchmark %>/fix_sam.rb output.sam > fixed.sam
 perl <%= @aligner_benchmark %>/perl_scripts/compare2truth.pl <%= @cig_file %> fixed.sam -noHtag > comp_res.txt
 perl <%= @aligner_benchmark %>/perl_scripts/sam2junctions.pl fixed.sam > inferred_junctions.txt
