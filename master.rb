@@ -336,7 +336,7 @@ def run_star(options, source_of_tree, dataset)
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/star.sh"))
   Dir.glob("#{l}/*").each do |p|
     if File.directory? p
-      cmd = "find #{p} -name \"Aligned.out.sam\""
+      cmd = "find #{p} -name \"*Aligned.out.sam\""
       $logger.debug(cmd)
       l = `#{cmd}`
       l = l.split("\n")
