@@ -297,7 +297,7 @@ def run_gsnap(options, source_of_tree, dataset)
   raise "Trouble finding #{dataset}: #{l}" if l.length != 1
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/gsnap.sh"))
-  return unless File.exists?("#{l}/ouptut.sam")
+  return unless File.exists?("#{l}/output.sam")
   options[:stats_path] = "#{options[:out_directory]}/gsnap/"
   begin
     Dir.mkdir(options[:stats_path])
