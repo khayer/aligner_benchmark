@@ -218,13 +218,13 @@ def run_tophat2(options, source_of_tree, dataset)
     next if check_if_results_exist(options[:stats_path])
 
     options[:tool_result_path] = p
-
-    o = File.open("#{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh","w")
+    shell_file = "#{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/\W/,"")
+    o = File.open(shell_file,"w")
     o.puts(erubis.evaluate(options))
     o.close()
     Dir.chdir "#{options[:jobs_path]}"
     $logger.debug(Dir.pwd)
-    cmd = "bsub < #{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh"
+    cmd = "bsub < #{shell_file}"
     jobnumber = submit(cmd,options)
     options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
   end
