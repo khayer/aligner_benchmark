@@ -9,7 +9,7 @@
 all = []
 ARGV[0..-1].each do |arg|
   info = []
-  info << arg.split("/")[0]
+  info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
   first = true
   File.open(arg).each do |line|
     if first
