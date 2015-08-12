@@ -212,7 +212,7 @@ def run_contextmap2(options, source_of_tree, dataset)
       logger.warn("Directory #{options[:stats_path]} exists!")
     else
       logger.error("Can't create directory #{options[:stats_path]}!")
-      raise("Trouble creating directory, log for detials.")
+      raise("Trouble creating directory, log for details.")
     end
   end
 
@@ -251,7 +251,7 @@ def run_crac(options, source_of_tree, dataset)
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
-          raise("Trouble creating directory, log for detials.")
+          raise("Trouble creating directory, log for details.")
         end
       end
       options[:tool_result_path] = p
@@ -267,7 +267,7 @@ def run_crac(options, source_of_tree, dataset)
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
-          raise("Trouble creating directory, log for detials.")
+          raise("Trouble creating directory, log for details.")
         end
       end
       options[:tool_result_path] = p.gsub(/output\.sam$/,"")
@@ -306,7 +306,7 @@ def run_gsnap(options, source_of_tree, dataset)
       logger.warn("Directory #{options[:stats_path]} exists!")
     else
       logger.error("Can't create directory #{options[:stats_path]}!")
-      raise("Trouble creating directory, log for detials.")
+      raise("Trouble creating directory, log for details.")
     end
   end
 
@@ -314,6 +314,42 @@ def run_gsnap(options, source_of_tree, dataset)
   clean_files(options[:stats_path])
   options[:tool_result_path] = l
   shell_file = "#{options[:jobs_path]}/gsnap_statistics_#{options[:species]}_#{dataset}.sh"
+  o = File.open(shell_file,"w")
+  o.puts(erubis.evaluate(options))
+  o.close()
+  Dir.chdir "#{options[:jobs_path]}"
+  $logger.debug(Dir.pwd)
+  cmd = "bsub < #{shell_file}"
+  jobnumber = submit(cmd,options)
+  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  $logger.debug(options[:jobs])
+end
+
+def run_hisat(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/hisat/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/hisat.sh"))
+  return unless File.exist?("#{l}/output.sam")
+  options[:stats_path] = "#{options[:out_directory]}/hisat/"
+  begin
+    Dir.mkdir(options[:stats_path])
+  rescue SystemCallError
+    if Dir.exist?(options[:stats_path])
+      logger.warn("Directory #{options[:stats_path]} exists!")
+    else
+      logger.error("Can't create directory #{options[:stats_path]}!")
+      raise("Trouble creating directory, log for details.")
+    end
+  end
+
+  return if check_if_results_exist(options[:stats_path])
+  clean_files(options[:stats_path])
+  options[:tool_result_path] = l
+  shell_file = "#{options[:jobs_path]}/hisat_statistics_#{options[:species]}_#{dataset}.sh"
   o = File.open(shell_file,"w")
   o.puts(erubis.evaluate(options))
   o.close()
@@ -353,7 +389,7 @@ def run_star(options, source_of_tree, dataset)
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
-          raise("Trouble creating directory, log for detials.")
+          raise("Trouble creating directory, log for details.")
         end
       end
       options[:tool_result_path] = p
@@ -369,7 +405,7 @@ def run_star(options, source_of_tree, dataset)
           logger.warn("Directory #{options[:stats_path]} exists!")
         else
           logger.error("Can't create directory #{options[:stats_path]}!")
-          raise("Trouble creating directory, log for detials.")
+          raise("Trouble creating directory, log for details.")
         end
       end
       options[:tool_result_path] = p.gsub(/\/[\.\w]*Aligned\.out\.sam$/,"")
@@ -412,7 +448,7 @@ def run_tophat2(options, source_of_tree, dataset)
         logger.warn("Directory #{options[:stats_path]} exists!")
       else
         logger.error("Can't create directory #{options[:stats_path]}!")
-        raise("Trouble creating directory, log for detials.")
+        raise("Trouble creating directory, log for details.")
       end
     end
 
@@ -447,7 +483,7 @@ def run(argv)
       logger.warn("Directory #{options[:out_directory]} exists!")
     else
       logger.error("Can't create directory #{options[:out_directory]}!")
-      raise("Trouble creating directory, log for detials.")
+      raise("Trouble creating directory, log for details.")
     end
   end
 
@@ -480,7 +516,7 @@ def run(argv)
         logger.warn("Directory #{options[:out_directory]}/#{alg} exists!")
       else
         logger.error("Can't create directory #{options[:out_directory]}/#{alg}!")
-        raise("Trouble creating directory, log for detials.")
+        raise("Trouble creating directory, log for details.")
       end
     end
     case alg
