@@ -202,29 +202,33 @@ def run_crac(options, source_of_tree, dataset)
   l = l.split("\n")
   raise "Trouble finding #{dataset}: #{l}" if l.length != 1
   l = l[0]
-  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/tophat2.sh"))
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/crac.sh"))
   Dir.glob("#{l}/*").each do |p|
-    next unless File.directory? p
-    next unless File.exists?("#{p}/unmapped.bam")
-    next unless File.exists?("#{p}/accepted_hits.bam")
-    $logger.debug(p)
-    options[:stats_path] = "#{options[:out_directory]}/tophat2/#{p.split("/")[-1]}".gsub(/[()]/,"")
-    begin
-      Dir.mkdir(options[:stats_path])
-    rescue SystemCallError
-      if Dir.exists?(options[:stats_path])
-        logger.warn("Directory #{options[:stats_path]} exists!")
-      else
-        logger.error("Can't create directory #{options[:stats_path]}!")
-        raise("Trouble creating directory, log for detials.")
+    if File.directory? p
+      next unless File.exists?("#{p}/output.sam")
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/crac/#{p.split("/")[-1]}".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exists?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for detials.")
+        end
       end
+      options[:tool_result_path] = p
+      shell_file = "#{options[:jobs_path]}/crac_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
+    else
+      next unless p =~ /output\.sam$/
+      options[:tool_result_path] = p.gsub(/output\.sam$/,"")
+      shell_file = "#{options[:jobs_path]}/crac_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
 
     next if check_if_results_exist(options[:stats_path])
     clean_files(options[:stats_path])
 
-    options[:tool_result_path] = p
-    shell_file = "#{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
     o = File.open(shell_file,"w")
     o.puts(erubis.evaluate(options))
     o.close()
