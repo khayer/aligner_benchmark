@@ -372,7 +372,7 @@ def run_star(options, source_of_tree, dataset)
           raise("Trouble creating directory, log for detials.")
         end
       end
-      options[:tool_result_path] = p.gsub(/\/.*Aligned\.out\.sam$/,"")
+      options[:tool_result_path] = p.gsub(/\/[\.\w]*Aligned\.out\.sam$/,"")
       shell_file = "#{options[:jobs_path]}/star_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
 
