@@ -41,7 +41,7 @@ def setup_options(args)
     :algorithm => "all", :transcripts => nil, :junctions_crossed => nil,
     :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
-    :species => "human"
+    :species => "human", :debug => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -61,6 +61,7 @@ def setup_options(args)
 
     opts.on("-d", "--debug", "Run in debug mode") do |v|
       options[:log_level] = "debug"
+      options[:debug] = true
     end
 
     opts.on("-o", "--out_file [OUT_FILE]",
@@ -100,8 +101,29 @@ class Job
   attr_accessor :jobnumber, :cmd, :status
 
   def to_s
-    "Jobnumber #{@jobnumber};\nCmd: #{@cmd};\nStatus: #{@status}\nWD: #{@working_dir}"
+    "Jobnumber #{@jobnumber}; Cmd: #{@cmd}; Status: #{@status}; WD: #{@working_dir}"
   end
+
+  def update_status
+    begin
+      l = `bjobs -l #{@jobnumber}`
+    rescue Exception => e
+      $logger.error(e)
+      $logger.error("bjobs not found!\n#{self}")
+      @status = "EXIT"
+      return
+    end
+    # if @status == "EXIT"
+    l.chomp!
+    if l == ""
+      $logger.error("Jobnumber #{@jobnumber} not found! #{self}")
+      @status = "EXIT"
+    else
+      l = l.split("\n")[1]
+      @status = l.split("Status ")[1].split(",")[0].gsub(/\W/,"")
+    end
+  end
+
 end
 
 def check_if_results_exist(stats_path)
@@ -134,9 +156,39 @@ def get_truth_files(options, source_of_tree, dataset)
 end
 
 def monitor_jobs(jobs)
+  while jobs.length > 0
+    jobs.each_with_index do |job,i|
+      job.update_status()
+      case job.status
+      when "DONE"
+        $logger.info("SUCCESS #{job}")
+        jobs.delete_at(i)
+      when "EXIT"
+        $logger.error("FAILED #{job}")
+        jobs.delete_at(i)
+      end
+    end
+    sleep(5)
+  end
   #TODO
 end
 
+def submit(cmd, options)
+  if options[:debug]
+    $logger.debug("In submit: #{cmd}")
+    return 1234
+  else
+    begin
+      l = `#{cmd}`
+    rescue Exception => e
+      $logger.error(e)
+      $logger.error("bsub not found!#{cmd}")
+      return 1
+    end
+    num = l.split(/\W/)[2].to_i
+  end
+  num
+end
 
 def run_tophat2(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/tophat2/alignment -name \"*#{options[:species]}*#{dataset}*\""
@@ -173,7 +225,8 @@ def run_tophat2(options, source_of_tree, dataset)
     Dir.chdir "#{options[:jobs_path]}"
     $logger.debug(Dir.pwd)
     cmd = "bsub < #{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}.sh"
-    options[:jobs] << Job.new(1245, cmd, "queud",Dir.pwd)
+    jobnumber = submit(cmd,options)
+    options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
   end
   $logger.debug(options[:jobs])
 end
