@@ -156,6 +156,7 @@ end
 
 def monitor_jobs(jobs)
   while jobs.length > 0
+    sleep(5)
     jobs.each_with_index do |job,i|
       job.update_status()
       case job.status
@@ -167,7 +168,7 @@ def monitor_jobs(jobs)
         jobs.delete_at(i)
       end
     end
-    sleep(5)
+
   end
   #TODO
 end
