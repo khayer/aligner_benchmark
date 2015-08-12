@@ -119,7 +119,6 @@ class Job
       $logger.error("Jobnumber #{@jobnumber} not found! #{self}")
       @status = "EXIT"
     else
-      l = l.split("\n")[1]
       @status = l.split("Status ")[1].split(",")[0].gsub(/\W/,"")
     end
   end
@@ -203,7 +202,7 @@ def run_tophat2(options, source_of_tree, dataset)
     next unless File.exists?("#{p}/unmapped.bam")
     next unless File.exists?("#{p}/accepted_hits.bam")
     $logger.debug(p)
-    options[:stats_path] = "#{options[:out_directory]}/tophat2/#{p.split("/")[-1]}"
+    options[:stats_path] = "#{options[:out_directory]}/tophat2/#{p.split("/")[-1]}".gsub(/[()]/,"")
     begin
       Dir.mkdir(options[:stats_path])
     rescue SystemCallError
@@ -218,7 +217,7 @@ def run_tophat2(options, source_of_tree, dataset)
     next if check_if_results_exist(options[:stats_path])
 
     options[:tool_result_path] = p
-    shell_file = "#{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/\W/,"")
+    shell_file = "#{options[:jobs_path]}/tophat2_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
     o = File.open(shell_file,"w")
     o.puts(erubis.evaluate(options))
     o.close()
