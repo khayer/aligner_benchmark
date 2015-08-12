@@ -325,6 +325,65 @@ def run_gsnap(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
+def run_star(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/star/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  l = l.delete_if {|e| e =~ /denovo$/}
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/star.sh"))
+  Dir.glob("#{l}/*").each do |p|
+    if File.directory? p
+      next unless File.exists?("#{p}/*Aligned.out.sam")
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/star/#{p.split("/")[-1]}".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exists?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for detials.")
+        end
+      end
+      options[:tool_result_path] = p
+      shell_file = "#{options[:jobs_path]}/star_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
+    else
+      next unless p =~ /Aligned\.out\.sam$/
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/star/".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exists?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for detials.")
+        end
+      end
+      options[:tool_result_path] = p.gsub(/\/.*Aligned\.out\.sam$/,"")
+      shell_file = "#{options[:jobs_path]}/star_statistics_#{options[:species]}_#{dataset}_default.sh"
+    end
+
+    next if check_if_results_exist(options[:stats_path])
+    clean_files(options[:stats_path])
+
+    o = File.open(shell_file,"w")
+    o.puts(erubis.evaluate(options))
+    o.close()
+    Dir.chdir "#{options[:jobs_path]}"
+    $logger.debug(Dir.pwd)
+    cmd = "bsub < #{shell_file}"
+    jobnumber = submit(cmd,options)
+    options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  end
+  $logger.debug(options[:jobs])
+end
+
 def run_tophat2(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/tophat2/alignment -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
@@ -424,10 +483,10 @@ def run(argv)
       run_crac(options, source_of_tree, dataset)
     when :gsnap
       run_gsnap(options, source_of_tree, dataset)
+    when :star
+      run_star(options, source_of_tree, dataset)
     when :tophat2
       run_tophat2(options, source_of_tree, dataset)
-    when :star
-      puts "LALAA"
     end
   end
 
