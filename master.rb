@@ -458,7 +458,7 @@ def run_olego(options, source_of_tree, dataset)
 end
 
 def run_rum(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/rum/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/rum/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
