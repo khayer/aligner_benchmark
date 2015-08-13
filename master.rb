@@ -707,6 +707,8 @@ def run(argv)
       run_olego(options, source_of_tree, dataset)
     when :rum
       run_rum(options, source_of_tree, dataset)
+    when :subread
+      run_subread(options, source_of_tree, dataset)
     when :star
       run_star(options, source_of_tree, dataset)
     when :tophat2
