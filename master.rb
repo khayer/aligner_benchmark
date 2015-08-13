@@ -627,7 +627,7 @@ def run(argv)
     when :mapsplice2
       run_mapsplice2(options, source_of_tree, dataset)
     when :olego
-      run_star(options, source_of_tree, dataset)
+      run_olego(options, source_of_tree, dataset)
     when :star
       run_star(options, source_of_tree, dataset)
     when :tophat2
