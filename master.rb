@@ -51,9 +51,7 @@ def setup_options(args)
     opts.separator "e.g. source_of_tree = /project/itmatlab/aligner_benchmark"
     opts.separator ""
     # enumeration
-    opts.on('-a', '--algorithm ENUM', [:all,:contextmap2,
-      :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
-      :star, :subjunc, :tophat2],'Choose from below:','all: DEFAULT',
+    opts.on('-a', '--algorithm ENUM', $algorithms,'Choose from below:','all: DEFAULT',
       'contextmap2','crac','gsnap','hisat', 'mapsplice2',
       'olego','rum','star','subjunc','tophat2') do |v|
       options[:algorithm] = v
