@@ -466,7 +466,7 @@ def run_rum(options, source_of_tree, dataset)
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/rum.sh"))
   return unless File.exist?("#{l}/RUM.sam")
-  options[:stats_path] = "#{options[:out_directory]}/contextmap2/"
+  options[:stats_path] = "#{options[:out_directory]}/rum/"
   begin
     Dir.mkdir(options[:stats_path])
   rescue SystemCallError
@@ -664,6 +664,8 @@ def run(argv)
       run_mapsplice2(options, source_of_tree, dataset)
     when :olego
       run_olego(options, source_of_tree, dataset)
+    when :rum
+      run_rum(options, source_of_tree, dataset)
     when :star
       run_star(options, source_of_tree, dataset)
     when :tophat2
