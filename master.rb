@@ -397,6 +397,66 @@ def run_mapsplice2(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
+def run_olego(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/olego/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  l# = l.delete_if {|e| e =~ /denovo$/}
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/olego.sh"))
+  Dir.glob("#{l}/*").each do |p|
+    if File.directory? p
+      next unless File.exist?("#{p}/output.sam")
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/olego/#{p.split("/")[-1]}".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exist?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for details.")
+        end
+      end
+      options[:tool_result_path] = p
+      shell_file = "#{options[:jobs_path]}/olego_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
+    else
+      next unless p =~ /Aligned\.out\.sam$/
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/olego/".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exist?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for details.")
+        end
+      end
+      options[:tool_result_path] = p.gsub(/\/[\.\w]*Aligned\.out\.sam$/,"")
+      shell_file = "#{options[:jobs_path]}/olego_statistics_#{options[:species]}_#{dataset}_default.sh"
+    end
+
+    next if check_if_results_exist(options[:stats_path])
+    clean_files(options[:stats_path])
+
+    o = File.open(shell_file,"w")
+    o.puts(erubis.evaluate(options))
+    o.close()
+    Dir.chdir "#{options[:jobs_path]}"
+    $logger.debug(Dir.pwd)
+    cmd = "bsub < #{shell_file}"
+    jobnumber = submit(cmd,options)
+    options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  end
+  $logger.debug(options[:jobs])
+end
+
+
 def run_star(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/star/alignment -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
@@ -566,6 +626,8 @@ def run(argv)
       run_hisat(options, source_of_tree, dataset)
     when :mapsplice2
       run_mapsplice2(options, source_of_tree, dataset)
+    when :olego
+      run_star(options, source_of_tree, dataset)
     when :star
       run_star(options, source_of_tree, dataset)
     when :tophat2
