@@ -402,13 +402,13 @@ def run_olego(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  l# = l.delete_if {|e| e =~ /denovo$/}
+  # = l.delete_if {|e| e =~ /denovo$/}
   raise "Trouble finding #{dataset}: #{l}" if l.length != 1
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/olego.sh"))
   Dir.glob("#{l}/*").each do |p|
     if File.directory? p
-      next unless File.exist?("#{p}/output.sam")
+      next unless File.exist?("#{p}/output.#{p.split("/")[-1]}.sam")
       $logger.debug(p)
       options[:stats_path] = "#{options[:out_directory]}/olego/#{p.split("/")[-1]}".gsub(/[()]/,"")
       begin
@@ -424,7 +424,7 @@ def run_olego(options, source_of_tree, dataset)
       options[:tool_result_path] = p
       shell_file = "#{options[:jobs_path]}/olego_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
     else
-      next unless p =~ /Aligned\.out\.sam$/
+      next unless p =~ /output.sam$/
       $logger.debug(p)
       options[:stats_path] = "#{options[:out_directory]}/olego/".gsub(/[()]/,"")
       begin
@@ -437,7 +437,7 @@ def run_olego(options, source_of_tree, dataset)
           raise("Trouble creating directory, log for details.")
         end
       end
-      options[:tool_result_path] = p.gsub(/\/[\.\w]*Aligned\.out\.sam$/,"")
+      options[:tool_result_path] = p.gsub(/\/output\.sam$/,"")
       shell_file = "#{options[:jobs_path]}/olego_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
 
