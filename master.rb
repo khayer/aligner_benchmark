@@ -152,6 +152,10 @@ def get_truth_files(options, source_of_tree, dataset)
       options[:junctions_crossed] = "#{dir}/#{fields[1]}"
     end
   end
+  unless (options[:junctions_crossed] && options[:transcripts] && options[:cig_file])
+    $logger.error "Trouble finding truth files in settings at #{l}"
+    raise "Can't find all truth files!"
+  end
   $logger.debug(options)
 end
 

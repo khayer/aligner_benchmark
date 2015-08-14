@@ -4,7 +4,7 @@
 #BSUB -e crac_stats.%J.error     # Name of the job error file
 #BSUB -M 18432
 
-cd /Users/hayer/github/aligner_benchmark/example_source_tree//statistics/human_t3r1/crac/noambiguity
+cd /Users/hayer/github/aligner_benchmark/example_source_tree//statistics/human_t3r1/crac/
 
 ln -s /Users/hayer/github/aligner_benchmark/example_source_tree//tool_results/crac/alignment/dataset_human_hg19_RefSeq_t3r1//output.sam output.sam
 ruby /Users/hayer/github/aligner_benchmark/fix_sam.rb output.sam > fixed.sam
