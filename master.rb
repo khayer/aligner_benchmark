@@ -20,7 +20,7 @@ require "erubis"
 $logger = Logger.new(STDERR)
 $algorithms = [:contextmap2,
       :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
-      :star, :subread, :tophat2]
+      :soap, :soapsplice, :star, :subread, :tophat2]
 
 # Initialize logger
 def setup_logger(loglevel)
@@ -45,8 +45,9 @@ def setup_options(args)
   }
 
   opt_parser = OptionParser.new do |opts|
-    opts.banner = "\nUsage: ruby master.rb [options] dataset source_of_tree"
+    opts.banner = "\nUsage: ruby master.rb [options] run_name dataset source_of_tree"
     opts.separator ""
+    opts.separator "e.g. run_name = t3r1-test4"
     opts.separator "e.g. dataset = t3r1"
     opts.separator "e.g. source_of_tree = /project/itmatlab/aligner_benchmark"
     opts.separator ""
@@ -497,21 +498,17 @@ def run_rum(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
-def run_soapsplice(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/subread/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
+def run_soap(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/soap/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   raise "Trouble finding #{dataset}: #{l}" if l.length != 1
   l = l[0]
-  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/subread.sh"))
-  return unless File.exist?("#{l}/ucsc.hg19.sam") || File.exist?("#{l}/pfal.sam")
-  if File.exist?("#{l}/ucsc.hg19.sam")
-    k = `ln -s #{l}/ucsc.hg19.sam #{l}/output.sam`
-  else
-    k = `ln -s #{l}/pfal.sam #{l}/output.sam`
-  end
-  options[:stats_path] = "#{options[:out_directory]}/subread/"
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/soap.sh"))
+  return unless File.exist?("#{l}/ucsc.hg19.paired.output.sam") || File.exist?("#{l}/pfal.paired.output.sam")
+  return unless File.exist?("#{l}/ucsc.hg19.unpaired.output.sam") || File.exist?("#{l}/pfal.unpaired.output.sam")
+  options[:stats_path] = "#{options[:out_directory]}/soap/"
   begin
     Dir.mkdir(options[:stats_path])
   rescue SystemCallError
@@ -526,7 +523,48 @@ def run_soapsplice(options, source_of_tree, dataset)
   return if check_if_results_exist(options[:stats_path])
   clean_files(options[:stats_path])
   options[:tool_result_path] = l
-  shell_file = "#{options[:jobs_path]}/contextmap2_statistics_#{options[:species]}_#{dataset}.sh"
+  shell_file = "#{options[:jobs_path]}/soap_statistics_#{options[:species]}_#{dataset}.sh"
+  o = File.open(shell_file,"w")
+  o.puts(erubis.evaluate(options))
+  o.close()
+  Dir.chdir "#{options[:jobs_path]}"
+  $logger.debug(Dir.pwd)
+  cmd = "bsub < #{shell_file}"
+  jobnumber = submit(cmd,options)
+  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  $logger.debug(options[:jobs])
+end
+
+def run_soapsplice(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/soapsplice/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/soapsplice.sh"))
+  return unless File.exist?("#{l}/ucsc.hg19.sam") || File.exist?("#{l}/pfal.sam")
+  if File.exist?("#{l}/ucsc.hg19.sam")
+    k = `ln -s #{l}/ucsc.hg19.sam #{l}/output.sam`
+  else
+    k = `ln -s #{l}/pfal.sam #{l}/output.sam`
+  end
+  options[:stats_path] = "#{options[:out_directory]}/soapsplice/"
+  begin
+    Dir.mkdir(options[:stats_path])
+  rescue SystemCallError
+    if Dir.exist?(options[:stats_path])
+      logger.warn("Directory #{options[:stats_path]} exists!")
+    else
+      logger.error("Can't create directory #{options[:stats_path]}!")
+      raise("Trouble creating directory, log for details.")
+    end
+  end
+
+  return if check_if_results_exist(options[:stats_path])
+  clean_files(options[:stats_path])
+  options[:tool_result_path] = l
+  shell_file = "#{options[:jobs_path]}/soapsplice_statistics_#{options[:species]}_#{dataset}.sh"
   o = File.open(shell_file,"w")
   o.puts(erubis.evaluate(options))
   o.close()
@@ -567,7 +605,7 @@ def run_subread(options, source_of_tree, dataset)
   return if check_if_results_exist(options[:stats_path])
   clean_files(options[:stats_path])
   options[:tool_result_path] = l
-  shell_file = "#{options[:jobs_path]}/contextmap2_statistics_#{options[:species]}_#{dataset}.sh"
+  shell_file = "#{options[:jobs_path]}/subread_statistics_#{options[:species]}_#{dataset}.sh"
   o = File.open(shell_file,"w")
   o.puts(erubis.evaluate(options))
   o.close()
@@ -689,8 +727,9 @@ end
 
 def run(argv)
   options = setup_options(argv)
-  dataset = argv[0]
-  source_of_tree = argv[1]
+  run_name = argv[0]
+  dataset = argv[1]
+  source_of_tree = argv[2]
   options[:aligner_benchmark] = File.expand_path(File.dirname(__FILE__))
   # Results go to
   options[:out_directory] = "#{source_of_tree}/statistics/#{options[:species]}_#{dataset}"
@@ -739,25 +778,29 @@ def run(argv)
     end
     case alg
     when :contextmap2
-      run_contextmap2(options, source_of_tree, dataset)
+      run_contextmap2(options, source_of_tree, run_name)
     when :crac
-      run_crac(options, source_of_tree, dataset)
+      run_crac(options, source_of_tree, run_name)
     when :gsnap
-      run_gsnap(options, source_of_tree, dataset)
+      run_gsnap(options, source_of_tree, run_name)
     when :hisat
-      run_hisat(options, source_of_tree, dataset)
+      run_hisat(options, source_of_tree, run_name)
     when :mapsplice2
-      run_mapsplice2(options, source_of_tree, dataset)
+      run_mapsplice2(options, source_of_tree, run_name)
     when :olego
-      run_olego(options, source_of_tree, dataset)
+      run_olego(options, source_of_tree, run_name)
     when :rum
-      run_rum(options, source_of_tree, dataset)
+      run_rum(options, source_of_tree, run_name)
+    when :soap
+      run_soap(options, source_of_tree, run_name)
+    when :soapsplice
+      run_soapsplice(options, source_of_tree, run_name)
     when :subread
-      run_subread(options, source_of_tree, dataset)
+      run_subread(options, source_of_tree, run_name)
     when :star
-      run_star(options, source_of_tree, dataset)
+      run_star(options, source_of_tree, run_name)
     when :tophat2
-      run_tophat2(options, source_of_tree, dataset)
+      run_tophat2(options, source_of_tree, run_name)
     end
   end
 
