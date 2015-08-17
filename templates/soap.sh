@@ -1,12 +1,12 @@
 #!/bin/bash -e
-#BSUB -J contextmap2_stats              # LSF job name
-#BSUB -o contextmap2_stats.%J.out       # Name of the job output file
-#BSUB -e contextmap2_stats.%J.error     # Name of the job error file
+#BSUB -J soap_stats              # LSF job name
+#BSUB -o soap_stats.%J.out       # Name of the job output file
+#BSUB -e soap_stats.%J.error     # Name of the job error file
 #BSUB -M 18432
 
 cd <%= @stats_path %>
 
-grep -v "^@" <%= @tool_result_path %>/mapping.sam | sort -t'.' -k 2n > output.sam
+cat <%= @tool_result_path %>/*paired.output.sam <%= @tool_result_path %>/*.unpaired.output.sam | grep -v "^@"  | sort -t'.' -k 2n > output.sam
 ruby <%= @aligner_benchmark %>/fix_sam.rb output.sam > fixed.sam
 perl <%= @aligner_benchmark %>/perl_scripts/compare2truth.pl <%= @cig_file %> fixed.sam -noHtag > comp_res.txt
 perl <%= @aligner_benchmark %>/perl_scripts/sam2junctions.pl fixed.sam > inferred_junctions.txt

@@ -31,6 +31,10 @@
 ### On a specific algorithm
         bsub ruby master.rb -s malaria t3r3 /project/itmatlab/aligner_benchmark -v -a tophat2
 
+### Read stats:
+        find . -name comp_res.txt |sort | xargs ruby ~/aligner_benchmark/scripts/aligner_benchmark/read_stats.rb
+        find . -name junctions_stats.txt | sort |  xargs ruby ~/aligner_benchmark/scripts/aligner_benchmark/read_junctions_stats.rb
+
 ###
 
 ## ToDo
