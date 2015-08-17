@@ -54,9 +54,9 @@ def setup_options(args)
     # enumeration
     opts.on('-a', '--algorithm ENUM', [:all, :contextmap2,
       :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
-      :star, :subread, :tophat2],'Choose from below:','all: DEFAULT',
+      :star,:soap,:soapsplice, :subread, :tophat2],'Choose from below:','all: DEFAULT',
       'contextmap2','crac','gsnap','hisat', 'mapsplice2',
-      'olego','rum','star','subread','tophat2') do |v|
+      'olego','rum','star','soap','soapsplice','subread','tophat2') do |v|
       options[:algorithm] = v
     end
 
@@ -65,11 +65,11 @@ def setup_options(args)
       options[:debug] = true
     end
 
-    opts.on("-o", "--out_file [OUT_FILE]",
-      :REQUIRED,String,
-      "File for the output, Default: overview_table.xls") do |anno_file|
-      options[:out_file] = anno_file
-    end
+    #opts.on("-o", "--out_file [OUT_FILE]",
+    #  :REQUIRED,String,
+    #  "File for the output, Default: overview_table.xls") do |anno_file|
+    #  options[:out_file] = anno_file
+    #end
 
     opts.on("-s", "--species [String]",
       :REQUIRED,String,
@@ -87,7 +87,10 @@ def setup_options(args)
   args = ["-h"] if args.length == 0
   opt_parser.parse!(args)
   setup_logger(options[:log_level])
-  raise "Please specify the input files" if args.length == 0
+  if args.length != 3
+    $logger.error("You only provided #{args.length} fields, but 3 required!")
+    raise "Please specify the input (run_name dataset source_of_tree)"
+  end
   options
 end
 
