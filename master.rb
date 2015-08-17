@@ -523,12 +523,12 @@ def run_rum(options, source_of_tree, dataset)
 end
 
 def run_soap(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/soap/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/soap/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "SOAP: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -563,12 +563,12 @@ def run_soap(options, source_of_tree, dataset)
 end
 
 def run_soapsplice(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/soapsplice/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/soapsplice/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "soapsplice: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -607,12 +607,12 @@ def run_soapsplice(options, source_of_tree, dataset)
 end
 
 def run_subread(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/subread/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/subread/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "subread: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -651,13 +651,13 @@ def run_subread(options, source_of_tree, dataset)
 end
 
 def run_star(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/star/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/star/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   l = l.delete_if {|e| e =~ /denovo$/}
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "STAR: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -720,12 +720,12 @@ def run_star(options, source_of_tree, dataset)
 end
 
 def run_tophat2(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/tophat2/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/tophat2/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "tophat2: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
