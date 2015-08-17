@@ -735,7 +735,7 @@ def run(argv)
   source_of_tree = argv[2]
   options[:aligner_benchmark] = File.expand_path(File.dirname(__FILE__))
   # Results go to
-  options[:out_directory] = "#{source_of_tree}/statistics/#{options[:species]}_#{dataset}"
+  options[:out_directory] = "#{source_of_tree}/statistics/#{options[:species]}_#{run_name}"
   begin
     Dir.mkdir(options[:out_directory])
   rescue SystemCallError
