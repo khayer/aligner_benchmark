@@ -204,12 +204,12 @@ def clean_files(path)
 end
 
 def run_contextmap2(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/contextmap2/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/contextmap2/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "contextmap2: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -243,12 +243,12 @@ def run_contextmap2(options, source_of_tree, dataset)
 end
 
 def run_crac(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/crac/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/crac/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "crac: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -304,12 +304,12 @@ def run_crac(options, source_of_tree, dataset)
 end
 
 def run_gsnap(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/gsnap/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/gsnap/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "GSNAP: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -343,12 +343,12 @@ def run_gsnap(options, source_of_tree, dataset)
 end
 
 def run_hisat(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/hisat/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/hisat/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "Hisat: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -382,12 +382,12 @@ def run_hisat(options, source_of_tree, dataset)
 end
 
 def run_mapsplice2(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/mapsplice2/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/mapsplice2/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "mapsplice2: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -421,13 +421,13 @@ def run_mapsplice2(options, source_of_tree, dataset)
 end
 
 def run_olego(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/olego/alignment -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/olego/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   # = l.delete_if {|e| e =~ /denovo$/}
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "olego: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
@@ -484,12 +484,12 @@ def run_olego(options, source_of_tree, dataset)
 end
 
 def run_rum(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/rum/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/tool_results/rum/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "Trouble finding #{dataset}: #{l}"
+    $logger.error "RUM: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
