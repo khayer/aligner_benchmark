@@ -208,7 +208,10 @@ def run_contextmap2(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/contextmap2.sh"))
   return unless File.exist?("#{l}/mapping.sam")
@@ -244,7 +247,10 @@ def run_crac(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/crac.sh"))
   Dir.glob("#{l}/*").each do |p|
@@ -302,7 +308,10 @@ def run_gsnap(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/gsnap.sh"))
   return unless File.exist?("#{l}/output.sam")
@@ -338,7 +347,10 @@ def run_hisat(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/hisat.sh"))
   return unless File.exist?("#{l}/output.sam")
@@ -374,7 +386,10 @@ def run_mapsplice2(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/mapsplice2.sh"))
   return unless File.exist?("#{l}/alignments.sam")
@@ -411,7 +426,10 @@ def run_olego(options, source_of_tree, dataset)
   l = `#{cmd}`
   l = l.split("\n")
   # = l.delete_if {|e| e =~ /denovo$/}
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/olego.sh"))
   Dir.glob("#{l}/*").each do |p|
@@ -470,7 +488,10 @@ def run_rum(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/rum.sh"))
   return unless File.exist?("#{l}/RUM.sam")
@@ -506,7 +527,10 @@ def run_soap(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/soap.sh"))
   return unless File.exist?("#{l}/ucsc.hg19.paired.output.sam") || File.exist?("#{l}/pfal.paired.output.sam")
@@ -543,7 +567,10 @@ def run_soapsplice(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/soapsplice.sh"))
   return unless File.exist?("#{l}/ucsc.hg19.sam") || File.exist?("#{l}/pfal.sam")
@@ -584,7 +611,10 @@ def run_subread(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/subread.sh"))
   return unless File.exist?("#{l}/ucsc.hg19") || File.exist?("#{l}/pfal")
@@ -626,7 +656,10 @@ def run_star(options, source_of_tree, dataset)
   l = `#{cmd}`
   l = l.split("\n")
   l = l.delete_if {|e| e =~ /denovo$/}
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/star.sh"))
   Dir.glob("#{l}/*").each do |p|
@@ -691,7 +724,10 @@ def run_tophat2(options, source_of_tree, dataset)
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
-  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  if l.length != 1
+    $logger.error "Trouble finding #{dataset}: #{l}"
+    return
+  end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/tophat2.sh"))
   Dir.glob("#{l}/*").each do |p|
