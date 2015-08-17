@@ -485,6 +485,47 @@ def run_rum(options, source_of_tree, dataset)
   return if check_if_results_exist(options[:stats_path])
   clean_files(options[:stats_path])
   options[:tool_result_path] = l
+  shell_file = "#{options[:jobs_path]}/rum_statistics_#{options[:species]}_#{dataset}.sh"
+  o = File.open(shell_file,"w")
+  o.puts(erubis.evaluate(options))
+  o.close()
+  Dir.chdir "#{options[:jobs_path]}"
+  $logger.debug(Dir.pwd)
+  cmd = "bsub < #{shell_file}"
+  jobnumber = submit(cmd,options)
+  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  $logger.debug(options[:jobs])
+end
+
+def run_soapsplice(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/subread/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}*\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  raise "Trouble finding #{dataset}: #{l}" if l.length != 1
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/subread.sh"))
+  return unless File.exist?("#{l}/ucsc.hg19.sam") || File.exist?("#{l}/pfal.sam")
+  if File.exist?("#{l}/ucsc.hg19.sam")
+    k = `ln -s #{l}/ucsc.hg19.sam #{l}/output.sam`
+  else
+    k = `ln -s #{l}/pfal.sam #{l}/output.sam`
+  end
+  options[:stats_path] = "#{options[:out_directory]}/subread/"
+  begin
+    Dir.mkdir(options[:stats_path])
+  rescue SystemCallError
+    if Dir.exist?(options[:stats_path])
+      logger.warn("Directory #{options[:stats_path]} exists!")
+    else
+      logger.error("Can't create directory #{options[:stats_path]}!")
+      raise("Trouble creating directory, log for details.")
+    end
+  end
+
+  return if check_if_results_exist(options[:stats_path])
+  clean_files(options[:stats_path])
+  options[:tool_result_path] = l
   shell_file = "#{options[:jobs_path]}/contextmap2_statistics_#{options[:species]}_#{dataset}.sh"
   o = File.open(shell_file,"w")
   o.puts(erubis.evaluate(options))
