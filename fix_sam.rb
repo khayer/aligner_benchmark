@@ -131,6 +131,7 @@ end
 sam_file = File.open(ARGV[0])
 current_name = ""
 lines = []
+first = true
 while !sam_file.eof?
   line = sam_file.readline()
   if line =~ /^@/
@@ -150,6 +151,7 @@ while !sam_file.eof?
       current_name = ""
     end
   end
+
   if current_name == ""
     #line.chomp!
     #fields = line.split("\t")
@@ -172,6 +174,14 @@ while !sam_file.eof?
   num = $1.to_i
   old_name =~ /(\d+)/
   old_num = $1.to_i
+  if old_num > 1 && first
+    k = 1
+    first = false
+    while k < old_num
+      add_empty_lines(k)
+      k += 1
+    end
+  end
   num_out ||= old_num
   #STDERR.puts old_num
   while !(old_num  <= num_out)
