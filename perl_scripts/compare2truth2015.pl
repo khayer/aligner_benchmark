@@ -469,11 +469,14 @@ if($total_number_of_bases_in_true_insertions==0) {
 } else {
     if($total_number_of_bases_called_insertions>0) {
       # I think this the false_negative_rate
-	$insertions_false_positive_rate = int((1 - int($insertions_called_correctly / $total_number_of_bases_called_insertions * 10000) / 10000) * 100 * 10000)/10000;
+      print STDERR "insertions_called_correctly $insertions_called_correctly \n";
+	    print STDERR "total_number_of_bases_called_insertions $total_number_of_bases_called_insertions \n";
+  $insertions_false_positive_rate = int((1 - int($insertions_called_correctly / $total_number_of_bases_called_insertions * 10000) / 10000) * 100 * 10000)/10000;
 	print "insertions FP rate: $insertions_false_positive_rate%\n";
     } else {
 	print "insertions FP rate: 0% (no insertions called)\n";
     } # I think this is false_discovery_rate
+    print STDERR "total_number_of_bases_in_true_insertions $total_number_of_bases_in_true_insertions \n";
     # https://en.wikipedia.org/wiki/Sensitivity_and_specificity
     $insertions_false_negative_rate = (1 - int($insertions_called_correctly / $total_number_of_bases_in_true_insertions * 10000) / 10000) * 100;
     print "insertions FN rate: $insertions_false_negative_rate%\n";
