@@ -141,6 +141,38 @@ deletions_called_correctly: #{@deletions_called_correctly}
   end
 end
 
+class MappingObject
+  def initialize()
+    # Current Pos 100
+    # 95M [100,195]
+    @matches = []
+    # 3I [100,3]
+    @insertions = []
+    # 4D [100,104]
+    @deletions = []
+    # 123N [100,223]
+    @skipped = []
+    # 30S/H [100,30]
+    @unaligned = []
+  end
+
+  attr_accessor :matches,
+    :insertions,
+    :deletions,
+    :skipped,
+    :unaligned
+
+  def to_s
+    %{Matches: #{matches.join(":")},
+Insertions: #{insertions.join(":")},
+Deletions: #{deletions.join(":")},
+Skipped: #{skipped.join(":")},
+Unaligned: #{unaligned.join(":")}
+}
+  end
+
+end
+
 
 def files_valid?(truth_cig,sam_file,options)
   l = `grep ^seq #{truth_cig} | head -1`
@@ -167,8 +199,86 @@ def files_valid?(truth_cig,sam_file,options)
   end
 end
 
-def comp_base_by_base(s_sam,c_cig,stats)
+def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
+  current_pos = start
+  cigar_nums.each_with_index do |num,i|
+    case cigar_letters[i]
+    when "M"
+      mo.matches << [current_pos, current_pos + num]
+      current_pos += num
+    when "I"
+      mo.insertions << [current_pos, num]
+    when "D"
+      mo.deletions << [current_pos, current_pos + num]
+      current_pos += num
+    when "N"
+      mo.skipped << [current_pos, current_pos + num]
+      current_pos += num
+    when "H","S"
+      mo.unaligned << [current_pos, num]
+    end
+  end
+end
 
+# Returns [#matches,#misaligned]
+def compare_ranges(true_ranges, inferred_ranges)
+  matches = 0
+  misaligned = 0
+  true_ranges.each_with_index do |t1, i|
+    next unless i.even?
+    t2 = true_ranges[i+1]
+    inferred_ranges.each_with_index do |i1, k|
+      next unless k.even?
+      old_matches = matches
+      i2 = inferred_ranges[k+1]
+      if t1 <= i1 && t2 >= i2
+        matches += i2 - i1
+      elsif t1 <= i1 && t2 <= i2
+        matches += t2 - i1
+        misaligned += i2 - t2
+      elsif t1 >= i1  && t2 <= i2
+        matches += t2 - t1
+        misaligned += (i2 - t2) + (t1 - i1)
+      elsif t1 >= i1  && t2 >= i2
+        matches += i2 - t1
+        misaligned += (t1 - i1)
+      end
+      if matches != old_matches
+        inferred_ranges.delete_at(k)
+        inferred_ranges.delete_at(k)
+      end
+      #puts misaligned
+    end
+  end
+  inferred_ranges.each_with_index do |i1, k|
+    next unless k.even?
+    i2 = inferred_ranges[k+1]
+    misaligned += i2-i1
+  end
+
+  [matches, misaligned]
+end
+
+def comp_base_by_base(s_sam,c_cig,stats)
+  $logger.debug(s_sam.join("::"))
+  $logger.debug(c_cig.join("::"))
+  cig_cigar_nums = c_cig[4].split(/\D/).map { |e|  e.to_i }
+  cig_cigar_letters = c_cig[4].split(/\d+/).reject { |c| c.empty? }
+  sam_cigar_nums = s_sam[5].split(/\D/).map { |e|  e.to_i }
+  sam_cigar_letters = s_sam[5].split(/\d+/).reject { |c| c.empty? }
+
+  c_cig_mo = MappingObject.new()
+  fill_mapping_object(c_cig_mo, c_cig[2].to_i, cig_cigar_nums, cig_cigar_letters)
+  $logger.debug(c_cig_mo)
+
+  s_sam_mo = MappingObject.new()
+  fill_mapping_object(s_sam_mo, s_sam[3].to_i, sam_cigar_nums, sam_cigar_letters)
+  $logger.debug(s_sam_mo)
+
+  # How many matches?
+  k = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
+  puts k.join(":")
+  exit
 end
 
 def process(current_group, cig_group, stats,options)
