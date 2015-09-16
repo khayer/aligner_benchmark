@@ -103,10 +103,13 @@ class Stats
     @total_number_of_bases_unaligned = 0
     @total_number_of_bases_in_true_insertions = 0
     @total_number_of_bases_in_true_deletions = 0
+    @total_number_of_bases_in_true_skipping = 0
     @total_number_of_bases_called_insertions = 0
     @total_number_of_bases_called_deletions = 0
+    @total_number_of_bases_called_skipped = 0
     @insertions_called_correctly = 0
     @deletions_called_correctly = 0
+    @skipping_called_correctly = 0
   end
 
   attr_accessor :total_number_of_bases_of_reads,
@@ -116,10 +119,13 @@ class Stats
     :total_number_of_bases_unaligned,
     :total_number_of_bases_in_true_insertions,
     :total_number_of_bases_in_true_deletions,
+    :total_number_of_bases_in_true_skipping,
     :total_number_of_bases_called_insertions,
     :total_number_of_bases_called_deletions,
+    :total_number_of_bases_called_skipped,
     :insertions_called_correctly,
-    :deletions_called_correctly
+    :deletions_called_correctly,
+    :skipping_called_correctly
 
   def to_s
     %{total_number_of_bases_of_reads: #{@total_number_of_bases_of_reads}
@@ -129,15 +135,85 @@ total_number_of_bases_aligned_ambiguously: #{@total_number_of_bases_aligned_ambi
 total_number_of_bases_unaligned: #{@total_number_of_bases_unaligned}
 total_number_of_bases_in_true_insertions: #{@total_number_of_bases_in_true_insertions}
 total_number_of_bases_in_true_deletions: #{@total_number_of_bases_in_true_deletions}
+total_number_of_bases_in_true_skipping: #{@total_number_of_bases_in_true_skipping}
 total_number_of_bases_called_insertions: #{@total_number_of_bases_called_insertions}
 total_number_of_bases_called_deletions: #{@total_number_of_bases_called_deletions}
+total_number_of_bases_called_skipped: #{@total_number_of_bases_called_skipped}
 insertions_called_correctly: #{@insertions_called_correctly}
 deletions_called_correctly: #{@deletions_called_correctly}
-}
+skipping_called_correctly: #{@skipping_called_correctly}}
   end
 
   def process
-    #Calc percentages TODO
+    puts "total_number_of_bases_of_reads = #{@total_number_of_bases_of_reads}"
+    percent_bases_aligned_correctly = (@total_number_of_bases_aligned_correctly.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    puts "accuracy over all bases: #{percent_bases_aligned_correctly}%";
+    total_num_unique_aligners = @total_number_of_bases_aligned_correctly + @total_number_of_bases_aligned_incorrectly
+    $logger.debug("total_num_unique_aligners=#{total_num_unique_aligners}")
+    accuracy_on_unique_aligners = (@total_number_of_bases_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
+    ##print "% unique aligners correct: $accuracy_on_unique_aligners%\n";
+    puts "accuracy over uniquely aligned bases: #{accuracy_on_unique_aligners}%"
+    percent_bases_aligned_incorrectly = (@total_number_of_bases_aligned_incorrectly.to_f / @total_number_of_bases_of_reads.to_f * 10000.0).to_i / 100.0
+    ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
+    puts "% bases aligned incorrectly: #{percent_bases_aligned_incorrectly}%"
+    percent_bases_aligned_ambiguously = (@total_number_of_bases_aligned_ambiguously.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
+    puts "% bases aligned ambiguously: #{percent_bases_aligned_ambiguously}%"
+    percent_bases_unaligned = (@total_number_of_bases_unaligned.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
+    puts "% bases unaligned: #{percent_bases_unaligned}%"
+    percent_bases_aligned = 100 - percent_bases_unaligned
+    puts "% bases aligned: #{percent_bases_aligned}%"
+    #puts "number of bases in true insertions = #{@total_number_of_bases_in_true_insertions}"
+    insertion_rate = (@total_number_of_bases_in_true_insertions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
+    puts "% of bases in true insertions: #{insertion_rate}%"
+    deletion_rate = (@total_number_of_bases_in_true_deletions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
+    puts "% of bases in true deletions: #{deletion_rate}%"
+
+    if(@total_number_of_bases_in_true_insertions==0)
+      puts "insertions FN/FD rate: No insertions exist in true data."
+    else
+      if(@total_number_of_bases_called_insertions>0)
+        #false_negative_rate
+        insertions_false_negative_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_called_insertions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        puts "insertions FN rate: #{insertions_false_negative_rate}%"
+      else
+        puts "insertions FN rate: 0% (no insertions called)"
+      end
+      #false_discovery_rate
+      insertions_false_discovery_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_in_true_insertions.to_f * 10000).to_i / 10000.0) * 100* 10000).to_i/10000.0
+      puts "insertions FD rate: #{insertions_false_discovery_rate}%"
+    end
+
+    if(@total_number_of_bases_in_true_deletions==0)
+      puts "deletions FN/FD rate: No deletions exist in true data."
+    else
+      if(@total_number_of_bases_called_deletions>0)
+        #false_negative_rate
+        deletions_false_negative_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_called_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        puts "deletions FN rate: #{deletions_false_negative_rate}%"
+      else
+        puts "deletions FN rate: 0% (no insertions called)"
+      end
+      #false_discovery_rate
+      deletions_false_discovery_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_in_true_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+      puts "deletions FD rate: #{deletions_false_discovery_rate}%"
+    end
+
+    if(@total_number_of_bases_in_true_skipping==0)
+      puts "skipping FN/FD rate: No skipping exist in true data."
+    else
+      if(@total_number_of_bases_called_skipped>0)
+        #false_negative_rate
+        skipping_false_negative_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_called_skipped.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        puts "skipping FN rate: #{skipping_false_negative_rate}%"
+      else
+        puts "skipping FN rate: 0% (no skipping called)"
+      end
+      #false_discovery_rate
+      skipping_false_discovery_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_in_true_skipping.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+      puts "skipping FD rate: #{skipping_false_discovery_rate}%"
+    end
   end
 end
 
@@ -173,7 +249,6 @@ Unaligned: #{unaligned.join(":")}
 
 end
 
-
 def files_valid?(truth_cig,sam_file,options)
   l = `grep ^seq #{truth_cig} | head -1`
   l.chomp!
@@ -207,7 +282,7 @@ def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
       mo.matches << [current_pos, current_pos + num]
       current_pos += num
     when "I"
-      mo.insertions << [current_pos, num]
+      mo.insertions << [current_pos, current_pos + num]
     when "D"
       mo.deletions << [current_pos, current_pos + num]
       current_pos += num
@@ -215,7 +290,7 @@ def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
       mo.skipped << [current_pos, current_pos + num]
       current_pos += num
     when "H","S"
-      mo.unaligned << [current_pos, num]
+      mo.unaligned << [current_pos, current_pos + num]
     end
   end
 end
@@ -232,20 +307,23 @@ def compare_ranges(true_ranges, inferred_ranges)
       old_matches = matches
       i2 = inferred_ranges[k+1]
       if t1 <= i1 && t2 >= i2
-        matches += i2 - i1
-      elsif t1 <= i1 && t2 <= i2
-        matches += t2 - i1
+        matches += (i2 - i1)
+      elsif t1 <= i1 && i1 <= t2 && t2 <= i2
+        matches += (t2 - i1)
         misaligned += i2 - t2
       elsif t1 >= i1  && t2 <= i2
-        matches += t2 - t1
+        matches += (t2 - t1)
         misaligned += (i2 - t2) + (t1 - i1)
-      elsif t1 >= i1  && t2 >= i2
-        matches += i2 - t1
+      elsif t1 >= i1  && t2 >= i2 && t1 <= i2
+        matches += (i2 - t1)
         misaligned += (t1 - i1)
       end
+      puts matches
       if matches != old_matches
+
         inferred_ranges.delete_at(k)
         inferred_ranges.delete_at(k)
+        break
       end
       #puts misaligned
     end
@@ -255,9 +333,41 @@ def compare_ranges(true_ranges, inferred_ranges)
     i2 = inferred_ranges[k+1]
     misaligned += i2-i1
   end
-
+  if matches < 0 || misaligned < 0
+    puts matches
+    puts misaligned
+    exit
+  end
   [matches, misaligned]
 end
+
+# Returns [#matches,#misaligned]
+#def compare_pos_count(true_pos_count, inferred_pos_count)
+#  correct = 0
+#  incorrect = 0
+#  true_pos_count.each_with_index do |t_pos, i|
+#    next unless i.even?
+#    t_count = true_pos_count[i+1]
+#    inferred_pos_count.each_with_index do |i_pos, k|
+#      next unless k.even?
+#      old_correct = correct
+#      i_count = inferred_pos_count[k+1]
+#      if t_pos <= i_pos &&
+#      if old_correct != correct
+#        inferred_pos_count.delete_at(k)
+#        inferred_pos_count.delete_at(k)
+#      end
+#      #puts misaligned
+#    end
+#  end
+#  inferred_pos_count.each_with_index do |i1, k|
+#    next unless k.even?
+#    i2 = inferred_pos_count[k+1]
+#    incorrect += i2-i1
+#  end
+#
+#  [correct, incorrect]
+#end
 
 def comp_base_by_base(s_sam,c_cig,stats)
   $logger.debug(s_sam.join("::"))
@@ -276,9 +386,31 @@ def comp_base_by_base(s_sam,c_cig,stats)
   $logger.debug(s_sam_mo)
 
   # How many matches?
-  k = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
-  puts k.join(":")
-  exit
+  $logger.debug("MATCHES")
+  matches_misaligned = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
+  stats.total_number_of_bases_aligned_correctly += matches_misaligned[0]
+  stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
+  # Insertions
+  $logger.debug("INSERTIONS")
+  insertions_incorrect = compare_ranges(c_cig_mo.insertions.flatten, s_sam_mo.insertions.flatten)
+  stats.insertions_called_correctly += insertions_incorrect[0]
+  stats.total_number_of_bases_called_insertions += insertions_incorrect[1] + insertions_incorrect[0]
+  # Deletions
+  $logger.debug("DELETIONS")
+  deletions_incorrect = compare_ranges(c_cig_mo.deletions.flatten, s_sam_mo.deletions.flatten)
+  stats.deletions_called_correctly += deletions_incorrect[0]
+  stats.total_number_of_bases_called_deletions += deletions_incorrect[1] + deletions_incorrect[0]
+  # Skipping
+  $logger.debug("SKIPPING")
+  skipping_incorrect = compare_ranges(c_cig_mo.skipped.flatten, s_sam_mo.skipped.flatten)
+  stats.skipping_called_correctly += skipping_incorrect[0]
+  stats.total_number_of_bases_called_skipped += skipping_incorrect[1] + skipping_incorrect[0]
+  # How many clippings?
+  $logger.debug("CLIPPING")
+  unaligned = compare_ranges(c_cig_mo.unaligned.flatten, s_sam_mo.unaligned.flatten)
+  stats.total_number_of_bases_unaligned += unaligned[1]
+  #stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
+  puts unaligned
 end
 
 def process(current_group, cig_group, stats,options)
@@ -298,6 +430,13 @@ def process(current_group, cig_group, stats,options)
       k.sub!(/(\d+)D/,"")
     end
     stats.total_number_of_bases_in_true_deletions += deletions
+    k = l[4].dup
+    skipping = 0
+    while k =~ /(\d+)N/
+      skipping = skipping+$1.to_i
+      k.sub!(/(\d+)N/,"")
+    end
+    stats.total_number_of_bases_in_true_skipping += skipping
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
       stats.total_number_of_bases_aligned_ambiguously += options[:read_length]
@@ -317,6 +456,8 @@ def process(current_group, cig_group, stats,options)
               stats.total_number_of_bases_called_insertions += inserts
               stats.deletions_called_correctly += deletions
               stats.total_number_of_bases_called_deletions += deletions
+              stats.skipping_called_correctly += skipping
+              stats.total_number_of_bases_called_skipped += skipping
             else
               comp_base_by_base(s,l,stats)
             end
@@ -369,8 +510,9 @@ def run(argv)
 
   files_valid?(truth_cig,sam_file,options)
   stats = compare(truth_cig, sam_file, options)
-  stats.process()
   puts stats
+  stats.process()
+
   $logger.info("All done!")
 end
 
