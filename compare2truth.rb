@@ -565,10 +565,6 @@ def compare(truth_cig, sam_file, options)
   current_num = nil
   count = 0
   while !sam_file_handler.eof?
-    count += 1
-    if (count % 50000 == 0)
-      STDERR.puts "finished #{count} reads"
-    end
     # process one sequence name at a time
     line = sam_file_handler.readline.chomp
     next unless line =~ /^seq/
@@ -585,6 +581,10 @@ def compare(truth_cig, sam_file, options)
       cig_group = []
       current_group << line
     end
+  end
+  count += 1
+  if (count % 50000 == 0)
+    STDERR.puts "finished #{count} reads"
   end
   cig_group << truth_cig_handler.readline.chomp
   cig_group << truth_cig_handler.readline.chomp
