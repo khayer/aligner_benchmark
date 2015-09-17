@@ -20,7 +20,7 @@ require "erubis"
 $logger = Logger.new(STDERR)
 $algorithms = [:contextmap2,
       :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
-      :soap, :soapsplice, :star, :subread, :tophat2]
+      :soap, :soapsplice, :star, :subread, :tophat2, :novoalign]
 
 # Initialize logger
 def setup_logger(loglevel)
@@ -53,9 +53,9 @@ def setup_options(args)
     opts.separator ""
     # enumeration
     opts.on('-a', '--algorithm ENUM', [:all, :contextmap2,
-      :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
+      :crac, :gsnap, :hisat, :mapsplice2, :novoalign, :olego, :rum,
       :star,:soap,:soapsplice, :subread, :tophat2],'Choose from below:','all: DEFAULT',
-      'contextmap2','crac','gsnap','hisat', 'mapsplice2',
+      'contextmap2','crac','gsnap','hisat', 'mapsplice2','novoalign',
       'olego','rum','star','soap','soapsplice','subread','tophat2') do |v|
       options[:algorithm] = v
     end
@@ -334,6 +334,45 @@ def run_gsnap(options, source_of_tree, dataset)
   clean_files(options[:stats_path])
   options[:tool_result_path] = l
   shell_file = "#{options[:jobs_path]}/gsnap_statistics_#{options[:species]}_#{dataset}.sh"
+  o = File.open(shell_file,"w")
+  o.puts(erubis.evaluate(options))
+  o.close()
+  Dir.chdir "#{options[:jobs_path]}"
+  $logger.debug(Dir.pwd)
+  cmd = "bsub < #{shell_file}"
+  jobnumber = submit(cmd,options)
+  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  $logger.debug(options[:jobs])
+end
+
+def run_novoalign(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/novoalign/alignment -name \"*#{options[:species]}*#{dataset}\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  if l.length != 1
+    $logger.error "GSNAP: Trouble finding #{dataset}: #{l}"
+    return
+  end
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/novoalign.sh"))
+  return unless File.exist?("#{l}/output.sam.gz")
+  options[:stats_path] = "#{options[:out_directory]}/novoalign/"
+  begin
+    Dir.mkdir(options[:stats_path])
+  rescue SystemCallError
+    if Dir.exist?(options[:stats_path])
+      logger.warn("Directory #{options[:stats_path]} exists!")
+    else
+      logger.error("Can't create directory #{options[:stats_path]}!")
+      raise("Trouble creating directory, log for details.")
+    end
+  end
+
+  return if check_if_results_exist(options[:stats_path])
+  clean_files(options[:stats_path])
+  options[:tool_result_path] = l
+  shell_file = "#{options[:jobs_path]}/novoalign_statistics_#{options[:species]}_#{dataset}.sh"
   o = File.open(shell_file,"w")
   o.puts(erubis.evaluate(options))
   o.close()
@@ -829,6 +868,8 @@ def run(argv)
       run_hisat(options, source_of_tree, run_name)
     when :mapsplice2
       run_mapsplice2(options, source_of_tree, run_name)
+    when :novoalign
+      run_novoalign(options, source_of_tree, run_name)
     when :olego
       run_olego(options, source_of_tree, run_name)
     when :rum

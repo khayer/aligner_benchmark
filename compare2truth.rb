@@ -601,7 +601,7 @@ def run(argv)
 
   files_valid?(truth_cig,sam_file,options)
   stats = compare(truth_cig, sam_file, options)
-  puts stats
+  $logger.info(stats)
   stats.process()
 
   $logger.info("All done!")
