@@ -12,7 +12,7 @@ ARGV[0..-1].each do |arg|
   info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
   File.open(arg).each do |line|
     line.chomp!
-    next if =~ /^------/
+    next if line =~ /^------/
     if line =~ /exist in true data/
       info << "NA"
       info << "NA"
@@ -26,7 +26,7 @@ end
 
 #puts "aligner\ttotal_number_of_bases_of_reads\taccuracy over all bases\taccuracy over uniquely aligned bases"
 
-for j in 0..10
+for j in 0..22
   case j
   when 0
     print "Aligner\t"
