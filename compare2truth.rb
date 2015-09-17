@@ -1,8 +1,9 @@
-require 'logger'
-require './logging'
-include Logging
 require 'optparse'
 require "erubis"
+require 'logger'
+path = File.expand_path(File.dirname(__FILE__))
+require "#{path}/logging"
+include Logging
 
 #####
 #
