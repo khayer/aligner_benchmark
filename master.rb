@@ -20,7 +20,7 @@ require "erubis"
 $logger = Logger.new(STDERR)
 $algorithms = [:contextmap2,
       :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
-      :soap, :soapsplice, :star, :subread, :tophat2, :novoalign]
+      :soapsplice, :star, :subread, :tophat2, :novoalign]
 
 # Initialize logger
 def setup_logger(loglevel)
@@ -54,9 +54,9 @@ def setup_options(args)
     # enumeration
     opts.on('-a', '--algorithm ENUM', [:all, :contextmap2,
       :crac, :gsnap, :hisat, :mapsplice2, :novoalign, :olego, :rum,
-      :star,:soap,:soapsplice, :subread, :tophat2],'Choose from below:','all: DEFAULT',
+      :star,:soapsplice, :subread, :tophat2],'Choose from below:','all: DEFAULT',
       'contextmap2','crac','gsnap','hisat', 'mapsplice2','novoalign',
-      'olego','rum','star','soap','soapsplice','subread','tophat2') do |v|
+      'olego','rum','star','soapsplice','subread','tophat2') do |v|
       options[:algorithm] = v
     end
 
@@ -564,45 +564,45 @@ def run_rum(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
-def run_soap(options, source_of_tree, dataset)
-  cmd = "find #{source_of_tree}/tool_results/soap/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
-  $logger.debug(cmd)
-  l = `#{cmd}`
-  l = l.split("\n")
-  if l.length != 1
-    $logger.error "SOAP: Trouble finding #{dataset}: #{l}"
-    return
-  end
-  l = l[0]
-  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/soap.sh"))
-  return unless File.exist?("#{l}/ucsc.hg19.paired.output.sam") || File.exist?("#{l}/pfal.paired.output.sam")
-  return unless File.exist?("#{l}/ucsc.hg19.unpaired.output.sam") || File.exist?("#{l}/pfal.unpaired.output.sam")
-  options[:stats_path] = "#{options[:out_directory]}/soap/"
-  begin
-    Dir.mkdir(options[:stats_path])
-  rescue SystemCallError
-    if Dir.exist?(options[:stats_path])
-      logger.warn("Directory #{options[:stats_path]} exists!")
-    else
-      logger.error("Can't create directory #{options[:stats_path]}!")
-      raise("Trouble creating directory, log for details.")
-    end
-  end
-
-  return if check_if_results_exist(options[:stats_path])
-  clean_files(options[:stats_path])
-  options[:tool_result_path] = l
-  shell_file = "#{options[:jobs_path]}/soap_statistics_#{options[:species]}_#{dataset}.sh"
-  o = File.open(shell_file,"w")
-  o.puts(erubis.evaluate(options))
-  o.close()
-  Dir.chdir "#{options[:jobs_path]}"
-  $logger.debug(Dir.pwd)
-  cmd = "bsub < #{shell_file}"
-  jobnumber = submit(cmd,options)
-  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
-  $logger.debug(options[:jobs])
-end
+#def run_soap(options, source_of_tree, dataset)
+#  cmd = "find #{source_of_tree}/tool_results/soap/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
+#  $logger.debug(cmd)
+#  l = `#{cmd}`
+#  l = l.split("\n")
+#  if l.length != 1
+#    $logger.error "SOAP: Trouble finding #{dataset}: #{l}"
+#    return
+#  end
+#  l = l[0]
+#  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/soap.sh"))
+#  return unless File.exist?("#{l}/ucsc.hg19.paired.output.sam") || File.exist?("#{l}/pfal.paired.output.sam")
+#  return unless File.exist?("#{l}/ucsc.hg19.unpaired.output.sam") || File.exist?("#{l}/pfal.unpaired.output.sam")
+#  options[:stats_path] = "#{options[:out_directory]}/soap/"
+#  begin
+#    Dir.mkdir(options[:stats_path])
+#  rescue SystemCallError
+#    if Dir.exist?(options[:stats_path])
+#      logger.warn("Directory #{options[:stats_path]} exists!")
+#    else
+#      logger.error("Can't create directory #{options[:stats_path]}!")
+#      raise("Trouble creating directory, log for details.")
+#    end
+#  end
+#
+#  return if check_if_results_exist(options[:stats_path])
+#  clean_files(options[:stats_path])
+#  options[:tool_result_path] = l
+#  shell_file = "#{options[:jobs_path]}/soap_statistics_#{options[:species]}_#{dataset}.sh"
+#  o = File.open(shell_file,"w")
+#  o.puts(erubis.evaluate(options))
+#  o.close()
+#  Dir.chdir "#{options[:jobs_path]}"
+#  $logger.debug(Dir.pwd)
+#  cmd = "bsub < #{shell_file}"
+#  jobnumber = submit(cmd,options)
+#  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+#  $logger.debug(options[:jobs])
+#end
 
 def run_soapsplice(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/soapsplice/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
@@ -874,8 +874,8 @@ def run(argv)
       run_olego(options, source_of_tree, run_name)
     when :rum
       run_rum(options, source_of_tree, run_name)
-    when :soap
-      run_soap(options, source_of_tree, run_name)
+    #when :soap
+    #  run_soap(options, source_of_tree, run_name)
     when :soapsplice
       run_soapsplice(options, source_of_tree, run_name)
     when :subread
