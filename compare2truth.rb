@@ -104,6 +104,7 @@ class Stats
     @total_number_of_bases_aligned_incorrectly = 0
     @total_number_of_reads_aligned_incorrectly = 0
     @total_number_of_bases_aligned_ambiguously = 0
+    @total_number_of_reads_aligned_ambiguously = 0
     @total_number_of_bases_unaligned = 0
     @total_number_of_reads_unaligned = 0
     @total_number_of_bases_in_true_insertions = 0
@@ -520,6 +521,7 @@ def process(current_group, cig_group, stats,options)
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
       stats.total_number_of_bases_aligned_ambiguously += options[:read_length]
+      stats.total_number_of_reads_aligned_ambiguously += 1
     else
       current_group.each do |s|
         s = s.split("\t")
