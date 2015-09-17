@@ -575,6 +575,10 @@ def compare(truth_cig, sam_file, options)
     else
       cig_group << truth_cig_handler.readline.chomp
       cig_group << truth_cig_handler.readline.chomp
+      count += 1
+      if (count % 50000 == 0)
+        STDERR.puts "finished #{count} reads"
+      end
       process(current_group, cig_group,stats,options)
       current_num = $1
       current_group = []
@@ -582,10 +586,7 @@ def compare(truth_cig, sam_file, options)
       current_group << line
     end
   end
-  count += 1
-  if (count % 50000 == 0)
-    STDERR.puts "finished #{count} reads"
-  end
+
   cig_group << truth_cig_handler.readline.chomp
   cig_group << truth_cig_handler.readline.chomp
   process(current_group, cig_group,stats,options)
