@@ -288,6 +288,31 @@ Unaligned: #{unaligned.join(":")}
 }
   end
 
+  #def fix
+  #  @matches = comp(@matches)
+  #  @insertions = comp(@insertions)
+  #  @deletions = comp(@deletions)
+  #  @skipped = comp(@skipped)
+  #  @unaligned = comp(@unaligned)
+  #end
+#
+  #private
+#
+  #def comp(some)
+  #  out = some.dup
+  #  out.flatten!
+  #  out.each_with_index do |t1, i|
+  #    next unless i.odd?
+  #    next unless out[i+1]
+  #    puts "MOMA"
+  #    if t1 == out[i+1]
+  #      out.delete_at(i)
+  #      out.delete_at(i)
+  #    end
+  #  end
+  #  out
+  #end
+
 end
 
 def files_valid?(truth_cig,sam_file,options)
@@ -322,11 +347,11 @@ def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
     case cigar_letters[i]
     when "M"
       mo.matches << [current_pos, current_pos + num + add]
-      current_pos += num
+      current_pos += num #+ add
       add = 0
     when "I"
       mo.insertions << [current_pos, current_pos + num]
-      add = num
+      add = 1 #num
     when "D"
       mo.deletions << [current_pos, current_pos + num]
       current_pos += num
@@ -341,7 +366,7 @@ def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
 end
 
 # Returns [#matches,#misaligned]
-def compare_ranges(true_ranges, inferred_ranges)
+def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
   matches = 0
   misaligned = 0
   true_ranges.each_with_index do |t1, i|
@@ -350,22 +375,31 @@ def compare_ranges(true_ranges, inferred_ranges)
     inferred_ranges.each_with_index do |i1, k|
       next unless k.even?
       old_matches = matches
+      old_misaligned = misaligned
       i2 = inferred_ranges[k+1]
       if t1 <= i1 && t2 >= i2
         matches += (i2 - i1)
-      elsif t1 <= i1 && i1 < t2 && t2 <= i2
+      elsif !insertion_mode && t1 <= i1 && i1 < t2 && t2 <= i2
+        matches += (t2 - i1)
+        misaligned += i2 - t2
+      elsif insertion_mode && t1 <= i1 && i1 <= t2 && t2 <= i2
+        #puts "YOUNK"
         matches += (t2 - i1)
         misaligned += i2 - t2
       elsif t1 >= i1  && t2 <= i2
         matches += (t2 - t1)
         misaligned += (i2 - t2) + (t1 - i1)
-      elsif t1 >= i1  && t2 >= i2 && t1 < i2
+      elsif !insertion_mode && t1 >= i1  && t2 >= i2 && t1 < i2
+        matches += (i2 - t1)
+        misaligned += (t1 - i1)
+      elsif insertion_mode && t1 >= i1  && t2 >= i2 && t1 <= i2
+        #puts "YOUNS"
         matches += (i2 - t1)
         misaligned += (t1 - i1)
       end
-      #puts "Matches #{matches}"
-      #puts "Misaligned #{misaligned}"
-      if matches != old_matches
+      $logger.debug "Matches #{matches}"
+      $logger.debug "Misaligned #{misaligned}"
+      if matches != old_matches || misaligned != old_misaligned
         inferred_ranges.delete_at(k)
         inferred_ranges.delete_at(k)
         break
@@ -384,31 +418,32 @@ def compare_ranges(true_ranges, inferred_ranges)
     puts misaligned
     exit
   end
+
   [matches, misaligned]
 end
 
 def fix_cigar(t_nums,t_letters,i_nums,i_letters)
-  #puts t_nums.join("T")
-  #puts t_letters.join("T")
-  #puts i_nums.join("I")
-  #puts i_letters.join("I")
+  $logger.debug t_nums.join("T")
+  $logger.debug t_letters.join("T")
+  $logger.debug i_nums.join("I")
+  $logger.debug i_letters.join("I")
   t_nums.each_with_index do |t_num, i|
     next if t_num == i_nums[i]
     case t_letters[i]
     when 'M'
       if ['N','I','D'].include?(t_letters[i+1])
-        if t_nums[i+1] == i_nums[i+1] && (i_nums[i]-t_num).abs == (i_nums[i+2]-t_nums[i+2]).abs
+        if t_nums[i+1] == i_nums[i+1] && i_nums[i+2] && (i_nums[i]-t_num).abs == (i_nums[i+2]-t_nums[i+2]).abs
           i_nums[i] = t_num
           i_nums[i+2] = t_nums[i+2]
         end
       end
     end
   end
-  #puts "LALA"
-  #puts t_nums.join("T")
-  #puts t_letters.join("T")
-  #puts i_nums.join("I")
-  #puts i_letters.join("I")
+  $logger.debug "LALA"
+  $logger.debug t_nums.join("T")
+  $logger.debug t_letters.join("T")
+  $logger.debug i_nums.join("I")
+  $logger.debug i_letters.join("I")
 end
 
 # Returns [#matches,#misaligned]
@@ -450,7 +485,7 @@ def comp_base_by_base(s_sam,c_cig,stats)
   c_cig_mo = MappingObject.new()
   fill_mapping_object(c_cig_mo, c_cig[2].to_i, cig_cigar_nums, cig_cigar_letters)
   $logger.debug(c_cig_mo)
-
+  #c_cig_mo.fix
   s_sam_mo = MappingObject.new()
   if (cig_cigar_letters & ["I","D","N"]).length > 0 && (sam_cigar_letters & ["I","D","N"]).length > 0 &&
     cig_cigar_letters == sam_cigar_letters
@@ -458,6 +493,7 @@ def comp_base_by_base(s_sam,c_cig,stats)
     fix_cigar(cig_cigar_nums,cig_cigar_letters,sam_cigar_nums,sam_cigar_letters)
   end
   fill_mapping_object(s_sam_mo, s_sam[3].to_i, sam_cigar_nums, sam_cigar_letters)
+  #s_sam_mo.fix
   $logger.debug(s_sam_mo)
   # How many matches?
   $logger.debug("MATCHES")
@@ -472,14 +508,16 @@ def comp_base_by_base(s_sam,c_cig,stats)
   end
   # Insertions
   $logger.debug("INSERTIONS")
-  insertions_incorrect = compare_ranges(c_cig_mo.insertions.flatten, s_sam_mo.insertions.flatten)
+  insertions_incorrect = compare_ranges(c_cig_mo.insertions.flatten, s_sam_mo.insertions.flatten,true)
   stats.insertions_called_correctly += insertions_incorrect[0]
   stats.total_number_of_bases_called_insertions += insertions_incorrect[1] + insertions_incorrect[0]
+  stats.total_number_of_bases_aligned_incorrectly += insertions_incorrect[1]
   # Deletions
   $logger.debug("DELETIONS")
-  deletions_incorrect = compare_ranges(c_cig_mo.deletions.flatten, s_sam_mo.deletions.flatten)
+  deletions_incorrect = compare_ranges(c_cig_mo.deletions.flatten, s_sam_mo.deletions.flatten,true)
   stats.deletions_called_correctly += deletions_incorrect[0]
   stats.total_number_of_bases_called_deletions += deletions_incorrect[1] + deletions_incorrect[0]
+  stats.total_number_of_bases_aligned_incorrectly += deletions_incorrect[1]
   # Skipping
   $logger.debug("SKIPPING")
   skipping_incorrect = compare_ranges(c_cig_mo.skipped.flatten, s_sam_mo.skipped.flatten)
