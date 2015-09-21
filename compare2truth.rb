@@ -611,6 +611,7 @@ def compare(truth_cig, sam_file, options)
     if current_num == $1
       current_group << line
     else
+      break if $1 == 10000000
       cig_group << truth_cig_handler.readline.chomp
       cig_group << truth_cig_handler.readline.chomp
       count += 1
@@ -622,7 +623,6 @@ def compare(truth_cig, sam_file, options)
       current_group = []
       cig_group = []
       current_group << line
-      break if current_num == 10000000
     end
   end
 
