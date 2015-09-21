@@ -214,7 +214,7 @@ end
 
 old_name =~ /(\d+)/
 old_num = $1.to_i
-num = 10000000
+num = 10000001
 while !(num <= old_num)
   add_empty_lines(old_num)
   old_name = "seq.#{old_num+1}"
