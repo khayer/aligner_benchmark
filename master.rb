@@ -132,9 +132,7 @@ end
 
 def check_if_results_exist(stats_path)
   File.exist?("#{stats_path}/comp_res.txt") &&
-  !File.zero?("#{stats_path}/comp_res.txt") &&
-  File.exist?("#{stats_path}/junctions_stats.txt") &&
-  !File.zero?("#{stats_path}/junctions_stats.txt")
+  !File.zero?("#{stats_path}/comp_res.txt") #&& File.exist?("#{stats_path}/junctions_stats.txt") && !File.zero?("#{stats_path}/junctions_stats.txt")
 end
 
 def get_truth_files(options, source_of_tree, dataset)
