@@ -8,6 +8,26 @@
 # 4) NH and IH tag signalizing multi-mappers
 #
 ####
+require 'logger'
+path = File.expand_path(File.dirname(__FILE__))
+require "#{path}/logging"
+include Logging
+
+$logger = Logger.new(STDERR)
+
+# Initialize logger
+def setup_logger(loglevel)
+  case loglevel
+  when "debug"
+    $logger.level = Logger::DEBUG
+  when "warn"
+    $logger.level = Logger::WARN
+  when "info"
+    $logger.level = Logger::INFO
+  else
+    $logger.level = Logger::ERROR
+  end
+end
 
 def get_name(field_0)
   field_0 =~ /(\d+)/
@@ -129,6 +149,14 @@ def fix_lines(lines,current_name)
 end
 
 sam_file = File.open(ARGV[0])
+if ARGV[1]
+  endnum = ARGV[1].to_i
+end
+if ARGV[2]
+  setup_logger("debug")
+else
+  setup_logger("error")
+end
 current_name = ""
 lines = []
 first = true
@@ -147,7 +175,7 @@ while !sam_file.eof?
     if get_name(lines[0][0]) != get_name(fields[0])
       fix_lines(lines,current_name)
       current_name =~ /(\d+)/
-      num_out = $1.to_i+1
+      num_out = $1.to_i
       current_name = ""
     end
   end
@@ -162,18 +190,24 @@ while !sam_file.eof?
   end
   old_name = current_name
   while old_name == current_name && !sam_file.eof?
+
     line = sam_file.readline()
+    $logger.debug "LINE #{line}"
     line.chomp!
     fields = line.split("\t")
     fields = check_hi_tag(fields)
     lines << fields
     current_name = get_name(fields[0])
   end
+
   #STDERR.puts current_name
   current_name =~ /(\d+)/
+  $logger.debug "CURRENT NAME #{current_name}"
   num = $1.to_i
   old_name =~ /(\d+)/
   old_num = $1.to_i
+  #exit if old_num > 4
+  $logger.debug "OLD_NUM #{old_num}"
   if old_num > 1 && first
     k = 1
     first = false
@@ -183,16 +217,32 @@ while !sam_file.eof?
     end
   end
   num_out ||= old_num
-  #STDERR.puts old_num
-  while !(old_num  <= num_out)
-    add_empty_lines(num_out)
+  $logger.debug "NUM_OUT #{num_out}"
+  while old_num > num_out+1 #&& #(num > num_out+1)
+    $logger.debug "ADDING #{num_out+1}"
+    add_empty_lines(num_out+1)
     #num_out = "seq.#{num_out+1}"
     num_out += 1
     #STDERR.puts "HERE: #{num}"
     #STDERR.puts "OLD_NAME: #{old_name}"
     #STDIN.gets
   end
-  while !(num+1 <= old_num)
+
+
+  #STDERR.puts current_name
+  $logger.debug old_name
+  lines = lines[0...-1] #if !sam_file.eof?
+  $logger.debug "MUHAHAHA #{lines.join(":::")}"
+  fix_lines(lines,old_name)
+
+  first = false
+  #current_name = fields[0]
+  #puts current_name
+  #puts lines[-1]
+  old_name =~ /(\d+)/
+  old_num = $1.to_i + 1
+  while !(num <= old_num)
+    $logger.debug "adding #{old_num}"
     add_empty_lines(old_num)
     old_name = "seq.#{old_num+1}"
     old_num += 1
@@ -200,23 +250,18 @@ while !sam_file.eof?
     #STDERR.puts "OLD_NAME: #{old_name}"
     #STDIN.gets
   end
-
-  #STDERR.puts current_name
-  #STDERR.puts old_name
-  lines = lines[0...-1] if !sam_file.eof?
-  fix_lines(lines,old_name)
-  first = false
-  #current_name = fields[0]
-  #puts current_name
-  #puts lines[-1]
   lines = [fields]
-#  exit
+  $logger.debug lines.join(":::")
 end
 
-old_name =~ /(\d+)/
-old_num = $1.to_i
-num = 10000001
-while !(num <= old_num)
+fix_lines(lines,current_name) if lines.length > 0
+
+$logger.debug "could be empty #{lines.join(":::")}"
+
+current_name =~ /(\d+)/
+old_num = $1.to_i+1
+endnum ||= 10000000
+while !(endnum+1 <= old_num)
   add_empty_lines(old_num)
   old_name = "seq.#{old_num+1}"
   old_num += 1
