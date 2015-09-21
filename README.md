@@ -40,5 +40,7 @@
 ## ToDo
 
 * Write unit tests!!!
+* Count introns in binary (TP,FN,TP)
+    * Count partially correct introns (either left or right is correct)
 
 
