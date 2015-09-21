@@ -1,0 +1,17 @@
+seq.1	89	chr3	458849	255	100M	*	0	0	*	*	NM:i:4	NH:i:1
+seq.2	153	chr14	1160326	255	8S82M10S	*	0	0	*	*	NM:i:3	NH:i:1
+seq.4	137	chr7	585748	255	69M31S	*	0	0	*	*	NM:i:3	NH:i:1
+seq.6	137	chr14	1713022	255	1S56M43S	*	0	0	*	*	NM:i:2	NH:i:1
+seq.7	89	chr2	414525	255	100M	*	0	0	*	*	NM:i:3	NH:i:1
+seq.8	153	chr7	189510	255	100M	*	0	0	*	*	NM:i:4	NH:i:1
+seq.8	73	chr7	189335	255	15S85M	*	0	0	*	*	NM:i:2	NH:i:1
+seq.10	137	chr3	161153	255	39S59M2S	*	0	0	*	*	NM:i:3	NH:i:1
+seq.12	137	chr13	1613211	255	52M48S	*	0	0	*	*	NM:i:1	NH:i:1
+seq.13	153	chr9	1007703	255	9S91M	*	0	0	*	*	NM:i:2	NH:i:1
+seq.14	137	chr8	1114625	255	1S89M10S	*	0	0	*	*	NM:i:2	NH:i:1
+seq.15	89	chr13	66551	255	51M49S	*	0	0	*	*	NM:i:1	NH:i:2	CC:Z:chr9	CP:i:62288	S1:f:55.68	S2:f:55.52
+seq.17	89	chr9	248570	255	100M	*	0	0	*	*	NM:i:3	NH:i:1
+seq.18	137	chr3	849970	255	90M10S	*	0	0	*	*	NM:i:2	NH:i:1
+seq.19	153	chr5	1029397	255	10S90M	*	0	0	*	*	NM:i:3	NH:i:1
+seq.19	73	chr5	1029303	255	100M	*	0	0	*	*	NM:i:4	NH:i:1
+seq.20	89	chr12	424185	255	62M1I37M	*	0	0	*	*	NM:i:5	NH:i:2
