@@ -351,7 +351,7 @@ def run_novoalign(options, source_of_tree, dataset)
   l = `#{cmd}`
   l = l.split("\n")
   if l.length != 1
-    $logger.error "GSNAP: Trouble finding #{dataset}: #{l}"
+    $logger.error "Novoalign: Trouble finding #{dataset}: #{l}"
     return
   end
   l = l[0]
