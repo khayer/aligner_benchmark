@@ -162,99 +162,198 @@ skipping_called_correctly: #{@skipping_called_correctly}}
 
   def process
     # READ LEVEL
-    puts "--------------------------------------"
-    puts "total_number_of_reads = #{@total_number_of_reads}"
+    out = "--------------------------------------\n"
+    out += "total_number_of_reads = #{@total_number_of_reads}\n"
     percent_reads_aligned_correctly = (@total_number_of_reads_aligned_correctly.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
-    puts "accuracy over all reads: #{percent_reads_aligned_correctly}%"
+    out += "accuracy over all reads: #{percent_reads_aligned_correctly}%\n"
     total_num_unique_aligners = @total_number_of_reads_aligned_correctly + @total_number_of_reads_aligned_incorrectly
     #$logger.debug("total_num_unique_aligned_reads=#{total_num_unique_aligners}")
     accuracy_on_unique_aligners = (@total_number_of_reads_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
     ##print "% unique aligners correct: $accuracy_on_unique_aligners%\n";
-    puts "accuracy over uniquely aligned reads: #{accuracy_on_unique_aligners}%"
+    out += "accuracy over uniquely aligned reads: #{accuracy_on_unique_aligners}%\n"
     percent_reads_aligned_incorrectly = (@total_number_of_reads_aligned_incorrectly.to_f / @total_number_of_reads.to_f * 10000.0).to_i / 100.0
     ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
-    puts "% reads aligned incorrectly: #{percent_reads_aligned_incorrectly}%"
+    out += "% reads aligned incorrectly: #{percent_reads_aligned_incorrectly}%\n"
     percent_reads_aligned_ambiguously = (@total_number_of_reads_aligned_ambiguously.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    puts "% reads aligned ambiguously: #{percent_reads_aligned_ambiguously}%"
+    out += "% reads aligned ambiguously: #{percent_reads_aligned_ambiguously}%\n"
     percent_reads_unaligned = (@total_number_of_reads_unaligned.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
-    puts "% reads unaligned: #{percent_reads_unaligned}%"
+    out += "% reads unaligned: #{percent_reads_unaligned}%\n"
     percent_reads_aligned = 100 - percent_reads_unaligned
-    puts "% reads aligned: #{percent_reads_aligned}%"
+    out += "% reads aligned: #{percent_reads_aligned}%\n"
     # BASE LEVEL
-    puts "--------------------------------------"
-    puts "total_number_of_bases_of_reads = #{@total_number_of_bases_of_reads}"
+    out += "--------------------------------------\n"
+    out += "total_number_of_bases_of_reads = #{@total_number_of_bases_of_reads}\n"
     percent_bases_aligned_correctly = (@total_number_of_bases_aligned_correctly.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
-    puts "accuracy over all bases: #{percent_bases_aligned_correctly}%";
+    out += "accuracy over all bases: #{percent_bases_aligned_correctly}%\n"
     total_num_unique_aligners = @total_number_of_bases_aligned_correctly + @total_number_of_bases_aligned_incorrectly
     $logger.debug("total_num_unique_aligners=#{total_num_unique_aligners}")
     accuracy_on_unique_aligners = (@total_number_of_bases_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
     ##print "% unique aligners correct: $accuracy_on_unique_aligners%\n";
-    puts "accuracy over uniquely aligned bases: #{accuracy_on_unique_aligners}%"
+    out += "accuracy over uniquely aligned bases: #{accuracy_on_unique_aligners}%\n"
     percent_bases_aligned_incorrectly = (@total_number_of_bases_aligned_incorrectly.to_f / @total_number_of_bases_of_reads.to_f * 10000.0).to_i / 100.0
     ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
-    puts "% bases aligned incorrectly: #{percent_bases_aligned_incorrectly}%"
+    out += "% bases aligned incorrectly: #{percent_bases_aligned_incorrectly}%\n"
     percent_bases_aligned_ambiguously = (@total_number_of_bases_aligned_ambiguously.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    puts "% bases aligned ambiguously: #{percent_bases_aligned_ambiguously}%"
+    out += "% bases aligned ambiguously: #{percent_bases_aligned_ambiguously}%\n"
     percent_bases_unaligned = (@total_number_of_bases_unaligned.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
-    puts "% bases unaligned: #{percent_bases_unaligned}%"
+    out += "% bases unaligned: #{percent_bases_unaligned}%\n"
     percent_bases_aligned = 100 - percent_bases_unaligned
-    puts "% bases aligned: #{percent_bases_aligned}%"
+    out += "% bases aligned: #{percent_bases_aligned}%\n"
     #puts "number of bases in true insertions = #{@total_number_of_bases_in_true_insertions}"
     insertion_rate = (@total_number_of_bases_in_true_insertions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
-    puts "% of bases in true insertions: #{insertion_rate}%"
+    out += "% of bases in true insertions: #{insertion_rate}%\n"
     deletion_rate = (@total_number_of_bases_in_true_deletions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
-    puts "% of bases in true deletions: #{deletion_rate}%"
+    out += "% of bases in true deletions: #{deletion_rate}%\n"
 
     # INSERTIONS DELETIONS SKIPPING
-    puts "--------------------------------------"
+    out += "--------------------------------------\n"
     if(@total_number_of_bases_in_true_insertions==0)
-      puts "insertions FN/FD rate: No insertions exist in true data."
+      out += "insertions FN/FD rate: No insertions exist in true data.\n"
     else
       if(@total_number_of_bases_called_insertions>0)
         #false_discovery_rate
         insertions_false_discovery_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_called_insertions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        puts "insertions FD rate: #{insertions_false_discovery_rate}%"
+        out += "insertions FD rate: #{insertions_false_discovery_rate}%\n"
       else
-        puts "insertions FD rate: 0% (no insertions called)"
+        out += "insertions FD rate: 0% (no insertions called)\n"
       end
       #false_negative_rate
       insertions_false_negative_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_in_true_insertions.to_f * 10000).to_i / 10000.0) * 100* 10000).to_i/10000.0
-      puts "insertions FN rate: #{insertions_false_negative_rate}%"
+      out += "insertions FN rate: #{insertions_false_negative_rate}%\n"
     end
 
     if(@total_number_of_bases_in_true_deletions==0)
-      puts "deletions FN/FD rate: No deletions exist in true data."
+      out += "deletions FN/FD rate: No deletions exist in true data.\n"
     else
       if(@total_number_of_bases_called_deletions>0)
         #false_discovery_rate
         deletions_false_discovery_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_called_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        puts "deletions FD rate: #{deletions_false_discovery_rate}%"
+        out += "deletions FD rate: #{deletions_false_discovery_rate}%\n"
       else
-        puts "deletions FD rate: 0% (no deletions called)"
+        out += "deletions FD rate: 0% (no deletions called)\n"
       end
       #false_negative_rate
       deletions_false_negative_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_in_true_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-      puts "deletions FN rate: #{deletions_false_negative_rate}%"
+      out += "deletions FN rate: #{deletions_false_negative_rate}%\n"
     end
 
     if(@total_number_of_bases_in_true_skipping==0)
-      puts "skipping FN/FD rate: No skipping exist in true data."
+      out += "skipping FN/FD rate: No skipping exist in true data.\n"
     else
       if(@total_number_of_bases_called_skipped>0)
         #false_discovery_rate
         skipping_false_discovery_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_called_skipped.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        puts "skipping FD rate: #{skipping_false_discovery_rate}%"
+        out += "skipping FD rate: #{skipping_false_discovery_rate}%\n"
       else
-        puts "skipping FD rate: 0% (no skipping called)"
+        out += "skipping FD rate: 0% (no skipping called)\n"
       end
       #false_negative_rate
       skipping_false_negative_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_in_true_skipping.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-      puts "skipping FN rate: #{skipping_false_negative_rate}%"
+      out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
     end
+    out
+  end
+
+  def process_old
+    # READ LEVEL
+    out = "--------------------------------------\n"
+    out += "total_number_of_reads = #{@total_number_of_reads}\n"
+    percent_reads_aligned_correctly = (@total_number_of_reads_aligned_correctly.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
+    out += "accuracy over all reads: #{percent_reads_aligned_correctly}%\n"
+    total_num_unique_aligners = @total_number_of_reads_aligned_correctly + @total_number_of_reads_aligned_incorrectly
+    #$logger.debug("total_num_unique_aligned_reads=#{total_num_unique_aligners}")
+    accuracy_on_unique_aligners = (@total_number_of_reads_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
+    ##print "% unique aligners correct: $accuracy_on_unique_aligners%\n";
+    out += "accuracy over uniquely aligned reads: #{accuracy_on_unique_aligners}%\n"
+    percent_reads_aligned_incorrectly = (@total_number_of_reads_aligned_incorrectly.to_f / @total_number_of_reads.to_f * 10000.0).to_i / 100.0
+    ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
+    out += "% reads aligned incorrectly: #{percent_reads_aligned_incorrectly}%\n"
+    percent_reads_aligned_ambiguously = (@total_number_of_reads_aligned_ambiguously.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
+    out += "% reads aligned ambiguously: #{percent_reads_aligned_ambiguously}%\n"
+    percent_reads_unaligned = (@total_number_of_reads_unaligned.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
+    out += "% reads unaligned: #{percent_reads_unaligned}%\n"
+    percent_reads_aligned = 100 - percent_reads_unaligned
+    out += "% reads aligned: #{percent_reads_aligned}%\n"
+    # BASE LEVEL
+    out += "--------------------------------------\n"
+    out += "total_number_of_bases_of_reads = #{@total_number_of_bases_of_reads}\n"
+    percent_bases_aligned_correctly = (@total_number_of_bases_aligned_correctly.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    out += "accuracy over all bases: #{percent_bases_aligned_correctly}%\n"
+    total_num_unique_aligners = @total_number_of_bases_aligned_correctly + @total_number_of_bases_aligned_incorrectly
+    $logger.debug("total_num_unique_aligners=#{total_num_unique_aligners}")
+    accuracy_on_unique_aligners = (@total_number_of_bases_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
+    ##print "% unique aligners correct: $accuracy_on_unique_aligners%\n";
+    out += "accuracy over uniquely aligned bases: #{accuracy_on_unique_aligners}%\n"
+    percent_bases_aligned_incorrectly = (@total_number_of_bases_aligned_incorrectly.to_f / @total_number_of_bases_of_reads.to_f * 10000.0).to_i / 100.0
+    ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
+    out += "% bases aligned incorrectly: #{percent_bases_aligned_incorrectly}%\n"
+    percent_bases_aligned_ambiguously = (@total_number_of_bases_aligned_ambiguously.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
+    out += "% bases aligned ambiguously: #{percent_bases_aligned_ambiguously}%\n"
+    percent_bases_unaligned = (@total_number_of_bases_unaligned.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
+    out += "% bases unaligned: #{percent_bases_unaligned}%\n"
+    percent_bases_aligned = 100 - percent_bases_unaligned
+    out += "% bases aligned: #{percent_bases_aligned}%\n"
+    #puts "number of bases in true insertions = #{@total_number_of_bases_in_true_insertions}"
+    insertion_rate = (@total_number_of_bases_in_true_insertions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
+    out += "% of bases in true insertions: #{insertion_rate}%\n"
+    deletion_rate = (@total_number_of_bases_in_true_deletions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
+    out += "% of bases in true deletions: #{deletion_rate}%\n"
+
+    # INSERTIONS DELETIONS SKIPPING
+    out += "--------------------------------------\n"
+    if(@total_number_of_bases_in_true_insertions==0)
+      out += "insertions FN/FD rate: No insertions exist in true data.\n"
+    else
+      if(@total_number_of_bases_called_insertions>0)
+        #false_discovery_rate
+        insertions_false_discovery_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_called_insertions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        out += "insertions FD rate: #{insertions_false_discovery_rate}%\n"
+      else
+        out += "insertions FD rate: 0% (no insertions called)\n"
+      end
+      #false_negative_rate
+      insertions_false_negative_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_in_true_insertions.to_f * 10000).to_i / 10000.0) * 100* 10000).to_i/10000.0
+      out += "insertions FN rate: #{insertions_false_negative_rate}%\n"
+    end
+
+    if(@total_number_of_bases_in_true_deletions==0)
+      out += "deletions FN/FD rate: No deletions exist in true data.\n"
+    else
+      if(@total_number_of_bases_called_deletions>0)
+        #false_discovery_rate
+        deletions_false_discovery_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_called_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        out += "deletions FD rate: #{deletions_false_discovery_rate}%\n"
+      else
+        out += "deletions FD rate: 0% (no deletions called)\n"
+      end
+      #false_negative_rate
+      deletions_false_negative_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_in_true_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+      out += "deletions FN rate: #{deletions_false_negative_rate}%\n"
+    end
+
+    if(@total_number_of_bases_in_true_skipping==0)
+      out += "skipping FN/FD rate: No skipping exist in true data.\n"
+    else
+      if(@total_number_of_bases_called_skipped>0)
+        #false_discovery_rate
+        skipping_false_discovery_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_called_skipped.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        out += "skipping FD rate: #{skipping_false_discovery_rate}%\n"
+      else
+        out += "skipping FD rate: 0% (no skipping called)\n"
+      end
+      #false_negative_rate
+      skipping_false_negative_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_in_true_skipping.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+      out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
+    end
+    out
   end
 end
 
@@ -474,6 +573,13 @@ end
 #  [correct, incorrect]
 #end
 
+def exists?(file)
+  out = File.exist?(file) &&
+  !File.zero?(file)
+  raise "File #{file} does not exist or is empty!" unless out
+  out
+end
+
 def comp_base_by_base(s_sam,c_cig,stats)
   $logger.debug(s_sam.join("::"))
   $logger.debug(c_cig.join("::"))
@@ -634,14 +740,14 @@ end
 
 def run(argv)
   options = setup_options(argv)
-  truth_cig = argv[0]
-  sam_file = argv[1]
+  truth_cig = argv[0] if exists?(argv[0])
+  sam_file = argv[1] if exists?(argv[1])
   $logger.info("Options are #{options}")
 
   files_valid?(truth_cig,sam_file,options)
   stats = compare(truth_cig, sam_file, options)
   $logger.info(stats)
-  stats.process()
+  puts stats.process()
 
   $logger.info("All done!")
 end
