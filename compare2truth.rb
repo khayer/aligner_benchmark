@@ -622,6 +622,7 @@ def compare(truth_cig, sam_file, options)
       current_group = []
       cig_group = []
       current_group << line
+      break if current_num == 10000000
     end
   end
 
