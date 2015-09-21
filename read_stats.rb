@@ -71,9 +71,9 @@ for j in 0..22
   when 20
     print "deletions FN rate\t"
   when 21
-    print "skipping FD rate\t"
+    print "junctions FD rate\t"
   when 22
-    print "skipping FN rate\t"
+    print "junctions FN rate\t"
   end
   res = []
   for i in 0...ARGV.length
