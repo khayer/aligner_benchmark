@@ -205,6 +205,7 @@ while !sam_file.eof?
   #STDERR.puts old_name
   lines = lines[0...-1] if !sam_file.eof?
   fix_lines(lines,old_name)
+  first = false
   #current_name = fields[0]
   #puts current_name
   #puts lines[-1]
