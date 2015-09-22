@@ -1,14 +1,12 @@
 require_relative "../compare2truth"
 require "test/unit"
 
-
-
 class TestCompare2Truth < Test::Unit::TestCase
 
-  ##def test_simple
-  ##  assert_equal(4, 4 )
-  ##  assert_equal(6, 6 )
-  ##end
+  def test_simple
+    assert_equal(4, 4 )
+    assert_equal(6, 6 )
+  end
 
   def run_with(cig, sam, solution)
     argv = [cig,sam]
