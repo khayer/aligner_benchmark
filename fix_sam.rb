@@ -320,5 +320,5 @@ def run_all(arguments)
 end
 
 if __FILE__ == $0
-  run(ARGV)
+  run_all(ARGV)
 end
