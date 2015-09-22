@@ -110,12 +110,15 @@ class Stats
     @total_number_of_bases_in_true_insertions = 0
     @total_number_of_bases_in_true_deletions = 0
     @total_number_of_bases_in_true_skipping = 0
+    @total_number_of_bases_in_true_skipping_binary = 0
     @total_number_of_bases_called_insertions = 0
     @total_number_of_bases_called_deletions = 0
     @total_number_of_bases_called_skipped = 0
+    @total_number_of_bases_called_skipped_binary = 0
     @insertions_called_correctly = 0
     @deletions_called_correctly = 0
     @skipping_called_correctly = 0
+    @skipping_called_correctly_binary = 0
   end
 
   attr_accessor :total_number_of_bases_of_reads,
@@ -131,12 +134,15 @@ class Stats
     :total_number_of_bases_in_true_insertions,
     :total_number_of_bases_in_true_deletions,
     :total_number_of_bases_in_true_skipping,
+    :total_number_of_bases_in_true_skipping_binary,
     :total_number_of_bases_called_insertions,
     :total_number_of_bases_called_deletions,
     :total_number_of_bases_called_skipped,
+    :total_number_of_bases_called_skipped_binary,
     :insertions_called_correctly,
     :deletions_called_correctly,
-    :skipping_called_correctly
+    :skipping_called_correctly,
+    :skipping_called_correctly_binary
 
   def to_s
     %{total_number_of_bases_of_reads: #{@total_number_of_bases_of_reads}
@@ -152,12 +158,15 @@ total_number_of_reads_unaligned: #{@total_number_of_reads_unaligned}
 total_number_of_bases_in_true_insertions: #{@total_number_of_bases_in_true_insertions}
 total_number_of_bases_in_true_deletions: #{@total_number_of_bases_in_true_deletions}
 total_number_of_bases_in_true_skipping: #{@total_number_of_bases_in_true_skipping}
+total_number_of_bases_in_true_skipping_binary: #{@total_number_of_bases_in_true_skipping_binary}
 total_number_of_bases_called_insertions: #{@total_number_of_bases_called_insertions}
 total_number_of_bases_called_deletions: #{@total_number_of_bases_called_deletions}
 total_number_of_bases_called_skipped: #{@total_number_of_bases_called_skipped}
+total_number_of_bases_called_skipped_binary: #{@total_number_of_bases_called_skipped_binary}
 insertions_called_correctly: #{@insertions_called_correctly}
 deletions_called_correctly: #{@deletions_called_correctly}
-skipping_called_correctly: #{@skipping_called_correctly}}
+skipping_called_correctly: #{@skipping_called_correctly}
+skipping_called_correctly_binary: #{@skipping_called_correctly_binary}}
   end
 
   def process
@@ -182,6 +191,24 @@ skipping_called_correctly: #{@skipping_called_correctly}}
     out += "% reads unaligned: #{percent_reads_unaligned}%\n"
     percent_reads_aligned = 100 - percent_reads_unaligned
     out += "% reads aligned: #{percent_reads_aligned}%\n"
+    intron_rate = (@total_number_of_bases_in_true_skipping_binary.to_f / @total_number_of_reads.to_f * 1000000).to_i / 10000.0
+    out += "% of reads with true introns: #{intron_rate}%\n"
+
+    if(@total_number_of_bases_in_true_skipping_binary==0)
+      out += "junctions FN/FD rate: No skipping exist in true data.\n"
+    else
+      if(@total_number_of_bases_called_skipped_binary>0)
+        #false_discovery_rate
+        skipping_false_discovery_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        out += "junctions FD rate: #{skipping_false_discovery_rate}%\n"
+      else
+        out += "junctions FD rate: 0% (no junctions called)\n"
+      end
+      #false_negative_rate
+      skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+      out += "junctions FN rate: #{skipping_false_negative_rate}%\n"
+    end
+
     # BASE LEVEL
     out += "--------------------------------------\n"
     out += "total_number_of_bases_of_reads = #{@total_number_of_bases_of_reads}\n"
@@ -208,6 +235,7 @@ skipping_called_correctly: #{@skipping_called_correctly}}
     out += "% of bases in true insertions: #{insertion_rate}%\n"
     deletion_rate = (@total_number_of_bases_in_true_deletions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
     out += "% of bases in true deletions: #{deletion_rate}%\n"
+
 
     # INSERTIONS DELETIONS SKIPPING
     out += "--------------------------------------\n"
@@ -255,6 +283,21 @@ skipping_called_correctly: #{@skipping_called_correctly}}
       skipping_false_negative_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_in_true_skipping.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
       out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
     end
+
+    #if(@total_number_of_bases_in_true_skipping_binary==0)
+    #  out += "skipping FN/FD rate: No skipping exist in true data.\n"
+    #else
+    #  if(@total_number_of_bases_called_skipped_binary>0)
+    #    #false_discovery_rate
+    #    skipping_false_discovery_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+    #    out += "skipping FD rate: #{skipping_false_discovery_rate}%\n"
+    #  else
+    #    out += "skipping FD rate: 0% (no skipping called)\n"
+    #  end
+    #  #false_negative_rate
+    #  skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+    #  out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
+    #end
     out
   end
 
@@ -353,6 +396,7 @@ skipping_called_correctly: #{@skipping_called_correctly}}
       skipping_false_negative_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_in_true_skipping.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
       out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
     end
+
     out
   end
 end
@@ -434,7 +478,9 @@ def files_valid?(truth_cig,sam_file,options)
   l =~ /seq.(\d+)/
   last_sam = $1
   unless last_sam == last_truth && first_sam == first_truth
-    logger.error("Sam file and cig file don't start and end in the same sequence!")
+    $logger.error("Sam file and cig file don't start and end in the same sequence!")
+    $logger.debug("last_sam #{last_sam}, last_truth #{last_truth}")
+    $logger.debug("first_sam #{first_sam}, first_truth #{first_truth}")
     raise "both files must start and end with the same sequence number and must have an entry for every sequence number in between."
   end
 end
@@ -580,7 +626,7 @@ def exists?(file)
   out
 end
 
-def comp_base_by_base(s_sam,c_cig,stats)
+def comp_base_by_base(s_sam,c_cig,stats,skipping_length)
   $logger.debug(s_sam.join("::"))
   $logger.debug(c_cig.join("::"))
   cig_cigar_nums = c_cig[4].split(/\D/).map { |e|  e.to_i }
@@ -629,6 +675,9 @@ def comp_base_by_base(s_sam,c_cig,stats)
   skipping_incorrect = compare_ranges(c_cig_mo.skipped.flatten, s_sam_mo.skipped.flatten)
   stats.skipping_called_correctly += skipping_incorrect[0]
   stats.total_number_of_bases_called_skipped += skipping_incorrect[1] + skipping_incorrect[0]
+  $logger.debug(skipping_incorrect)
+  stats.skipping_called_correctly_binary += 1 if skipping_incorrect[0]-skipping_length == 0 &&  skipping_incorrect[1] == 0 && skipping_incorrect[0] > 0
+  stats.total_number_of_bases_called_skipped_binary += 1 if skipping_incorrect[0] > 0 || skipping_incorrect[1] > 0
   # How many clippings?
   $logger.debug("CLIPPING")
   unaligned = compare_ranges(c_cig_mo.unaligned.flatten, s_sam_mo.unaligned.flatten)
@@ -662,6 +711,9 @@ def process(current_group, cig_group, stats,options)
       k.sub!(/(\d+)N/,"")
     end
     stats.total_number_of_bases_in_true_skipping += skipping
+    if skipping > 0
+      stats.total_number_of_bases_in_true_skipping_binary += 1
+    end
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
       stats.total_number_of_bases_aligned_ambiguously += options[:read_length]
@@ -686,9 +738,14 @@ def process(current_group, cig_group, stats,options)
               stats.total_number_of_bases_called_deletions += deletions
               stats.skipping_called_correctly += skipping
               stats.total_number_of_bases_called_skipped += skipping
+              if skipping > 0
+                stats.skipping_called_correctly_binary += 1
+                stats.total_number_of_bases_called_skipped_binary += 1
+              end
               stats.total_number_of_reads_aligned_correctly += 1
             else
-              comp_base_by_base(s,l,stats)
+              $logger.debug("SKIPPING_LENGTH #{skipping}")
+              comp_base_by_base(s,l,stats,skipping)
             end
           end
         end

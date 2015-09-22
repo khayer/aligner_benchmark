@@ -5,7 +5,7 @@ class TestFixSam < Test::Unit::TestCase
 
   def test_simple
     assert_equal(4, 4 )
-    assert_equal(6, 6 )
+    assert_equal(6, 6)
   end
 
   def run_with(sam,num,solution)
@@ -25,6 +25,7 @@ class TestFixSam < Test::Unit::TestCase
     run_with("test_files/context.sam",
       "20",
       "test_files/context_out.sam")
+
   end
 
   def test_hisat

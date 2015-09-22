@@ -1,4 +1,4 @@
-require_relative "../compare2truth"
+require_relative "../compare2truth.rb"
 require "test/unit"
 
 class TestCompare2Truth < Test::Unit::TestCase
@@ -26,6 +26,7 @@ class TestCompare2Truth < Test::Unit::TestCase
     run_with("test_files/compare2truth2015/1.cig",
       "test_files/compare2truth2015/1.sam",
       "test_files/compare2truth2015/1.solution")
+
   end
 
   def test_10_sam
