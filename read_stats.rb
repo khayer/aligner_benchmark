@@ -26,7 +26,7 @@ end
 
 #puts "aligner\ttotal_number_of_bases_of_reads\taccuracy over all bases\taccuracy over uniquely aligned bases"
 
-for j in 0..22
+for j in 0..25
   case j
   when 0
     print "Aligner\t"
@@ -44,35 +44,41 @@ for j in 0..22
     print "% reads unaligned\t"
   when 7
     print "% reads aligned\t"
-  when 8
-   print "total_number_of_bases_of_reads\t"
-  when 9
-    print "accuracy over all bases\t"
-  when 10
-    print "accuracy over uniquely aligned bases\t"
-  when 11
-    print "% bases aligned incorrectly\t"
-  when 12
-    print "% bases aligned ambiguously\t"
-  when 13
-    print "% bases unaligned\t"
-  when 14
-    print "% bases aligned\t"
-  when 15
-    print "% of bases in true insertions\t"
-  when 16
-    print "% of bases in true deletion\t"
-  when 17
-    print "insertions FD rate\t"
-  when 18
-    print "insertions FN rate\t"
-  when 19
-    print "deletions FD rate\t"
-  when 20
-    print "deletions FN rate\t"
-  when 21
+  when 8 
+    print "% of reads with true introns\t"
+  when 9  
     print "junctions FD rate\t"
+  when 10  
+    print "junctions FN rate\t"
+  when 11
+   print "total_number_of_bases_of_reads\t"
+  when 12
+    print "accuracy over all bases\t"
+  when 13
+    print "accuracy over uniquely aligned bases\t"
+  when 14
+    print "% bases aligned incorrectly\t"
+  when 15
+    print "% bases aligned ambiguously\t"
+  when 16
+    print "% bases unaligned\t"
+  when 17
+    print "% bases aligned\t"
+  when 18
+    print "% of bases in true insertions\t"
+  when 19
+    print "% of bases in true deletion\t"
+  when 20
+    print "insertions FD rate\t"
+  when 21
+    print "insertions FN rate\t"
   when 22
+    print "deletions FD rate\t"
+  when 23
+    print "deletions FN rate\t"
+  when 24
+    print "junctions FD rate\t"
+  when 25
     print "junctions FN rate\t"
   end
   res = []
@@ -84,4 +90,7 @@ for j in 0..22
   case j
   when 0
     puts "---------------- READ LEVEL ---------------------"
+  when 10
+    puts "---------------- BASE LEVEL ---------------------"
+  end
 end
