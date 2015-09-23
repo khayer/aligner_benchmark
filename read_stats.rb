@@ -81,4 +81,7 @@ for j in 0..22
   end
   print res.join("\t")
   print "\n"
+  case j
+  when 0
+    puts "---------------- READ LEVEL ---------------------"
 end
