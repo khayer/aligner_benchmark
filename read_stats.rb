@@ -26,7 +26,7 @@ end
 
 #puts "aligner\ttotal_number_of_bases_of_reads\taccuracy over all bases\taccuracy over uniquely aligned bases"
 
-for j in 0..25
+for j in 0..27
   case j
   when 0
     print "Aligner\t"
@@ -44,11 +44,11 @@ for j in 0..25
     print "% reads unaligned\t"
   when 7
     print "% reads aligned\t"
-  when 8 
+  when 8
     print "% of reads with true introns\t"
-  when 9  
+  when 9
     print "junctions FD rate\t"
-  when 10  
+  when 10
     print "junctions FN rate\t"
   when 11
    print "total_number_of_bases_of_reads\t"
@@ -80,7 +80,12 @@ for j in 0..25
     print "junctions FD rate\t"
   when 25
     print "junctions FN rate\t"
+  when 26
+    print "Junctions Sides (none|left|right|ambiguous|both)\t"
+  when 27
+    print "Junctions Sides (none|left|right|ambiguous|both)% of all called\t"
   end
+
   res = []
   for i in 0...ARGV.length
     res << all[i][j]
@@ -92,5 +97,7 @@ for j in 0..25
     puts "---------------- READ LEVEL ---------------------"
   when 10
     puts "---------------- BASE LEVEL ---------------------"
+  when 25
+    puts "---------------- EXPLORATORY ---------------------"
   end
 end
