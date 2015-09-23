@@ -22,6 +22,20 @@ class TestCompare2Truth < Test::Unit::TestCase
     `rm outfile`
   end
 
+  def run_with2(cig, sam, solution)
+    argv = [cig,sam]
+    options = setup_options(argv)
+    truth_cig = argv[0]
+    sam_file = argv[1]
+    files_valid?(truth_cig,sam_file,options)
+    stats = compare(truth_cig, sam_file, options)
+    File.open("outfile", "w") { |io| io.puts stats.process}
+    diff = `diff outfile #{solution}`
+    assert_equal("",diff)
+    assert_equal(0,$?.to_i)
+    `rm outfile`
+  end
+
   def test_1_sam
     run_with("test_files/compare2truth2015/1.cig",
       "test_files/compare2truth2015/1.sam",
@@ -51,6 +65,12 @@ class TestCompare2Truth < Test::Unit::TestCase
     run_with("test_files/compare2truth2015/20.cig",
       "test_files/compare2truth2015/20.sam",
       "test_files/compare2truth2015/20.solution")
+  end
+
+  def test_20_sam
+    run_with2("test_files/compare2truth2015/50.cig",
+      "test_files/compare2truth2015/50.sam",
+      "test_files/compare2truth2015/50.solution")
   end
 
   def test_seq11_sam
