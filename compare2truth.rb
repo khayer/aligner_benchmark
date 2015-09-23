@@ -193,135 +193,135 @@ skipping_sides: #{@skipping_sides.join(":")}}
   def process
     # READ LEVEL
     out = "--------------------------------------\n"
-    out += "total_number_of_reads = #{@total_number_of_reads}\n"
+    out += "total_number_of_reads:\t#{@total_number_of_reads}\n"
     percent_reads_aligned_correctly = (@total_number_of_reads_aligned_correctly.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
-    out += "accuracy over all reads: #{percent_reads_aligned_correctly}%\n"
+    out += "accuracy over all reads:\t#{percent_reads_aligned_correctly}%\n"
     total_num_unique_aligners = @total_number_of_reads_aligned_correctly + @total_number_of_reads_aligned_incorrectly
     #$logger.debug("total_num_unique_aligned_reads=#{total_num_unique_aligners}")
     accuracy_on_unique_aligners = (@total_number_of_reads_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
-    ##print "% unique aligners correct: $accuracy_on_unique_aligners%\n";
-    out += "accuracy over uniquely aligned reads: #{accuracy_on_unique_aligners}%\n"
+    ##print "% unique aligners correct:\t$accuracy_on_unique_aligners%\n";
+    out += "accuracy over uniquely aligned reads:\t#{accuracy_on_unique_aligners}%\n"
     percent_reads_aligned_incorrectly = (@total_number_of_reads_aligned_incorrectly.to_f / @total_number_of_reads.to_f * 10000.0).to_i / 100.0
     ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
-    out += "% reads aligned incorrectly: #{percent_reads_aligned_incorrectly}%\n"
+    out += "% reads aligned incorrectly:\t#{percent_reads_aligned_incorrectly}%\n"
     percent_reads_aligned_ambiguously = (@total_number_of_reads_aligned_ambiguously.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    out += "% reads aligned ambiguously: #{percent_reads_aligned_ambiguously}%\n"
+    out += "% reads aligned ambiguously:\t#{percent_reads_aligned_ambiguously}%\n"
     percent_reads_unaligned = (@total_number_of_reads_unaligned.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
-    out += "% reads unaligned: #{percent_reads_unaligned}%\n"
+    out += "% reads unaligned:\t#{percent_reads_unaligned}%\n"
     percent_reads_aligned = 100 - percent_reads_unaligned
-    out += "% reads aligned: #{percent_reads_aligned}%\n"
+    out += "% reads aligned:\t#{percent_reads_aligned}%\n"
     intron_rate = (@total_number_of_bases_in_true_skipping_binary.to_f / @total_number_of_reads.to_f * 1000000).to_i / 10000.0
-    out += "% of reads with true introns: #{intron_rate}%\n"
+    out += "% of reads with true introns:\t#{intron_rate}%\n"
 
     if(@total_number_of_bases_in_true_skipping_binary==0)
-      out += "junctions FN/FD rate: No skipping exist in true data.\n"
+      out += "junctions FN/FD rate:\tNo skipping exist in true data.\n"
     else
       if(@total_number_of_bases_called_skipped_binary>0)
         #false_discovery_rate
         skipping_false_discovery_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        out += "junctions FD rate: #{skipping_false_discovery_rate}%\n"
+        out += "junctions FD rate:\t#{skipping_false_discovery_rate}%\n"
       else
-        out += "junctions FD rate: 0% (no junctions called)\n"
+        out += "junctions FD rate:\t0% (no junctions called)\n"
       end
       #false_negative_rate
       skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-      out += "junctions FN rate: #{skipping_false_negative_rate}%\n"
+      out += "junctions FN rate:\t#{skipping_false_negative_rate}%\n"
     end
 
     # BASE LEVEL
     out += "--------------------------------------\n"
-    out += "total_number_of_bases_of_reads = #{@total_number_of_bases_of_reads}\n"
+    out += "total_number_of_bases_of_reads:\t#{@total_number_of_bases_of_reads}\n"
     percent_bases_aligned_correctly = (@total_number_of_bases_aligned_correctly.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
-    out += "accuracy over all bases: #{percent_bases_aligned_correctly}%\n"
+    out += "accuracy over all bases:\t#{percent_bases_aligned_correctly}%\n"
     total_num_unique_aligners = @total_number_of_bases_aligned_correctly + @total_number_of_bases_aligned_incorrectly
     $logger.debug("total_num_unique_aligners=#{total_num_unique_aligners}")
     accuracy_on_unique_aligners = (@total_number_of_bases_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
-    ##print "% unique aligners correct: $accuracy_on_unique_aligners%\n";
-    out += "accuracy over uniquely aligned bases: #{accuracy_on_unique_aligners}%\n"
+    ##print "% unique aligners correct:\t$accuracy_on_unique_aligners%\n";
+    out += "accuracy over uniquely aligned bases:\t#{accuracy_on_unique_aligners}%\n"
     percent_bases_aligned_incorrectly = (@total_number_of_bases_aligned_incorrectly.to_f / @total_number_of_bases_of_reads.to_f * 10000.0).to_i / 100.0
     ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
-    out += "% bases aligned incorrectly: #{percent_bases_aligned_incorrectly}%\n"
+    out += "% bases aligned incorrectly:\t#{percent_bases_aligned_incorrectly}%\n"
     percent_bases_aligned_ambiguously = (@total_number_of_bases_aligned_ambiguously.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    out += "% bases aligned ambiguously: #{percent_bases_aligned_ambiguously}%\n"
+    out += "% bases aligned ambiguously:\t#{percent_bases_aligned_ambiguously}%\n"
     percent_bases_unaligned = (@total_number_of_bases_unaligned.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
-    out += "% bases unaligned: #{percent_bases_unaligned}%\n"
+    out += "% bases unaligned:\t#{percent_bases_unaligned}%\n"
     percent_bases_aligned = 100 - percent_bases_unaligned
-    out += "% bases aligned: #{percent_bases_aligned}%\n"
+    out += "% bases aligned:\t#{percent_bases_aligned}%\n"
     #puts "number of bases in true insertions = #{@total_number_of_bases_in_true_insertions}"
     insertion_rate = (@total_number_of_bases_in_true_insertions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
-    out += "% of bases in true insertions: #{insertion_rate}%\n"
+    out += "% of bases in true insertions:\t#{insertion_rate}%\n"
     deletion_rate = (@total_number_of_bases_in_true_deletions.to_f / @total_number_of_bases_of_reads.to_f * 1000000).to_i / 10000.0
-    out += "% of bases in true deletions: #{deletion_rate}%\n"
+    out += "% of bases in true deletions:\t#{deletion_rate}%\n"
 
 
     # INSERTIONS DELETIONS SKIPPING
-    out += "--------------------------------------\n"
+
     if(@total_number_of_bases_in_true_insertions==0)
-      out += "insertions FN/FD rate: No insertions exist in true data.\n"
+      out += "insertions FN/FD rate:\tNo insertions exist in true data.\n"
     else
       if(@total_number_of_bases_called_insertions>0)
         #false_discovery_rate
         insertions_false_discovery_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_called_insertions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        out += "insertions FD rate: #{insertions_false_discovery_rate}%\n"
+        out += "insertions FD rate:\t#{insertions_false_discovery_rate}%\n"
       else
-        out += "insertions FD rate: 0% (no insertions called)\n"
+        out += "insertions FD rate:\t0% (no insertions called)\n"
       end
       #false_negative_rate
       insertions_false_negative_rate = ((1 - (@insertions_called_correctly.to_f / @total_number_of_bases_in_true_insertions.to_f * 10000).to_i / 10000.0) * 100* 10000).to_i/10000.0
-      out += "insertions FN rate: #{insertions_false_negative_rate}%\n"
+      out += "insertions FN rate:\t#{insertions_false_negative_rate}%\n"
     end
 
     if(@total_number_of_bases_in_true_deletions==0)
-      out += "deletions FN/FD rate: No deletions exist in true data.\n"
+      out += "deletions FN/FD rate:\tNo deletions exist in true data.\n"
     else
       if(@total_number_of_bases_called_deletions>0)
         #false_discovery_rate
         deletions_false_discovery_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_called_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        out += "deletions FD rate: #{deletions_false_discovery_rate}%\n"
+        out += "deletions FD rate:\t#{deletions_false_discovery_rate}%\n"
       else
-        out += "deletions FD rate: 0% (no deletions called)\n"
+        out += "deletions FD rate:\t0% (no deletions called)\n"
       end
       #false_negative_rate
       deletions_false_negative_rate = ((1 - (@deletions_called_correctly.to_f / @total_number_of_bases_in_true_deletions.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-      out += "deletions FN rate: #{deletions_false_negative_rate}%\n"
+      out += "deletions FN rate:\t#{deletions_false_negative_rate}%\n"
     end
 
     if(@total_number_of_bases_in_true_skipping==0)
-      out += "skipping FN/FD rate: No skipping exist in true data.\n"
+      out += "skipping FN/FD rate:\tNo skipping exist in true data.\n"
     else
       if(@total_number_of_bases_called_skipped>0)
         #false_discovery_rate
         skipping_false_discovery_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_called_skipped.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        out += "skipping FD rate: #{skipping_false_discovery_rate}%\n"
+        out += "skipping FD rate:\t#{skipping_false_discovery_rate}%\n"
       else
-        out += "skipping FD rate: 0% (no skipping called)\n"
+        out += "skipping FD rate:\t0% (no skipping called)\n"
       end
       #false_negative_rate
       skipping_false_negative_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_in_true_skipping.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-      out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
+      out += "skipping FN rate:\t#{skipping_false_negative_rate}%\n"
     end
 
     #if(@total_number_of_bases_in_true_skipping_binary==0)
-    #  out += "skipping FN/FD rate: No skipping exist in true data.\n"
+    #  out += "skipping FN/FD rate:\tNo skipping exist in true data.\n"
     #else
     #  if(@total_number_of_bases_called_skipped_binary>0)
     #    #false_discovery_rate
     #    skipping_false_discovery_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-    #    out += "skipping FD rate: #{skipping_false_discovery_rate}%\n"
+    #    out += "skipping FD rate:\t#{skipping_false_discovery_rate}%\n"
     #  else
-    #    out += "skipping FD rate: 0% (no skipping called)\n"
+    #    out += "skipping FD rate:\t0% (no skipping called)\n"
     #  end
     #  #false_negative_rate
     #  skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-    #  out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
+    #  out += "skipping FN rate:\t#{skipping_false_negative_rate}%\n"
     #end
     out += "--------------------------------------\n"
-    out += "Junctions Sides (none|left|right|ambiguous|both): #{@skipping_sides.join("|")}\n"
-    out += "Junctions Sides (none|left|right|ambiguous|both)% of all called: #{@skipping_sides.map { |e| (((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}.join("|")}\n"
+    out += "Junctions Sides (none|left|right|ambiguous|both):\t#{@skipping_sides.join("|")}\n"
+    out += "Junctions Sides (none|left|right|ambiguous|both)% of all called:\t#{@skipping_sides.map { |e| "#{(((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}%"}.join("|")}\n"
     out
   end
 
