@@ -6,9 +6,6 @@ accuracy over uniquely aligned reads: 100.0%
 % reads aligned ambiguously: 0.0%
 % reads unaligned: 50.0%
 % reads aligned: 50.0%
-% of reads with true introns: 50.0%
-junctions FD rate: 100.0%
-junctions FN rate: 100.0%
 --------------------------------------
 total_number_of_bases_of_reads = 200
 accuracy over all bases: 43.0%

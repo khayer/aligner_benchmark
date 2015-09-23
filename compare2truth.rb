@@ -119,6 +119,8 @@ class Stats
     @deletions_called_correctly = 0
     @skipping_called_correctly = 0
     @skipping_called_correctly_binary = 0
+    # Sides can be one of "none", "left", "right", "ambiguous" or "both"
+    @skipping_sides = [0,0,0,0,0]
   end
 
   attr_accessor :total_number_of_bases_of_reads,
@@ -142,7 +144,8 @@ class Stats
     :insertions_called_correctly,
     :deletions_called_correctly,
     :skipping_called_correctly,
-    :skipping_called_correctly_binary
+    :skipping_called_correctly_binary,
+    :skipping_sides
 
   def to_s
     %{total_number_of_bases_of_reads: #{@total_number_of_bases_of_reads}
@@ -166,7 +169,25 @@ total_number_of_bases_called_skipped_binary: #{@total_number_of_bases_called_ski
 insertions_called_correctly: #{@insertions_called_correctly}
 deletions_called_correctly: #{@deletions_called_correctly}
 skipping_called_correctly: #{@skipping_called_correctly}
-skipping_called_correctly_binary: #{@skipping_called_correctly_binary}}
+skipping_called_correctly_binary: #{@skipping_called_correctly_binary}
+skipping_sides: #{@skipping_sides.join(":")}}
+  end
+
+  def fill_skipping_sides(word)
+    #Sides can be one of "none", "left", "right", "ambiguous" or "both"
+    case word
+    when "none"
+      @skipping_sides[0] += 1
+    when "left"
+      @skipping_sides[1] += 1
+    when "right"
+      @skipping_sides[2] += 1
+    when "ambiguous"
+      @skipping_sides[3] += 1
+    else
+      @skipping_sides[4] += 1
+    end
+
   end
 
   def process
@@ -298,6 +319,9 @@ skipping_called_correctly_binary: #{@skipping_called_correctly_binary}}
     #  skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
     #  out += "skipping FN rate: #{skipping_false_negative_rate}%\n"
     #end
+    out += "--------------------------------------\n"
+    out += "Junctions Sides (none|left|right|ambiguous|both): #{@skipping_sides.join("|")}\n"
+    out += "Junctions Sides (none|left|right|ambiguous|both)% of all called: #{@skipping_sides.map { |e| (((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}.join("|")}\n"
     out
   end
 
@@ -510,10 +534,12 @@ def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
   end
 end
 
-# Returns [#matches,#misaligned]
+# Returns [ #matches, #misaligned]
 def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
   matches = 0
   misaligned = 0
+  # Sides can be one of "none", "left", "right", "ambiguous" or "both"
+  sides = "none"
   true_ranges.each_with_index do |t1, i|
     next unless i.even?
     t2 = true_ranges[i+1]
@@ -524,23 +550,30 @@ def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
       i2 = inferred_ranges[k+1]
       if t1 <= i1 && t2 >= i2
         matches += (i2 - i1)
+        sides = "left" if t1 == i1
+        sides = "right" if t2 == i2
       elsif !insertion_mode && t1 <= i1 && i1 < t2 && t2 <= i2
         matches += (t2 - i1)
         misaligned += i2 - t2
+        sides = "left" if t1 == i1
       elsif insertion_mode && t1 <= i1 && i1 <= t2 && t2 <= i2
         #puts "YOUNK"
         matches += (t2 - i1)
         misaligned += i2 - t2
-      elsif t1 >= i1  && t2 <= i2
-        matches += (t2 - t1)
-        misaligned += (i2 - t2) + (t1 - i1)
+      #elsif t1 >= i1  && t2 <= i2
+      #  matches += (t2 - t1)
+      #  misaligned += (i2 - t2) + (t1 - i1)
+      #  $logger.debug "BUBBLES"
       elsif !insertion_mode && t1 >= i1  && t2 >= i2 && t1 < i2
         matches += (i2 - t1)
         misaligned += (t1 - i1)
+        sides = "right" if t2 == i2
+
       elsif insertion_mode && t1 >= i1  && t2 >= i2 && t1 <= i2
         #puts "YOUNS"
         matches += (i2 - t1)
         misaligned += (t1 - i1)
+
       end
       $logger.debug "Matches #{matches}"
       $logger.debug "Misaligned #{misaligned}"
@@ -563,8 +596,8 @@ def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
     puts misaligned
     exit
   end
-
-  [matches, misaligned]
+  $logger.debug("SIDES #{sides}")
+  [matches, misaligned, sides]
 end
 
 def fix_cigar(t_nums,t_letters,i_nums,i_letters)
@@ -591,7 +624,7 @@ def fix_cigar(t_nums,t_letters,i_nums,i_letters)
   $logger.debug i_letters.join("I")
 end
 
-# Returns [#matches,#misaligned]
+# Returns [#matches, #misaligned]
 #def compare_pos_count(true_pos_count, inferred_pos_count)
 #  correct = 0
 #  incorrect = 0
@@ -676,8 +709,15 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length)
   stats.skipping_called_correctly += skipping_incorrect[0]
   stats.total_number_of_bases_called_skipped += skipping_incorrect[1] + skipping_incorrect[0]
   $logger.debug(skipping_incorrect)
-  stats.skipping_called_correctly_binary += 1 if skipping_incorrect[0]-skipping_length == 0 &&  skipping_incorrect[1] == 0 && skipping_incorrect[0] > 0
-  stats.total_number_of_bases_called_skipped_binary += 1 if skipping_incorrect[0] > 0 || skipping_incorrect[1] > 0
+  if skipping_incorrect[0]-skipping_length == 0 &&  skipping_incorrect[1] == 0 && skipping_incorrect[0] > 0
+    stats.skipping_called_correctly_binary += 1
+    skipping_incorrect[2] = "both"
+  end
+  stats.total_number_of_bases_called_skipped_binary += 1 if skipping_incorrect[0] > 0 || skipping_incorrect[1] > 0 #|| (skipping_incorrect[0]-skipping_length).abs > 10
+  if (skipping_incorrect[0]-skipping_length).abs > 10  && skipping_length > 0 && skipping_incorrect[0]  > 0
+    skipping_incorrect[2] = "ambiguous"
+  end
+  stats.fill_skipping_sides(skipping_incorrect[2]) if  skipping_incorrect[1] > 0 || skipping_incorrect[0]  > 0
   # How many clippings?
   $logger.debug("CLIPPING")
   unaligned = compare_ranges(c_cig_mo.unaligned.flatten, s_sam_mo.unaligned.flatten)
@@ -741,6 +781,7 @@ def process(current_group, cig_group, stats,options)
               if skipping > 0
                 stats.skipping_called_correctly_binary += 1
                 stats.total_number_of_bases_called_skipped_binary += 1
+                stats.fill_skipping_sides("both")
               end
               stats.total_number_of_reads_aligned_correctly += 1
             else
