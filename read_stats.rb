@@ -10,6 +10,7 @@ all = []
 names = ["Aligner"]
 count = 0
 borders = []
+first = true
 ARGV[0..-1].each do |arg|
   info = []
   info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
@@ -24,21 +25,21 @@ ARGV[0..-1].each do |arg|
     if line =~ /exist in true data/
       info << "NA"
       info << "NA"
-      names << fields[0]
-      names << fields[0].gsub(/FD/, "FN")
+      names << fields[0] if first
+      names << fields[0].gsub(/FD/, "FN") if first
       count += 1
       next
     end
     if line =~ /^Junctions\ Sides/
-      puts fields[0]
-      names << fields[0].split(/[\(\)]/)[1].split("|").map { |e| e = "Junction Sides #{e}" }
+      names << fields[0].split(/[\(\)]/)[1].split("|").map { |e| e = "Junction Sides #{e}" } if first
       info << fields[-1].split("|")
       count += 4
       next
     end
     info << fields[-1]
-    names << fields[0]
+    names << fields[0] if first
   end
+  first = false
   all << info.flatten
 end
 
