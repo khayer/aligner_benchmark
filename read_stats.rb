@@ -63,6 +63,6 @@ names.each_with_index do |name, j|
   when borders[1]
     puts "---------------- BASE LEVEL ---------------------"
   when borders[2]
-    puts "---------------- EXPLORATORY ---------------------"
+    puts "---------------- JUNC LEVEL ---------------------"
   end
 end

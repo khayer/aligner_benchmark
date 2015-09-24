@@ -111,6 +111,7 @@ class Stats
     @total_number_of_bases_in_true_deletions = 0
     @total_number_of_bases_in_true_skipping = 0
     @total_number_of_bases_in_true_skipping_binary = 0
+    @total_number_of_reads_in_true_skipping_binary = 0
     @total_number_of_bases_called_insertions = 0
     @total_number_of_bases_called_deletions = 0
     @total_number_of_bases_called_skipped = 0
@@ -120,7 +121,7 @@ class Stats
     @skipping_called_correctly = 0
     @skipping_called_correctly_binary = 0
     # Sides can be one of "none", "left", "right", "ambiguous" or "both"
-    @skipping_sides = [0,0,0,0,0]
+    @skipping_sides = [0,0,0,0]
   end
 
   attr_accessor :total_number_of_bases_of_reads,
@@ -137,6 +138,7 @@ class Stats
     :total_number_of_bases_in_true_deletions,
     :total_number_of_bases_in_true_skipping,
     :total_number_of_bases_in_true_skipping_binary,
+    :total_number_of_reads_in_true_skipping_binary,
     :total_number_of_bases_called_insertions,
     :total_number_of_bases_called_deletions,
     :total_number_of_bases_called_skipped,
@@ -173,19 +175,17 @@ skipping_called_correctly_binary: #{@skipping_called_correctly_binary}
 skipping_sides: #{@skipping_sides.join(":")}}
   end
 
-  def fill_skipping_sides(word)
+  def fill_skipping_sides(word, num=1)
     #Sides can be one of "none", "left", "right", "ambiguous" or "both"
     case word
     when "none"
-      @skipping_sides[0] += 1
+      @skipping_sides[0] += num
     when "left"
-      @skipping_sides[1] += 1
+      @skipping_sides[1] += num
     when "right"
-      @skipping_sides[2] += 1
-    when "ambiguous"
-      @skipping_sides[3] += 1
+      @skipping_sides[2] += num
     else
-      @skipping_sides[4] += 1
+      @skipping_sides[3] += num
     end
 
   end
@@ -212,23 +212,10 @@ skipping_sides: #{@skipping_sides.join(":")}}
     out += "% reads unaligned:\t#{percent_reads_unaligned}%\n"
     percent_reads_aligned = 100 - percent_reads_unaligned
     out += "% reads aligned:\t#{percent_reads_aligned}%\n"
-    intron_rate = (@total_number_of_bases_in_true_skipping_binary.to_f / @total_number_of_reads.to_f * 1000000).to_i / 10000.0
+
+    intron_rate = (@total_number_of_reads_in_true_skipping_binary.to_f / @total_number_of_reads.to_f * 1000000).to_i / 10000.0
     out += "% of reads with true introns:\t#{intron_rate}%\n"
 
-    if(@total_number_of_bases_in_true_skipping_binary==0)
-      out += "junctions FN/FD rate:\tNo skipping exist in true data.\n"
-    else
-      if(@total_number_of_bases_called_skipped_binary>0)
-        #false_discovery_rate
-        skipping_false_discovery_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-        out += "junctions FD rate:\t#{skipping_false_discovery_rate}%\n"
-      else
-        out += "junctions FD rate:\t0% (no junctions called)\n"
-      end
-      #false_negative_rate
-      skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
-      out += "junctions FN rate:\t#{skipping_false_negative_rate}%\n"
-    end
 
     # BASE LEVEL
     out += "--------------------------------------\n"
@@ -319,9 +306,26 @@ skipping_sides: #{@skipping_sides.join(":")}}
     #  skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
     #  out += "skipping FN rate:\t#{skipping_false_negative_rate}%\n"
     #end
+    # JUNCTIONS LEVEL
     out += "--------------------------------------\n"
-    out += "Junctions Sides (none|left|right|ambiguous|both):\t#{@skipping_sides.join("|")}\n"
-    out += "Junctions Sides (none|left|right|ambiguous|both)% of all called:\t#{@skipping_sides.map { |e| "#{(((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}%"}.join("|")}\n"
+
+
+    if(@total_number_of_bases_in_true_skipping_binary==0)
+      out += "junctions FN/FD rate:\tNo skipping exist in true data.\n"
+    else
+      if(@total_number_of_bases_called_skipped_binary>0)
+        #false_discovery_rate
+        skipping_false_discovery_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+        out += "junctions FD rate:\t#{skipping_false_discovery_rate}%\n"
+      else
+        out += "junctions FD rate:\t0% (no junctions called)\n"
+      end
+      #false_negative_rate
+      skipping_false_negative_rate = ((1 - (@skipping_called_correctly_binary.to_f / @total_number_of_bases_in_true_skipping_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
+      out += "junctions FN rate:\t#{skipping_false_negative_rate}%\n"
+    end
+    out += "Junctions Sides (none|left|right|both):\t#{@skipping_sides.join("|")}\n"
+    out += "Junctions Sides (none|left|right|both)% of all called:\t#{@skipping_sides.map { |e| "#{(((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}%"}.join("|")}\n"
     out
   end
 
@@ -539,7 +543,7 @@ def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
   matches = 0
   misaligned = 0
   # Sides can be one of "none", "left", "right", "ambiguous" or "both"
-  sides = "none"
+  sides = []
   true_ranges.each_with_index do |t1, i|
     next unless i.even?
     t2 = true_ranges[i+1]
@@ -550,12 +554,19 @@ def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
       i2 = inferred_ranges[k+1]
       if t1 <= i1 && t2 >= i2
         matches += (i2 - i1)
-        sides = "left" if t1 == i1
-        sides = "right" if t2 == i2
+        side = "none"
+        side = "left" if t1 == i1
+        side = "right" if t2 == i2
+        side = "both" if t2 == i2 && t1 == i1
+        sides << side
       elsif !insertion_mode && t1 <= i1 && i1 < t2 && t2 <= i2
         matches += (t2 - i1)
         misaligned += i2 - t2
-        sides = "left" if t1 == i1
+        if t1 == i1
+          sides << "left"
+        else
+          sides << "none"
+        end
       elsif insertion_mode && t1 <= i1 && i1 <= t2 && t2 <= i2
         #puts "YOUNK"
         matches += (t2 - i1)
@@ -567,8 +578,11 @@ def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
       elsif !insertion_mode && t1 >= i1  && t2 >= i2 && t1 < i2
         matches += (i2 - t1)
         misaligned += (t1 - i1)
-        sides = "right" if t2 == i2
-
+        if t2 == i2
+          sides << "right"
+        else
+          sides << "none"
+        end
       elsif insertion_mode && t1 >= i1  && t2 >= i2 && t1 <= i2
         #puts "YOUNS"
         matches += (i2 - t1)
@@ -590,6 +604,7 @@ def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
     next unless k.even?
     i2 = inferred_ranges[k+1]
     misaligned += i2-i1
+    sides << "none"
   end
   if matches < 0 || misaligned < 0
     puts matches
@@ -659,7 +674,7 @@ def exists?(file)
   out
 end
 
-def comp_base_by_base(s_sam,c_cig,stats,skipping_length)
+def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
   $logger.debug(s_sam.join("::"))
   $logger.debug(c_cig.join("::"))
   cig_cigar_nums = c_cig[4].split(/\D/).map { |e|  e.to_i }
@@ -709,15 +724,18 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length)
   stats.skipping_called_correctly += skipping_incorrect[0]
   stats.total_number_of_bases_called_skipped += skipping_incorrect[1] + skipping_incorrect[0]
   $logger.debug(skipping_incorrect)
-  if skipping_incorrect[0]-skipping_length == 0 &&  skipping_incorrect[1] == 0 && skipping_incorrect[0] > 0
-    stats.skipping_called_correctly_binary += 1
-    skipping_incorrect[2] = "both"
+  #if skipping_incorrect[0]-skipping_length == 0 &&  skipping_incorrect[1] == 0 && skipping_incorrect[0] > 0
+  #  stats.skipping_called_correctly_binary += skipping_incorrect[2].length
+  #  #skipping_incorrect[2] = "both"
+  #end
+  #stats.total_number_of_bases_called_skipped_binary += skipping_incorrect[2].length if skipping_incorrect[0] > 0 || skipping_incorrect[1] > 0 #|| (skipping_incorrect[0]-skipping_length).abs > 10
+  if  skipping_incorrect[1] > 0 || skipping_incorrect[0]  > 0
+    skipping_incorrect[2].each do |e|
+      stats.fill_skipping_sides(e)
+      stats.skipping_called_correctly_binary += 1 if e == "both"
+      stats.total_number_of_bases_called_skipped_binary += 1
+    end
   end
-  stats.total_number_of_bases_called_skipped_binary += 1 if skipping_incorrect[0] > 0 || skipping_incorrect[1] > 0 #|| (skipping_incorrect[0]-skipping_length).abs > 10
-  if (skipping_incorrect[0]-skipping_length).abs > 10  && skipping_length > 0 && skipping_incorrect[0]  > 0
-    skipping_incorrect[2] = "ambiguous"
-  end
-  stats.fill_skipping_sides(skipping_incorrect[2]) if  skipping_incorrect[1] > 0 || skipping_incorrect[0]  > 0
   # How many clippings?
   $logger.debug("CLIPPING")
   unaligned = compare_ranges(c_cig_mo.unaligned.flatten, s_sam_mo.unaligned.flatten)
@@ -746,13 +764,16 @@ def process(current_group, cig_group, stats,options)
     stats.total_number_of_bases_in_true_deletions += deletions
     k = l[4].dup
     skipping = 0
+    skipping_binary = 0
     while k =~ /(\d+)N/
       skipping = skipping+$1.to_i
+      skipping_binary += 1
       k.sub!(/(\d+)N/,"")
     end
     stats.total_number_of_bases_in_true_skipping += skipping
     if skipping > 0
-      stats.total_number_of_bases_in_true_skipping_binary += 1
+      stats.total_number_of_bases_in_true_skipping_binary += skipping_binary
+      stats.total_number_of_reads_in_true_skipping_binary += 1
     end
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
@@ -778,15 +799,15 @@ def process(current_group, cig_group, stats,options)
               stats.total_number_of_bases_called_deletions += deletions
               stats.skipping_called_correctly += skipping
               stats.total_number_of_bases_called_skipped += skipping
-              if skipping > 0
-                stats.skipping_called_correctly_binary += 1
-                stats.total_number_of_bases_called_skipped_binary += 1
-                stats.fill_skipping_sides("both")
-              end
+              #if skipping > 0
+              stats.skipping_called_correctly_binary += skipping_binary
+              stats.total_number_of_bases_called_skipped_binary += skipping_binary
+              stats.fill_skipping_sides("both",skipping_binary)
+              #end
               stats.total_number_of_reads_aligned_correctly += 1
             else
               $logger.debug("SKIPPING_LENGTH #{skipping}")
-              comp_base_by_base(s,l,stats,skipping)
+              comp_base_by_base(s,l,stats,skipping,skipping_binary)
             end
           end
         end
@@ -815,7 +836,6 @@ def compare(truth_cig, sam_file, options)
     if current_num == $1
       current_group << line
     else
-      break if $1 == 10000000
       cig_group << truth_cig_handler.readline.chomp
       cig_group << truth_cig_handler.readline.chomp
       count += 1
