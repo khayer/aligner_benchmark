@@ -67,7 +67,7 @@ class TestCompare2Truth < Test::Unit::TestCase
       "test_files/compare2truth2015/20.solution")
   end
 
-  def test_20_sam
+  def test_50_sam
     run_with("test_files/compare2truth2015/50.cig",
       "test_files/compare2truth2015/50.sam",
       "test_files/compare2truth2015/50.solution")
