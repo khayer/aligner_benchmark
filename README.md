@@ -1,6 +1,10 @@
 # aligner_benchmark
 
-## Usage
+## Master script
+
+The master script runs both fix_sam.rb and compar2truth.rb for a given aligner.
+
+### Usage
         Usage: ruby master.rb [options] run_name dataset source_of_tree
 
         e.g. run_name = t3r1-test4
@@ -14,10 +18,10 @@
                                              gsnap
                                              hisat
                                              mapsplice2
+                                             novoalign
                                              olego
                                              rum
                                              star
-                                             soap
                                              soapsplice
                                              subread
                                              tophat2
@@ -25,22 +29,24 @@
             -s, --species [String]           Spiecies, Default: human
             -v, --verbose                    Run verbosely
 
-### On a cluster environment
+
+#### On a cluster environment
         bsub ruby master.rb -s malaria t3r3-test t3r3 /project/itmatlab/aligner_benchmark -v
 
-### On a specific algorithm
+#### On a specific algorithm
         bsub ruby master.rb -s malaria t3r3-test t3r3  /project/itmatlab/aligner_benchmark -v -a tophat2
 
-### Read stats:
-        find . -name comp_res.txt |sort | xargs ruby ~/aligner_benchmark/scripts/aligner_benchmark/read_stats.rb
-        find . -name junctions_stats.txt | sort |  xargs ruby ~/aligner_benchmark/scripts/aligner_benchmark/read_junctions_stats.rb
+## Read stats
 
-###
+After master.rb is complete, this code combines the stats of all the given statistic files.
+
+### Usage
+
+        find . -name comp_res.txt |sort | xargs ruby /path/to/read_stats.rb
+
 
 ## ToDo
 
-* Write unit tests!!!
-* Count introns in binary (TP,FN,TP)
-    * Count partially correct introns (either left or right is correct)
+* Update unit tests to new version!
 
 
