@@ -38,7 +38,7 @@ The master script runs both fix_sam.rb and compar2truth.rb for a given aligner.
 
 ## Read stats
 
-After master.rb is complete, this code combines the stats of all the given statistic files.
+After master.rb is complete, this code combines the stats of all the given comp_res.txt files.
 
 ### Usage
 
