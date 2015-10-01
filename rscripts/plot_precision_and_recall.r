@@ -7,8 +7,8 @@ cols <- c('character','character','character','character','character','character
           'numeric')
 d = read.csv("../test_file", head =T,sep = "\t", colClasses = cols)
 
-ggplot(d, aes(x = algorithm, y= value),stat="identity") + 
-  geom_bar(stat="identity",fill=factor(replicate)) 
+ggplot(d, aes(x = algorithm, y= value,fill=factor(d$replicate)),stat="identity") + 
+  geom_bar(stat="identity",position="dodge") 
   
 df <- data.frame(x = 1:10,
                    y = 1:10,
