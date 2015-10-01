@@ -1,14 +1,89 @@
 library(ggplot2)
 library(tidyr)
-setwd("/Users/kat/github/aligner_benchmark/rscripts")
+setwd("~/github/aligner_benchmark/rscripts")
 
 
 cols <- c('character','character','character','character','character','character',
           'numeric')
 d = read.csv("../test_file", head =T,sep = "\t", colClasses = cols)
+d$mean = rep(0,dim(d)[1])
+d$sd = rep(0,dim(d)[1])
 
-ggplot(d, aes(x = algorithm, y= value,fill=factor(d$replicate)),stat="identity") + 
-  geom_bar(stat="identity",position="dodge") 
+for (i in 1:dim(d)[1]) {
+  #print(i)
+  d$mean[i] = mean(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value)
+  d$sd[i] = sd(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value) 
+}
+l  = spread(d[,c("species","dataset","replicate","level","algorithm","measurement","mean")], measurement, mean)
+#ggplot(d[d$algorithm %in% c("contextmap2","crac","cracnoambiguity","gsnap",
+#          "hisat", "mapsplice2", "novoalign", "olego","olegotwopass","rum",                                                    
+#          "soapsplice", "star", "staronepass", "subread",
+#          "tophat2coveragesearch-bowtie2sensitive",
+#          "tophat2coveragesearch",
+#          "tophat2nocoveragesearch-bowtie2sensitive",
+#          "tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist"),]
+ggplot(l[l$algorithm %in% c("contextmap2","cracnoambiguity","gsnap",
+                            "hisat", "mapsplice2", "novoalign","olegotwopass","rum",                                                    
+                            "soapsplice", "star", "subread",
+                            "tophat2coveragesearch-bowtie2sensitive") &
+           l$replicate == "r1" & l$level == "READ",]
+       , aes(x =precision , y= recall, color=factor(algorithm)),stat="identity") + 
+  coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
+  #geom_bar(stat="identity",position="dodge")  + 
+  #geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position="dodge") +
+  geom_jitter( position = position_jitter(height = .008,width=.008),alpha=0.95,size=6) + 
+  facet_grid(. ~ dataset) + scale_color_brewer(palette="Paired")  +  ggtitle("human read level")
+
+
+ggplot(l[l$algorithm %in% c("contextmap2","cracnoambiguity","gsnap",
+                            "hisat", "mapsplice2", "novoalign","olegotwopass","rum",                                                    
+                            "soapsplice", "star", "subread",
+                            "tophat2coveragesearch-bowtie2sensitive") &
+           l$replicate == "r1" & l$level == "BASE",]
+       , aes(x =precision , y= recall, color=factor(algorithm)),stat="identity") + 
+  coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
+  #geom_bar(stat="identity",position="dodge")  + 
+  #geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position="dodge") +
+  geom_jitter( position = position_jitter(height = .008,width=.008),alpha=0.95,size=6) + 
+  facet_grid(. ~ dataset) + scale_color_brewer(palette="Paired")  +  ggtitle("human base level")
+
+
+ggplot(l[l$algorithm %in% c("contextmap2","cracnoambiguity","gsnap",
+                            "hisat", "mapsplice2", "novoalign","olegotwopass","rum",                                                    
+                            "soapsplice", "star", "subread",
+                            "tophat2coveragesearch-bowtie2sensitive") &
+           l$replicate == "r1" & l$level == "BASE",]
+       , aes(x =insertions_precision , y= insertions_recall, color=factor(algorithm)),stat="identity") + 
+  coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
+  #geom_bar(stat="identity",position="dodge")  + 
+  #geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position="dodge") +
+  geom_jitter( position = position_jitter(height = .008,width=.008),alpha=0.95,size=6) + 
+  facet_grid(. ~ dataset) + scale_color_brewer(palette="Paired")  +  ggtitle("insertions - human base level")
+
+ggplot(l[l$algorithm %in% c("contextmap2","cracnoambiguity","gsnap",
+                            "hisat", "mapsplice2", "novoalign","olegotwopass","rum",                                                    
+                            "soapsplice", "star", "subread",
+                            "tophat2coveragesearch-bowtie2sensitive") &
+           l$replicate == "r1" & l$level == "BASE",]
+       , aes(x =deletions_precision , y= deletions_recall, color=factor(algorithm)),stat="identity") + 
+  coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
+  #geom_bar(stat="identity",position="dodge")  + 
+  #geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position="dodge") +
+  geom_jitter( position = position_jitter(height = .008,width=.008),alpha=0.95,size=6) + 
+  facet_grid(. ~ dataset) + scale_color_brewer(palette="Paired")  +  ggtitle("deletions - human base level")
+
+
+ggplot(l[l$algorithm %in% c("contextmap2","cracnoambiguity","gsnap",
+                            "hisat", "mapsplice2", "novoalign","olegotwopass","rum",                                                    
+                            "soapsplice", "star", "subread",
+                            "tophat2coveragesearch-bowtie2sensitive") &
+           l$replicate == "r1" & l$level == "JUNC",]
+       , aes(x =precision , y= recall, color=factor(algorithm)),stat="identity") + 
+  coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
+  #geom_bar(stat="identity",position="dodge")  + 
+  #geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position="dodge") +
+  geom_jitter( position = position_jitter(height = .008,width=.008),alpha=0.95,size=6) + 
+  facet_grid(. ~ dataset) + scale_color_brewer(palette="Paired")  +  ggtitle("human junction level")
   
 df <- data.frame(x = 1:10,
                    y = 1:10,
