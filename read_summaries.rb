@@ -1,0 +1,249 @@
+require 'logger'
+require './logging'
+include Logging
+require 'optparse'
+require 'csv'
+require 'set'
+###
+#
+# IN:
+# [hayer@consign aligner_benchmark]$ ls Google\ Drive/AlignerBenchmarkLocal/summary/*txt
+#     human_t1r1.txt human_t1r3.txt human_t2r2.txt human_t3r1.txt human_t3r3.txt
+#     human_t1r2.txt human_t2r1.txt human_t2r3.txt human_t3r2.txt
+# OUT: Summary for R-Plotting
+#
+###
+
+
+
+# 2015/8/10 Katharina Hayer
+
+$logger = Logger.new(STDERR)
+$algorithms = [:contextmap2,
+  :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
+  :soapsplice, :star, :subread, :tophat2, :novoalign]
+
+# Initialize logger
+def setup_logger(loglevel)
+  case loglevel
+  when "debug"
+    $logger.level = Logger::DEBUG
+  when "warn"
+    $logger.level = Logger::WARN
+  when "info"
+    $logger.level = Logger::INFO
+  else
+    $logger.level = Logger::ERROR
+  end
+end
+
+def setup_options(args)
+  options = {:out_file =>  "overview_table.xls", :loglevel => "error",
+    :algorithm => "all", :transcripts => nil, :junctions_crossed => nil,
+    :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
+    :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
+    :species => "human", :debug => false
+  }
+
+  opt_parser = OptionParser.new do |opts|
+    opts.banner = "\nUsage: ruby read_summaries.rb [options] sumary.txt [summary2.txt]"
+    opts.separator ""
+    opts.separator "e.g. summary = human_t1r1.txt"
+    opts.separator "e.g. summary2 = human_t1r2.txt"
+    opts.separator ""
+    # enumeration
+    #opts.on('-a', '--algorithm ENUM', [:all, :contextmap2,
+    #  :crac, :gsnap, :hisat, :mapsplice2, :novoalign, :olego, :rum,
+    #  :star,:soapsplice, :subread, :tophat2],'Choose from below:','all: DEFAULT',
+    #  'contextmap2','crac','gsnap','hisat', 'mapsplice2','novoalign',
+    #  'olego','rum','star','soapsplice','subread','tophat2') do |v|
+    #  options[:algorithm] = v
+    #end
+
+    opts.on("-d", "--debug", "Run in debug mode") do |v|
+      options[:log_level] = "debug"
+      options[:debug] = true
+    end
+
+    #opts.on("-o", "--out_file [OUT_FILE]",
+    #  :REQUIRED,String,
+    #  "File for the output, Default: overview_table.xls") do |anno_file|
+    #  options[:out_file] = anno_file
+    #end
+
+    opts.on("-s", "--species [String]",
+      :REQUIRED,String,
+      "Spiecies, Default: human") do |s|
+      options[:species] = s
+    end
+
+    opts.on("-v", "--verbose", "Run verbosely") do |v|
+      options[:log_level] = "info"
+    end
+
+    opts.separator ""
+  end
+
+  args = ["-h"] if args.length == 0
+  opt_parser.parse!(args)
+  setup_logger(options[:log_level])
+  if args.length == 0
+    $logger.error("You only provided #{args.length} fields, but 3 required!")
+    raise "Please specify the input (run_name dataset source_of_tree)"
+  end
+  options
+end
+
+class Run
+  def initialize(species, dataset, replicate)
+    @species = species
+    @dataset = dataset
+    @replicate = replicate
+    @algorithms = Set.new
+    @levels = {"READ" => {}, "JUNC" => {}, "BASE" => {} }
+  end
+
+  attr_accessor :species, :dataset, :replicate, :algorithms, :levels
+
+  def to_s
+    "species #{@species}; dataset: #{@dataset}; replicate: #{@replicate}; Levels: #{@levels}; algorithms #{@algorithms.to_a.join("|")}"
+  end
+
+
+end
+
+def read_files(argv)
+  all = []
+  #names = ["Aligner"]
+  argv[0..-1].each do |arg|
+    arg =~ /\/([a-z]*)_(t\d)(r\d).txt/
+    species = $1
+    dataset = $2
+    replicate = $3
+    $logger.debug(replicate)
+    level = nil
+    names = []
+    first = true
+    current_run = Run.new(species, dataset, replicate)
+    #info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
+    File.open(arg).each do |line|
+      line.chomp!
+      if line =~ /^Aligner/
+        fields = line.split("\t")
+        fields[1...-1].each do |f|
+          f.sub!(/#{species}_#{dataset}#{replicate}/,"")
+          current_run.algorithms << f
+        end
+        next
+      end
+      if line =~ /^------/
+        level = line.split(" ")[1]
+        next
+      end
+      fields = line.split("\t")
+      case fields[0]
+      when "accuracy over uniquely aligned reads:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["precision"]  ||= []
+          current_run.levels[level]["precision"]  << fields[i+1].to_f / 100.0
+        end
+      end
+    end
+    all << current_run
+  end
+  all
+end
+
+def print_all(all)
+  #precision
+  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\n"
+  all.each do |e|
+    e.levels.each_pair do |level, measurement|
+      measurement.each_pair do |m, values|
+        values.each_with_index do |v,i|
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{e.algorithms.to_a[i]}\t#{m}\t#{v}\n"
+        end
+      end
+    end
+  end
+ puts result
+end
+
+  
+def run(argv)
+  options = setup_options(argv)
+  $logger.debug(options)
+  $logger.debug(argv)
+  all = read_files(argv)
+  print_all(all)
+  #puts options[:cut_off]
+  $logger.info("All done!")
+end
+
+if __FILE__ == $0
+  run(ARGV)
+end
+
+
+=begin
+all = []
+names = ["Aligner"]
+count = 0
+borders = []
+first = true
+ARGV[0..-1].each do |arg|
+  info = []
+  info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
+  File.open(arg).each do |line|
+    line.chomp!
+    if line =~ /^------/
+      borders << count
+      next
+    end
+    count += 1
+    fields = line.split("\t")
+    if line =~ /exist in true data/
+      info << "NA"
+      info << "NA"
+      names << fields[0] if first
+      names << fields[0].gsub(/FD/, "FN") if first
+      count += 1
+      next
+    end
+    if line =~ /^Junctions\ Sides/
+      names << fields[0].split(/[\(\)]/)[1].split("|").map { |e| e = "Junction Sides #{e}" } if first
+      info << fields[-1].split("|")
+      count += 4
+      next
+    end
+    info << fields[-1]
+    names << fields[0] if first
+  end
+  first = false
+  all << info.flatten
+end
+
+names.flatten!
+#info.flatten!
+
+#puts "aligner\ttotal_number_of_bases_of_reads\taccuracy over all bases\taccuracy over uniquely aligned bases"
+
+names.each_with_index do |name, j|
+  print "#{name}\t"
+
+  res = []
+  for i in 0...ARGV.length
+    res << all[i][j]
+  end
+  print res.join("\t")
+  print "\n"
+  case j
+  when borders[0]
+    puts "---------------- READ LEVEL ---------------------"
+  when borders[1]
+    puts "---------------- BASE LEVEL ---------------------"
+  when borders[2]
+    puts "---------------- JUNC LEVEL ---------------------"
+  end
+end
+=end
