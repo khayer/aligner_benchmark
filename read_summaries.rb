@@ -16,12 +16,9 @@ require 'set'
 
 
 
-# 2015/8/10 Katharina Hayer
+# 2015/9/30 Katharina Hayer
 
 $logger = Logger.new(STDERR)
-$algorithms = [:contextmap2,
-  :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
-  :soapsplice, :star, :subread, :tophat2, :novoalign]
 
 # Initialize logger
 def setup_logger(loglevel)
@@ -126,13 +123,15 @@ def read_files(argv)
     first = true
     current_run = Run.new(species, dataset, replicate)
     #info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
+    current_mapping = {}
     File.open(arg).each do |line|
       line.chomp!
       if line =~ /^Aligner/
         fields = line.split("\t")
-        fields[1...-1].each do |f|
+        fields[1...-1].each_with_index do |f, i|
           f.sub!(/#{species}_#{dataset}#{replicate}/,"")
           current_run.algorithms << f
+          current_mapping[f] = i+1
         end
         next
       end
@@ -145,10 +144,56 @@ def read_files(argv)
       when "accuracy over uniquely aligned reads:"
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["precision"]  ||= []
-          current_run.levels[level]["precision"]  << fields[i+1].to_f / 100.0
+          current_run.levels[level]["precision"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% reads aligned:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["recall"]  ||= []
+          current_run.levels[level]["recall"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "accuracy over uniquely aligned bases:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["precision"]  ||= []
+          current_run.levels[level]["precision"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% bases aligned:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["recall"]  ||= []
+          current_run.levels[level]["recall"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "insertions FD rate:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["insertions_precision"]  ||= []
+          current_run.levels[level]["insertions_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
+        end
+      when "insertions FN rate:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["insertions_recall"]  ||= []
+          current_run.levels[level]["insertions_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
+        end
+      when "deletions FD rate:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["deletions_precision"]  ||= []
+          current_run.levels[level]["deletions_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
+        end
+      when "deletions FN rate:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["deletions_recall"]  ||= []
+          current_run.levels[level]["deletions_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
+        end
+      when "junctions FD rate:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["precision"]  ||= []
+          current_run.levels[level]["precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
+        end
+      when "junctions FN rate:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["recall"]  ||= []
+          current_run.levels[level]["recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
         end
       end
     end
+    STDERR.puts current_mapping
     all << current_run
   end
   all
@@ -169,7 +214,7 @@ def print_all(all)
  puts result
 end
 
-  
+
 def run(argv)
   options = setup_options(argv)
   $logger.debug(options)
