@@ -901,6 +901,8 @@ def run(argv)
       end
     end
     case alg
+    when :clc
+      run_clc(options, source_of_tree, run_name)
     when :contextmap2
       run_contextmap2(options, source_of_tree, run_name)
     when :crac
