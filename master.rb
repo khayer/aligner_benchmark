@@ -204,7 +204,7 @@ def clean_files(path)
 
 end
 
-def run_tophat2(options, source_of_tree, dataset)
+def run_clc(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/clc/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
