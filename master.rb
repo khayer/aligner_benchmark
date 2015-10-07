@@ -18,7 +18,7 @@ require "erubis"
 # 2015/8/10 Katharina Hayer
 
 $logger = Logger.new(STDERR)
-$algorithms = [:contextmap2,
+$algorithms = [:clc, :contextmap2,
       :crac, :gsnap, :hisat, :mapsplice2, :olego, :rum,
       :soapsplice, :star, :subread, :tophat2, :novoalign]
 
@@ -52,10 +52,10 @@ def setup_options(args)
     opts.separator "e.g. source_of_tree = /project/itmatlab/aligner_benchmark"
     opts.separator ""
     # enumeration
-    opts.on('-a', '--algorithm ENUM', [:all, :contextmap2,
+    opts.on('-a', '--algorithm ENUM', [:all,:clc, :contextmap2,
       :crac, :gsnap, :hisat, :mapsplice2, :novoalign, :olego, :rum,
       :star,:soapsplice, :subread, :tophat2],'Choose from below:','all: DEFAULT',
-      'contextmap2','crac','gsnap','hisat', 'mapsplice2','novoalign',
+      'clc','contextmap2','crac','gsnap','hisat', 'mapsplice2','novoalign',
       'olego','rum','star','soapsplice','subread','tophat2') do |v|
       options[:algorithm] = v
     end
@@ -202,6 +202,51 @@ end
 
 def clean_files(path)
 
+end
+
+def run_tophat2(options, source_of_tree, dataset)
+  cmd = "find #{source_of_tree}/tool_results/clc/alignment -name \"*#{options[:species]}*#{dataset}\""
+  $logger.debug(cmd)
+  l = `#{cmd}`
+  l = l.split("\n")
+  if l.length != 1
+    $logger.error "clc: Trouble finding #{dataset}: #{l}"
+    return
+  end
+  l = l[0]
+  erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/clc.sh"))
+  Dir.glob("#{l}/*").each do |p|
+    next unless File.directory? p
+    next unless File.exist?("#{p}/output.sam")
+    #next unless File.exist?("#{p}/accepted_hits.bam")
+    $logger.debug(p)
+    options[:stats_path] = "#{options[:out_directory]}/clc/#{p.split("/")[-1]}".gsub(/[()]/,"")
+    begin
+      Dir.mkdir(options[:stats_path])
+    rescue SystemCallError
+      if Dir.exist?(options[:stats_path])
+        logger.warn("Directory #{options[:stats_path]} exists!")
+      else
+        logger.error("Can't create directory #{options[:stats_path]}!")
+        raise("Trouble creating directory, log for details.")
+      end
+    end
+
+    next if check_if_results_exist(options[:stats_path])
+    clean_files(options[:stats_path])
+
+    options[:tool_result_path] = p
+    shell_file = "#{options[:jobs_path]}/clc_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
+    o = File.open(shell_file,"w")
+    o.puts(erubis.evaluate(options))
+    o.close()
+    Dir.chdir "#{options[:jobs_path]}"
+    $logger.debug(Dir.pwd)
+    cmd = "bsub < #{shell_file}"
+    jobnumber = submit(cmd,options)
+    options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  end
+  $logger.debug(options[:jobs])
 end
 
 def run_contextmap2(options, source_of_tree, dataset)
