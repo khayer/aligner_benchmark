@@ -325,7 +325,11 @@ skipping_sides: #{@skipping_sides.join(":")}}
       out += "junctions FN rate:\t#{skipping_false_negative_rate}%\n"
     end
     out += "Junctions Sides (none|left|right|both):\t#{@skipping_sides.join("|")}\n"
-    out += "Junctions Sides (none|left|right|both)% of all called:\t#{@skipping_sides.map { |e| "#{(((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}%"}.join("|")}\n"
+    if total_number_of_bases_called_skipped_binary > 0
+      out += "Junctions Sides (none|left|right|both)% of all called:\t#{@skipping_sides.map { |e| "#{(((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}%"}.join("|")}\n"
+    else
+      out += "Junctions Sides (none|left|right|both)% of all called:\tNaN|NaN|NaN|NaN"
+    end
     out
   end
 
