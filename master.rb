@@ -466,7 +466,7 @@ def run_hisat(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
-def run_hisat(options, source_of_tree, dataset)
+def run_hisat2(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/hisat2/alignment -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
   l = `#{cmd}`
@@ -951,7 +951,7 @@ def run(argv)
     when :hisat
       run_hisat(options, source_of_tree, run_name)
     when :hisat2
-      run_hisat(options, source_of_tree, run_name)
+      run_hisat2(options, source_of_tree, run_name)
     when :mapsplice2
       run_mapsplice2(options, source_of_tree, run_name)
     when :novoalign
