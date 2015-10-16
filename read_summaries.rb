@@ -14,9 +14,23 @@ require 'set'
 #
 ###
 
-
-
 # 2015/9/30 Katharina Hayer
+
+$colors = {
+  :clc => "pink",
+  :contextmap2 => "cadetblue1",
+  :crac => "seagreen1",
+  :gsnap => "gold",
+  :hisat => "slateblue",
+  :hisat2 => "slateblue1",
+  :mapsplice2 => "yellowgreen",
+  :olego => "navy",
+  :rum => "forestgreen",
+  :soapsplice => "black",
+  :star => "blueviolet",
+  :subread => "grey",
+  :tophat2 => "brown"
+}
 
 $logger = Logger.new(STDERR)
 
@@ -201,12 +215,12 @@ end
 
 def print_all(all)
   #precision
-  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\n"
+  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\n"
   all.each do |e|
     e.levels.each_pair do |level, measurement|
       measurement.each_pair do |m, values|
         values.each_with_index do |v,i|
-          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{e.algorithms.to_a[i]}\t#{m}\t#{v}\n"
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{e.algorithms.to_a[i]}\t#{m}\t#{v}\t#{$colors[e.algorithms.to_a[i].to_sym]}\n"
         end
       end
     end
