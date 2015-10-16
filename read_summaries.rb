@@ -16,6 +16,8 @@ require 'set'
 
 # 2015/9/30 Katharina Hayer
 
+# TODO filter for best outcome!!!!
+
 $colors = {
   :clc => "pink",
   :contextmap2 => "cadetblue1",
