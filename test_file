@@ -1,1511 +1,1511 @@
-species	dataset	replicate	level	algorithm	measurement	value
-human	t1	r1	READ	contextmap2	precision	0.9903
-human	t1	r1	READ	crac	precision	0.9193000000000001
-human	t1	r1	READ	cracnoambiguity	precision	0.9192
-human	t1	r1	READ	gsnap	precision	0.9976999999999999
-human	t1	r1	READ	hisat	precision	0.9886
-human	t1	r1	READ	mapsplice2	precision	0.9969
-human	t1	r1	READ	novoalign	precision	0.9983
-human	t1	r1	READ	olego	precision	0.9819
-human	t1	r1	READ	olegotwopass	precision	0.9819
-human	t1	r1	READ	rum	precision	0.9933
-human	t1	r1	READ	soapsplice	precision	0.9909
-human	t1	r1	READ	star	precision	0.9993000000000001
-human	t1	r1	READ	staronepass	precision	0.9991
-human	t1	r1	READ	subread	precision	0.9826999999999999
-human	t1	r1	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9958
-human	t1	r1	READ	tophat2coveragesearch	precision	0.9956999999999999
-human	t1	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9958
-human	t1	r1	READ	contextmap2	recall	0.9854999999999999
-human	t1	r1	READ	crac	recall	0.9998999999999999
-human	t1	r1	READ	cracnoambiguity	recall	0.9998999999999999
-human	t1	r1	READ	gsnap	recall	1.0
-human	t1	r1	READ	hisat	recall	0.9973000000000001
-human	t1	r1	READ	mapsplice2	recall	0.9995999999999999
-human	t1	r1	READ	novoalign	recall	1.0
-human	t1	r1	READ	olego	recall	0.9682
-human	t1	r1	READ	olegotwopass	recall	0.9695
-human	t1	r1	READ	rum	recall	0.9984000000000001
-human	t1	r1	READ	soapsplice	recall	0.9615
-human	t1	r1	READ	star	recall	0.9982
-human	t1	r1	READ	staronepass	recall	0.9983
-human	t1	r1	READ	subread	recall	0.9456
-human	t1	r1	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.9737
-human	t1	r1	READ	tophat2coveragesearch	recall	0.9734999999999999
-human	t1	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736
-human	t1	r1	JUNC	contextmap2	precision	0.982701
-human	t1	r1	JUNC	crac	precision	0.8058
-human	t1	r1	JUNC	cracnoambiguity	precision	0.8197
-human	t1	r1	JUNC	gsnap	precision	0.9933
-human	t1	r1	JUNC	hisat	precision	0.9921
-human	t1	r1	JUNC	mapsplice2	precision	0.987801
-human	t1	r1	JUNC	novoalign	precision	0.945
-human	t1	r1	JUNC	olego	precision	0.982
-human	t1	r1	JUNC	olegotwopass	precision	0.9812
-human	t1	r1	JUNC	rum	precision	0.987401
-human	t1	r1	JUNC	soapsplice	precision	0.9881
-human	t1	r1	JUNC	star	precision	0.9972
-human	t1	r1	JUNC	staronepass	precision	0.9961
-human	t1	r1	JUNC	subread	precision	0.982601
-human	t1	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.989801
-human	t1	r1	JUNC	tophat2coveragesearch	precision	0.989801
-human	t1	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.989801
-human	t1	r1	JUNC	contextmap2	recall	0.9295
-human	t1	r1	JUNC	crac	recall	0.329901
-human	t1	r1	JUNC	cracnoambiguity	recall	0.3238
-human	t1	r1	JUNC	gsnap	recall	0.7676000000000001
-human	t1	r1	JUNC	hisat	recall	0.936101
-human	t1	r1	JUNC	mapsplice2	recall	0.9013
-human	t1	r1	JUNC	novoalign	recall	0.8691
-human	t1	r1	JUNC	olego	recall	0.840401
-human	t1	r1	JUNC	olegotwopass	recall	0.850401
-human	t1	r1	JUNC	rum	recall	0.876601
-human	t1	r1	JUNC	soapsplice	recall	0.6426000000000001
-human	t1	r1	JUNC	star	recall	0.9138
-human	t1	r1	JUNC	staronepass	recall	0.8932
-human	t1	r1	JUNC	subread	recall	0.6633
-human	t1	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.909801
-human	t1	r1	JUNC	tophat2coveragesearch	recall	0.909801
-human	t1	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9093
-human	t1	r1	BASE	contextmap2	precision	0.9899
-human	t1	r1	BASE	crac	precision	0.9142
-human	t1	r1	BASE	cracnoambiguity	precision	0.9147
-human	t1	r1	BASE	gsnap	precision	0.9968
-human	t1	r1	BASE	hisat	precision	0.9968
-human	t1	r1	BASE	mapsplice2	precision	0.9965
-human	t1	r1	BASE	novoalign	precision	0.9976
-human	t1	r1	BASE	olego	precision	0.9814
-human	t1	r1	BASE	olegotwopass	precision	0.9813
-human	t1	r1	BASE	rum	precision	0.9982
-human	t1	r1	BASE	soapsplice	precision	0.9887
-human	t1	r1	BASE	star	precision	0.9984999999999999
-human	t1	r1	BASE	staronepass	precision	0.9983
-human	t1	r1	BASE	subread	precision	0.9825
-human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9956
-human	t1	r1	BASE	tophat2coveragesearch	precision	0.9954999999999999
-human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956
-human	t1	r1	BASE	contextmap2	recall	0.9847
-human	t1	r1	BASE	crac	recall	0.9412999999999999
-human	t1	r1	BASE	cracnoambiguity	recall	0.9401
-human	t1	r1	BASE	gsnap	recall	0.9971
-human	t1	r1	BASE	hisat	recall	0.9973000000000001
-human	t1	r1	BASE	mapsplice2	recall	0.9976999999999999
-human	t1	r1	BASE	novoalign	recall	0.9922
-human	t1	r1	BASE	olego	recall	0.9682
-human	t1	r1	BASE	olegotwopass	recall	0.9695
-human	t1	r1	BASE	rum	recall	0.9965999999999999
-human	t1	r1	BASE	soapsplice	recall	0.9582999999999999
-human	t1	r1	BASE	star	recall	0.9971
-human	t1	r1	BASE	staronepass	recall	0.9969
-human	t1	r1	BASE	subread	recall	0.9339
-human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.9737
-human	t1	r1	BASE	tophat2coveragesearch	recall	0.9734999999999999
-human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736
-human	t1	r1	BASE	contextmap2	insertions_precision	0.969301
-human	t1	r1	BASE	crac	insertions_precision	0.8607009999999999
-human	t1	r1	BASE	cracnoambiguity	insertions_precision	0.8772
-human	t1	r1	BASE	gsnap	insertions_precision	0.9599
-human	t1	r1	BASE	hisat	insertions_precision	0.995801
-human	t1	r1	BASE	mapsplice2	insertions_precision	0.987801
-human	t1	r1	BASE	novoalign	insertions_precision	0.5581
-human	t1	r1	BASE	olego	insertions_precision	0.9278
-human	t1	r1	BASE	olegotwopass	insertions_precision	0.960301
-human	t1	r1	BASE	rum	insertions_precision	0.982401
-human	t1	r1	BASE	soapsplice	insertions_precision	0.6652009999999999
-human	t1	r1	BASE	star	insertions_precision	0.9819
-human	t1	r1	BASE	staronepass	insertions_precision	0.980801
-human	t1	r1	BASE	subread	insertions_precision	0.953201
-human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.98
-human	t1	r1	BASE	tophat2coveragesearch	insertions_precision	0.98
-human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.98
-human	t1	r1	BASE	contextmap2	insertions_recall	0.772701
-human	t1	r1	BASE	crac	insertions_recall	0.311901
-human	t1	r1	BASE	cracnoambiguity	insertions_recall	0.30590000000000006
-human	t1	r1	BASE	gsnap	insertions_recall	0.719
-human	t1	r1	BASE	hisat	insertions_recall	0.5082
-human	t1	r1	BASE	mapsplice2	insertions_recall	0.6909000000000001
-human	t1	r1	BASE	novoalign	insertions_recall	0.8094
-human	t1	r1	BASE	olego	insertions_recall	0.35939999999999994
-human	t1	r1	BASE	olegotwopass	insertions_recall	0.3599
-human	t1	r1	BASE	rum	insertions_recall	0.5577000000000001
-human	t1	r1	BASE	soapsplice	insertions_recall	0.31079999999999997
-human	t1	r1	BASE	star	insertions_recall	0.6063000000000001
-human	t1	r1	BASE	staronepass	insertions_recall	0.6049
-human	t1	r1	BASE	subread	insertions_recall	0.727501
-human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.4384
-human	t1	r1	BASE	tophat2coveragesearch	insertions_recall	0.43820000000000003
-human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.43820000000000003
-human	t1	r1	BASE	contextmap2	deletions_precision	0.9769
-human	t1	r1	BASE	crac	deletions_precision	0.916101
-human	t1	r1	BASE	cracnoambiguity	deletions_precision	0.9278
-human	t1	r1	BASE	gsnap	deletions_precision	0.8764000000000001
-human	t1	r1	BASE	hisat	deletions_precision	0.995601
-human	t1	r1	BASE	mapsplice2	deletions_precision	0.986601
-human	t1	r1	BASE	novoalign	deletions_precision	0.7574
-human	t1	r1	BASE	olego	deletions_precision	0.9637
-human	t1	r1	BASE	olegotwopass	deletions_precision	0.964501
-human	t1	r1	BASE	rum	deletions_precision	0.9408
-human	t1	r1	BASE	soapsplice	deletions_precision	0.7038
-human	t1	r1	BASE	star	deletions_precision	0.9849
-human	t1	r1	BASE	staronepass	deletions_precision	0.983801
-human	t1	r1	BASE	subread	deletions_precision	0.944201
-human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9862
-human	t1	r1	BASE	tophat2coveragesearch	deletions_precision	0.9862
-human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9861
-human	t1	r1	BASE	contextmap2	deletions_recall	0.7947
-human	t1	r1	BASE	crac	deletions_recall	0.3234
-human	t1	r1	BASE	cracnoambiguity	deletions_recall	0.31720000000000004
-human	t1	r1	BASE	gsnap	deletions_recall	0.7235
-human	t1	r1	BASE	hisat	deletions_recall	0.5284
-human	t1	r1	BASE	mapsplice2	deletions_recall	0.7777000000000001
-human	t1	r1	BASE	novoalign	deletions_recall	0.823101
-human	t1	r1	BASE	olego	deletions_recall	0.37560000000000004
-human	t1	r1	BASE	olegotwopass	deletions_recall	0.376401
-human	t1	r1	BASE	rum	deletions_recall	0.7361
-human	t1	r1	BASE	soapsplice	deletions_recall	0.2973
-human	t1	r1	BASE	star	deletions_recall	0.707301
-human	t1	r1	BASE	staronepass	deletions_recall	0.7062010000000001
-human	t1	r1	BASE	subread	deletions_recall	0.7628010000000001
-human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.43579999999999997
-human	t1	r1	BASE	tophat2coveragesearch	deletions_recall	0.4357
-human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.4357
-human	t1	r2	READ	contextmap2	precision	0.9901000000000001
-human	t1	r2	READ	crac	precision	0.9193000000000001
-human	t1	r2	READ	cracnoambiguity	precision	0.9193000000000001
-human	t1	r2	READ	gsnap	precision	0.9976999999999999
-human	t1	r2	READ	hisat	precision	0.9884999999999999
-human	t1	r2	READ	mapsplice2	precision	0.9969
-human	t1	r2	READ	novoalign	precision	0.9983
-human	t1	r2	READ	olego	precision	0.9819
-human	t1	r2	READ	olegotwopass	precision	0.9819
-human	t1	r2	READ	rum	precision	0.9932
-human	t1	r2	READ	soapsplice	precision	0.9909
-human	t1	r2	READ	star	precision	0.9993000000000001
-human	t1	r2	READ	staronepass	precision	0.9991
-human	t1	r2	READ	subread	precision	0.9826999999999999
-human	t1	r2	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9958
-human	t1	r2	READ	tophat2coveragesearch	precision	0.9956999999999999
-human	t1	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9958
-human	t1	r2	READ	contextmap2	recall	0.9854
-human	t1	r2	READ	crac	recall	0.9998999999999999
-human	t1	r2	READ	cracnoambiguity	recall	0.9998999999999999
-human	t1	r2	READ	gsnap	recall	1.0
-human	t1	r2	READ	hisat	recall	0.9973000000000001
-human	t1	r2	READ	mapsplice2	recall	0.9995999999999999
-human	t1	r2	READ	novoalign	recall	1.0
-human	t1	r2	READ	olego	recall	0.9681000000000001
-human	t1	r2	READ	olegotwopass	recall	0.9693999999999999
-human	t1	r2	READ	rum	recall	0.9984000000000001
-human	t1	r2	READ	soapsplice	recall	0.9614
-human	t1	r2	READ	star	recall	0.9983
-human	t1	r2	READ	staronepass	recall	0.9983
-human	t1	r2	READ	subread	recall	0.9454
-human	t1	r2	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.9736
-human	t1	r2	READ	tophat2coveragesearch	recall	0.9734
-human	t1	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9734999999999999
-human	t1	r2	JUNC	contextmap2	precision	0.9821
-human	t1	r2	JUNC	crac	precision	0.806101
-human	t1	r2	JUNC	cracnoambiguity	precision	0.8197
-human	t1	r2	JUNC	gsnap	precision	0.993501
-human	t1	r2	JUNC	hisat	precision	0.9921
-human	t1	r2	JUNC	mapsplice2	precision	0.988501
-human	t1	r2	JUNC	novoalign	precision	0.945301
-human	t1	r2	JUNC	olego	precision	0.9821
-human	t1	r2	JUNC	olegotwopass	precision	0.981401
-human	t1	r2	JUNC	rum	precision	0.987501
-human	t1	r2	JUNC	soapsplice	precision	0.988501
-human	t1	r2	JUNC	star	precision	0.9974
-human	t1	r2	JUNC	staronepass	precision	0.9961
-human	t1	r2	JUNC	subread	precision	0.982601
-human	t1	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.989801
-human	t1	r2	JUNC	tophat2coveragesearch	precision	0.989801
-human	t1	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.989801
-human	t1	r2	JUNC	contextmap2	recall	0.9289000000000001
-human	t1	r2	JUNC	crac	recall	0.3297
-human	t1	r2	JUNC	cracnoambiguity	recall	0.3236
-human	t1	r2	JUNC	gsnap	recall	0.767801
-human	t1	r2	JUNC	hisat	recall	0.9356
-human	t1	r2	JUNC	mapsplice2	recall	0.9017
-human	t1	r2	JUNC	novoalign	recall	0.869501
-human	t1	r2	JUNC	olego	recall	0.8401
-human	t1	r2	JUNC	olegotwopass	recall	0.8503000000000001
-human	t1	r2	JUNC	rum	recall	0.8765000000000001
-human	t1	r2	JUNC	soapsplice	recall	0.642
-human	t1	r2	JUNC	star	recall	0.9136
-human	t1	r2	JUNC	staronepass	recall	0.892901
-human	t1	r2	JUNC	subread	recall	0.6613
-human	t1	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.9097
-human	t1	r2	JUNC	tophat2coveragesearch	recall	0.9097
-human	t1	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.909201
-human	t1	r2	BASE	contextmap2	precision	0.9895999999999999
-human	t1	r2	BASE	crac	precision	0.9143000000000001
-human	t1	r2	BASE	cracnoambiguity	precision	0.9147
-human	t1	r2	BASE	gsnap	precision	0.9968
-human	t1	r2	BASE	hisat	precision	0.9967
-human	t1	r2	BASE	mapsplice2	precision	0.9965
-human	t1	r2	BASE	novoalign	precision	0.9976
-human	t1	r2	BASE	olego	precision	0.9814
-human	t1	r2	BASE	olegotwopass	precision	0.9814
-human	t1	r2	BASE	rum	precision	0.9982
-human	t1	r2	BASE	soapsplice	precision	0.9887
-human	t1	r2	BASE	star	precision	0.9984999999999999
-human	t1	r2	BASE	staronepass	precision	0.9983
-human	t1	r2	BASE	subread	precision	0.9825
-human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9956
-human	t1	r2	BASE	tophat2coveragesearch	precision	0.9956
-human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956
-human	t1	r2	BASE	contextmap2	recall	0.9845
-human	t1	r2	BASE	crac	recall	0.9412999999999999
-human	t1	r2	BASE	cracnoambiguity	recall	0.9401999999999999
-human	t1	r2	BASE	gsnap	recall	0.9971
-human	t1	r2	BASE	hisat	recall	0.9973000000000001
-human	t1	r2	BASE	mapsplice2	recall	0.9976
-human	t1	r2	BASE	novoalign	recall	0.9922
-human	t1	r2	BASE	olego	recall	0.9681000000000001
-human	t1	r2	BASE	olegotwopass	recall	0.9693999999999999
-human	t1	r2	BASE	rum	recall	0.9967
-human	t1	r2	BASE	soapsplice	recall	0.9581999999999999
-human	t1	r2	BASE	star	recall	0.9971
-human	t1	r2	BASE	staronepass	recall	0.9969
-human	t1	r2	BASE	subread	recall	0.9337000000000001
-human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.9736
-human	t1	r2	BASE	tophat2coveragesearch	recall	0.9734
-human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9734999999999999
-human	t1	r2	BASE	contextmap2	insertions_precision	0.968701
-human	t1	r2	BASE	crac	insertions_precision	0.8699
-human	t1	r2	BASE	cracnoambiguity	insertions_precision	0.8793
-human	t1	r2	BASE	gsnap	insertions_precision	0.959401
-human	t1	r2	BASE	hisat	insertions_precision	0.994901
-human	t1	r2	BASE	mapsplice2	insertions_precision	0.9879
-human	t1	r2	BASE	novoalign	insertions_precision	0.572301
-human	t1	r2	BASE	olego	insertions_precision	0.928201
-human	t1	r2	BASE	olegotwopass	insertions_precision	0.9609
-human	t1	r2	BASE	rum	insertions_precision	0.981401
-human	t1	r2	BASE	soapsplice	insertions_precision	0.6636
-human	t1	r2	BASE	star	insertions_precision	0.9819
-human	t1	r2	BASE	staronepass	insertions_precision	0.979801
-human	t1	r2	BASE	subread	insertions_precision	0.950601
-human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.978501
-human	t1	r2	BASE	tophat2coveragesearch	insertions_precision	0.978501
-human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.978501
-human	t1	r2	BASE	contextmap2	insertions_recall	0.781
-human	t1	r2	BASE	crac	insertions_recall	0.316001
-human	t1	r2	BASE	cracnoambiguity	insertions_recall	0.30920000000000003
-human	t1	r2	BASE	gsnap	insertions_recall	0.716301
-human	t1	r2	BASE	hisat	insertions_recall	0.499
-human	t1	r2	BASE	mapsplice2	insertions_recall	0.6934009999999999
-human	t1	r2	BASE	novoalign	insertions_recall	0.810201
-human	t1	r2	BASE	olego	insertions_recall	0.35230000000000006
-human	t1	r2	BASE	olegotwopass	insertions_recall	0.35319999999999996
-human	t1	r2	BASE	rum	insertions_recall	0.5448999999999999
-human	t1	r2	BASE	soapsplice	insertions_recall	0.29930099999999993
-human	t1	r2	BASE	star	insertions_recall	0.6057
-human	t1	r2	BASE	staronepass	insertions_recall	0.6045
-human	t1	r2	BASE	subread	insertions_recall	0.7307
-human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.4286
-human	t1	r2	BASE	tophat2coveragesearch	insertions_recall	0.4285
-human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.4285
-human	t1	r2	BASE	contextmap2	deletions_precision	0.9761
-human	t1	r2	BASE	crac	deletions_precision	0.9177
-human	t1	r2	BASE	cracnoambiguity	deletions_precision	0.929301
-human	t1	r2	BASE	gsnap	deletions_precision	0.8752
-human	t1	r2	BASE	hisat	deletions_precision	0.995601
-human	t1	r2	BASE	mapsplice2	deletions_precision	0.9882
-human	t1	r2	BASE	novoalign	deletions_precision	0.7525
-human	t1	r2	BASE	olego	deletions_precision	0.963601
-human	t1	r2	BASE	olegotwopass	deletions_precision	0.9641
-human	t1	r2	BASE	rum	deletions_precision	0.939301
-human	t1	r2	BASE	soapsplice	deletions_precision	0.7016
-human	t1	r2	BASE	star	deletions_precision	0.985701
-human	t1	r2	BASE	staronepass	deletions_precision	0.984601
-human	t1	r2	BASE	subread	deletions_precision	0.9437
-human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9853
-human	t1	r2	BASE	tophat2coveragesearch	deletions_precision	0.9853
-human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.985401
-human	t1	r2	BASE	contextmap2	deletions_recall	0.8025
-human	t1	r2	BASE	crac	deletions_recall	0.32240099999999994
-human	t1	r2	BASE	cracnoambiguity	deletions_recall	0.3162999999999999
-human	t1	r2	BASE	gsnap	deletions_recall	0.7264999999999999
-human	t1	r2	BASE	hisat	deletions_recall	0.5332
-human	t1	r2	BASE	mapsplice2	deletions_recall	0.775801
-human	t1	r2	BASE	novoalign	deletions_recall	0.8239
-human	t1	r2	BASE	olego	deletions_recall	0.37649999999999995
-human	t1	r2	BASE	olegotwopass	deletions_recall	0.377
-human	t1	r2	BASE	rum	deletions_recall	0.7387
-human	t1	r2	BASE	soapsplice	deletions_recall	0.2994
-human	t1	r2	BASE	star	deletions_recall	0.7088
-human	t1	r2	BASE	staronepass	deletions_recall	0.7081
-human	t1	r2	BASE	subread	deletions_recall	0.7648010000000001
-human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.43720100000000006
-human	t1	r2	BASE	tophat2coveragesearch	deletions_recall	0.43720100000000006
-human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.43710099999999996
-human	t1	r3	READ	contextmap2	precision	0.9899
-human	t1	r3	READ	crac	precision	0.9193000000000001
-human	t1	r3	READ	cracnoambiguity	precision	0.9193000000000001
-human	t1	r3	READ	gsnap	precision	0.9976999999999999
-human	t1	r3	READ	hisat	precision	0.9884999999999999
-human	t1	r3	READ	mapsplice2	precision	0.997
-human	t1	r3	READ	novoalign	precision	0.9983
-human	t1	r3	READ	olego	precision	0.9819
-human	t1	r3	READ	olegotwopass	precision	0.9818000000000001
-human	t1	r3	READ	rum	precision	0.9932
-human	t1	r3	READ	soapsplice	precision	0.9909
-human	t1	r3	READ	star	precision	0.9993000000000001
-human	t1	r3	READ	staronepass	precision	0.9991
-human	t1	r3	READ	subread	precision	0.9826999999999999
-human	t1	r3	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956999999999999
-human	t1	r3	READ	tophat2coveragesearch	precision	0.9956999999999999
-human	t1	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956999999999999
-human	t1	r3	READ	contextmap2	recall	0.9858
-human	t1	r3	READ	crac	recall	0.9998999999999999
-human	t1	r3	READ	cracnoambiguity	recall	0.9998999999999999
-human	t1	r3	READ	gsnap	recall	1.0
-human	t1	r3	READ	hisat	recall	0.9974
-human	t1	r3	READ	mapsplice2	recall	0.9995999999999999
-human	t1	r3	READ	novoalign	recall	1.0
-human	t1	r3	READ	olego	recall	0.968
-human	t1	r3	READ	olegotwopass	recall	0.9693999999999999
-human	t1	r3	READ	rum	recall	0.9984000000000001
-human	t1	r3	READ	soapsplice	recall	0.9614
-human	t1	r3	READ	star	recall	0.9983
-human	t1	r3	READ	staronepass	recall	0.9983
-human	t1	r3	READ	subread	recall	0.9454
-human	t1	r3	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.9737
-human	t1	r3	READ	tophat2coveragesearch	recall	0.9736
-human	t1	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736
-human	t1	r3	JUNC	contextmap2	precision	0.9823
-human	t1	r3	JUNC	crac	precision	0.8052010000000001
-human	t1	r3	JUNC	cracnoambiguity	precision	0.8189
-human	t1	r3	JUNC	gsnap	precision	0.993701
-human	t1	r3	JUNC	hisat	precision	0.9922
-human	t1	r3	JUNC	mapsplice2	precision	0.9881
-human	t1	r3	JUNC	novoalign	precision	0.945401
-human	t1	r3	JUNC	olego	precision	0.982
-human	t1	r3	JUNC	olegotwopass	precision	0.9813
-human	t1	r3	JUNC	rum	precision	0.987501
-human	t1	r3	JUNC	soapsplice	precision	0.9883
-human	t1	r3	JUNC	star	precision	0.997601
-human	t1	r3	JUNC	staronepass	precision	0.9963
-human	t1	r3	JUNC	subread	precision	0.982501
-human	t1	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.99
-human	t1	r3	JUNC	tophat2coveragesearch	precision	0.99
-human	t1	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.99
-human	t1	r3	JUNC	contextmap2	recall	0.930001
-human	t1	r3	JUNC	crac	recall	0.3294
-human	t1	r3	JUNC	cracnoambiguity	recall	0.32319999999999993
-human	t1	r3	JUNC	gsnap	recall	0.7684
-human	t1	r3	JUNC	hisat	recall	0.9368
-human	t1	r3	JUNC	mapsplice2	recall	0.9024
-human	t1	r3	JUNC	novoalign	recall	0.869501
-human	t1	r3	JUNC	olego	recall	0.841
-human	t1	r3	JUNC	olegotwopass	recall	0.8511
-human	t1	r3	JUNC	rum	recall	0.8769009999999999
-human	t1	r3	JUNC	soapsplice	recall	0.642701
-human	t1	r3	JUNC	star	recall	0.9145
-human	t1	r3	JUNC	staronepass	recall	0.8939010000000001
-human	t1	r3	JUNC	subread	recall	0.664101
-human	t1	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.910801
-human	t1	r3	JUNC	tophat2coveragesearch	recall	0.910801
-human	t1	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9103
-human	t1	r3	BASE	contextmap2	precision	0.9895
-human	t1	r3	BASE	crac	precision	0.9143000000000001
-human	t1	r3	BASE	cracnoambiguity	precision	0.9147
-human	t1	r3	BASE	gsnap	precision	0.9969
-human	t1	r3	BASE	hisat	precision	0.9967
-human	t1	r3	BASE	mapsplice2	precision	0.9965
-human	t1	r3	BASE	novoalign	precision	0.9976
-human	t1	r3	BASE	olego	precision	0.9814
-human	t1	r3	BASE	olegotwopass	precision	0.9813
-human	t1	r3	BASE	rum	precision	0.9981
-human	t1	r3	BASE	soapsplice	precision	0.9887
-human	t1	r3	BASE	star	precision	0.9984999999999999
-human	t1	r3	BASE	staronepass	precision	0.9983
-human	t1	r3	BASE	subread	precision	0.9823999999999999
-human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9954999999999999
-human	t1	r3	BASE	tophat2coveragesearch	precision	0.9954999999999999
-human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9954999999999999
-human	t1	r3	BASE	contextmap2	recall	0.985
-human	t1	r3	BASE	crac	recall	0.9412999999999999
-human	t1	r3	BASE	cracnoambiguity	recall	0.9401
-human	t1	r3	BASE	gsnap	recall	0.9971
-human	t1	r3	BASE	hisat	recall	0.9974
-human	t1	r3	BASE	mapsplice2	recall	0.9976999999999999
-human	t1	r3	BASE	novoalign	recall	0.9922
-human	t1	r3	BASE	olego	recall	0.968
-human	t1	r3	BASE	olegotwopass	recall	0.9693999999999999
-human	t1	r3	BASE	rum	recall	0.9965999999999999
-human	t1	r3	BASE	soapsplice	recall	0.9581999999999999
-human	t1	r3	BASE	star	recall	0.9971
-human	t1	r3	BASE	staronepass	recall	0.9969
-human	t1	r3	BASE	subread	recall	0.9337000000000001
-human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.9737
-human	t1	r3	BASE	tophat2coveragesearch	recall	0.9736
-human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736
-human	t1	r3	BASE	contextmap2	insertions_precision	0.9669
-human	t1	r3	BASE	crac	insertions_precision	0.863701
-human	t1	r3	BASE	cracnoambiguity	insertions_precision	0.875901
-human	t1	r3	BASE	gsnap	insertions_precision	0.958201
-human	t1	r3	BASE	hisat	insertions_precision	0.9954
-human	t1	r3	BASE	mapsplice2	insertions_precision	0.988601
-human	t1	r3	BASE	novoalign	insertions_precision	0.5686
-human	t1	r3	BASE	olego	insertions_precision	0.9287
-human	t1	r3	BASE	olegotwopass	insertions_precision	0.9619
-human	t1	r3	BASE	rum	insertions_precision	0.9822
-human	t1	r3	BASE	soapsplice	insertions_precision	0.6651009999999999
-human	t1	r3	BASE	star	insertions_precision	0.981
-human	t1	r3	BASE	staronepass	insertions_precision	0.9792
-human	t1	r3	BASE	subread	insertions_precision	0.9509
-human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.979501
-human	t1	r3	BASE	tophat2coveragesearch	insertions_precision	0.979501
-human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.979501
-human	t1	r3	BASE	contextmap2	insertions_recall	0.7865
-human	t1	r3	BASE	crac	insertions_recall	0.3153
-human	t1	r3	BASE	cracnoambiguity	insertions_recall	0.3085
-human	t1	r3	BASE	gsnap	insertions_recall	0.7203010000000001
-human	t1	r3	BASE	hisat	insertions_recall	0.5108010000000001
-human	t1	r3	BASE	mapsplice2	insertions_recall	0.7037
-human	t1	r3	BASE	novoalign	insertions_recall	0.8094
-human	t1	r3	BASE	olego	insertions_recall	0.363
-human	t1	r3	BASE	olegotwopass	insertions_recall	0.3638
-human	t1	r3	BASE	rum	insertions_recall	0.5550010000000001
-human	t1	r3	BASE	soapsplice	insertions_recall	0.3053
-human	t1	r3	BASE	star	insertions_recall	0.6049
-human	t1	r3	BASE	staronepass	insertions_recall	0.6034010000000001
-human	t1	r3	BASE	subread	insertions_recall	0.7398
-human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.4343
-human	t1	r3	BASE	tophat2coveragesearch	insertions_recall	0.43420000000000003
-human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.43409999999999993
-human	t1	r3	BASE	contextmap2	deletions_precision	0.9763
-human	t1	r3	BASE	crac	deletions_precision	0.9173
-human	t1	r3	BASE	cracnoambiguity	deletions_precision	0.9274
-human	t1	r3	BASE	gsnap	deletions_precision	0.8765000000000001
-human	t1	r3	BASE	hisat	deletions_precision	0.9963
-human	t1	r3	BASE	mapsplice2	deletions_precision	0.989
-human	t1	r3	BASE	novoalign	deletions_precision	0.759001
-human	t1	r3	BASE	olego	deletions_precision	0.9668
-human	t1	r3	BASE	olegotwopass	deletions_precision	0.967401
-human	t1	r3	BASE	rum	deletions_precision	0.9407
-human	t1	r3	BASE	soapsplice	deletions_precision	0.7037
-human	t1	r3	BASE	star	deletions_precision	0.984601
-human	t1	r3	BASE	staronepass	deletions_precision	0.983401
-human	t1	r3	BASE	subread	deletions_precision	0.9477
-human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.986701
-human	t1	r3	BASE	tophat2coveragesearch	deletions_precision	0.986701
-human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.986701
-human	t1	r3	BASE	contextmap2	deletions_recall	0.8078000000000001
-human	t1	r3	BASE	crac	deletions_recall	0.33020099999999997
-human	t1	r3	BASE	cracnoambiguity	deletions_recall	0.32330000000000003
-human	t1	r3	BASE	gsnap	deletions_recall	0.7296
-human	t1	r3	BASE	hisat	deletions_recall	0.5308010000000001
-human	t1	r3	BASE	mapsplice2	deletions_recall	0.7864
-human	t1	r3	BASE	novoalign	deletions_recall	0.829501
-human	t1	r3	BASE	olego	deletions_recall	0.37529999999999997
-human	t1	r3	BASE	olegotwopass	deletions_recall	0.3758
-human	t1	r3	BASE	rum	deletions_recall	0.7405010000000001
-human	t1	r3	BASE	soapsplice	deletions_recall	0.2992
-human	t1	r3	BASE	star	deletions_recall	0.7144010000000001
-human	t1	r3	BASE	staronepass	deletions_recall	0.7132000000000001
-human	t1	r3	BASE	subread	deletions_recall	0.7674
-human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.43789999999999996
-human	t1	r3	BASE	tophat2coveragesearch	deletions_recall	0.43779999999999997
-human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.4377
-human	t2	r1	READ	contextmap2	precision	0.9892
-human	t2	r1	READ	crac	precision	0.9158
-human	t2	r1	READ	cracnoambiguity	precision	0.9158
-human	t2	r1	READ	gsnap	precision	0.9968
-human	t2	r1	READ	hisat	precision	0.93
-human	t2	r1	READ	mapsplice2	precision	0.996
-human	t2	r1	READ	novoalign	precision	0.9982
-human	t2	r1	READ	olego	precision	0.9821
-human	t2	r1	READ	olegotwopass	precision	0.982
-human	t2	r1	READ	rum	precision	0.9736
-human	t2	r1	READ	soapsplice	precision	0.9891
-human	t2	r1	READ	star	precision	0.9987999999999999
-human	t2	r1	READ	staronepass	precision	0.9986
-human	t2	r1	READ	subread	precision	0.9815
-human	t2	r1	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9963
-human	t2	r1	READ	tophat2coveragesearch	precision	0.9963
-human	t2	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9963
-human	t2	r1	READ	contextmap2	recall	0.9722
-human	t2	r1	READ	crac	recall	0.9987999999999999
-human	t2	r1	READ	cracnoambiguity	recall	0.9987999999999999
-human	t2	r1	READ	gsnap	recall	1.0
-human	t2	r1	READ	hisat	recall	0.9799
-human	t2	r1	READ	mapsplice2	recall	0.9971
-human	t2	r1	READ	novoalign	recall	1.0
-human	t2	r1	READ	olego	recall	0.9009999999999999
-human	t2	r1	READ	olegotwopass	recall	0.9026000000000001
-human	t2	r1	READ	rum	recall	0.9953
-human	t2	r1	READ	soapsplice	recall	0.9220999999999999
-human	t2	r1	READ	star	recall	0.997
-human	t2	r1	READ	staronepass	recall	0.9969
-human	t2	r1	READ	subread	recall	0.9107999999999999
-human	t2	r1	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r1	READ	tophat2coveragesearch	recall	0.838
-human	t2	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r1	JUNC	contextmap2	precision	0.970701
-human	t2	r1	JUNC	crac	precision	0.6535
-human	t2	r1	JUNC	cracnoambiguity	precision	0.6643
-human	t2	r1	JUNC	gsnap	precision	0.9862
-human	t2	r1	JUNC	hisat	precision	0.9879
-human	t2	r1	JUNC	mapsplice2	precision	0.9849
-human	t2	r1	JUNC	novoalign	precision	0.9425
-human	t2	r1	JUNC	olego	precision	0.9803
-human	t2	r1	JUNC	olegotwopass	precision	0.9779
-human	t2	r1	JUNC	rum	precision	0.9639
-human	t2	r1	JUNC	soapsplice	precision	0.963601
-human	t2	r1	JUNC	star	precision	0.994901
-human	t2	r1	JUNC	staronepass	precision	0.9943
-human	t2	r1	JUNC	subread	precision	0.969601
-human	t2	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.9911
-human	t2	r1	JUNC	tophat2coveragesearch	precision	0.9911
-human	t2	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9911
-human	t2	r1	JUNC	contextmap2	recall	0.838401
-human	t2	r1	JUNC	crac	recall	0.18019999999999992
-human	t2	r1	JUNC	cracnoambiguity	recall	0.17710099999999995
-human	t2	r1	JUNC	gsnap	recall	0.718601
-human	t2	r1	JUNC	hisat	recall	0.7821
-human	t2	r1	JUNC	mapsplice2	recall	0.7903
-human	t2	r1	JUNC	novoalign	recall	0.8629
-human	t2	r1	JUNC	olego	recall	0.719301
-human	t2	r1	JUNC	olegotwopass	recall	0.7293000000000001
-human	t2	r1	JUNC	rum	recall	0.7501
-human	t2	r1	JUNC	soapsplice	recall	0.520701
-human	t2	r1	JUNC	star	recall	0.864501
-human	t2	r1	JUNC	staronepass	recall	0.842
-human	t2	r1	JUNC	subread	recall	0.5285
-human	t2	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.6882999999999999
-human	t2	r1	JUNC	tophat2coveragesearch	recall	0.6884
-human	t2	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.6882010000000001
-human	t2	r1	BASE	contextmap2	precision	0.9878
-human	t2	r1	BASE	crac	precision	0.9042
-human	t2	r1	BASE	cracnoambiguity	precision	0.9048
-human	t2	r1	BASE	gsnap	precision	0.9941
-human	t2	r1	BASE	hisat	precision	0.9953
-human	t2	r1	BASE	mapsplice2	precision	0.9944
-human	t2	r1	BASE	novoalign	precision	0.9967
-human	t2	r1	BASE	olego	precision	0.9812000000000001
-human	t2	r1	BASE	olegotwopass	precision	0.9811
-human	t2	r1	BASE	rum	precision	0.9965999999999999
-human	t2	r1	BASE	soapsplice	precision	0.9840000000000001
-human	t2	r1	BASE	star	precision	0.9953
-human	t2	r1	BASE	staronepass	precision	0.9951000000000001
-human	t2	r1	BASE	subread	precision	0.9797
-human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.996
-human	t2	r1	BASE	tophat2coveragesearch	precision	0.9959
-human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.996
-human	t2	r1	BASE	contextmap2	recall	0.9682999999999999
-human	t2	r1	BASE	crac	recall	0.8713
-human	t2	r1	BASE	cracnoambiguity	recall	0.8698999999999999
-human	t2	r1	BASE	gsnap	recall	0.9926999999999999
-human	t2	r1	BASE	hisat	recall	0.9799
-human	t2	r1	BASE	mapsplice2	recall	0.9863
-human	t2	r1	BASE	novoalign	recall	0.9903
-human	t2	r1	BASE	olego	recall	0.9009999999999999
-human	t2	r1	BASE	olegotwopass	recall	0.9026000000000001
-human	t2	r1	BASE	rum	recall	0.9915999999999999
-human	t2	r1	BASE	soapsplice	recall	0.9117000000000001
-human	t2	r1	BASE	star	recall	0.9921
-human	t2	r1	BASE	staronepass	recall	0.9917
-human	t2	r1	BASE	subread	recall	0.8931
-human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r1	BASE	tophat2coveragesearch	recall	0.838
-human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r1	BASE	contextmap2	insertions_precision	0.970401
-human	t2	r1	BASE	crac	insertions_precision	0.8267
-human	t2	r1	BASE	cracnoambiguity	insertions_precision	0.8402000000000001
-human	t2	r1	BASE	gsnap	insertions_precision	0.939401
-human	t2	r1	BASE	hisat	insertions_precision	0.9933
-human	t2	r1	BASE	mapsplice2	insertions_precision	0.976501
-human	t2	r1	BASE	novoalign	insertions_precision	0.8094
-human	t2	r1	BASE	olego	insertions_precision	0.9637
-human	t2	r1	BASE	olegotwopass	insertions_precision	0.972501
-human	t2	r1	BASE	rum	insertions_precision	0.9731
-human	t2	r1	BASE	soapsplice	insertions_precision	0.724301
-human	t2	r1	BASE	star	insertions_precision	0.956
-human	t2	r1	BASE	staronepass	insertions_precision	0.9549
-human	t2	r1	BASE	subread	insertions_precision	0.9385
-human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.987401
-human	t2	r1	BASE	tophat2coveragesearch	insertions_precision	0.987401
-human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.987401
-human	t2	r1	BASE	contextmap2	insertions_recall	0.6747
-human	t2	r1	BASE	crac	insertions_recall	0.19879999999999998
-human	t2	r1	BASE	cracnoambiguity	insertions_recall	0.19520099999999996
-human	t2	r1	BASE	gsnap	insertions_recall	0.6485000000000001
-human	t2	r1	BASE	hisat	insertions_recall	0.26990099999999995
-human	t2	r1	BASE	mapsplice2	insertions_recall	0.5597
-human	t2	r1	BASE	novoalign	insertions_recall	0.7821
-human	t2	r1	BASE	olego	insertions_recall	0.26170000000000004
-human	t2	r1	BASE	olegotwopass	insertions_recall	0.2623000000000001
-human	t2	r1	BASE	rum	insertions_recall	0.39749999999999996
-human	t2	r1	BASE	soapsplice	insertions_recall	0.15349999999999997
-human	t2	r1	BASE	star	insertions_recall	0.5103
-human	t2	r1	BASE	staronepass	insertions_recall	0.5085
-human	t2	r1	BASE	subread	insertions_recall	0.6101
-human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.21250000000000002
-human	t2	r1	BASE	tophat2coveragesearch	insertions_recall	0.21240099999999995
-human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.21250000000000002
-human	t2	r1	BASE	contextmap2	deletions_precision	0.9751
-human	t2	r1	BASE	crac	deletions_precision	0.8628
-human	t2	r1	BASE	cracnoambiguity	deletions_precision	0.8762
-human	t2	r1	BASE	gsnap	deletions_precision	0.8966000000000001
-human	t2	r1	BASE	hisat	deletions_precision	0.9931
-human	t2	r1	BASE	mapsplice2	deletions_precision	0.973701
-human	t2	r1	BASE	novoalign	deletions_precision	0.883601
-human	t2	r1	BASE	olego	deletions_precision	0.971501
-human	t2	r1	BASE	olegotwopass	deletions_precision	0.971501
-human	t2	r1	BASE	rum	deletions_precision	0.924301
-human	t2	r1	BASE	soapsplice	deletions_precision	0.7129
-human	t2	r1	BASE	star	deletions_precision	0.9536
-human	t2	r1	BASE	staronepass	deletions_precision	0.952501
-human	t2	r1	BASE	subread	deletions_precision	0.9264
-human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9922
-human	t2	r1	BASE	tophat2coveragesearch	deletions_precision	0.9922
-human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9922
-human	t2	r1	BASE	contextmap2	deletions_recall	0.6874
-human	t2	r1	BASE	crac	deletions_recall	0.1956
-human	t2	r1	BASE	cracnoambiguity	deletions_recall	0.19200000000000006
-human	t2	r1	BASE	gsnap	deletions_recall	0.6721
-human	t2	r1	BASE	hisat	deletions_recall	0.27849999999999997
-human	t2	r1	BASE	mapsplice2	deletions_recall	0.5869
-human	t2	r1	BASE	novoalign	deletions_recall	0.7938
-human	t2	r1	BASE	olego	deletions_recall	0.2712
-human	t2	r1	BASE	olegotwopass	deletions_recall	0.27190000000000003
-human	t2	r1	BASE	rum	deletions_recall	0.644101
-human	t2	r1	BASE	soapsplice	deletions_recall	0.15500000000000003
-human	t2	r1	BASE	star	deletions_recall	0.6075010000000001
-human	t2	r1	BASE	staronepass	deletions_recall	0.6057
-human	t2	r1	BASE	subread	deletions_recall	0.6274
-human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.21589999999999998
-human	t2	r1	BASE	tophat2coveragesearch	deletions_recall	0.2158
-human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.21589999999999998
-human	t2	r2	READ	contextmap2	precision	0.9890000000000001
-human	t2	r2	READ	crac	precision	0.9157
-human	t2	r2	READ	cracnoambiguity	precision	0.9157
-human	t2	r2	READ	gsnap	precision	0.9968
-human	t2	r2	READ	hisat	precision	0.9298000000000001
-human	t2	r2	READ	mapsplice2	precision	0.9959
-human	t2	r2	READ	novoalign	precision	0.9982
-human	t2	r2	READ	olego	precision	0.982
-human	t2	r2	READ	olegotwopass	precision	0.982
-human	t2	r2	READ	rum	precision	0.9736
-human	t2	r2	READ	soapsplice	precision	0.9892
-human	t2	r2	READ	star	precision	0.9987999999999999
-human	t2	r2	READ	staronepass	precision	0.9986
-human	t2	r2	READ	subread	precision	0.9815999999999999
-human	t2	r2	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9963
-human	t2	r2	READ	tophat2coveragesearch	precision	0.9963
-human	t2	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9963
-human	t2	r2	READ	contextmap2	recall	0.9726
-human	t2	r2	READ	crac	recall	0.9987999999999999
-human	t2	r2	READ	cracnoambiguity	recall	0.9987999999999999
-human	t2	r2	READ	gsnap	recall	1.0
-human	t2	r2	READ	hisat	recall	0.9799
-human	t2	r2	READ	mapsplice2	recall	0.9971
-human	t2	r2	READ	novoalign	recall	1.0
-human	t2	r2	READ	olego	recall	0.9009
-human	t2	r2	READ	olegotwopass	recall	0.9024
-human	t2	r2	READ	rum	recall	0.9953
-human	t2	r2	READ	soapsplice	recall	0.9220999999999999
-human	t2	r2	READ	star	recall	0.9971
-human	t2	r2	READ	staronepass	recall	0.9969
-human	t2	r2	READ	subread	recall	0.9109
-human	t2	r2	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r2	READ	tophat2coveragesearch	recall	0.838
-human	t2	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r2	JUNC	contextmap2	precision	0.9702
-human	t2	r2	JUNC	crac	precision	0.6519010000000001
-human	t2	r2	JUNC	cracnoambiguity	precision	0.6625
-human	t2	r2	JUNC	gsnap	precision	0.9862
-human	t2	r2	JUNC	hisat	precision	0.9872
-human	t2	r2	JUNC	mapsplice2	precision	0.984501
-human	t2	r2	JUNC	novoalign	precision	0.942101
-human	t2	r2	JUNC	olego	precision	0.979701
-human	t2	r2	JUNC	olegotwopass	precision	0.977601
-human	t2	r2	JUNC	rum	precision	0.964301
-human	t2	r2	JUNC	soapsplice	precision	0.963601
-human	t2	r2	JUNC	star	precision	0.995
-human	t2	r2	JUNC	staronepass	precision	0.9944
-human	t2	r2	JUNC	subread	precision	0.9688
-human	t2	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.9913
-human	t2	r2	JUNC	tophat2coveragesearch	precision	0.9913
-human	t2	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9913
-human	t2	r2	JUNC	contextmap2	recall	0.839
-human	t2	r2	JUNC	crac	recall	0.18000000000000005
-human	t2	r2	JUNC	cracnoambiguity	recall	0.17680099999999999
-human	t2	r2	JUNC	gsnap	recall	0.7191000000000001
-human	t2	r2	JUNC	hisat	recall	0.7817000000000001
-human	t2	r2	JUNC	mapsplice2	recall	0.7908
-human	t2	r2	JUNC	novoalign	recall	0.8623000000000001
-human	t2	r2	JUNC	olego	recall	0.719
-human	t2	r2	JUNC	olegotwopass	recall	0.7295
-human	t2	r2	JUNC	rum	recall	0.75
-human	t2	r2	JUNC	soapsplice	recall	0.5215
-human	t2	r2	JUNC	star	recall	0.8648
-human	t2	r2	JUNC	staronepass	recall	0.8425009999999999
-human	t2	r2	JUNC	subread	recall	0.531801
-human	t2	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.6879
-human	t2	r2	JUNC	tophat2coveragesearch	recall	0.6879
-human	t2	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.6878
-human	t2	r2	BASE	contextmap2	precision	0.9876
-human	t2	r2	BASE	crac	precision	0.9041
-human	t2	r2	BASE	cracnoambiguity	precision	0.9047
-human	t2	r2	BASE	gsnap	precision	0.9942
-human	t2	r2	BASE	hisat	precision	0.9953
-human	t2	r2	BASE	mapsplice2	precision	0.9943000000000001
-human	t2	r2	BASE	novoalign	precision	0.9967
-human	t2	r2	BASE	olego	precision	0.9811
-human	t2	r2	BASE	olegotwopass	precision	0.981
-human	t2	r2	BASE	rum	precision	0.9965999999999999
-human	t2	r2	BASE	soapsplice	precision	0.9841
-human	t2	r2	BASE	star	precision	0.9953
-human	t2	r2	BASE	staronepass	precision	0.9951000000000001
-human	t2	r2	BASE	subread	precision	0.9798
-human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.996
-human	t2	r2	BASE	tophat2coveragesearch	precision	0.9959
-human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.996
-human	t2	r2	BASE	contextmap2	recall	0.9686
-human	t2	r2	BASE	crac	recall	0.8712000000000001
-human	t2	r2	BASE	cracnoambiguity	recall	0.8698999999999999
-human	t2	r2	BASE	gsnap	recall	0.9926999999999999
-human	t2	r2	BASE	hisat	recall	0.9799
-human	t2	r2	BASE	mapsplice2	recall	0.9863
-human	t2	r2	BASE	novoalign	recall	0.9903
-human	t2	r2	BASE	olego	recall	0.9009
-human	t2	r2	BASE	olegotwopass	recall	0.9024
-human	t2	r2	BASE	rum	recall	0.9915999999999999
-human	t2	r2	BASE	soapsplice	recall	0.9116
-human	t2	r2	BASE	star	recall	0.9922
-human	t2	r2	BASE	staronepass	recall	0.9917
-human	t2	r2	BASE	subread	recall	0.8934000000000001
-human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r2	BASE	tophat2coveragesearch	recall	0.838
-human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384
-human	t2	r2	BASE	contextmap2	insertions_precision	0.9721
-human	t2	r2	BASE	crac	insertions_precision	0.824
-human	t2	r2	BASE	cracnoambiguity	insertions_precision	0.836401
-human	t2	r2	BASE	gsnap	insertions_precision	0.9397
-human	t2	r2	BASE	hisat	insertions_precision	0.993
-human	t2	r2	BASE	mapsplice2	insertions_precision	0.977401
-human	t2	r2	BASE	novoalign	insertions_precision	0.8128
-human	t2	r2	BASE	olego	insertions_precision	0.965
-human	t2	r2	BASE	olegotwopass	insertions_precision	0.972601
-human	t2	r2	BASE	rum	insertions_precision	0.973501
-human	t2	r2	BASE	soapsplice	insertions_precision	0.725
-human	t2	r2	BASE	star	insertions_precision	0.956501
-human	t2	r2	BASE	staronepass	insertions_precision	0.955501
-human	t2	r2	BASE	subread	insertions_precision	0.940101
-human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.987501
-human	t2	r2	BASE	tophat2coveragesearch	insertions_precision	0.987501
-human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.987501
-human	t2	r2	BASE	contextmap2	insertions_recall	0.6815
-human	t2	r2	BASE	crac	insertions_recall	0.19700000000000006
-human	t2	r2	BASE	cracnoambiguity	insertions_recall	0.19320099999999996
-human	t2	r2	BASE	gsnap	insertions_recall	0.6504
-human	t2	r2	BASE	hisat	insertions_recall	0.2704000000000001
-human	t2	r2	BASE	mapsplice2	insertions_recall	0.5604
-human	t2	r2	BASE	novoalign	insertions_recall	0.783901
-human	t2	r2	BASE	olego	insertions_recall	0.26170000000000004
-human	t2	r2	BASE	olegotwopass	insertions_recall	0.2622
-human	t2	r2	BASE	rum	insertions_recall	0.4012
-human	t2	r2	BASE	soapsplice	insertions_recall	0.15359999999999996
-human	t2	r2	BASE	star	insertions_recall	0.5136000000000001
-human	t2	r2	BASE	staronepass	insertions_recall	0.5119009999999999
-human	t2	r2	BASE	subread	insertions_recall	0.611
-human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.2128
-human	t2	r2	BASE	tophat2coveragesearch	insertions_recall	0.2127
-human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.2127
-human	t2	r2	BASE	contextmap2	deletions_precision	0.9761
-human	t2	r2	BASE	crac	deletions_precision	0.868701
-human	t2	r2	BASE	cracnoambiguity	deletions_precision	0.8802
-human	t2	r2	BASE	gsnap	deletions_precision	0.9034
-human	t2	r2	BASE	hisat	deletions_precision	0.992601
-human	t2	r2	BASE	mapsplice2	deletions_precision	0.974601
-human	t2	r2	BASE	novoalign	deletions_precision	0.8852
-human	t2	r2	BASE	olego	deletions_precision	0.9741
-human	t2	r2	BASE	olegotwopass	deletions_precision	0.9742
-human	t2	r2	BASE	rum	deletions_precision	0.9269000000000001
-human	t2	r2	BASE	soapsplice	deletions_precision	0.7132000000000001
-human	t2	r2	BASE	star	deletions_precision	0.956201
-human	t2	r2	BASE	staronepass	deletions_precision	0.9551
-human	t2	r2	BASE	subread	deletions_precision	0.9295
-human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9913
-human	t2	r2	BASE	tophat2coveragesearch	deletions_precision	0.9913
-human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9913
-human	t2	r2	BASE	contextmap2	deletions_recall	0.6950000000000001
-human	t2	r2	BASE	crac	deletions_recall	0.1984999999999999
-human	t2	r2	BASE	cracnoambiguity	deletions_recall	0.1945
-human	t2	r2	BASE	gsnap	deletions_recall	0.6741010000000001
-human	t2	r2	BASE	hisat	deletions_recall	0.2791
-human	t2	r2	BASE	mapsplice2	deletions_recall	0.5939
-human	t2	r2	BASE	novoalign	deletions_recall	0.7938
-human	t2	r2	BASE	olego	deletions_recall	0.27290000000000003
-human	t2	r2	BASE	olegotwopass	deletions_recall	0.2734000000000001
-human	t2	r2	BASE	rum	deletions_recall	0.6456
-human	t2	r2	BASE	soapsplice	deletions_recall	0.15450000000000008
-human	t2	r2	BASE	star	deletions_recall	0.6103000000000001
-human	t2	r2	BASE	staronepass	deletions_recall	0.6088
-human	t2	r2	BASE	subread	deletions_recall	0.6373
-human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.21450000000000002
-human	t2	r2	BASE	tophat2coveragesearch	deletions_recall	0.21450000000000002
-human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.21450000000000002
-human	t2	r3	READ	contextmap2	precision	0.9887999999999999
-human	t2	r3	READ	crac	precision	0.9156
-human	t2	r3	READ	cracnoambiguity	precision	0.9156
-human	t2	r3	READ	gsnap	precision	0.9968
-human	t2	r3	READ	hisat	precision	0.9299
-human	t2	r3	READ	mapsplice2	precision	0.9959
-human	t2	r3	READ	novoalign	precision	0.9982
-human	t2	r3	READ	olego	precision	0.9821
-human	t2	r3	READ	olegotwopass	precision	0.982
-human	t2	r3	READ	rum	precision	0.9734999999999999
-human	t2	r3	READ	soapsplice	precision	0.9891
-human	t2	r3	READ	star	precision	0.9987999999999999
-human	t2	r3	READ	staronepass	precision	0.9986
-human	t2	r3	READ	subread	precision	0.9815
-human	t2	r3	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9963
-human	t2	r3	READ	tophat2coveragesearch	precision	0.9963
-human	t2	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9963
-human	t2	r3	READ	contextmap2	recall	0.9729000000000001
-human	t2	r3	READ	crac	recall	0.9987999999999999
-human	t2	r3	READ	cracnoambiguity	recall	0.9987999999999999
-human	t2	r3	READ	gsnap	recall	1.0
-human	t2	r3	READ	hisat	recall	0.9799
-human	t2	r3	READ	mapsplice2	recall	0.9971
-human	t2	r3	READ	novoalign	recall	1.0
-human	t2	r3	READ	olego	recall	0.9009
-human	t2	r3	READ	olegotwopass	recall	0.9024
-human	t2	r3	READ	rum	recall	0.9954000000000001
-human	t2	r3	READ	soapsplice	recall	0.9220999999999999
-human	t2	r3	READ	star	recall	0.997
-human	t2	r3	READ	staronepass	recall	0.9969
-human	t2	r3	READ	subread	recall	0.9109999999999999
-human	t2	r3	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.8387
-human	t2	r3	READ	tophat2coveragesearch	recall	0.8382999999999999
-human	t2	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8386
-human	t2	r3	JUNC	contextmap2	precision	0.9712
-human	t2	r3	JUNC	crac	precision	0.650901
-human	t2	r3	JUNC	cracnoambiguity	precision	0.6619010000000001
-human	t2	r3	JUNC	gsnap	precision	0.9859
-human	t2	r3	JUNC	hisat	precision	0.987801
-human	t2	r3	JUNC	mapsplice2	precision	0.985
-human	t2	r3	JUNC	novoalign	precision	0.942301
-human	t2	r3	JUNC	olego	precision	0.979601
-human	t2	r3	JUNC	olegotwopass	precision	0.977401
-human	t2	r3	JUNC	rum	precision	0.9647
-human	t2	r3	JUNC	soapsplice	precision	0.9637
-human	t2	r3	JUNC	star	precision	0.9951
-human	t2	r3	JUNC	staronepass	precision	0.994501
-human	t2	r3	JUNC	subread	precision	0.9709
-human	t2	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.9911
-human	t2	r3	JUNC	tophat2coveragesearch	precision	0.9912
-human	t2	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9912
-human	t2	r3	JUNC	contextmap2	recall	0.8382000000000001
-human	t2	r3	JUNC	crac	recall	0.17909999999999993
-human	t2	r3	JUNC	cracnoambiguity	recall	0.17599999999999993
-human	t2	r3	JUNC	gsnap	recall	0.7184010000000001
-human	t2	r3	JUNC	hisat	recall	0.7813
-human	t2	r3	JUNC	mapsplice2	recall	0.790901
-human	t2	r3	JUNC	novoalign	recall	0.862601
-human	t2	r3	JUNC	olego	recall	0.7179
-human	t2	r3	JUNC	olegotwopass	recall	0.728
-human	t2	r3	JUNC	rum	recall	0.7492000000000001
-human	t2	r3	JUNC	soapsplice	recall	0.5201
-human	t2	r3	JUNC	star	recall	0.864501
-human	t2	r3	JUNC	staronepass	recall	0.842
-human	t2	r3	JUNC	subread	recall	0.531
-human	t2	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.6879
-human	t2	r3	JUNC	tophat2coveragesearch	recall	0.6879
-human	t2	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.6878
-human	t2	r3	BASE	contextmap2	precision	0.9875
-human	t2	r3	BASE	crac	precision	0.904
-human	t2	r3	BASE	cracnoambiguity	precision	0.9045000000000001
-human	t2	r3	BASE	gsnap	precision	0.9942
-human	t2	r3	BASE	hisat	precision	0.9953
-human	t2	r3	BASE	mapsplice2	precision	0.9943000000000001
-human	t2	r3	BASE	novoalign	precision	0.9967
-human	t2	r3	BASE	olego	precision	0.9811
-human	t2	r3	BASE	olegotwopass	precision	0.981
-human	t2	r3	BASE	rum	precision	0.9965999999999999
-human	t2	r3	BASE	soapsplice	precision	0.9840000000000001
-human	t2	r3	BASE	star	precision	0.9954000000000001
-human	t2	r3	BASE	staronepass	precision	0.9951000000000001
-human	t2	r3	BASE	subread	precision	0.9797
-human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9959
-human	t2	r3	BASE	tophat2coveragesearch	precision	0.9959
-human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9959
-human	t2	r3	BASE	contextmap2	recall	0.9689
-human	t2	r3	BASE	crac	recall	0.8713
-human	t2	r3	BASE	cracnoambiguity	recall	0.87
-human	t2	r3	BASE	gsnap	recall	0.9926999999999999
-human	t2	r3	BASE	hisat	recall	0.9799
-human	t2	r3	BASE	mapsplice2	recall	0.9863
-human	t2	r3	BASE	novoalign	recall	0.9903
-human	t2	r3	BASE	olego	recall	0.9009
-human	t2	r3	BASE	olegotwopass	recall	0.9024
-human	t2	r3	BASE	rum	recall	0.9915999999999999
-human	t2	r3	BASE	soapsplice	recall	0.9117000000000001
-human	t2	r3	BASE	star	recall	0.9922
-human	t2	r3	BASE	staronepass	recall	0.9917
-human	t2	r3	BASE	subread	recall	0.8935
-human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.8387
-human	t2	r3	BASE	tophat2coveragesearch	recall	0.8382999999999999
-human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8386
-human	t2	r3	BASE	contextmap2	insertions_precision	0.97
-human	t2	r3	BASE	crac	insertions_precision	0.8291
-human	t2	r3	BASE	cracnoambiguity	insertions_precision	0.8421000000000001
-human	t2	r3	BASE	gsnap	insertions_precision	0.9389
-human	t2	r3	BASE	hisat	insertions_precision	0.9933
-human	t2	r3	BASE	mapsplice2	insertions_precision	0.976701
-human	t2	r3	BASE	novoalign	insertions_precision	0.8114
-human	t2	r3	BASE	olego	insertions_precision	0.965301
-human	t2	r3	BASE	olegotwopass	insertions_precision	0.973301
-human	t2	r3	BASE	rum	insertions_precision	0.9722
-human	t2	r3	BASE	soapsplice	insertions_precision	0.7237
-human	t2	r3	BASE	star	insertions_precision	0.9567
-human	t2	r3	BASE	staronepass	insertions_precision	0.955401
-human	t2	r3	BASE	subread	insertions_precision	0.9373009999999999
-human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.9881
-human	t2	r3	BASE	tophat2coveragesearch	insertions_precision	0.9881
-human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.9881
-human	t2	r3	BASE	contextmap2	insertions_recall	0.6795
-human	t2	r3	BASE	crac	insertions_recall	0.20019999999999993
-human	t2	r3	BASE	cracnoambiguity	insertions_recall	0.1965
-human	t2	r3	BASE	gsnap	insertions_recall	0.65
-human	t2	r3	BASE	hisat	insertions_recall	0.26980000000000004
-human	t2	r3	BASE	mapsplice2	insertions_recall	0.5623009999999999
-human	t2	r3	BASE	novoalign	insertions_recall	0.782001
-human	t2	r3	BASE	olego	insertions_recall	0.2609999999999999
-human	t2	r3	BASE	olegotwopass	insertions_recall	0.26170000000000004
-human	t2	r3	BASE	rum	insertions_recall	0.3995000000000001
-human	t2	r3	BASE	soapsplice	insertions_recall	0.1522
-human	t2	r3	BASE	star	insertions_recall	0.5134000000000001
-human	t2	r3	BASE	staronepass	insertions_recall	0.5115000000000001
-human	t2	r3	BASE	subread	insertions_recall	0.6131
-human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.2137
-human	t2	r3	BASE	tophat2coveragesearch	insertions_recall	0.2136
-human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.2137
-human	t2	r3	BASE	contextmap2	deletions_precision	0.977401
-human	t2	r3	BASE	crac	deletions_precision	0.867
-human	t2	r3	BASE	cracnoambiguity	deletions_precision	0.8788009999999999
-human	t2	r3	BASE	gsnap	deletions_precision	0.9026
-human	t2	r3	BASE	hisat	deletions_precision	0.9934
-human	t2	r3	BASE	mapsplice2	deletions_precision	0.975701
-human	t2	r3	BASE	novoalign	deletions_precision	0.8852
-human	t2	r3	BASE	olego	deletions_precision	0.972501
-human	t2	r3	BASE	olegotwopass	deletions_precision	0.972301
-human	t2	r3	BASE	rum	deletions_precision	0.9265
-human	t2	r3	BASE	soapsplice	deletions_precision	0.7138
-human	t2	r3	BASE	star	deletions_precision	0.956201
-human	t2	r3	BASE	staronepass	deletions_precision	0.9551
-human	t2	r3	BASE	subread	deletions_precision	0.9305
-human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.991901
-human	t2	r3	BASE	tophat2coveragesearch	deletions_precision	0.991901
-human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.991901
-human	t2	r3	BASE	contextmap2	deletions_recall	0.6934009999999999
-human	t2	r3	BASE	crac	deletions_recall	0.19640000000000002
-human	t2	r3	BASE	cracnoambiguity	deletions_recall	0.19230000000000003
-human	t2	r3	BASE	gsnap	deletions_recall	0.6740010000000001
-human	t2	r3	BASE	hisat	deletions_recall	0.2781999999999999
-human	t2	r3	BASE	mapsplice2	deletions_recall	0.590401
-human	t2	r3	BASE	novoalign	deletions_recall	0.7957
-human	t2	r3	BASE	olego	deletions_recall	0.2711
-human	t2	r3	BASE	olegotwopass	deletions_recall	0.27170000000000005
-human	t2	r3	BASE	rum	deletions_recall	0.646
-human	t2	r3	BASE	soapsplice	deletions_recall	0.1542
-human	t2	r3	BASE	star	deletions_recall	0.611
-human	t2	r3	BASE	staronepass	deletions_recall	0.6093
-human	t2	r3	BASE	subread	deletions_recall	0.6325000000000001
-human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.21439999999999992
-human	t2	r3	BASE	tophat2coveragesearch	deletions_recall	0.21430000000000005
-human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.21439999999999992
-human	t3	r1	READ	contextmap2	precision	0.9778
-human	t3	r1	READ	crac	precision	0.8855
-human	t3	r1	READ	cracnoambiguity	precision	0.8854000000000001
-human	t3	r1	READ	gsnap	precision	0.9849
-human	t3	r1	READ	hisat	precision	0.591
-human	t3	r1	READ	mapsplice2	precision	0.9915
-human	t3	r1	READ	olego	precision	0.9819
-human	t3	r1	READ	olegotwopass	precision	0.9817
-human	t3	r1	READ	rum	precision	0.8420000000000001
-human	t3	r1	READ	soapsplice	precision	0.9621
-human	t3	r1	READ	star	precision	0.9956999999999999
-human	t3	r1	READ	staronepass	precision	0.9956
-human	t3	r1	READ	subread	precision	0.9779000000000001
-human	t3	r1	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956999999999999
-human	t3	r1	READ	tophat2coveragesearch	precision	0.9956
-human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956999999999999
-human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	precision	0.9956
-human	t3	r1	READ	contextmap2	recall	0.589
-human	t3	r1	READ	crac	recall	0.9109
-human	t3	r1	READ	cracnoambiguity	recall	0.9109
-human	t3	r1	READ	gsnap	recall	0.9534
-human	t3	r1	READ	hisat	recall	0.34159999999999996
-human	t3	r1	READ	mapsplice2	recall	0.8864
-human	t3	r1	READ	olego	recall	0.23730000000000004
-human	t3	r1	READ	olegotwopass	recall	0.2375
-human	t3	r1	READ	rum	recall	0.8889
-human	t3	r1	READ	soapsplice	recall	0.5909
-human	t3	r1	READ	star	recall	0.8370000000000001
-human	t3	r1	READ	staronepass	recall	0.8353
-human	t3	r1	READ	subread	recall	0.4807
-human	t3	r1	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r1	READ	tophat2coveragesearch	recall	0.13269999999999996
-human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	recall	0.13299999999999998
-human	t3	r1	JUNC	contextmap2	precision	0.951201
-human	t3	r1	JUNC	crac	precision	0.358
-human	t3	r1	JUNC	cracnoambiguity	precision	0.36460000000000004
-human	t3	r1	JUNC	gsnap	precision	0.881701
-human	t3	r1	JUNC	hisat	precision	0.951
-human	t3	r1	JUNC	mapsplice2	precision	0.975
-human	t3	r1	JUNC	olego	precision	0.922001
-human	t3	r1	JUNC	olegotwopass	precision	0.923301
-human	t3	r1	JUNC	rum	precision	0.6343
-human	t3	r1	JUNC	soapsplice	precision	0.933401
-human	t3	r1	JUNC	star	precision	0.985401
-human	t3	r1	JUNC	staronepass	precision	0.985801
-human	t3	r1	JUNC	subread	precision	0.877801
-human	t3	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.988
-human	t3	r1	JUNC	tophat2coveragesearch	precision	0.988
-human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9883
-human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	precision	0.9883
-human	t3	r1	JUNC	contextmap2	recall	0.1028
-human	t3	r1	JUNC	crac	recall	0.013299999999999979
-human	t3	r1	JUNC	cracnoambiguity	recall	0.0131
-human	t3	r1	JUNC	gsnap	recall	0.4314
-human	t3	r1	JUNC	hisat	recall	0.04349999999999998
-human	t3	r1	JUNC	mapsplice2	recall	0.12250000000000005
-human	t3	r1	JUNC	olego	recall	0.06959999999999988
-human	t3	r1	JUNC	olegotwopass	recall	0.07030000000000003
-human	t3	r1	JUNC	rum	recall	0.17430099999999993
-human	t3	r1	JUNC	soapsplice	recall	0.09920000000000007
-human	t3	r1	JUNC	star	recall	0.3902
-human	t3	r1	JUNC	staronepass	recall	0.37439999999999996
-human	t3	r1	JUNC	subread	recall	0.07940000000000003
-human	t3	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.019500000000000073
-human	t3	r1	JUNC	tophat2coveragesearch	recall	0.019500000000000073
-human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.019500000000000073
-human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	recall	0.019500000000000073
-human	t3	r1	BASE	contextmap2	precision	0.9743
-human	t3	r1	BASE	crac	precision	0.8373
-human	t3	r1	BASE	cracnoambiguity	precision	0.8375
-human	t3	r1	BASE	gsnap	precision	0.9745
-human	t3	r1	BASE	hisat	precision	0.9895
-human	t3	r1	BASE	mapsplice2	precision	0.9865999999999999
-human	t3	r1	BASE	olego	precision	0.9813
-human	t3	r1	BASE	olegotwopass	precision	0.9811
-human	t3	r1	BASE	rum	precision	0.9873000000000001
-human	t3	r1	BASE	soapsplice	precision	0.9501999999999999
-human	t3	r1	BASE	star	precision	0.9879000000000001
-human	t3	r1	BASE	staronepass	precision	0.9878
-human	t3	r1	BASE	subread	precision	0.9727
-human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9952
-human	t3	r1	BASE	tophat2coveragesearch	precision	0.9952
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9952
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	precision	0.9952
-human	t3	r1	BASE	contextmap2	recall	0.5445
-human	t3	r1	BASE	crac	recall	0.5804
-human	t3	r1	BASE	cracnoambiguity	recall	0.5798
-human	t3	r1	BASE	gsnap	recall	0.8832
-human	t3	r1	BASE	hisat	recall	0.34159999999999996
-human	t3	r1	BASE	mapsplice2	recall	0.7448999999999999
-human	t3	r1	BASE	olego	recall	0.23730000000000004
-human	t3	r1	BASE	olegotwopass	recall	0.2375
-human	t3	r1	BASE	rum	recall	0.8493
-human	t3	r1	BASE	soapsplice	recall	0.5246999999999999
-human	t3	r1	BASE	star	recall	0.7873
-human	t3	r1	BASE	staronepass	recall	0.7856000000000001
-human	t3	r1	BASE	subread	recall	0.4329
-human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r1	BASE	tophat2coveragesearch	recall	0.13269999999999996
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	recall	0.13299999999999998
-human	t3	r1	BASE	contextmap2	insertions_precision	0.955601
-human	t3	r1	BASE	crac	insertions_precision	0.5676
-human	t3	r1	BASE	cracnoambiguity	insertions_precision	0.5800000000000001
-human	t3	r1	BASE	gsnap	insertions_precision	0.7653
-human	t3	r1	BASE	hisat	insertions_precision	0.9792
-human	t3	r1	BASE	mapsplice2	insertions_precision	0.8425009999999999
-human	t3	r1	BASE	olego	insertions_precision	0.973601
-human	t3	r1	BASE	olegotwopass	insertions_precision	0.9762
-human	t3	r1	BASE	rum	insertions_precision	0.83
-human	t3	r1	BASE	soapsplice	insertions_precision	0.0927
-human	t3	r1	BASE	star	insertions_precision	0.8360000000000001
-human	t3	r1	BASE	staronepass	insertions_precision	0.835601
-human	t3	r1	BASE	subread	insertions_precision	0.7934
-human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.8166
-human	t3	r1	BASE	tophat2coveragesearch	insertions_precision	0.8168
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.8166
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	insertions_precision	0.8166
-human	t3	r1	BASE	contextmap2	insertions_recall	0.07630099999999995
-human	t3	r1	BASE	crac	insertions_recall	0.021299999999999986
-human	t3	r1	BASE	cracnoambiguity	insertions_recall	0.02090000000000003
-human	t3	r1	BASE	gsnap	insertions_recall	0.389
-human	t3	r1	BASE	hisat	insertions_recall	0.0030999999999999917
-human	t3	r1	BASE	mapsplice2	insertions_recall	0.05379999999999996
-human	t3	r1	BASE	olego	insertions_recall	0.012300000000000089
-human	t3	r1	BASE	olegotwopass	insertions_recall	0.012300000000000089
-human	t3	r1	BASE	rum	insertions_recall	0.032200000000000006
-human	t3	r1	BASE	soapsplice	insertions_recall	0.0023000000000000798
-human	t3	r1	BASE	star	insertions_recall	0.13590000000000002
-human	t3	r1	BASE	staronepass	insertions_recall	0.13490099999999994
-human	t3	r1	BASE	subread	insertions_recall	0.08719999999999994
-human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798
-human	t3	r1	BASE	tophat2coveragesearch	insertions_recall	0.0023000000000000798
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	insertions_recall	0.0023000000000000798
-human	t3	r1	BASE	contextmap2	deletions_precision	0.9647
-human	t3	r1	BASE	crac	deletions_precision	0.7423
-human	t3	r1	BASE	cracnoambiguity	deletions_precision	0.7568010000000001
-human	t3	r1	BASE	gsnap	deletions_precision	0.6735
-human	t3	r1	BASE	hisat	deletions_precision	0.9833
-human	t3	r1	BASE	mapsplice2	deletions_precision	0.830401
-human	t3	r1	BASE	olego	deletions_precision	0.973501
-human	t3	r1	BASE	olegotwopass	deletions_precision	0.973601
-human	t3	r1	BASE	rum	deletions_precision	0.6632
-human	t3	r1	BASE	soapsplice	deletions_precision	0.12170000000000003
-human	t3	r1	BASE	star	deletions_precision	0.8253010000000001
-human	t3	r1	BASE	staronepass	deletions_precision	0.825
-human	t3	r1	BASE	subread	deletions_precision	0.7682
-human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9324
-human	t3	r1	BASE	tophat2coveragesearch	deletions_precision	0.932301
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9324
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	deletions_precision	0.932301
-human	t3	r1	BASE	contextmap2	deletions_recall	0.07510000000000006
-human	t3	r1	BASE	crac	deletions_recall	0.019399999999999973
-human	t3	r1	BASE	cracnoambiguity	deletions_recall	0.018900000000000028
-human	t3	r1	BASE	gsnap	deletions_recall	0.42579999999999996
-human	t3	r1	BASE	hisat	deletions_recall	0.0030000000000000027
-human	t3	r1	BASE	mapsplice2	deletions_recall	0.04909999999999992
-human	t3	r1	BASE	olego	deletions_recall	0.012300000000000089
-human	t3	r1	BASE	olegotwopass	deletions_recall	0.012300000000000089
-human	t3	r1	BASE	rum	deletions_recall	0.2834
-human	t3	r1	BASE	soapsplice	deletions_recall	0.0021999999999999797
-human	t3	r1	BASE	star	deletions_recall	0.15810000000000002
-human	t3	r1	BASE	staronepass	deletions_recall	0.15710099999999994
-human	t3	r1	BASE	subread	deletions_recall	0.08430099999999996
-human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797
-human	t3	r1	BASE	tophat2coveragesearch	deletions_recall	0.0021999999999999797
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797
-human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	deletions_recall	0.0021999999999999797
-human	t3	r2	READ	contextmap2	precision	0.9773000000000001
-human	t3	r2	READ	crac	precision	0.8855
-human	t3	r2	READ	cracnoambiguity	precision	0.8854000000000001
-human	t3	r2	READ	gsnap	precision	0.9849
-human	t3	r2	READ	hisat	precision	0.5908
-human	t3	r2	READ	mapsplice2	precision	0.9915
-human	t3	r2	READ	olego	precision	0.9819
-human	t3	r2	READ	olegotwopass	precision	0.9817
-human	t3	r2	READ	rum	precision	0.8419
-human	t3	r2	READ	soapsplice	precision	0.9621
-human	t3	r2	READ	star	precision	0.9956999999999999
-human	t3	r2	READ	staronepass	precision	0.9956999999999999
-human	t3	r2	READ	subread	precision	0.978
-human	t3	r2	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956
-human	t3	r2	READ	tophat2coveragesearch	precision	0.9956
-human	t3	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956
-human	t3	r2	READ	contextmap2	recall	0.5892000000000001
-human	t3	r2	READ	crac	recall	0.9109
-human	t3	r2	READ	cracnoambiguity	recall	0.9109
-human	t3	r2	READ	gsnap	recall	0.9533
-human	t3	r2	READ	hisat	recall	0.34159999999999996
-human	t3	r2	READ	mapsplice2	recall	0.8865999999999999
-human	t3	r2	READ	olego	recall	0.2372
-human	t3	r2	READ	olegotwopass	recall	0.23730000000000004
-human	t3	r2	READ	rum	recall	0.889
-human	t3	r2	READ	soapsplice	recall	0.5909
-human	t3	r2	READ	star	recall	0.8369
-human	t3	r2	READ	staronepass	recall	0.8353
-human	t3	r2	READ	subread	recall	0.48100000000000004
-human	t3	r2	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.13290000000000007
-human	t3	r2	READ	tophat2coveragesearch	recall	0.13260000000000005
-human	t3	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13290000000000007
-human	t3	r2	JUNC	contextmap2	precision	0.952201
-human	t3	r2	JUNC	crac	precision	0.3558
-human	t3	r2	JUNC	cracnoambiguity	precision	0.362
-human	t3	r2	JUNC	gsnap	precision	0.881701
-human	t3	r2	JUNC	hisat	precision	0.95
-human	t3	r2	JUNC	mapsplice2	precision	0.9749
-human	t3	r2	JUNC	olego	precision	0.923101
-human	t3	r2	JUNC	olegotwopass	precision	0.9238
-human	t3	r2	JUNC	rum	precision	0.6362
-human	t3	r2	JUNC	soapsplice	precision	0.9338
-human	t3	r2	JUNC	star	precision	0.985501
-human	t3	r2	JUNC	staronepass	precision	0.986
-human	t3	r2	JUNC	subread	precision	0.8797010000000001
-human	t3	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.988501
-human	t3	r2	JUNC	tophat2coveragesearch	precision	0.988601
-human	t3	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.988801
-human	t3	r2	JUNC	contextmap2	recall	0.10309999999999997
-human	t3	r2	JUNC	crac	recall	0.013299999999999979
-human	t3	r2	JUNC	cracnoambiguity	recall	0.013000000000000012
-human	t3	r2	JUNC	gsnap	recall	0.43200000000000005
-human	t3	r2	JUNC	hisat	recall	0.04379999999999995
-human	t3	r2	JUNC	mapsplice2	recall	0.12409999999999999
-human	t3	r2	JUNC	olego	recall	0.06969999999999998
-human	t3	r2	JUNC	olegotwopass	recall	0.07040099999999994
-human	t3	r2	JUNC	rum	recall	0.17500000000000004
-human	t3	r2	JUNC	soapsplice	recall	0.09999999999999998
-human	t3	r2	JUNC	star	recall	0.3902
-human	t3	r2	JUNC	staronepass	recall	0.37439999999999996
-human	t3	r2	JUNC	subread	recall	0.0797
-human	t3	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.01959999999999995
-human	t3	r2	JUNC	tophat2coveragesearch	recall	0.01959999999999995
-human	t3	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.01959999999999995
-human	t3	r2	BASE	contextmap2	precision	0.9737
-human	t3	r2	BASE	crac	precision	0.8373
-human	t3	r2	BASE	cracnoambiguity	precision	0.8375
-human	t3	r2	BASE	gsnap	precision	0.9745
-human	t3	r2	BASE	hisat	precision	0.9894
-human	t3	r2	BASE	mapsplice2	precision	0.9865
-human	t3	r2	BASE	olego	precision	0.9812000000000001
-human	t3	r2	BASE	olegotwopass	precision	0.9811
-human	t3	r2	BASE	rum	precision	0.9873000000000001
-human	t3	r2	BASE	soapsplice	precision	0.9501000000000001
-human	t3	r2	BASE	star	precision	0.9878
-human	t3	r2	BASE	staronepass	precision	0.9878
-human	t3	r2	BASE	subread	precision	0.9728
-human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9952
-human	t3	r2	BASE	tophat2coveragesearch	precision	0.9951000000000001
-human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9952
-human	t3	r2	BASE	contextmap2	recall	0.5447
-human	t3	r2	BASE	crac	recall	0.5804
-human	t3	r2	BASE	cracnoambiguity	recall	0.5797
-human	t3	r2	BASE	gsnap	recall	0.8832
-human	t3	r2	BASE	hisat	recall	0.34159999999999996
-human	t3	r2	BASE	mapsplice2	recall	0.745
-human	t3	r2	BASE	olego	recall	0.2372
-human	t3	r2	BASE	olegotwopass	recall	0.23730000000000004
-human	t3	r2	BASE	rum	recall	0.8493
-human	t3	r2	BASE	soapsplice	recall	0.5247999999999999
-human	t3	r2	BASE	star	recall	0.7872
-human	t3	r2	BASE	staronepass	recall	0.7856000000000001
-human	t3	r2	BASE	subread	recall	0.43310000000000004
-human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.13290000000000007
-human	t3	r2	BASE	tophat2coveragesearch	recall	0.13260000000000005
-human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13290000000000007
-human	t3	r2	BASE	contextmap2	insertions_precision	0.9571
-human	t3	r2	BASE	crac	insertions_precision	0.5628
-human	t3	r2	BASE	cracnoambiguity	insertions_precision	0.5771
-human	t3	r2	BASE	gsnap	insertions_precision	0.7654
-human	t3	r2	BASE	hisat	insertions_precision	0.975401
-human	t3	r2	BASE	mapsplice2	insertions_precision	0.8432
-human	t3	r2	BASE	olego	insertions_precision	0.968601
-human	t3	r2	BASE	olegotwopass	insertions_precision	0.9739
-human	t3	r2	BASE	rum	insertions_precision	0.8291
-human	t3	r2	BASE	soapsplice	insertions_precision	0.09079999999999999
-human	t3	r2	BASE	star	insertions_precision	0.8360000000000001
-human	t3	r2	BASE	staronepass	insertions_precision	0.8358
-human	t3	r2	BASE	subread	insertions_precision	0.7956
-human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.8203
-human	t3	r2	BASE	tophat2coveragesearch	insertions_precision	0.8207
-human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.8203
-human	t3	r2	BASE	contextmap2	insertions_recall	0.07689999999999997
-human	t3	r2	BASE	crac	insertions_recall	0.021700000000000053
-human	t3	r2	BASE	cracnoambiguity	insertions_recall	0.021199999999999997
-human	t3	r2	BASE	gsnap	insertions_recall	0.38749999999999996
-human	t3	r2	BASE	hisat	insertions_recall	0.0030999999999999917
-human	t3	r2	BASE	mapsplice2	insertions_recall	0.053100000000000036
-human	t3	r2	BASE	olego	insertions_recall	0.012099999999999889
-human	t3	r2	BASE	olegotwopass	insertions_recall	0.012099999999999889
-human	t3	r2	BASE	rum	insertions_recall	0.03200000000000003
-human	t3	r2	BASE	soapsplice	insertions_recall	0.0021999999999999797
-human	t3	r2	BASE	star	insertions_recall	0.13470000000000004
-human	t3	r2	BASE	staronepass	insertions_recall	0.13390000000000002
-human	t3	r2	BASE	subread	insertions_recall	0.0867
-human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.0021999999999999797
-human	t3	r2	BASE	tophat2coveragesearch	insertions_recall	0.0021999999999999797
-human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.0021999999999999797
-human	t3	r2	BASE	contextmap2	deletions_precision	0.964
-human	t3	r2	BASE	crac	deletions_precision	0.747501
-human	t3	r2	BASE	cracnoambiguity	deletions_precision	0.759701
-human	t3	r2	BASE	gsnap	deletions_precision	0.672901
-human	t3	r2	BASE	hisat	deletions_precision	0.9849
-human	t3	r2	BASE	mapsplice2	deletions_precision	0.832
-human	t3	r2	BASE	olego	deletions_precision	0.973301
-human	t3	r2	BASE	olegotwopass	deletions_precision	0.973501
-human	t3	r2	BASE	rum	deletions_precision	0.6637
-human	t3	r2	BASE	soapsplice	deletions_precision	0.12780000000000002
-human	t3	r2	BASE	star	deletions_precision	0.8248
-human	t3	r2	BASE	staronepass	deletions_precision	0.8245009999999999
-human	t3	r2	BASE	subread	deletions_precision	0.7685
-human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9297
-human	t3	r2	BASE	tophat2coveragesearch	deletions_precision	0.9301010000000001
-human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9297
-human	t3	r2	BASE	contextmap2	deletions_recall	0.07579999999999998
-human	t3	r2	BASE	crac	deletions_recall	0.019300000000000095
-human	t3	r2	BASE	cracnoambiguity	deletions_recall	0.018800999999999957
-human	t3	r2	BASE	gsnap	deletions_recall	0.4264
-human	t3	r2	BASE	hisat	deletions_recall	0.0031999999999999806
-human	t3	r2	BASE	mapsplice2	deletions_recall	0.04990099999999997
-human	t3	r2	BASE	olego	deletions_recall	0.012499999999999956
-human	t3	r2	BASE	olegotwopass	deletions_recall	0.012499999999999956
-human	t3	r2	BASE	rum	deletions_recall	0.28469999999999995
-human	t3	r2	BASE	soapsplice	deletions_recall	0.0023999999999999577
-human	t3	r2	BASE	star	deletions_recall	0.15890000000000004
-human	t3	r2	BASE	staronepass	deletions_recall	0.15799999999999992
-human	t3	r2	BASE	subread	deletions_recall	0.08540099999999995
-human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.0023000000000000798
-human	t3	r2	BASE	tophat2coveragesearch	deletions_recall	0.0023000000000000798
-human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.0023000000000000798
-human	t3	r3	READ	contextmap2	precision	0.9773999999999999
-human	t3	r3	READ	crac	precision	0.8856
-human	t3	r3	READ	cracnoambiguity	precision	0.8856
-human	t3	r3	READ	gsnap	precision	0.9849
-human	t3	r3	READ	hisat	precision	0.5907
-human	t3	r3	READ	mapsplice2	precision	0.9915
-human	t3	r3	READ	olego	precision	0.9818000000000001
-human	t3	r3	READ	olegotwopass	precision	0.9815999999999999
-human	t3	r3	READ	rum	precision	0.8415
-human	t3	r3	READ	soapsplice	precision	0.9621999999999999
-human	t3	r3	READ	star	precision	0.9958
-human	t3	r3	READ	staronepass	precision	0.9956999999999999
-human	t3	r3	READ	subread	precision	0.978
-human	t3	r3	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956999999999999
-human	t3	r3	READ	tophat2coveragesearch	precision	0.9956999999999999
-human	t3	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956999999999999
-human	t3	r3	READ	contextmap2	recall	0.5892000000000001
-human	t3	r3	READ	crac	recall	0.9106000000000001
-human	t3	r3	READ	cracnoambiguity	recall	0.9106000000000001
-human	t3	r3	READ	gsnap	recall	0.9531999999999999
-human	t3	r3	READ	hisat	recall	0.3419
-human	t3	r3	READ	mapsplice2	recall	0.8864
-human	t3	r3	READ	olego	recall	0.23730000000000004
-human	t3	r3	READ	olegotwopass	recall	0.2375
-human	t3	r3	READ	rum	recall	0.8887
-human	t3	r3	READ	soapsplice	recall	0.5909
-human	t3	r3	READ	star	recall	0.8366
-human	t3	r3	READ	staronepass	recall	0.835
-human	t3	r3	READ	subread	recall	0.48090000000000005
-human	t3	r3	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r3	READ	tophat2coveragesearch	recall	0.13269999999999996
-human	t3	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r3	JUNC	contextmap2	precision	0.9517
-human	t3	r3	JUNC	crac	precision	0.3601
-human	t3	r3	JUNC	cracnoambiguity	precision	0.3668
-human	t3	r3	JUNC	gsnap	precision	0.8822
-human	t3	r3	JUNC	hisat	precision	0.950601
-human	t3	r3	JUNC	mapsplice2	precision	0.973701
-human	t3	r3	JUNC	olego	precision	0.922201
-human	t3	r3	JUNC	olegotwopass	precision	0.9232009999999999
-human	t3	r3	JUNC	rum	precision	0.6374
-human	t3	r3	JUNC	soapsplice	precision	0.933001
-human	t3	r3	JUNC	star	precision	0.9852
-human	t3	r3	JUNC	staronepass	precision	0.9859
-human	t3	r3	JUNC	subread	precision	0.8781
-human	t3	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.988501
-human	t3	r3	JUNC	tophat2coveragesearch	precision	0.988501
-human	t3	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.988701
-human	t3	r3	JUNC	contextmap2	recall	0.10329999999999995
-human	t3	r3	JUNC	crac	recall	0.013400000000000079
-human	t3	r3	JUNC	cracnoambiguity	recall	0.0131
-human	t3	r3	JUNC	gsnap	recall	0.43220000000000003
-human	t3	r3	JUNC	hisat	recall	0.04379999999999995
-human	t3	r3	JUNC	mapsplice2	recall	0.12409999999999999
-human	t3	r3	JUNC	olego	recall	0.07020099999999996
-human	t3	r3	JUNC	olegotwopass	recall	0.07090000000000007
-human	t3	r3	JUNC	rum	recall	0.1751999999999999
-human	t3	r3	JUNC	soapsplice	recall	0.09999999999999998
-human	t3	r3	JUNC	star	recall	0.39060000000000006
-human	t3	r3	JUNC	staronepass	recall	0.375
-human	t3	r3	JUNC	subread	recall	0.0798000000000001
-human	t3	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.01959999999999995
-human	t3	r3	JUNC	tophat2coveragesearch	recall	0.01959999999999995
-human	t3	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.01959999999999995
-human	t3	r3	BASE	contextmap2	precision	0.9739
-human	t3	r3	BASE	crac	precision	0.8375
-human	t3	r3	BASE	cracnoambiguity	precision	0.8377
-human	t3	r3	BASE	gsnap	precision	0.9745999999999999
-human	t3	r3	BASE	hisat	precision	0.9895
-human	t3	r3	BASE	mapsplice2	precision	0.9865999999999999
-human	t3	r3	BASE	olego	precision	0.9811
-human	t3	r3	BASE	olegotwopass	precision	0.981
-human	t3	r3	BASE	rum	precision	0.9873000000000001
-human	t3	r3	BASE	soapsplice	precision	0.9501999999999999
-human	t3	r3	BASE	star	precision	0.9879000000000001
-human	t3	r3	BASE	staronepass	precision	0.9879000000000001
-human	t3	r3	BASE	subread	precision	0.9728
-human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9953
-human	t3	r3	BASE	tophat2coveragesearch	precision	0.9952
-human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9953
-human	t3	r3	BASE	contextmap2	recall	0.5448
-human	t3	r3	BASE	crac	recall	0.5802
-human	t3	r3	BASE	cracnoambiguity	recall	0.5796
-human	t3	r3	BASE	gsnap	recall	0.8831
-human	t3	r3	BASE	hisat	recall	0.3419
-human	t3	r3	BASE	mapsplice2	recall	0.7448
-human	t3	r3	BASE	olego	recall	0.23730000000000004
-human	t3	r3	BASE	olegotwopass	recall	0.2375
-human	t3	r3	BASE	rum	recall	0.8490000000000001
-human	t3	r3	BASE	soapsplice	recall	0.5247999999999999
-human	t3	r3	BASE	star	recall	0.787
-human	t3	r3	BASE	staronepass	recall	0.7853999999999999
-human	t3	r3	BASE	subread	recall	0.433
-human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r3	BASE	tophat2coveragesearch	recall	0.13269999999999996
-human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998
-human	t3	r3	BASE	contextmap2	insertions_precision	0.9559
-human	t3	r3	BASE	crac	insertions_precision	0.5785
-human	t3	r3	BASE	cracnoambiguity	insertions_precision	0.5911
-human	t3	r3	BASE	gsnap	insertions_precision	0.767001
-human	t3	r3	BASE	hisat	insertions_precision	0.974
-human	t3	r3	BASE	mapsplice2	insertions_precision	0.8426009999999999
-human	t3	r3	BASE	olego	insertions_precision	0.972301
-human	t3	r3	BASE	olegotwopass	insertions_precision	0.9742
-human	t3	r3	BASE	rum	insertions_precision	0.8297
-human	t3	r3	BASE	soapsplice	insertions_precision	0.09409999999999996
-human	t3	r3	BASE	star	insertions_precision	0.8360000000000001
-human	t3	r3	BASE	staronepass	insertions_precision	0.8360000000000001
-human	t3	r3	BASE	subread	insertions_precision	0.798001
-human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.8247
-human	t3	r3	BASE	tophat2coveragesearch	insertions_precision	0.8248
-human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.8247
-human	t3	r3	BASE	contextmap2	insertions_recall	0.07680000000000009
-human	t3	r3	BASE	crac	insertions_recall	0.021700000000000053
-human	t3	r3	BASE	cracnoambiguity	insertions_recall	0.021199999999999997
-human	t3	r3	BASE	gsnap	insertions_recall	0.3891
-human	t3	r3	BASE	hisat	insertions_recall	0.0031999999999999806
-human	t3	r3	BASE	mapsplice2	insertions_recall	0.053100000000000036
-human	t3	r3	BASE	olego	insertions_recall	0.012199999999999989
-human	t3	r3	BASE	olegotwopass	insertions_recall	0.012199999999999989
-human	t3	r3	BASE	rum	insertions_recall	0.03189999999999993
-human	t3	r3	BASE	soapsplice	insertions_recall	0.0023000000000000798
-human	t3	r3	BASE	star	insertions_recall	0.135
-human	t3	r3	BASE	staronepass	insertions_recall	0.13419999999999999
-human	t3	r3	BASE	subread	insertions_recall	0.08750000000000002
-human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798
-human	t3	r3	BASE	tophat2coveragesearch	insertions_recall	0.0023000000000000798
-human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798
-human	t3	r3	BASE	contextmap2	deletions_precision	0.9639
-human	t3	r3	BASE	crac	deletions_precision	0.75
-human	t3	r3	BASE	cracnoambiguity	deletions_precision	0.761801
-human	t3	r3	BASE	gsnap	deletions_precision	0.6746000000000001
-human	t3	r3	BASE	hisat	deletions_precision	0.9863
-human	t3	r3	BASE	mapsplice2	deletions_precision	0.8335
-human	t3	r3	BASE	olego	deletions_precision	0.972601
-human	t3	r3	BASE	olegotwopass	deletions_precision	0.972601
-human	t3	r3	BASE	rum	deletions_precision	0.6671
-human	t3	r3	BASE	soapsplice	deletions_precision	0.12660099999999996
-human	t3	r3	BASE	star	deletions_precision	0.824
-human	t3	r3	BASE	staronepass	deletions_precision	0.8238
-human	t3	r3	BASE	subread	deletions_precision	0.770101
-human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.926201
-human	t3	r3	BASE	tophat2coveragesearch	deletions_precision	0.926201
-human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.926301
-human	t3	r3	BASE	contextmap2	deletions_recall	0.07569999999999988
-human	t3	r3	BASE	crac	deletions_recall	0.01959999999999995
-human	t3	r3	BASE	cracnoambiguity	deletions_recall	0.019100000000000006
-human	t3	r3	BASE	gsnap	deletions_recall	0.4266
-human	t3	r3	BASE	hisat	deletions_recall	0.0030999999999999917
-human	t3	r3	BASE	mapsplice2	deletions_recall	0.04909999999999992
-human	t3	r3	BASE	olego	deletions_recall	0.012199999999999989
-human	t3	r3	BASE	olegotwopass	deletions_recall	0.012199999999999989
-human	t3	r3	BASE	rum	deletions_recall	0.2843009999999999
-human	t3	r3	BASE	soapsplice	deletions_recall	0.0023000000000000798
-human	t3	r3	BASE	star	deletions_recall	0.15790099999999996
-human	t3	r3	BASE	staronepass	deletions_recall	0.15689999999999993
-human	t3	r3	BASE	subread	deletions_recall	0.08460099999999993
-human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797
-human	t3	r3	BASE	tophat2coveragesearch	deletions_recall	0.0021999999999999797
-human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797
+species	dataset	replicate	level	algorithm	measurement	value	color
+human	t1	r1	READ	contextmap2	precision	0.9903	cadetblue1
+human	t1	r1	READ	crac	precision	0.9193000000000001	seagreen1
+human	t1	r1	READ	cracnoambiguity	precision	0.9192	
+human	t1	r1	READ	gsnap	precision	0.9976999999999999	gold
+human	t1	r1	READ	hisat	precision	0.9886	slateblue
+human	t1	r1	READ	mapsplice2	precision	0.9969	yellowgreen
+human	t1	r1	READ	novoalign	precision	0.9983	
+human	t1	r1	READ	olego	precision	0.9819	navy
+human	t1	r1	READ	olegotwopass	precision	0.9819	
+human	t1	r1	READ	rum	precision	0.9933	forestgreen
+human	t1	r1	READ	soapsplice	precision	0.9909	black
+human	t1	r1	READ	star	precision	0.9993000000000001	blueviolet
+human	t1	r1	READ	staronepass	precision	0.9991	
+human	t1	r1	READ	subread	precision	0.9826999999999999	grey
+human	t1	r1	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9958	
+human	t1	r1	READ	tophat2coveragesearch	precision	0.9956999999999999	
+human	t1	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9958	
+human	t1	r1	READ	contextmap2	recall	0.9854999999999999	cadetblue1
+human	t1	r1	READ	crac	recall	0.9998999999999999	seagreen1
+human	t1	r1	READ	cracnoambiguity	recall	0.9998999999999999	
+human	t1	r1	READ	gsnap	recall	1.0	gold
+human	t1	r1	READ	hisat	recall	0.9973000000000001	slateblue
+human	t1	r1	READ	mapsplice2	recall	0.9995999999999999	yellowgreen
+human	t1	r1	READ	novoalign	recall	1.0	
+human	t1	r1	READ	olego	recall	0.9682	navy
+human	t1	r1	READ	olegotwopass	recall	0.9695	
+human	t1	r1	READ	rum	recall	0.9984000000000001	forestgreen
+human	t1	r1	READ	soapsplice	recall	0.9615	black
+human	t1	r1	READ	star	recall	0.9982	blueviolet
+human	t1	r1	READ	staronepass	recall	0.9983	
+human	t1	r1	READ	subread	recall	0.9456	grey
+human	t1	r1	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.9737	
+human	t1	r1	READ	tophat2coveragesearch	recall	0.9734999999999999	
+human	t1	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736	
+human	t1	r1	JUNC	contextmap2	precision	0.982701	cadetblue1
+human	t1	r1	JUNC	crac	precision	0.8058	seagreen1
+human	t1	r1	JUNC	cracnoambiguity	precision	0.8197	
+human	t1	r1	JUNC	gsnap	precision	0.9933	gold
+human	t1	r1	JUNC	hisat	precision	0.9921	slateblue
+human	t1	r1	JUNC	mapsplice2	precision	0.987801	yellowgreen
+human	t1	r1	JUNC	novoalign	precision	0.945	
+human	t1	r1	JUNC	olego	precision	0.982	navy
+human	t1	r1	JUNC	olegotwopass	precision	0.9812	
+human	t1	r1	JUNC	rum	precision	0.987401	forestgreen
+human	t1	r1	JUNC	soapsplice	precision	0.9881	black
+human	t1	r1	JUNC	star	precision	0.9972	blueviolet
+human	t1	r1	JUNC	staronepass	precision	0.9961	
+human	t1	r1	JUNC	subread	precision	0.982601	grey
+human	t1	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.989801	
+human	t1	r1	JUNC	tophat2coveragesearch	precision	0.989801	
+human	t1	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.989801	
+human	t1	r1	JUNC	contextmap2	recall	0.9295	cadetblue1
+human	t1	r1	JUNC	crac	recall	0.329901	seagreen1
+human	t1	r1	JUNC	cracnoambiguity	recall	0.3238	
+human	t1	r1	JUNC	gsnap	recall	0.7676000000000001	gold
+human	t1	r1	JUNC	hisat	recall	0.936101	slateblue
+human	t1	r1	JUNC	mapsplice2	recall	0.9013	yellowgreen
+human	t1	r1	JUNC	novoalign	recall	0.8691	
+human	t1	r1	JUNC	olego	recall	0.840401	navy
+human	t1	r1	JUNC	olegotwopass	recall	0.850401	
+human	t1	r1	JUNC	rum	recall	0.876601	forestgreen
+human	t1	r1	JUNC	soapsplice	recall	0.6426000000000001	black
+human	t1	r1	JUNC	star	recall	0.9138	blueviolet
+human	t1	r1	JUNC	staronepass	recall	0.8932	
+human	t1	r1	JUNC	subread	recall	0.6633	grey
+human	t1	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.909801	
+human	t1	r1	JUNC	tophat2coveragesearch	recall	0.909801	
+human	t1	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9093	
+human	t1	r1	BASE	contextmap2	precision	0.9899	cadetblue1
+human	t1	r1	BASE	crac	precision	0.9142	seagreen1
+human	t1	r1	BASE	cracnoambiguity	precision	0.9147	
+human	t1	r1	BASE	gsnap	precision	0.9968	gold
+human	t1	r1	BASE	hisat	precision	0.9968	slateblue
+human	t1	r1	BASE	mapsplice2	precision	0.9965	yellowgreen
+human	t1	r1	BASE	novoalign	precision	0.9976	
+human	t1	r1	BASE	olego	precision	0.9814	navy
+human	t1	r1	BASE	olegotwopass	precision	0.9813	
+human	t1	r1	BASE	rum	precision	0.9982	forestgreen
+human	t1	r1	BASE	soapsplice	precision	0.9887	black
+human	t1	r1	BASE	star	precision	0.9984999999999999	blueviolet
+human	t1	r1	BASE	staronepass	precision	0.9983	
+human	t1	r1	BASE	subread	precision	0.9825	grey
+human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9956	
+human	t1	r1	BASE	tophat2coveragesearch	precision	0.9954999999999999	
+human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956	
+human	t1	r1	BASE	contextmap2	recall	0.9847	cadetblue1
+human	t1	r1	BASE	crac	recall	0.9412999999999999	seagreen1
+human	t1	r1	BASE	cracnoambiguity	recall	0.9401	
+human	t1	r1	BASE	gsnap	recall	0.9971	gold
+human	t1	r1	BASE	hisat	recall	0.9973000000000001	slateblue
+human	t1	r1	BASE	mapsplice2	recall	0.9976999999999999	yellowgreen
+human	t1	r1	BASE	novoalign	recall	0.9922	
+human	t1	r1	BASE	olego	recall	0.9682	navy
+human	t1	r1	BASE	olegotwopass	recall	0.9695	
+human	t1	r1	BASE	rum	recall	0.9965999999999999	forestgreen
+human	t1	r1	BASE	soapsplice	recall	0.9582999999999999	black
+human	t1	r1	BASE	star	recall	0.9971	blueviolet
+human	t1	r1	BASE	staronepass	recall	0.9969	
+human	t1	r1	BASE	subread	recall	0.9339	grey
+human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.9737	
+human	t1	r1	BASE	tophat2coveragesearch	recall	0.9734999999999999	
+human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736	
+human	t1	r1	BASE	contextmap2	insertions_precision	0.969301	cadetblue1
+human	t1	r1	BASE	crac	insertions_precision	0.8607009999999999	seagreen1
+human	t1	r1	BASE	cracnoambiguity	insertions_precision	0.8772	
+human	t1	r1	BASE	gsnap	insertions_precision	0.9599	gold
+human	t1	r1	BASE	hisat	insertions_precision	0.995801	slateblue
+human	t1	r1	BASE	mapsplice2	insertions_precision	0.987801	yellowgreen
+human	t1	r1	BASE	novoalign	insertions_precision	0.5581	
+human	t1	r1	BASE	olego	insertions_precision	0.9278	navy
+human	t1	r1	BASE	olegotwopass	insertions_precision	0.960301	
+human	t1	r1	BASE	rum	insertions_precision	0.982401	forestgreen
+human	t1	r1	BASE	soapsplice	insertions_precision	0.6652009999999999	black
+human	t1	r1	BASE	star	insertions_precision	0.9819	blueviolet
+human	t1	r1	BASE	staronepass	insertions_precision	0.980801	
+human	t1	r1	BASE	subread	insertions_precision	0.953201	grey
+human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.98	
+human	t1	r1	BASE	tophat2coveragesearch	insertions_precision	0.98	
+human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.98	
+human	t1	r1	BASE	contextmap2	insertions_recall	0.772701	cadetblue1
+human	t1	r1	BASE	crac	insertions_recall	0.311901	seagreen1
+human	t1	r1	BASE	cracnoambiguity	insertions_recall	0.30590000000000006	
+human	t1	r1	BASE	gsnap	insertions_recall	0.719	gold
+human	t1	r1	BASE	hisat	insertions_recall	0.5082	slateblue
+human	t1	r1	BASE	mapsplice2	insertions_recall	0.6909000000000001	yellowgreen
+human	t1	r1	BASE	novoalign	insertions_recall	0.8094	
+human	t1	r1	BASE	olego	insertions_recall	0.35939999999999994	navy
+human	t1	r1	BASE	olegotwopass	insertions_recall	0.3599	
+human	t1	r1	BASE	rum	insertions_recall	0.5577000000000001	forestgreen
+human	t1	r1	BASE	soapsplice	insertions_recall	0.31079999999999997	black
+human	t1	r1	BASE	star	insertions_recall	0.6063000000000001	blueviolet
+human	t1	r1	BASE	staronepass	insertions_recall	0.6049	
+human	t1	r1	BASE	subread	insertions_recall	0.727501	grey
+human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.4384	
+human	t1	r1	BASE	tophat2coveragesearch	insertions_recall	0.43820000000000003	
+human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.43820000000000003	
+human	t1	r1	BASE	contextmap2	deletions_precision	0.9769	cadetblue1
+human	t1	r1	BASE	crac	deletions_precision	0.916101	seagreen1
+human	t1	r1	BASE	cracnoambiguity	deletions_precision	0.9278	
+human	t1	r1	BASE	gsnap	deletions_precision	0.8764000000000001	gold
+human	t1	r1	BASE	hisat	deletions_precision	0.995601	slateblue
+human	t1	r1	BASE	mapsplice2	deletions_precision	0.986601	yellowgreen
+human	t1	r1	BASE	novoalign	deletions_precision	0.7574	
+human	t1	r1	BASE	olego	deletions_precision	0.9637	navy
+human	t1	r1	BASE	olegotwopass	deletions_precision	0.964501	
+human	t1	r1	BASE	rum	deletions_precision	0.9408	forestgreen
+human	t1	r1	BASE	soapsplice	deletions_precision	0.7038	black
+human	t1	r1	BASE	star	deletions_precision	0.9849	blueviolet
+human	t1	r1	BASE	staronepass	deletions_precision	0.983801	
+human	t1	r1	BASE	subread	deletions_precision	0.944201	grey
+human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9862	
+human	t1	r1	BASE	tophat2coveragesearch	deletions_precision	0.9862	
+human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9861	
+human	t1	r1	BASE	contextmap2	deletions_recall	0.7947	cadetblue1
+human	t1	r1	BASE	crac	deletions_recall	0.3234	seagreen1
+human	t1	r1	BASE	cracnoambiguity	deletions_recall	0.31720000000000004	
+human	t1	r1	BASE	gsnap	deletions_recall	0.7235	gold
+human	t1	r1	BASE	hisat	deletions_recall	0.5284	slateblue
+human	t1	r1	BASE	mapsplice2	deletions_recall	0.7777000000000001	yellowgreen
+human	t1	r1	BASE	novoalign	deletions_recall	0.823101	
+human	t1	r1	BASE	olego	deletions_recall	0.37560000000000004	navy
+human	t1	r1	BASE	olegotwopass	deletions_recall	0.376401	
+human	t1	r1	BASE	rum	deletions_recall	0.7361	forestgreen
+human	t1	r1	BASE	soapsplice	deletions_recall	0.2973	black
+human	t1	r1	BASE	star	deletions_recall	0.707301	blueviolet
+human	t1	r1	BASE	staronepass	deletions_recall	0.7062010000000001	
+human	t1	r1	BASE	subread	deletions_recall	0.7628010000000001	grey
+human	t1	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.43579999999999997	
+human	t1	r1	BASE	tophat2coveragesearch	deletions_recall	0.4357	
+human	t1	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.4357	
+human	t1	r2	READ	contextmap2	precision	0.9901000000000001	cadetblue1
+human	t1	r2	READ	crac	precision	0.9193000000000001	seagreen1
+human	t1	r2	READ	cracnoambiguity	precision	0.9193000000000001	
+human	t1	r2	READ	gsnap	precision	0.9976999999999999	gold
+human	t1	r2	READ	hisat	precision	0.9884999999999999	slateblue
+human	t1	r2	READ	mapsplice2	precision	0.9969	yellowgreen
+human	t1	r2	READ	novoalign	precision	0.9983	
+human	t1	r2	READ	olego	precision	0.9819	navy
+human	t1	r2	READ	olegotwopass	precision	0.9819	
+human	t1	r2	READ	rum	precision	0.9932	forestgreen
+human	t1	r2	READ	soapsplice	precision	0.9909	black
+human	t1	r2	READ	star	precision	0.9993000000000001	blueviolet
+human	t1	r2	READ	staronepass	precision	0.9991	
+human	t1	r2	READ	subread	precision	0.9826999999999999	grey
+human	t1	r2	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9958	
+human	t1	r2	READ	tophat2coveragesearch	precision	0.9956999999999999	
+human	t1	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9958	
+human	t1	r2	READ	contextmap2	recall	0.9854	cadetblue1
+human	t1	r2	READ	crac	recall	0.9998999999999999	seagreen1
+human	t1	r2	READ	cracnoambiguity	recall	0.9998999999999999	
+human	t1	r2	READ	gsnap	recall	1.0	gold
+human	t1	r2	READ	hisat	recall	0.9973000000000001	slateblue
+human	t1	r2	READ	mapsplice2	recall	0.9995999999999999	yellowgreen
+human	t1	r2	READ	novoalign	recall	1.0	
+human	t1	r2	READ	olego	recall	0.9681000000000001	navy
+human	t1	r2	READ	olegotwopass	recall	0.9693999999999999	
+human	t1	r2	READ	rum	recall	0.9984000000000001	forestgreen
+human	t1	r2	READ	soapsplice	recall	0.9614	black
+human	t1	r2	READ	star	recall	0.9983	blueviolet
+human	t1	r2	READ	staronepass	recall	0.9983	
+human	t1	r2	READ	subread	recall	0.9454	grey
+human	t1	r2	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.9736	
+human	t1	r2	READ	tophat2coveragesearch	recall	0.9734	
+human	t1	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9734999999999999	
+human	t1	r2	JUNC	contextmap2	precision	0.9821	cadetblue1
+human	t1	r2	JUNC	crac	precision	0.806101	seagreen1
+human	t1	r2	JUNC	cracnoambiguity	precision	0.8197	
+human	t1	r2	JUNC	gsnap	precision	0.993501	gold
+human	t1	r2	JUNC	hisat	precision	0.9921	slateblue
+human	t1	r2	JUNC	mapsplice2	precision	0.988501	yellowgreen
+human	t1	r2	JUNC	novoalign	precision	0.945301	
+human	t1	r2	JUNC	olego	precision	0.9821	navy
+human	t1	r2	JUNC	olegotwopass	precision	0.981401	
+human	t1	r2	JUNC	rum	precision	0.987501	forestgreen
+human	t1	r2	JUNC	soapsplice	precision	0.988501	black
+human	t1	r2	JUNC	star	precision	0.9974	blueviolet
+human	t1	r2	JUNC	staronepass	precision	0.9961	
+human	t1	r2	JUNC	subread	precision	0.982601	grey
+human	t1	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.989801	
+human	t1	r2	JUNC	tophat2coveragesearch	precision	0.989801	
+human	t1	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.989801	
+human	t1	r2	JUNC	contextmap2	recall	0.9289000000000001	cadetblue1
+human	t1	r2	JUNC	crac	recall	0.3297	seagreen1
+human	t1	r2	JUNC	cracnoambiguity	recall	0.3236	
+human	t1	r2	JUNC	gsnap	recall	0.767801	gold
+human	t1	r2	JUNC	hisat	recall	0.9356	slateblue
+human	t1	r2	JUNC	mapsplice2	recall	0.9017	yellowgreen
+human	t1	r2	JUNC	novoalign	recall	0.869501	
+human	t1	r2	JUNC	olego	recall	0.8401	navy
+human	t1	r2	JUNC	olegotwopass	recall	0.8503000000000001	
+human	t1	r2	JUNC	rum	recall	0.8765000000000001	forestgreen
+human	t1	r2	JUNC	soapsplice	recall	0.642	black
+human	t1	r2	JUNC	star	recall	0.9136	blueviolet
+human	t1	r2	JUNC	staronepass	recall	0.892901	
+human	t1	r2	JUNC	subread	recall	0.6613	grey
+human	t1	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.9097	
+human	t1	r2	JUNC	tophat2coveragesearch	recall	0.9097	
+human	t1	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.909201	
+human	t1	r2	BASE	contextmap2	precision	0.9895999999999999	cadetblue1
+human	t1	r2	BASE	crac	precision	0.9143000000000001	seagreen1
+human	t1	r2	BASE	cracnoambiguity	precision	0.9147	
+human	t1	r2	BASE	gsnap	precision	0.9968	gold
+human	t1	r2	BASE	hisat	precision	0.9967	slateblue
+human	t1	r2	BASE	mapsplice2	precision	0.9965	yellowgreen
+human	t1	r2	BASE	novoalign	precision	0.9976	
+human	t1	r2	BASE	olego	precision	0.9814	navy
+human	t1	r2	BASE	olegotwopass	precision	0.9814	
+human	t1	r2	BASE	rum	precision	0.9982	forestgreen
+human	t1	r2	BASE	soapsplice	precision	0.9887	black
+human	t1	r2	BASE	star	precision	0.9984999999999999	blueviolet
+human	t1	r2	BASE	staronepass	precision	0.9983	
+human	t1	r2	BASE	subread	precision	0.9825	grey
+human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9956	
+human	t1	r2	BASE	tophat2coveragesearch	precision	0.9956	
+human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956	
+human	t1	r2	BASE	contextmap2	recall	0.9845	cadetblue1
+human	t1	r2	BASE	crac	recall	0.9412999999999999	seagreen1
+human	t1	r2	BASE	cracnoambiguity	recall	0.9401999999999999	
+human	t1	r2	BASE	gsnap	recall	0.9971	gold
+human	t1	r2	BASE	hisat	recall	0.9973000000000001	slateblue
+human	t1	r2	BASE	mapsplice2	recall	0.9976	yellowgreen
+human	t1	r2	BASE	novoalign	recall	0.9922	
+human	t1	r2	BASE	olego	recall	0.9681000000000001	navy
+human	t1	r2	BASE	olegotwopass	recall	0.9693999999999999	
+human	t1	r2	BASE	rum	recall	0.9967	forestgreen
+human	t1	r2	BASE	soapsplice	recall	0.9581999999999999	black
+human	t1	r2	BASE	star	recall	0.9971	blueviolet
+human	t1	r2	BASE	staronepass	recall	0.9969	
+human	t1	r2	BASE	subread	recall	0.9337000000000001	grey
+human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.9736	
+human	t1	r2	BASE	tophat2coveragesearch	recall	0.9734	
+human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9734999999999999	
+human	t1	r2	BASE	contextmap2	insertions_precision	0.968701	cadetblue1
+human	t1	r2	BASE	crac	insertions_precision	0.8699	seagreen1
+human	t1	r2	BASE	cracnoambiguity	insertions_precision	0.8793	
+human	t1	r2	BASE	gsnap	insertions_precision	0.959401	gold
+human	t1	r2	BASE	hisat	insertions_precision	0.994901	slateblue
+human	t1	r2	BASE	mapsplice2	insertions_precision	0.9879	yellowgreen
+human	t1	r2	BASE	novoalign	insertions_precision	0.572301	
+human	t1	r2	BASE	olego	insertions_precision	0.928201	navy
+human	t1	r2	BASE	olegotwopass	insertions_precision	0.9609	
+human	t1	r2	BASE	rum	insertions_precision	0.981401	forestgreen
+human	t1	r2	BASE	soapsplice	insertions_precision	0.6636	black
+human	t1	r2	BASE	star	insertions_precision	0.9819	blueviolet
+human	t1	r2	BASE	staronepass	insertions_precision	0.979801	
+human	t1	r2	BASE	subread	insertions_precision	0.950601	grey
+human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.978501	
+human	t1	r2	BASE	tophat2coveragesearch	insertions_precision	0.978501	
+human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.978501	
+human	t1	r2	BASE	contextmap2	insertions_recall	0.781	cadetblue1
+human	t1	r2	BASE	crac	insertions_recall	0.316001	seagreen1
+human	t1	r2	BASE	cracnoambiguity	insertions_recall	0.30920000000000003	
+human	t1	r2	BASE	gsnap	insertions_recall	0.716301	gold
+human	t1	r2	BASE	hisat	insertions_recall	0.499	slateblue
+human	t1	r2	BASE	mapsplice2	insertions_recall	0.6934009999999999	yellowgreen
+human	t1	r2	BASE	novoalign	insertions_recall	0.810201	
+human	t1	r2	BASE	olego	insertions_recall	0.35230000000000006	navy
+human	t1	r2	BASE	olegotwopass	insertions_recall	0.35319999999999996	
+human	t1	r2	BASE	rum	insertions_recall	0.5448999999999999	forestgreen
+human	t1	r2	BASE	soapsplice	insertions_recall	0.29930099999999993	black
+human	t1	r2	BASE	star	insertions_recall	0.6057	blueviolet
+human	t1	r2	BASE	staronepass	insertions_recall	0.6045	
+human	t1	r2	BASE	subread	insertions_recall	0.7307	grey
+human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.4286	
+human	t1	r2	BASE	tophat2coveragesearch	insertions_recall	0.4285	
+human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.4285	
+human	t1	r2	BASE	contextmap2	deletions_precision	0.9761	cadetblue1
+human	t1	r2	BASE	crac	deletions_precision	0.9177	seagreen1
+human	t1	r2	BASE	cracnoambiguity	deletions_precision	0.929301	
+human	t1	r2	BASE	gsnap	deletions_precision	0.8752	gold
+human	t1	r2	BASE	hisat	deletions_precision	0.995601	slateblue
+human	t1	r2	BASE	mapsplice2	deletions_precision	0.9882	yellowgreen
+human	t1	r2	BASE	novoalign	deletions_precision	0.7525	
+human	t1	r2	BASE	olego	deletions_precision	0.963601	navy
+human	t1	r2	BASE	olegotwopass	deletions_precision	0.9641	
+human	t1	r2	BASE	rum	deletions_precision	0.939301	forestgreen
+human	t1	r2	BASE	soapsplice	deletions_precision	0.7016	black
+human	t1	r2	BASE	star	deletions_precision	0.985701	blueviolet
+human	t1	r2	BASE	staronepass	deletions_precision	0.984601	
+human	t1	r2	BASE	subread	deletions_precision	0.9437	grey
+human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9853	
+human	t1	r2	BASE	tophat2coveragesearch	deletions_precision	0.9853	
+human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.985401	
+human	t1	r2	BASE	contextmap2	deletions_recall	0.8025	cadetblue1
+human	t1	r2	BASE	crac	deletions_recall	0.32240099999999994	seagreen1
+human	t1	r2	BASE	cracnoambiguity	deletions_recall	0.3162999999999999	
+human	t1	r2	BASE	gsnap	deletions_recall	0.7264999999999999	gold
+human	t1	r2	BASE	hisat	deletions_recall	0.5332	slateblue
+human	t1	r2	BASE	mapsplice2	deletions_recall	0.775801	yellowgreen
+human	t1	r2	BASE	novoalign	deletions_recall	0.8239	
+human	t1	r2	BASE	olego	deletions_recall	0.37649999999999995	navy
+human	t1	r2	BASE	olegotwopass	deletions_recall	0.377	
+human	t1	r2	BASE	rum	deletions_recall	0.7387	forestgreen
+human	t1	r2	BASE	soapsplice	deletions_recall	0.2994	black
+human	t1	r2	BASE	star	deletions_recall	0.7088	blueviolet
+human	t1	r2	BASE	staronepass	deletions_recall	0.7081	
+human	t1	r2	BASE	subread	deletions_recall	0.7648010000000001	grey
+human	t1	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.43720100000000006	
+human	t1	r2	BASE	tophat2coveragesearch	deletions_recall	0.43720100000000006	
+human	t1	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.43710099999999996	
+human	t1	r3	READ	contextmap2	precision	0.9899	cadetblue1
+human	t1	r3	READ	crac	precision	0.9193000000000001	seagreen1
+human	t1	r3	READ	cracnoambiguity	precision	0.9193000000000001	
+human	t1	r3	READ	gsnap	precision	0.9976999999999999	gold
+human	t1	r3	READ	hisat	precision	0.9884999999999999	slateblue
+human	t1	r3	READ	mapsplice2	precision	0.997	yellowgreen
+human	t1	r3	READ	novoalign	precision	0.9983	
+human	t1	r3	READ	olego	precision	0.9819	navy
+human	t1	r3	READ	olegotwopass	precision	0.9818000000000001	
+human	t1	r3	READ	rum	precision	0.9932	forestgreen
+human	t1	r3	READ	soapsplice	precision	0.9909	black
+human	t1	r3	READ	star	precision	0.9993000000000001	blueviolet
+human	t1	r3	READ	staronepass	precision	0.9991	
+human	t1	r3	READ	subread	precision	0.9826999999999999	grey
+human	t1	r3	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956999999999999	
+human	t1	r3	READ	tophat2coveragesearch	precision	0.9956999999999999	
+human	t1	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956999999999999	
+human	t1	r3	READ	contextmap2	recall	0.9858	cadetblue1
+human	t1	r3	READ	crac	recall	0.9998999999999999	seagreen1
+human	t1	r3	READ	cracnoambiguity	recall	0.9998999999999999	
+human	t1	r3	READ	gsnap	recall	1.0	gold
+human	t1	r3	READ	hisat	recall	0.9974	slateblue
+human	t1	r3	READ	mapsplice2	recall	0.9995999999999999	yellowgreen
+human	t1	r3	READ	novoalign	recall	1.0	
+human	t1	r3	READ	olego	recall	0.968	navy
+human	t1	r3	READ	olegotwopass	recall	0.9693999999999999	
+human	t1	r3	READ	rum	recall	0.9984000000000001	forestgreen
+human	t1	r3	READ	soapsplice	recall	0.9614	black
+human	t1	r3	READ	star	recall	0.9983	blueviolet
+human	t1	r3	READ	staronepass	recall	0.9983	
+human	t1	r3	READ	subread	recall	0.9454	grey
+human	t1	r3	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.9737	
+human	t1	r3	READ	tophat2coveragesearch	recall	0.9736	
+human	t1	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736	
+human	t1	r3	JUNC	contextmap2	precision	0.9823	cadetblue1
+human	t1	r3	JUNC	crac	precision	0.8052010000000001	seagreen1
+human	t1	r3	JUNC	cracnoambiguity	precision	0.8189	
+human	t1	r3	JUNC	gsnap	precision	0.993701	gold
+human	t1	r3	JUNC	hisat	precision	0.9922	slateblue
+human	t1	r3	JUNC	mapsplice2	precision	0.9881	yellowgreen
+human	t1	r3	JUNC	novoalign	precision	0.945401	
+human	t1	r3	JUNC	olego	precision	0.982	navy
+human	t1	r3	JUNC	olegotwopass	precision	0.9813	
+human	t1	r3	JUNC	rum	precision	0.987501	forestgreen
+human	t1	r3	JUNC	soapsplice	precision	0.9883	black
+human	t1	r3	JUNC	star	precision	0.997601	blueviolet
+human	t1	r3	JUNC	staronepass	precision	0.9963	
+human	t1	r3	JUNC	subread	precision	0.982501	grey
+human	t1	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.99	
+human	t1	r3	JUNC	tophat2coveragesearch	precision	0.99	
+human	t1	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.99	
+human	t1	r3	JUNC	contextmap2	recall	0.930001	cadetblue1
+human	t1	r3	JUNC	crac	recall	0.3294	seagreen1
+human	t1	r3	JUNC	cracnoambiguity	recall	0.32319999999999993	
+human	t1	r3	JUNC	gsnap	recall	0.7684	gold
+human	t1	r3	JUNC	hisat	recall	0.9368	slateblue
+human	t1	r3	JUNC	mapsplice2	recall	0.9024	yellowgreen
+human	t1	r3	JUNC	novoalign	recall	0.869501	
+human	t1	r3	JUNC	olego	recall	0.841	navy
+human	t1	r3	JUNC	olegotwopass	recall	0.8511	
+human	t1	r3	JUNC	rum	recall	0.8769009999999999	forestgreen
+human	t1	r3	JUNC	soapsplice	recall	0.642701	black
+human	t1	r3	JUNC	star	recall	0.9145	blueviolet
+human	t1	r3	JUNC	staronepass	recall	0.8939010000000001	
+human	t1	r3	JUNC	subread	recall	0.664101	grey
+human	t1	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.910801	
+human	t1	r3	JUNC	tophat2coveragesearch	recall	0.910801	
+human	t1	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9103	
+human	t1	r3	BASE	contextmap2	precision	0.9895	cadetblue1
+human	t1	r3	BASE	crac	precision	0.9143000000000001	seagreen1
+human	t1	r3	BASE	cracnoambiguity	precision	0.9147	
+human	t1	r3	BASE	gsnap	precision	0.9969	gold
+human	t1	r3	BASE	hisat	precision	0.9967	slateblue
+human	t1	r3	BASE	mapsplice2	precision	0.9965	yellowgreen
+human	t1	r3	BASE	novoalign	precision	0.9976	
+human	t1	r3	BASE	olego	precision	0.9814	navy
+human	t1	r3	BASE	olegotwopass	precision	0.9813	
+human	t1	r3	BASE	rum	precision	0.9981	forestgreen
+human	t1	r3	BASE	soapsplice	precision	0.9887	black
+human	t1	r3	BASE	star	precision	0.9984999999999999	blueviolet
+human	t1	r3	BASE	staronepass	precision	0.9983	
+human	t1	r3	BASE	subread	precision	0.9823999999999999	grey
+human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9954999999999999	
+human	t1	r3	BASE	tophat2coveragesearch	precision	0.9954999999999999	
+human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9954999999999999	
+human	t1	r3	BASE	contextmap2	recall	0.985	cadetblue1
+human	t1	r3	BASE	crac	recall	0.9412999999999999	seagreen1
+human	t1	r3	BASE	cracnoambiguity	recall	0.9401	
+human	t1	r3	BASE	gsnap	recall	0.9971	gold
+human	t1	r3	BASE	hisat	recall	0.9974	slateblue
+human	t1	r3	BASE	mapsplice2	recall	0.9976999999999999	yellowgreen
+human	t1	r3	BASE	novoalign	recall	0.9922	
+human	t1	r3	BASE	olego	recall	0.968	navy
+human	t1	r3	BASE	olegotwopass	recall	0.9693999999999999	
+human	t1	r3	BASE	rum	recall	0.9965999999999999	forestgreen
+human	t1	r3	BASE	soapsplice	recall	0.9581999999999999	black
+human	t1	r3	BASE	star	recall	0.9971	blueviolet
+human	t1	r3	BASE	staronepass	recall	0.9969	
+human	t1	r3	BASE	subread	recall	0.9337000000000001	grey
+human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.9737	
+human	t1	r3	BASE	tophat2coveragesearch	recall	0.9736	
+human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.9736	
+human	t1	r3	BASE	contextmap2	insertions_precision	0.9669	cadetblue1
+human	t1	r3	BASE	crac	insertions_precision	0.863701	seagreen1
+human	t1	r3	BASE	cracnoambiguity	insertions_precision	0.875901	
+human	t1	r3	BASE	gsnap	insertions_precision	0.958201	gold
+human	t1	r3	BASE	hisat	insertions_precision	0.9954	slateblue
+human	t1	r3	BASE	mapsplice2	insertions_precision	0.988601	yellowgreen
+human	t1	r3	BASE	novoalign	insertions_precision	0.5686	
+human	t1	r3	BASE	olego	insertions_precision	0.9287	navy
+human	t1	r3	BASE	olegotwopass	insertions_precision	0.9619	
+human	t1	r3	BASE	rum	insertions_precision	0.9822	forestgreen
+human	t1	r3	BASE	soapsplice	insertions_precision	0.6651009999999999	black
+human	t1	r3	BASE	star	insertions_precision	0.981	blueviolet
+human	t1	r3	BASE	staronepass	insertions_precision	0.9792	
+human	t1	r3	BASE	subread	insertions_precision	0.9509	grey
+human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.979501	
+human	t1	r3	BASE	tophat2coveragesearch	insertions_precision	0.979501	
+human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.979501	
+human	t1	r3	BASE	contextmap2	insertions_recall	0.7865	cadetblue1
+human	t1	r3	BASE	crac	insertions_recall	0.3153	seagreen1
+human	t1	r3	BASE	cracnoambiguity	insertions_recall	0.3085	
+human	t1	r3	BASE	gsnap	insertions_recall	0.7203010000000001	gold
+human	t1	r3	BASE	hisat	insertions_recall	0.5108010000000001	slateblue
+human	t1	r3	BASE	mapsplice2	insertions_recall	0.7037	yellowgreen
+human	t1	r3	BASE	novoalign	insertions_recall	0.8094	
+human	t1	r3	BASE	olego	insertions_recall	0.363	navy
+human	t1	r3	BASE	olegotwopass	insertions_recall	0.3638	
+human	t1	r3	BASE	rum	insertions_recall	0.5550010000000001	forestgreen
+human	t1	r3	BASE	soapsplice	insertions_recall	0.3053	black
+human	t1	r3	BASE	star	insertions_recall	0.6049	blueviolet
+human	t1	r3	BASE	staronepass	insertions_recall	0.6034010000000001	
+human	t1	r3	BASE	subread	insertions_recall	0.7398	grey
+human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.4343	
+human	t1	r3	BASE	tophat2coveragesearch	insertions_recall	0.43420000000000003	
+human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.43409999999999993	
+human	t1	r3	BASE	contextmap2	deletions_precision	0.9763	cadetblue1
+human	t1	r3	BASE	crac	deletions_precision	0.9173	seagreen1
+human	t1	r3	BASE	cracnoambiguity	deletions_precision	0.9274	
+human	t1	r3	BASE	gsnap	deletions_precision	0.8765000000000001	gold
+human	t1	r3	BASE	hisat	deletions_precision	0.9963	slateblue
+human	t1	r3	BASE	mapsplice2	deletions_precision	0.989	yellowgreen
+human	t1	r3	BASE	novoalign	deletions_precision	0.759001	
+human	t1	r3	BASE	olego	deletions_precision	0.9668	navy
+human	t1	r3	BASE	olegotwopass	deletions_precision	0.967401	
+human	t1	r3	BASE	rum	deletions_precision	0.9407	forestgreen
+human	t1	r3	BASE	soapsplice	deletions_precision	0.7037	black
+human	t1	r3	BASE	star	deletions_precision	0.984601	blueviolet
+human	t1	r3	BASE	staronepass	deletions_precision	0.983401	
+human	t1	r3	BASE	subread	deletions_precision	0.9477	grey
+human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.986701	
+human	t1	r3	BASE	tophat2coveragesearch	deletions_precision	0.986701	
+human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.986701	
+human	t1	r3	BASE	contextmap2	deletions_recall	0.8078000000000001	cadetblue1
+human	t1	r3	BASE	crac	deletions_recall	0.33020099999999997	seagreen1
+human	t1	r3	BASE	cracnoambiguity	deletions_recall	0.32330000000000003	
+human	t1	r3	BASE	gsnap	deletions_recall	0.7296	gold
+human	t1	r3	BASE	hisat	deletions_recall	0.5308010000000001	slateblue
+human	t1	r3	BASE	mapsplice2	deletions_recall	0.7864	yellowgreen
+human	t1	r3	BASE	novoalign	deletions_recall	0.829501	
+human	t1	r3	BASE	olego	deletions_recall	0.37529999999999997	navy
+human	t1	r3	BASE	olegotwopass	deletions_recall	0.3758	
+human	t1	r3	BASE	rum	deletions_recall	0.7405010000000001	forestgreen
+human	t1	r3	BASE	soapsplice	deletions_recall	0.2992	black
+human	t1	r3	BASE	star	deletions_recall	0.7144010000000001	blueviolet
+human	t1	r3	BASE	staronepass	deletions_recall	0.7132000000000001	
+human	t1	r3	BASE	subread	deletions_recall	0.7674	grey
+human	t1	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.43789999999999996	
+human	t1	r3	BASE	tophat2coveragesearch	deletions_recall	0.43779999999999997	
+human	t1	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.4377	
+human	t2	r1	READ	contextmap2	precision	0.9892	cadetblue1
+human	t2	r1	READ	crac	precision	0.9158	seagreen1
+human	t2	r1	READ	cracnoambiguity	precision	0.9158	
+human	t2	r1	READ	gsnap	precision	0.9968	gold
+human	t2	r1	READ	hisat	precision	0.93	slateblue
+human	t2	r1	READ	mapsplice2	precision	0.996	yellowgreen
+human	t2	r1	READ	novoalign	precision	0.9982	
+human	t2	r1	READ	olego	precision	0.9821	navy
+human	t2	r1	READ	olegotwopass	precision	0.982	
+human	t2	r1	READ	rum	precision	0.9736	forestgreen
+human	t2	r1	READ	soapsplice	precision	0.9891	black
+human	t2	r1	READ	star	precision	0.9987999999999999	blueviolet
+human	t2	r1	READ	staronepass	precision	0.9986	
+human	t2	r1	READ	subread	precision	0.9815	grey
+human	t2	r1	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9963	
+human	t2	r1	READ	tophat2coveragesearch	precision	0.9963	
+human	t2	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9963	
+human	t2	r1	READ	contextmap2	recall	0.9722	cadetblue1
+human	t2	r1	READ	crac	recall	0.9987999999999999	seagreen1
+human	t2	r1	READ	cracnoambiguity	recall	0.9987999999999999	
+human	t2	r1	READ	gsnap	recall	1.0	gold
+human	t2	r1	READ	hisat	recall	0.9799	slateblue
+human	t2	r1	READ	mapsplice2	recall	0.9971	yellowgreen
+human	t2	r1	READ	novoalign	recall	1.0	
+human	t2	r1	READ	olego	recall	0.9009999999999999	navy
+human	t2	r1	READ	olegotwopass	recall	0.9026000000000001	
+human	t2	r1	READ	rum	recall	0.9953	forestgreen
+human	t2	r1	READ	soapsplice	recall	0.9220999999999999	black
+human	t2	r1	READ	star	recall	0.997	blueviolet
+human	t2	r1	READ	staronepass	recall	0.9969	
+human	t2	r1	READ	subread	recall	0.9107999999999999	grey
+human	t2	r1	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r1	READ	tophat2coveragesearch	recall	0.838	
+human	t2	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r1	JUNC	contextmap2	precision	0.970701	cadetblue1
+human	t2	r1	JUNC	crac	precision	0.6535	seagreen1
+human	t2	r1	JUNC	cracnoambiguity	precision	0.6643	
+human	t2	r1	JUNC	gsnap	precision	0.9862	gold
+human	t2	r1	JUNC	hisat	precision	0.9879	slateblue
+human	t2	r1	JUNC	mapsplice2	precision	0.9849	yellowgreen
+human	t2	r1	JUNC	novoalign	precision	0.9425	
+human	t2	r1	JUNC	olego	precision	0.9803	navy
+human	t2	r1	JUNC	olegotwopass	precision	0.9779	
+human	t2	r1	JUNC	rum	precision	0.9639	forestgreen
+human	t2	r1	JUNC	soapsplice	precision	0.963601	black
+human	t2	r1	JUNC	star	precision	0.994901	blueviolet
+human	t2	r1	JUNC	staronepass	precision	0.9943	
+human	t2	r1	JUNC	subread	precision	0.969601	grey
+human	t2	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.9911	
+human	t2	r1	JUNC	tophat2coveragesearch	precision	0.9911	
+human	t2	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9911	
+human	t2	r1	JUNC	contextmap2	recall	0.838401	cadetblue1
+human	t2	r1	JUNC	crac	recall	0.18019999999999992	seagreen1
+human	t2	r1	JUNC	cracnoambiguity	recall	0.17710099999999995	
+human	t2	r1	JUNC	gsnap	recall	0.718601	gold
+human	t2	r1	JUNC	hisat	recall	0.7821	slateblue
+human	t2	r1	JUNC	mapsplice2	recall	0.7903	yellowgreen
+human	t2	r1	JUNC	novoalign	recall	0.8629	
+human	t2	r1	JUNC	olego	recall	0.719301	navy
+human	t2	r1	JUNC	olegotwopass	recall	0.7293000000000001	
+human	t2	r1	JUNC	rum	recall	0.7501	forestgreen
+human	t2	r1	JUNC	soapsplice	recall	0.520701	black
+human	t2	r1	JUNC	star	recall	0.864501	blueviolet
+human	t2	r1	JUNC	staronepass	recall	0.842	
+human	t2	r1	JUNC	subread	recall	0.5285	grey
+human	t2	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.6882999999999999	
+human	t2	r1	JUNC	tophat2coveragesearch	recall	0.6884	
+human	t2	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.6882010000000001	
+human	t2	r1	BASE	contextmap2	precision	0.9878	cadetblue1
+human	t2	r1	BASE	crac	precision	0.9042	seagreen1
+human	t2	r1	BASE	cracnoambiguity	precision	0.9048	
+human	t2	r1	BASE	gsnap	precision	0.9941	gold
+human	t2	r1	BASE	hisat	precision	0.9953	slateblue
+human	t2	r1	BASE	mapsplice2	precision	0.9944	yellowgreen
+human	t2	r1	BASE	novoalign	precision	0.9967	
+human	t2	r1	BASE	olego	precision	0.9812000000000001	navy
+human	t2	r1	BASE	olegotwopass	precision	0.9811	
+human	t2	r1	BASE	rum	precision	0.9965999999999999	forestgreen
+human	t2	r1	BASE	soapsplice	precision	0.9840000000000001	black
+human	t2	r1	BASE	star	precision	0.9953	blueviolet
+human	t2	r1	BASE	staronepass	precision	0.9951000000000001	
+human	t2	r1	BASE	subread	precision	0.9797	grey
+human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.996	
+human	t2	r1	BASE	tophat2coveragesearch	precision	0.9959	
+human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.996	
+human	t2	r1	BASE	contextmap2	recall	0.9682999999999999	cadetblue1
+human	t2	r1	BASE	crac	recall	0.8713	seagreen1
+human	t2	r1	BASE	cracnoambiguity	recall	0.8698999999999999	
+human	t2	r1	BASE	gsnap	recall	0.9926999999999999	gold
+human	t2	r1	BASE	hisat	recall	0.9799	slateblue
+human	t2	r1	BASE	mapsplice2	recall	0.9863	yellowgreen
+human	t2	r1	BASE	novoalign	recall	0.9903	
+human	t2	r1	BASE	olego	recall	0.9009999999999999	navy
+human	t2	r1	BASE	olegotwopass	recall	0.9026000000000001	
+human	t2	r1	BASE	rum	recall	0.9915999999999999	forestgreen
+human	t2	r1	BASE	soapsplice	recall	0.9117000000000001	black
+human	t2	r1	BASE	star	recall	0.9921	blueviolet
+human	t2	r1	BASE	staronepass	recall	0.9917	
+human	t2	r1	BASE	subread	recall	0.8931	grey
+human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r1	BASE	tophat2coveragesearch	recall	0.838	
+human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r1	BASE	contextmap2	insertions_precision	0.970401	cadetblue1
+human	t2	r1	BASE	crac	insertions_precision	0.8267	seagreen1
+human	t2	r1	BASE	cracnoambiguity	insertions_precision	0.8402000000000001	
+human	t2	r1	BASE	gsnap	insertions_precision	0.939401	gold
+human	t2	r1	BASE	hisat	insertions_precision	0.9933	slateblue
+human	t2	r1	BASE	mapsplice2	insertions_precision	0.976501	yellowgreen
+human	t2	r1	BASE	novoalign	insertions_precision	0.8094	
+human	t2	r1	BASE	olego	insertions_precision	0.9637	navy
+human	t2	r1	BASE	olegotwopass	insertions_precision	0.972501	
+human	t2	r1	BASE	rum	insertions_precision	0.9731	forestgreen
+human	t2	r1	BASE	soapsplice	insertions_precision	0.724301	black
+human	t2	r1	BASE	star	insertions_precision	0.956	blueviolet
+human	t2	r1	BASE	staronepass	insertions_precision	0.9549	
+human	t2	r1	BASE	subread	insertions_precision	0.9385	grey
+human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.987401	
+human	t2	r1	BASE	tophat2coveragesearch	insertions_precision	0.987401	
+human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.987401	
+human	t2	r1	BASE	contextmap2	insertions_recall	0.6747	cadetblue1
+human	t2	r1	BASE	crac	insertions_recall	0.19879999999999998	seagreen1
+human	t2	r1	BASE	cracnoambiguity	insertions_recall	0.19520099999999996	
+human	t2	r1	BASE	gsnap	insertions_recall	0.6485000000000001	gold
+human	t2	r1	BASE	hisat	insertions_recall	0.26990099999999995	slateblue
+human	t2	r1	BASE	mapsplice2	insertions_recall	0.5597	yellowgreen
+human	t2	r1	BASE	novoalign	insertions_recall	0.7821	
+human	t2	r1	BASE	olego	insertions_recall	0.26170000000000004	navy
+human	t2	r1	BASE	olegotwopass	insertions_recall	0.2623000000000001	
+human	t2	r1	BASE	rum	insertions_recall	0.39749999999999996	forestgreen
+human	t2	r1	BASE	soapsplice	insertions_recall	0.15349999999999997	black
+human	t2	r1	BASE	star	insertions_recall	0.5103	blueviolet
+human	t2	r1	BASE	staronepass	insertions_recall	0.5085	
+human	t2	r1	BASE	subread	insertions_recall	0.6101	grey
+human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.21250000000000002	
+human	t2	r1	BASE	tophat2coveragesearch	insertions_recall	0.21240099999999995	
+human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.21250000000000002	
+human	t2	r1	BASE	contextmap2	deletions_precision	0.9751	cadetblue1
+human	t2	r1	BASE	crac	deletions_precision	0.8628	seagreen1
+human	t2	r1	BASE	cracnoambiguity	deletions_precision	0.8762	
+human	t2	r1	BASE	gsnap	deletions_precision	0.8966000000000001	gold
+human	t2	r1	BASE	hisat	deletions_precision	0.9931	slateblue
+human	t2	r1	BASE	mapsplice2	deletions_precision	0.973701	yellowgreen
+human	t2	r1	BASE	novoalign	deletions_precision	0.883601	
+human	t2	r1	BASE	olego	deletions_precision	0.971501	navy
+human	t2	r1	BASE	olegotwopass	deletions_precision	0.971501	
+human	t2	r1	BASE	rum	deletions_precision	0.924301	forestgreen
+human	t2	r1	BASE	soapsplice	deletions_precision	0.7129	black
+human	t2	r1	BASE	star	deletions_precision	0.9536	blueviolet
+human	t2	r1	BASE	staronepass	deletions_precision	0.952501	
+human	t2	r1	BASE	subread	deletions_precision	0.9264	grey
+human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9922	
+human	t2	r1	BASE	tophat2coveragesearch	deletions_precision	0.9922	
+human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9922	
+human	t2	r1	BASE	contextmap2	deletions_recall	0.6874	cadetblue1
+human	t2	r1	BASE	crac	deletions_recall	0.1956	seagreen1
+human	t2	r1	BASE	cracnoambiguity	deletions_recall	0.19200000000000006	
+human	t2	r1	BASE	gsnap	deletions_recall	0.6721	gold
+human	t2	r1	BASE	hisat	deletions_recall	0.27849999999999997	slateblue
+human	t2	r1	BASE	mapsplice2	deletions_recall	0.5869	yellowgreen
+human	t2	r1	BASE	novoalign	deletions_recall	0.7938	
+human	t2	r1	BASE	olego	deletions_recall	0.2712	navy
+human	t2	r1	BASE	olegotwopass	deletions_recall	0.27190000000000003	
+human	t2	r1	BASE	rum	deletions_recall	0.644101	forestgreen
+human	t2	r1	BASE	soapsplice	deletions_recall	0.15500000000000003	black
+human	t2	r1	BASE	star	deletions_recall	0.6075010000000001	blueviolet
+human	t2	r1	BASE	staronepass	deletions_recall	0.6057	
+human	t2	r1	BASE	subread	deletions_recall	0.6274	grey
+human	t2	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.21589999999999998	
+human	t2	r1	BASE	tophat2coveragesearch	deletions_recall	0.2158	
+human	t2	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.21589999999999998	
+human	t2	r2	READ	contextmap2	precision	0.9890000000000001	cadetblue1
+human	t2	r2	READ	crac	precision	0.9157	seagreen1
+human	t2	r2	READ	cracnoambiguity	precision	0.9157	
+human	t2	r2	READ	gsnap	precision	0.9968	gold
+human	t2	r2	READ	hisat	precision	0.9298000000000001	slateblue
+human	t2	r2	READ	mapsplice2	precision	0.9959	yellowgreen
+human	t2	r2	READ	novoalign	precision	0.9982	
+human	t2	r2	READ	olego	precision	0.982	navy
+human	t2	r2	READ	olegotwopass	precision	0.982	
+human	t2	r2	READ	rum	precision	0.9736	forestgreen
+human	t2	r2	READ	soapsplice	precision	0.9892	black
+human	t2	r2	READ	star	precision	0.9987999999999999	blueviolet
+human	t2	r2	READ	staronepass	precision	0.9986	
+human	t2	r2	READ	subread	precision	0.9815999999999999	grey
+human	t2	r2	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9963	
+human	t2	r2	READ	tophat2coveragesearch	precision	0.9963	
+human	t2	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9963	
+human	t2	r2	READ	contextmap2	recall	0.9726	cadetblue1
+human	t2	r2	READ	crac	recall	0.9987999999999999	seagreen1
+human	t2	r2	READ	cracnoambiguity	recall	0.9987999999999999	
+human	t2	r2	READ	gsnap	recall	1.0	gold
+human	t2	r2	READ	hisat	recall	0.9799	slateblue
+human	t2	r2	READ	mapsplice2	recall	0.9971	yellowgreen
+human	t2	r2	READ	novoalign	recall	1.0	
+human	t2	r2	READ	olego	recall	0.9009	navy
+human	t2	r2	READ	olegotwopass	recall	0.9024	
+human	t2	r2	READ	rum	recall	0.9953	forestgreen
+human	t2	r2	READ	soapsplice	recall	0.9220999999999999	black
+human	t2	r2	READ	star	recall	0.9971	blueviolet
+human	t2	r2	READ	staronepass	recall	0.9969	
+human	t2	r2	READ	subread	recall	0.9109	grey
+human	t2	r2	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r2	READ	tophat2coveragesearch	recall	0.838	
+human	t2	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r2	JUNC	contextmap2	precision	0.9702	cadetblue1
+human	t2	r2	JUNC	crac	precision	0.6519010000000001	seagreen1
+human	t2	r2	JUNC	cracnoambiguity	precision	0.6625	
+human	t2	r2	JUNC	gsnap	precision	0.9862	gold
+human	t2	r2	JUNC	hisat	precision	0.9872	slateblue
+human	t2	r2	JUNC	mapsplice2	precision	0.984501	yellowgreen
+human	t2	r2	JUNC	novoalign	precision	0.942101	
+human	t2	r2	JUNC	olego	precision	0.979701	navy
+human	t2	r2	JUNC	olegotwopass	precision	0.977601	
+human	t2	r2	JUNC	rum	precision	0.964301	forestgreen
+human	t2	r2	JUNC	soapsplice	precision	0.963601	black
+human	t2	r2	JUNC	star	precision	0.995	blueviolet
+human	t2	r2	JUNC	staronepass	precision	0.9944	
+human	t2	r2	JUNC	subread	precision	0.9688	grey
+human	t2	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.9913	
+human	t2	r2	JUNC	tophat2coveragesearch	precision	0.9913	
+human	t2	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9913	
+human	t2	r2	JUNC	contextmap2	recall	0.839	cadetblue1
+human	t2	r2	JUNC	crac	recall	0.18000000000000005	seagreen1
+human	t2	r2	JUNC	cracnoambiguity	recall	0.17680099999999999	
+human	t2	r2	JUNC	gsnap	recall	0.7191000000000001	gold
+human	t2	r2	JUNC	hisat	recall	0.7817000000000001	slateblue
+human	t2	r2	JUNC	mapsplice2	recall	0.7908	yellowgreen
+human	t2	r2	JUNC	novoalign	recall	0.8623000000000001	
+human	t2	r2	JUNC	olego	recall	0.719	navy
+human	t2	r2	JUNC	olegotwopass	recall	0.7295	
+human	t2	r2	JUNC	rum	recall	0.75	forestgreen
+human	t2	r2	JUNC	soapsplice	recall	0.5215	black
+human	t2	r2	JUNC	star	recall	0.8648	blueviolet
+human	t2	r2	JUNC	staronepass	recall	0.8425009999999999	
+human	t2	r2	JUNC	subread	recall	0.531801	grey
+human	t2	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.6879	
+human	t2	r2	JUNC	tophat2coveragesearch	recall	0.6879	
+human	t2	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.6878	
+human	t2	r2	BASE	contextmap2	precision	0.9876	cadetblue1
+human	t2	r2	BASE	crac	precision	0.9041	seagreen1
+human	t2	r2	BASE	cracnoambiguity	precision	0.9047	
+human	t2	r2	BASE	gsnap	precision	0.9942	gold
+human	t2	r2	BASE	hisat	precision	0.9953	slateblue
+human	t2	r2	BASE	mapsplice2	precision	0.9943000000000001	yellowgreen
+human	t2	r2	BASE	novoalign	precision	0.9967	
+human	t2	r2	BASE	olego	precision	0.9811	navy
+human	t2	r2	BASE	olegotwopass	precision	0.981	
+human	t2	r2	BASE	rum	precision	0.9965999999999999	forestgreen
+human	t2	r2	BASE	soapsplice	precision	0.9841	black
+human	t2	r2	BASE	star	precision	0.9953	blueviolet
+human	t2	r2	BASE	staronepass	precision	0.9951000000000001	
+human	t2	r2	BASE	subread	precision	0.9798	grey
+human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.996	
+human	t2	r2	BASE	tophat2coveragesearch	precision	0.9959	
+human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.996	
+human	t2	r2	BASE	contextmap2	recall	0.9686	cadetblue1
+human	t2	r2	BASE	crac	recall	0.8712000000000001	seagreen1
+human	t2	r2	BASE	cracnoambiguity	recall	0.8698999999999999	
+human	t2	r2	BASE	gsnap	recall	0.9926999999999999	gold
+human	t2	r2	BASE	hisat	recall	0.9799	slateblue
+human	t2	r2	BASE	mapsplice2	recall	0.9863	yellowgreen
+human	t2	r2	BASE	novoalign	recall	0.9903	
+human	t2	r2	BASE	olego	recall	0.9009	navy
+human	t2	r2	BASE	olegotwopass	recall	0.9024	
+human	t2	r2	BASE	rum	recall	0.9915999999999999	forestgreen
+human	t2	r2	BASE	soapsplice	recall	0.9116	black
+human	t2	r2	BASE	star	recall	0.9922	blueviolet
+human	t2	r2	BASE	staronepass	recall	0.9917	
+human	t2	r2	BASE	subread	recall	0.8934000000000001	grey
+human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r2	BASE	tophat2coveragesearch	recall	0.838	
+human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8384	
+human	t2	r2	BASE	contextmap2	insertions_precision	0.9721	cadetblue1
+human	t2	r2	BASE	crac	insertions_precision	0.824	seagreen1
+human	t2	r2	BASE	cracnoambiguity	insertions_precision	0.836401	
+human	t2	r2	BASE	gsnap	insertions_precision	0.9397	gold
+human	t2	r2	BASE	hisat	insertions_precision	0.993	slateblue
+human	t2	r2	BASE	mapsplice2	insertions_precision	0.977401	yellowgreen
+human	t2	r2	BASE	novoalign	insertions_precision	0.8128	
+human	t2	r2	BASE	olego	insertions_precision	0.965	navy
+human	t2	r2	BASE	olegotwopass	insertions_precision	0.972601	
+human	t2	r2	BASE	rum	insertions_precision	0.973501	forestgreen
+human	t2	r2	BASE	soapsplice	insertions_precision	0.725	black
+human	t2	r2	BASE	star	insertions_precision	0.956501	blueviolet
+human	t2	r2	BASE	staronepass	insertions_precision	0.955501	
+human	t2	r2	BASE	subread	insertions_precision	0.940101	grey
+human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.987501	
+human	t2	r2	BASE	tophat2coveragesearch	insertions_precision	0.987501	
+human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.987501	
+human	t2	r2	BASE	contextmap2	insertions_recall	0.6815	cadetblue1
+human	t2	r2	BASE	crac	insertions_recall	0.19700000000000006	seagreen1
+human	t2	r2	BASE	cracnoambiguity	insertions_recall	0.19320099999999996	
+human	t2	r2	BASE	gsnap	insertions_recall	0.6504	gold
+human	t2	r2	BASE	hisat	insertions_recall	0.2704000000000001	slateblue
+human	t2	r2	BASE	mapsplice2	insertions_recall	0.5604	yellowgreen
+human	t2	r2	BASE	novoalign	insertions_recall	0.783901	
+human	t2	r2	BASE	olego	insertions_recall	0.26170000000000004	navy
+human	t2	r2	BASE	olegotwopass	insertions_recall	0.2622	
+human	t2	r2	BASE	rum	insertions_recall	0.4012	forestgreen
+human	t2	r2	BASE	soapsplice	insertions_recall	0.15359999999999996	black
+human	t2	r2	BASE	star	insertions_recall	0.5136000000000001	blueviolet
+human	t2	r2	BASE	staronepass	insertions_recall	0.5119009999999999	
+human	t2	r2	BASE	subread	insertions_recall	0.611	grey
+human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.2128	
+human	t2	r2	BASE	tophat2coveragesearch	insertions_recall	0.2127	
+human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.2127	
+human	t2	r2	BASE	contextmap2	deletions_precision	0.9761	cadetblue1
+human	t2	r2	BASE	crac	deletions_precision	0.868701	seagreen1
+human	t2	r2	BASE	cracnoambiguity	deletions_precision	0.8802	
+human	t2	r2	BASE	gsnap	deletions_precision	0.9034	gold
+human	t2	r2	BASE	hisat	deletions_precision	0.992601	slateblue
+human	t2	r2	BASE	mapsplice2	deletions_precision	0.974601	yellowgreen
+human	t2	r2	BASE	novoalign	deletions_precision	0.8852	
+human	t2	r2	BASE	olego	deletions_precision	0.9741	navy
+human	t2	r2	BASE	olegotwopass	deletions_precision	0.9742	
+human	t2	r2	BASE	rum	deletions_precision	0.9269000000000001	forestgreen
+human	t2	r2	BASE	soapsplice	deletions_precision	0.7132000000000001	black
+human	t2	r2	BASE	star	deletions_precision	0.956201	blueviolet
+human	t2	r2	BASE	staronepass	deletions_precision	0.9551	
+human	t2	r2	BASE	subread	deletions_precision	0.9295	grey
+human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9913	
+human	t2	r2	BASE	tophat2coveragesearch	deletions_precision	0.9913	
+human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9913	
+human	t2	r2	BASE	contextmap2	deletions_recall	0.6950000000000001	cadetblue1
+human	t2	r2	BASE	crac	deletions_recall	0.1984999999999999	seagreen1
+human	t2	r2	BASE	cracnoambiguity	deletions_recall	0.1945	
+human	t2	r2	BASE	gsnap	deletions_recall	0.6741010000000001	gold
+human	t2	r2	BASE	hisat	deletions_recall	0.2791	slateblue
+human	t2	r2	BASE	mapsplice2	deletions_recall	0.5939	yellowgreen
+human	t2	r2	BASE	novoalign	deletions_recall	0.7938	
+human	t2	r2	BASE	olego	deletions_recall	0.27290000000000003	navy
+human	t2	r2	BASE	olegotwopass	deletions_recall	0.2734000000000001	
+human	t2	r2	BASE	rum	deletions_recall	0.6456	forestgreen
+human	t2	r2	BASE	soapsplice	deletions_recall	0.15450000000000008	black
+human	t2	r2	BASE	star	deletions_recall	0.6103000000000001	blueviolet
+human	t2	r2	BASE	staronepass	deletions_recall	0.6088	
+human	t2	r2	BASE	subread	deletions_recall	0.6373	grey
+human	t2	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.21450000000000002	
+human	t2	r2	BASE	tophat2coveragesearch	deletions_recall	0.21450000000000002	
+human	t2	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.21450000000000002	
+human	t2	r3	READ	contextmap2	precision	0.9887999999999999	cadetblue1
+human	t2	r3	READ	crac	precision	0.9156	seagreen1
+human	t2	r3	READ	cracnoambiguity	precision	0.9156	
+human	t2	r3	READ	gsnap	precision	0.9968	gold
+human	t2	r3	READ	hisat	precision	0.9299	slateblue
+human	t2	r3	READ	mapsplice2	precision	0.9959	yellowgreen
+human	t2	r3	READ	novoalign	precision	0.9982	
+human	t2	r3	READ	olego	precision	0.9821	navy
+human	t2	r3	READ	olegotwopass	precision	0.982	
+human	t2	r3	READ	rum	precision	0.9734999999999999	forestgreen
+human	t2	r3	READ	soapsplice	precision	0.9891	black
+human	t2	r3	READ	star	precision	0.9987999999999999	blueviolet
+human	t2	r3	READ	staronepass	precision	0.9986	
+human	t2	r3	READ	subread	precision	0.9815	grey
+human	t2	r3	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9963	
+human	t2	r3	READ	tophat2coveragesearch	precision	0.9963	
+human	t2	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9963	
+human	t2	r3	READ	contextmap2	recall	0.9729000000000001	cadetblue1
+human	t2	r3	READ	crac	recall	0.9987999999999999	seagreen1
+human	t2	r3	READ	cracnoambiguity	recall	0.9987999999999999	
+human	t2	r3	READ	gsnap	recall	1.0	gold
+human	t2	r3	READ	hisat	recall	0.9799	slateblue
+human	t2	r3	READ	mapsplice2	recall	0.9971	yellowgreen
+human	t2	r3	READ	novoalign	recall	1.0	
+human	t2	r3	READ	olego	recall	0.9009	navy
+human	t2	r3	READ	olegotwopass	recall	0.9024	
+human	t2	r3	READ	rum	recall	0.9954000000000001	forestgreen
+human	t2	r3	READ	soapsplice	recall	0.9220999999999999	black
+human	t2	r3	READ	star	recall	0.997	blueviolet
+human	t2	r3	READ	staronepass	recall	0.9969	
+human	t2	r3	READ	subread	recall	0.9109999999999999	grey
+human	t2	r3	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.8387	
+human	t2	r3	READ	tophat2coveragesearch	recall	0.8382999999999999	
+human	t2	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8386	
+human	t2	r3	JUNC	contextmap2	precision	0.9712	cadetblue1
+human	t2	r3	JUNC	crac	precision	0.650901	seagreen1
+human	t2	r3	JUNC	cracnoambiguity	precision	0.6619010000000001	
+human	t2	r3	JUNC	gsnap	precision	0.9859	gold
+human	t2	r3	JUNC	hisat	precision	0.987801	slateblue
+human	t2	r3	JUNC	mapsplice2	precision	0.985	yellowgreen
+human	t2	r3	JUNC	novoalign	precision	0.942301	
+human	t2	r3	JUNC	olego	precision	0.979601	navy
+human	t2	r3	JUNC	olegotwopass	precision	0.977401	
+human	t2	r3	JUNC	rum	precision	0.9647	forestgreen
+human	t2	r3	JUNC	soapsplice	precision	0.9637	black
+human	t2	r3	JUNC	star	precision	0.9951	blueviolet
+human	t2	r3	JUNC	staronepass	precision	0.994501	
+human	t2	r3	JUNC	subread	precision	0.9709	grey
+human	t2	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.9911	
+human	t2	r3	JUNC	tophat2coveragesearch	precision	0.9912	
+human	t2	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9912	
+human	t2	r3	JUNC	contextmap2	recall	0.8382000000000001	cadetblue1
+human	t2	r3	JUNC	crac	recall	0.17909999999999993	seagreen1
+human	t2	r3	JUNC	cracnoambiguity	recall	0.17599999999999993	
+human	t2	r3	JUNC	gsnap	recall	0.7184010000000001	gold
+human	t2	r3	JUNC	hisat	recall	0.7813	slateblue
+human	t2	r3	JUNC	mapsplice2	recall	0.790901	yellowgreen
+human	t2	r3	JUNC	novoalign	recall	0.862601	
+human	t2	r3	JUNC	olego	recall	0.7179	navy
+human	t2	r3	JUNC	olegotwopass	recall	0.728	
+human	t2	r3	JUNC	rum	recall	0.7492000000000001	forestgreen
+human	t2	r3	JUNC	soapsplice	recall	0.5201	black
+human	t2	r3	JUNC	star	recall	0.864501	blueviolet
+human	t2	r3	JUNC	staronepass	recall	0.842	
+human	t2	r3	JUNC	subread	recall	0.531	grey
+human	t2	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.6879	
+human	t2	r3	JUNC	tophat2coveragesearch	recall	0.6879	
+human	t2	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.6878	
+human	t2	r3	BASE	contextmap2	precision	0.9875	cadetblue1
+human	t2	r3	BASE	crac	precision	0.904	seagreen1
+human	t2	r3	BASE	cracnoambiguity	precision	0.9045000000000001	
+human	t2	r3	BASE	gsnap	precision	0.9942	gold
+human	t2	r3	BASE	hisat	precision	0.9953	slateblue
+human	t2	r3	BASE	mapsplice2	precision	0.9943000000000001	yellowgreen
+human	t2	r3	BASE	novoalign	precision	0.9967	
+human	t2	r3	BASE	olego	precision	0.9811	navy
+human	t2	r3	BASE	olegotwopass	precision	0.981	
+human	t2	r3	BASE	rum	precision	0.9965999999999999	forestgreen
+human	t2	r3	BASE	soapsplice	precision	0.9840000000000001	black
+human	t2	r3	BASE	star	precision	0.9954000000000001	blueviolet
+human	t2	r3	BASE	staronepass	precision	0.9951000000000001	
+human	t2	r3	BASE	subread	precision	0.9797	grey
+human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9959	
+human	t2	r3	BASE	tophat2coveragesearch	precision	0.9959	
+human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9959	
+human	t2	r3	BASE	contextmap2	recall	0.9689	cadetblue1
+human	t2	r3	BASE	crac	recall	0.8713	seagreen1
+human	t2	r3	BASE	cracnoambiguity	recall	0.87	
+human	t2	r3	BASE	gsnap	recall	0.9926999999999999	gold
+human	t2	r3	BASE	hisat	recall	0.9799	slateblue
+human	t2	r3	BASE	mapsplice2	recall	0.9863	yellowgreen
+human	t2	r3	BASE	novoalign	recall	0.9903	
+human	t2	r3	BASE	olego	recall	0.9009	navy
+human	t2	r3	BASE	olegotwopass	recall	0.9024	
+human	t2	r3	BASE	rum	recall	0.9915999999999999	forestgreen
+human	t2	r3	BASE	soapsplice	recall	0.9117000000000001	black
+human	t2	r3	BASE	star	recall	0.9922	blueviolet
+human	t2	r3	BASE	staronepass	recall	0.9917	
+human	t2	r3	BASE	subread	recall	0.8935	grey
+human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.8387	
+human	t2	r3	BASE	tophat2coveragesearch	recall	0.8382999999999999	
+human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.8386	
+human	t2	r3	BASE	contextmap2	insertions_precision	0.97	cadetblue1
+human	t2	r3	BASE	crac	insertions_precision	0.8291	seagreen1
+human	t2	r3	BASE	cracnoambiguity	insertions_precision	0.8421000000000001	
+human	t2	r3	BASE	gsnap	insertions_precision	0.9389	gold
+human	t2	r3	BASE	hisat	insertions_precision	0.9933	slateblue
+human	t2	r3	BASE	mapsplice2	insertions_precision	0.976701	yellowgreen
+human	t2	r3	BASE	novoalign	insertions_precision	0.8114	
+human	t2	r3	BASE	olego	insertions_precision	0.965301	navy
+human	t2	r3	BASE	olegotwopass	insertions_precision	0.973301	
+human	t2	r3	BASE	rum	insertions_precision	0.9722	forestgreen
+human	t2	r3	BASE	soapsplice	insertions_precision	0.7237	black
+human	t2	r3	BASE	star	insertions_precision	0.9567	blueviolet
+human	t2	r3	BASE	staronepass	insertions_precision	0.955401	
+human	t2	r3	BASE	subread	insertions_precision	0.9373009999999999	grey
+human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.9881	
+human	t2	r3	BASE	tophat2coveragesearch	insertions_precision	0.9881	
+human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.9881	
+human	t2	r3	BASE	contextmap2	insertions_recall	0.6795	cadetblue1
+human	t2	r3	BASE	crac	insertions_recall	0.20019999999999993	seagreen1
+human	t2	r3	BASE	cracnoambiguity	insertions_recall	0.1965	
+human	t2	r3	BASE	gsnap	insertions_recall	0.65	gold
+human	t2	r3	BASE	hisat	insertions_recall	0.26980000000000004	slateblue
+human	t2	r3	BASE	mapsplice2	insertions_recall	0.5623009999999999	yellowgreen
+human	t2	r3	BASE	novoalign	insertions_recall	0.782001	
+human	t2	r3	BASE	olego	insertions_recall	0.2609999999999999	navy
+human	t2	r3	BASE	olegotwopass	insertions_recall	0.26170000000000004	
+human	t2	r3	BASE	rum	insertions_recall	0.3995000000000001	forestgreen
+human	t2	r3	BASE	soapsplice	insertions_recall	0.1522	black
+human	t2	r3	BASE	star	insertions_recall	0.5134000000000001	blueviolet
+human	t2	r3	BASE	staronepass	insertions_recall	0.5115000000000001	
+human	t2	r3	BASE	subread	insertions_recall	0.6131	grey
+human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.2137	
+human	t2	r3	BASE	tophat2coveragesearch	insertions_recall	0.2136	
+human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.2137	
+human	t2	r3	BASE	contextmap2	deletions_precision	0.977401	cadetblue1
+human	t2	r3	BASE	crac	deletions_precision	0.867	seagreen1
+human	t2	r3	BASE	cracnoambiguity	deletions_precision	0.8788009999999999	
+human	t2	r3	BASE	gsnap	deletions_precision	0.9026	gold
+human	t2	r3	BASE	hisat	deletions_precision	0.9934	slateblue
+human	t2	r3	BASE	mapsplice2	deletions_precision	0.975701	yellowgreen
+human	t2	r3	BASE	novoalign	deletions_precision	0.8852	
+human	t2	r3	BASE	olego	deletions_precision	0.972501	navy
+human	t2	r3	BASE	olegotwopass	deletions_precision	0.972301	
+human	t2	r3	BASE	rum	deletions_precision	0.9265	forestgreen
+human	t2	r3	BASE	soapsplice	deletions_precision	0.7138	black
+human	t2	r3	BASE	star	deletions_precision	0.956201	blueviolet
+human	t2	r3	BASE	staronepass	deletions_precision	0.9551	
+human	t2	r3	BASE	subread	deletions_precision	0.9305	grey
+human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.991901	
+human	t2	r3	BASE	tophat2coveragesearch	deletions_precision	0.991901	
+human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.991901	
+human	t2	r3	BASE	contextmap2	deletions_recall	0.6934009999999999	cadetblue1
+human	t2	r3	BASE	crac	deletions_recall	0.19640000000000002	seagreen1
+human	t2	r3	BASE	cracnoambiguity	deletions_recall	0.19230000000000003	
+human	t2	r3	BASE	gsnap	deletions_recall	0.6740010000000001	gold
+human	t2	r3	BASE	hisat	deletions_recall	0.2781999999999999	slateblue
+human	t2	r3	BASE	mapsplice2	deletions_recall	0.590401	yellowgreen
+human	t2	r3	BASE	novoalign	deletions_recall	0.7957	
+human	t2	r3	BASE	olego	deletions_recall	0.2711	navy
+human	t2	r3	BASE	olegotwopass	deletions_recall	0.27170000000000005	
+human	t2	r3	BASE	rum	deletions_recall	0.646	forestgreen
+human	t2	r3	BASE	soapsplice	deletions_recall	0.1542	black
+human	t2	r3	BASE	star	deletions_recall	0.611	blueviolet
+human	t2	r3	BASE	staronepass	deletions_recall	0.6093	
+human	t2	r3	BASE	subread	deletions_recall	0.6325000000000001	grey
+human	t2	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.21439999999999992	
+human	t2	r3	BASE	tophat2coveragesearch	deletions_recall	0.21430000000000005	
+human	t2	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.21439999999999992	
+human	t3	r1	READ	contextmap2	precision	0.9778	cadetblue1
+human	t3	r1	READ	crac	precision	0.8855	seagreen1
+human	t3	r1	READ	cracnoambiguity	precision	0.8854000000000001	
+human	t3	r1	READ	gsnap	precision	0.9849	gold
+human	t3	r1	READ	hisat	precision	0.591	slateblue
+human	t3	r1	READ	mapsplice2	precision	0.9915	yellowgreen
+human	t3	r1	READ	olego	precision	0.9819	navy
+human	t3	r1	READ	olegotwopass	precision	0.9817	
+human	t3	r1	READ	rum	precision	0.8420000000000001	forestgreen
+human	t3	r1	READ	soapsplice	precision	0.9621	black
+human	t3	r1	READ	star	precision	0.9956999999999999	blueviolet
+human	t3	r1	READ	staronepass	precision	0.9956	
+human	t3	r1	READ	subread	precision	0.9779000000000001	grey
+human	t3	r1	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956999999999999	
+human	t3	r1	READ	tophat2coveragesearch	precision	0.9956	
+human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956999999999999	
+human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	precision	0.9956	
+human	t3	r1	READ	contextmap2	recall	0.589	cadetblue1
+human	t3	r1	READ	crac	recall	0.9109	seagreen1
+human	t3	r1	READ	cracnoambiguity	recall	0.9109	
+human	t3	r1	READ	gsnap	recall	0.9534	gold
+human	t3	r1	READ	hisat	recall	0.34159999999999996	slateblue
+human	t3	r1	READ	mapsplice2	recall	0.8864	yellowgreen
+human	t3	r1	READ	olego	recall	0.23730000000000004	navy
+human	t3	r1	READ	olegotwopass	recall	0.2375	
+human	t3	r1	READ	rum	recall	0.8889	forestgreen
+human	t3	r1	READ	soapsplice	recall	0.5909	black
+human	t3	r1	READ	star	recall	0.8370000000000001	blueviolet
+human	t3	r1	READ	staronepass	recall	0.8353	
+human	t3	r1	READ	subread	recall	0.4807	grey
+human	t3	r1	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r1	READ	tophat2coveragesearch	recall	0.13269999999999996	
+human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r1	READ	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	recall	0.13299999999999998	
+human	t3	r1	JUNC	contextmap2	precision	0.951201	cadetblue1
+human	t3	r1	JUNC	crac	precision	0.358	seagreen1
+human	t3	r1	JUNC	cracnoambiguity	precision	0.36460000000000004	
+human	t3	r1	JUNC	gsnap	precision	0.881701	gold
+human	t3	r1	JUNC	hisat	precision	0.951	slateblue
+human	t3	r1	JUNC	mapsplice2	precision	0.975	yellowgreen
+human	t3	r1	JUNC	olego	precision	0.922001	navy
+human	t3	r1	JUNC	olegotwopass	precision	0.923301	
+human	t3	r1	JUNC	rum	precision	0.6343	forestgreen
+human	t3	r1	JUNC	soapsplice	precision	0.933401	black
+human	t3	r1	JUNC	star	precision	0.985401	blueviolet
+human	t3	r1	JUNC	staronepass	precision	0.985801	
+human	t3	r1	JUNC	subread	precision	0.877801	grey
+human	t3	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.988	
+human	t3	r1	JUNC	tophat2coveragesearch	precision	0.988	
+human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9883	
+human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	precision	0.9883	
+human	t3	r1	JUNC	contextmap2	recall	0.1028	cadetblue1
+human	t3	r1	JUNC	crac	recall	0.013299999999999979	seagreen1
+human	t3	r1	JUNC	cracnoambiguity	recall	0.0131	
+human	t3	r1	JUNC	gsnap	recall	0.4314	gold
+human	t3	r1	JUNC	hisat	recall	0.04349999999999998	slateblue
+human	t3	r1	JUNC	mapsplice2	recall	0.12250000000000005	yellowgreen
+human	t3	r1	JUNC	olego	recall	0.06959999999999988	navy
+human	t3	r1	JUNC	olegotwopass	recall	0.07030000000000003	
+human	t3	r1	JUNC	rum	recall	0.17430099999999993	forestgreen
+human	t3	r1	JUNC	soapsplice	recall	0.09920000000000007	black
+human	t3	r1	JUNC	star	recall	0.3902	blueviolet
+human	t3	r1	JUNC	staronepass	recall	0.37439999999999996	
+human	t3	r1	JUNC	subread	recall	0.07940000000000003	grey
+human	t3	r1	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.019500000000000073	
+human	t3	r1	JUNC	tophat2coveragesearch	recall	0.019500000000000073	
+human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.019500000000000073	
+human	t3	r1	JUNC	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	recall	0.019500000000000073	
+human	t3	r1	BASE	contextmap2	precision	0.9743	cadetblue1
+human	t3	r1	BASE	crac	precision	0.8373	seagreen1
+human	t3	r1	BASE	cracnoambiguity	precision	0.8375	
+human	t3	r1	BASE	gsnap	precision	0.9745	gold
+human	t3	r1	BASE	hisat	precision	0.9895	slateblue
+human	t3	r1	BASE	mapsplice2	precision	0.9865999999999999	yellowgreen
+human	t3	r1	BASE	olego	precision	0.9813	navy
+human	t3	r1	BASE	olegotwopass	precision	0.9811	
+human	t3	r1	BASE	rum	precision	0.9873000000000001	forestgreen
+human	t3	r1	BASE	soapsplice	precision	0.9501999999999999	black
+human	t3	r1	BASE	star	precision	0.9879000000000001	blueviolet
+human	t3	r1	BASE	staronepass	precision	0.9878	
+human	t3	r1	BASE	subread	precision	0.9727	grey
+human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9952	
+human	t3	r1	BASE	tophat2coveragesearch	precision	0.9952	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9952	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	precision	0.9952	
+human	t3	r1	BASE	contextmap2	recall	0.5445	cadetblue1
+human	t3	r1	BASE	crac	recall	0.5804	seagreen1
+human	t3	r1	BASE	cracnoambiguity	recall	0.5798	
+human	t3	r1	BASE	gsnap	recall	0.8832	gold
+human	t3	r1	BASE	hisat	recall	0.34159999999999996	slateblue
+human	t3	r1	BASE	mapsplice2	recall	0.7448999999999999	yellowgreen
+human	t3	r1	BASE	olego	recall	0.23730000000000004	navy
+human	t3	r1	BASE	olegotwopass	recall	0.2375	
+human	t3	r1	BASE	rum	recall	0.8493	forestgreen
+human	t3	r1	BASE	soapsplice	recall	0.5246999999999999	black
+human	t3	r1	BASE	star	recall	0.7873	blueviolet
+human	t3	r1	BASE	staronepass	recall	0.7856000000000001	
+human	t3	r1	BASE	subread	recall	0.4329	grey
+human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r1	BASE	tophat2coveragesearch	recall	0.13269999999999996	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	recall	0.13299999999999998	
+human	t3	r1	BASE	contextmap2	insertions_precision	0.955601	cadetblue1
+human	t3	r1	BASE	crac	insertions_precision	0.5676	seagreen1
+human	t3	r1	BASE	cracnoambiguity	insertions_precision	0.5800000000000001	
+human	t3	r1	BASE	gsnap	insertions_precision	0.7653	gold
+human	t3	r1	BASE	hisat	insertions_precision	0.9792	slateblue
+human	t3	r1	BASE	mapsplice2	insertions_precision	0.8425009999999999	yellowgreen
+human	t3	r1	BASE	olego	insertions_precision	0.973601	navy
+human	t3	r1	BASE	olegotwopass	insertions_precision	0.9762	
+human	t3	r1	BASE	rum	insertions_precision	0.83	forestgreen
+human	t3	r1	BASE	soapsplice	insertions_precision	0.0927	black
+human	t3	r1	BASE	star	insertions_precision	0.8360000000000001	blueviolet
+human	t3	r1	BASE	staronepass	insertions_precision	0.835601	
+human	t3	r1	BASE	subread	insertions_precision	0.7934	grey
+human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.8166	
+human	t3	r1	BASE	tophat2coveragesearch	insertions_precision	0.8168	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.8166	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	insertions_precision	0.8166	
+human	t3	r1	BASE	contextmap2	insertions_recall	0.07630099999999995	cadetblue1
+human	t3	r1	BASE	crac	insertions_recall	0.021299999999999986	seagreen1
+human	t3	r1	BASE	cracnoambiguity	insertions_recall	0.02090000000000003	
+human	t3	r1	BASE	gsnap	insertions_recall	0.389	gold
+human	t3	r1	BASE	hisat	insertions_recall	0.0030999999999999917	slateblue
+human	t3	r1	BASE	mapsplice2	insertions_recall	0.05379999999999996	yellowgreen
+human	t3	r1	BASE	olego	insertions_recall	0.012300000000000089	navy
+human	t3	r1	BASE	olegotwopass	insertions_recall	0.012300000000000089	
+human	t3	r1	BASE	rum	insertions_recall	0.032200000000000006	forestgreen
+human	t3	r1	BASE	soapsplice	insertions_recall	0.0023000000000000798	black
+human	t3	r1	BASE	star	insertions_recall	0.13590000000000002	blueviolet
+human	t3	r1	BASE	staronepass	insertions_recall	0.13490099999999994	
+human	t3	r1	BASE	subread	insertions_recall	0.08719999999999994	grey
+human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798	
+human	t3	r1	BASE	tophat2coveragesearch	insertions_recall	0.0023000000000000798	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	insertions_recall	0.0023000000000000798	
+human	t3	r1	BASE	contextmap2	deletions_precision	0.9647	cadetblue1
+human	t3	r1	BASE	crac	deletions_precision	0.7423	seagreen1
+human	t3	r1	BASE	cracnoambiguity	deletions_precision	0.7568010000000001	
+human	t3	r1	BASE	gsnap	deletions_precision	0.6735	gold
+human	t3	r1	BASE	hisat	deletions_precision	0.9833	slateblue
+human	t3	r1	BASE	mapsplice2	deletions_precision	0.830401	yellowgreen
+human	t3	r1	BASE	olego	deletions_precision	0.973501	navy
+human	t3	r1	BASE	olegotwopass	deletions_precision	0.973601	
+human	t3	r1	BASE	rum	deletions_precision	0.6632	forestgreen
+human	t3	r1	BASE	soapsplice	deletions_precision	0.12170000000000003	black
+human	t3	r1	BASE	star	deletions_precision	0.8253010000000001	blueviolet
+human	t3	r1	BASE	staronepass	deletions_precision	0.825	
+human	t3	r1	BASE	subread	deletions_precision	0.7682	grey
+human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9324	
+human	t3	r1	BASE	tophat2coveragesearch	deletions_precision	0.932301	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9324	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	deletions_precision	0.932301	
+human	t3	r1	BASE	contextmap2	deletions_recall	0.07510000000000006	cadetblue1
+human	t3	r1	BASE	crac	deletions_recall	0.019399999999999973	seagreen1
+human	t3	r1	BASE	cracnoambiguity	deletions_recall	0.018900000000000028	
+human	t3	r1	BASE	gsnap	deletions_recall	0.42579999999999996	gold
+human	t3	r1	BASE	hisat	deletions_recall	0.0030000000000000027	slateblue
+human	t3	r1	BASE	mapsplice2	deletions_recall	0.04909999999999992	yellowgreen
+human	t3	r1	BASE	olego	deletions_recall	0.012300000000000089	navy
+human	t3	r1	BASE	olegotwopass	deletions_recall	0.012300000000000089	
+human	t3	r1	BASE	rum	deletions_recall	0.2834	forestgreen
+human	t3	r1	BASE	soapsplice	deletions_recall	0.0021999999999999797	black
+human	t3	r1	BASE	star	deletions_recall	0.15810000000000002	blueviolet
+human	t3	r1	BASE	staronepass	deletions_recall	0.15710099999999994	
+human	t3	r1	BASE	subread	deletions_recall	0.08430099999999996	grey
+human	t3	r1	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797	
+human	t3	r1	BASE	tophat2coveragesearch	deletions_recall	0.0021999999999999797	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797	
+human	t3	r1	BASE	tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist	deletions_recall	0.0021999999999999797	
+human	t3	r2	READ	contextmap2	precision	0.9773000000000001	cadetblue1
+human	t3	r2	READ	crac	precision	0.8855	seagreen1
+human	t3	r2	READ	cracnoambiguity	precision	0.8854000000000001	
+human	t3	r2	READ	gsnap	precision	0.9849	gold
+human	t3	r2	READ	hisat	precision	0.5908	slateblue
+human	t3	r2	READ	mapsplice2	precision	0.9915	yellowgreen
+human	t3	r2	READ	olego	precision	0.9819	navy
+human	t3	r2	READ	olegotwopass	precision	0.9817	
+human	t3	r2	READ	rum	precision	0.8419	forestgreen
+human	t3	r2	READ	soapsplice	precision	0.9621	black
+human	t3	r2	READ	star	precision	0.9956999999999999	blueviolet
+human	t3	r2	READ	staronepass	precision	0.9956999999999999	
+human	t3	r2	READ	subread	precision	0.978	grey
+human	t3	r2	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956	
+human	t3	r2	READ	tophat2coveragesearch	precision	0.9956	
+human	t3	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956	
+human	t3	r2	READ	contextmap2	recall	0.5892000000000001	cadetblue1
+human	t3	r2	READ	crac	recall	0.9109	seagreen1
+human	t3	r2	READ	cracnoambiguity	recall	0.9109	
+human	t3	r2	READ	gsnap	recall	0.9533	gold
+human	t3	r2	READ	hisat	recall	0.34159999999999996	slateblue
+human	t3	r2	READ	mapsplice2	recall	0.8865999999999999	yellowgreen
+human	t3	r2	READ	olego	recall	0.2372	navy
+human	t3	r2	READ	olegotwopass	recall	0.23730000000000004	
+human	t3	r2	READ	rum	recall	0.889	forestgreen
+human	t3	r2	READ	soapsplice	recall	0.5909	black
+human	t3	r2	READ	star	recall	0.8369	blueviolet
+human	t3	r2	READ	staronepass	recall	0.8353	
+human	t3	r2	READ	subread	recall	0.48100000000000004	grey
+human	t3	r2	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.13290000000000007	
+human	t3	r2	READ	tophat2coveragesearch	recall	0.13260000000000005	
+human	t3	r2	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13290000000000007	
+human	t3	r2	JUNC	contextmap2	precision	0.952201	cadetblue1
+human	t3	r2	JUNC	crac	precision	0.3558	seagreen1
+human	t3	r2	JUNC	cracnoambiguity	precision	0.362	
+human	t3	r2	JUNC	gsnap	precision	0.881701	gold
+human	t3	r2	JUNC	hisat	precision	0.95	slateblue
+human	t3	r2	JUNC	mapsplice2	precision	0.9749	yellowgreen
+human	t3	r2	JUNC	olego	precision	0.923101	navy
+human	t3	r2	JUNC	olegotwopass	precision	0.9238	
+human	t3	r2	JUNC	rum	precision	0.6362	forestgreen
+human	t3	r2	JUNC	soapsplice	precision	0.9338	black
+human	t3	r2	JUNC	star	precision	0.985501	blueviolet
+human	t3	r2	JUNC	staronepass	precision	0.986	
+human	t3	r2	JUNC	subread	precision	0.8797010000000001	grey
+human	t3	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.988501	
+human	t3	r2	JUNC	tophat2coveragesearch	precision	0.988601	
+human	t3	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.988801	
+human	t3	r2	JUNC	contextmap2	recall	0.10309999999999997	cadetblue1
+human	t3	r2	JUNC	crac	recall	0.013299999999999979	seagreen1
+human	t3	r2	JUNC	cracnoambiguity	recall	0.013000000000000012	
+human	t3	r2	JUNC	gsnap	recall	0.43200000000000005	gold
+human	t3	r2	JUNC	hisat	recall	0.04379999999999995	slateblue
+human	t3	r2	JUNC	mapsplice2	recall	0.12409999999999999	yellowgreen
+human	t3	r2	JUNC	olego	recall	0.06969999999999998	navy
+human	t3	r2	JUNC	olegotwopass	recall	0.07040099999999994	
+human	t3	r2	JUNC	rum	recall	0.17500000000000004	forestgreen
+human	t3	r2	JUNC	soapsplice	recall	0.09999999999999998	black
+human	t3	r2	JUNC	star	recall	0.3902	blueviolet
+human	t3	r2	JUNC	staronepass	recall	0.37439999999999996	
+human	t3	r2	JUNC	subread	recall	0.0797	grey
+human	t3	r2	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.01959999999999995	
+human	t3	r2	JUNC	tophat2coveragesearch	recall	0.01959999999999995	
+human	t3	r2	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.01959999999999995	
+human	t3	r2	BASE	contextmap2	precision	0.9737	cadetblue1
+human	t3	r2	BASE	crac	precision	0.8373	seagreen1
+human	t3	r2	BASE	cracnoambiguity	precision	0.8375	
+human	t3	r2	BASE	gsnap	precision	0.9745	gold
+human	t3	r2	BASE	hisat	precision	0.9894	slateblue
+human	t3	r2	BASE	mapsplice2	precision	0.9865	yellowgreen
+human	t3	r2	BASE	olego	precision	0.9812000000000001	navy
+human	t3	r2	BASE	olegotwopass	precision	0.9811	
+human	t3	r2	BASE	rum	precision	0.9873000000000001	forestgreen
+human	t3	r2	BASE	soapsplice	precision	0.9501000000000001	black
+human	t3	r2	BASE	star	precision	0.9878	blueviolet
+human	t3	r2	BASE	staronepass	precision	0.9878	
+human	t3	r2	BASE	subread	precision	0.9728	grey
+human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9952	
+human	t3	r2	BASE	tophat2coveragesearch	precision	0.9951000000000001	
+human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9952	
+human	t3	r2	BASE	contextmap2	recall	0.5447	cadetblue1
+human	t3	r2	BASE	crac	recall	0.5804	seagreen1
+human	t3	r2	BASE	cracnoambiguity	recall	0.5797	
+human	t3	r2	BASE	gsnap	recall	0.8832	gold
+human	t3	r2	BASE	hisat	recall	0.34159999999999996	slateblue
+human	t3	r2	BASE	mapsplice2	recall	0.745	yellowgreen
+human	t3	r2	BASE	olego	recall	0.2372	navy
+human	t3	r2	BASE	olegotwopass	recall	0.23730000000000004	
+human	t3	r2	BASE	rum	recall	0.8493	forestgreen
+human	t3	r2	BASE	soapsplice	recall	0.5247999999999999	black
+human	t3	r2	BASE	star	recall	0.7872	blueviolet
+human	t3	r2	BASE	staronepass	recall	0.7856000000000001	
+human	t3	r2	BASE	subread	recall	0.43310000000000004	grey
+human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.13290000000000007	
+human	t3	r2	BASE	tophat2coveragesearch	recall	0.13260000000000005	
+human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13290000000000007	
+human	t3	r2	BASE	contextmap2	insertions_precision	0.9571	cadetblue1
+human	t3	r2	BASE	crac	insertions_precision	0.5628	seagreen1
+human	t3	r2	BASE	cracnoambiguity	insertions_precision	0.5771	
+human	t3	r2	BASE	gsnap	insertions_precision	0.7654	gold
+human	t3	r2	BASE	hisat	insertions_precision	0.975401	slateblue
+human	t3	r2	BASE	mapsplice2	insertions_precision	0.8432	yellowgreen
+human	t3	r2	BASE	olego	insertions_precision	0.968601	navy
+human	t3	r2	BASE	olegotwopass	insertions_precision	0.9739	
+human	t3	r2	BASE	rum	insertions_precision	0.8291	forestgreen
+human	t3	r2	BASE	soapsplice	insertions_precision	0.09079999999999999	black
+human	t3	r2	BASE	star	insertions_precision	0.8360000000000001	blueviolet
+human	t3	r2	BASE	staronepass	insertions_precision	0.8358	
+human	t3	r2	BASE	subread	insertions_precision	0.7956	grey
+human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.8203	
+human	t3	r2	BASE	tophat2coveragesearch	insertions_precision	0.8207	
+human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.8203	
+human	t3	r2	BASE	contextmap2	insertions_recall	0.07689999999999997	cadetblue1
+human	t3	r2	BASE	crac	insertions_recall	0.021700000000000053	seagreen1
+human	t3	r2	BASE	cracnoambiguity	insertions_recall	0.021199999999999997	
+human	t3	r2	BASE	gsnap	insertions_recall	0.38749999999999996	gold
+human	t3	r2	BASE	hisat	insertions_recall	0.0030999999999999917	slateblue
+human	t3	r2	BASE	mapsplice2	insertions_recall	0.053100000000000036	yellowgreen
+human	t3	r2	BASE	olego	insertions_recall	0.012099999999999889	navy
+human	t3	r2	BASE	olegotwopass	insertions_recall	0.012099999999999889	
+human	t3	r2	BASE	rum	insertions_recall	0.03200000000000003	forestgreen
+human	t3	r2	BASE	soapsplice	insertions_recall	0.0021999999999999797	black
+human	t3	r2	BASE	star	insertions_recall	0.13470000000000004	blueviolet
+human	t3	r2	BASE	staronepass	insertions_recall	0.13390000000000002	
+human	t3	r2	BASE	subread	insertions_recall	0.0867	grey
+human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.0021999999999999797	
+human	t3	r2	BASE	tophat2coveragesearch	insertions_recall	0.0021999999999999797	
+human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.0021999999999999797	
+human	t3	r2	BASE	contextmap2	deletions_precision	0.964	cadetblue1
+human	t3	r2	BASE	crac	deletions_precision	0.747501	seagreen1
+human	t3	r2	BASE	cracnoambiguity	deletions_precision	0.759701	
+human	t3	r2	BASE	gsnap	deletions_precision	0.672901	gold
+human	t3	r2	BASE	hisat	deletions_precision	0.9849	slateblue
+human	t3	r2	BASE	mapsplice2	deletions_precision	0.832	yellowgreen
+human	t3	r2	BASE	olego	deletions_precision	0.973301	navy
+human	t3	r2	BASE	olegotwopass	deletions_precision	0.973501	
+human	t3	r2	BASE	rum	deletions_precision	0.6637	forestgreen
+human	t3	r2	BASE	soapsplice	deletions_precision	0.12780000000000002	black
+human	t3	r2	BASE	star	deletions_precision	0.8248	blueviolet
+human	t3	r2	BASE	staronepass	deletions_precision	0.8245009999999999	
+human	t3	r2	BASE	subread	deletions_precision	0.7685	grey
+human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.9297	
+human	t3	r2	BASE	tophat2coveragesearch	deletions_precision	0.9301010000000001	
+human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.9297	
+human	t3	r2	BASE	contextmap2	deletions_recall	0.07579999999999998	cadetblue1
+human	t3	r2	BASE	crac	deletions_recall	0.019300000000000095	seagreen1
+human	t3	r2	BASE	cracnoambiguity	deletions_recall	0.018800999999999957	
+human	t3	r2	BASE	gsnap	deletions_recall	0.4264	gold
+human	t3	r2	BASE	hisat	deletions_recall	0.0031999999999999806	slateblue
+human	t3	r2	BASE	mapsplice2	deletions_recall	0.04990099999999997	yellowgreen
+human	t3	r2	BASE	olego	deletions_recall	0.012499999999999956	navy
+human	t3	r2	BASE	olegotwopass	deletions_recall	0.012499999999999956	
+human	t3	r2	BASE	rum	deletions_recall	0.28469999999999995	forestgreen
+human	t3	r2	BASE	soapsplice	deletions_recall	0.0023999999999999577	black
+human	t3	r2	BASE	star	deletions_recall	0.15890000000000004	blueviolet
+human	t3	r2	BASE	staronepass	deletions_recall	0.15799999999999992	
+human	t3	r2	BASE	subread	deletions_recall	0.08540099999999995	grey
+human	t3	r2	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.0023000000000000798	
+human	t3	r2	BASE	tophat2coveragesearch	deletions_recall	0.0023000000000000798	
+human	t3	r2	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.0023000000000000798	
+human	t3	r3	READ	contextmap2	precision	0.9773999999999999	cadetblue1
+human	t3	r3	READ	crac	precision	0.8856	seagreen1
+human	t3	r3	READ	cracnoambiguity	precision	0.8856	
+human	t3	r3	READ	gsnap	precision	0.9849	gold
+human	t3	r3	READ	hisat	precision	0.5907	slateblue
+human	t3	r3	READ	mapsplice2	precision	0.9915	yellowgreen
+human	t3	r3	READ	olego	precision	0.9818000000000001	navy
+human	t3	r3	READ	olegotwopass	precision	0.9815999999999999	
+human	t3	r3	READ	rum	precision	0.8415	forestgreen
+human	t3	r3	READ	soapsplice	precision	0.9621999999999999	black
+human	t3	r3	READ	star	precision	0.9958	blueviolet
+human	t3	r3	READ	staronepass	precision	0.9956999999999999	
+human	t3	r3	READ	subread	precision	0.978	grey
+human	t3	r3	READ	tophat2coveragesearch-bowtie2sensitive	precision	0.9956999999999999	
+human	t3	r3	READ	tophat2coveragesearch	precision	0.9956999999999999	
+human	t3	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9956999999999999	
+human	t3	r3	READ	contextmap2	recall	0.5892000000000001	cadetblue1
+human	t3	r3	READ	crac	recall	0.9106000000000001	seagreen1
+human	t3	r3	READ	cracnoambiguity	recall	0.9106000000000001	
+human	t3	r3	READ	gsnap	recall	0.9531999999999999	gold
+human	t3	r3	READ	hisat	recall	0.3419	slateblue
+human	t3	r3	READ	mapsplice2	recall	0.8864	yellowgreen
+human	t3	r3	READ	olego	recall	0.23730000000000004	navy
+human	t3	r3	READ	olegotwopass	recall	0.2375	
+human	t3	r3	READ	rum	recall	0.8887	forestgreen
+human	t3	r3	READ	soapsplice	recall	0.5909	black
+human	t3	r3	READ	star	recall	0.8366	blueviolet
+human	t3	r3	READ	staronepass	recall	0.835	
+human	t3	r3	READ	subread	recall	0.48090000000000005	grey
+human	t3	r3	READ	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r3	READ	tophat2coveragesearch	recall	0.13269999999999996	
+human	t3	r3	READ	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r3	JUNC	contextmap2	precision	0.9517	cadetblue1
+human	t3	r3	JUNC	crac	precision	0.3601	seagreen1
+human	t3	r3	JUNC	cracnoambiguity	precision	0.3668	
+human	t3	r3	JUNC	gsnap	precision	0.8822	gold
+human	t3	r3	JUNC	hisat	precision	0.950601	slateblue
+human	t3	r3	JUNC	mapsplice2	precision	0.973701	yellowgreen
+human	t3	r3	JUNC	olego	precision	0.922201	navy
+human	t3	r3	JUNC	olegotwopass	precision	0.9232009999999999	
+human	t3	r3	JUNC	rum	precision	0.6374	forestgreen
+human	t3	r3	JUNC	soapsplice	precision	0.933001	black
+human	t3	r3	JUNC	star	precision	0.9852	blueviolet
+human	t3	r3	JUNC	staronepass	precision	0.9859	
+human	t3	r3	JUNC	subread	precision	0.8781	grey
+human	t3	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	precision	0.988501	
+human	t3	r3	JUNC	tophat2coveragesearch	precision	0.988501	
+human	t3	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	precision	0.988701	
+human	t3	r3	JUNC	contextmap2	recall	0.10329999999999995	cadetblue1
+human	t3	r3	JUNC	crac	recall	0.013400000000000079	seagreen1
+human	t3	r3	JUNC	cracnoambiguity	recall	0.0131	
+human	t3	r3	JUNC	gsnap	recall	0.43220000000000003	gold
+human	t3	r3	JUNC	hisat	recall	0.04379999999999995	slateblue
+human	t3	r3	JUNC	mapsplice2	recall	0.12409999999999999	yellowgreen
+human	t3	r3	JUNC	olego	recall	0.07020099999999996	navy
+human	t3	r3	JUNC	olegotwopass	recall	0.07090000000000007	
+human	t3	r3	JUNC	rum	recall	0.1751999999999999	forestgreen
+human	t3	r3	JUNC	soapsplice	recall	0.09999999999999998	black
+human	t3	r3	JUNC	star	recall	0.39060000000000006	blueviolet
+human	t3	r3	JUNC	staronepass	recall	0.375	
+human	t3	r3	JUNC	subread	recall	0.0798000000000001	grey
+human	t3	r3	JUNC	tophat2coveragesearch-bowtie2sensitive	recall	0.01959999999999995	
+human	t3	r3	JUNC	tophat2coveragesearch	recall	0.01959999999999995	
+human	t3	r3	JUNC	tophat2nocoveragesearch-bowtie2sensitive	recall	0.01959999999999995	
+human	t3	r3	BASE	contextmap2	precision	0.9739	cadetblue1
+human	t3	r3	BASE	crac	precision	0.8375	seagreen1
+human	t3	r3	BASE	cracnoambiguity	precision	0.8377	
+human	t3	r3	BASE	gsnap	precision	0.9745999999999999	gold
+human	t3	r3	BASE	hisat	precision	0.9895	slateblue
+human	t3	r3	BASE	mapsplice2	precision	0.9865999999999999	yellowgreen
+human	t3	r3	BASE	olego	precision	0.9811	navy
+human	t3	r3	BASE	olegotwopass	precision	0.981	
+human	t3	r3	BASE	rum	precision	0.9873000000000001	forestgreen
+human	t3	r3	BASE	soapsplice	precision	0.9501999999999999	black
+human	t3	r3	BASE	star	precision	0.9879000000000001	blueviolet
+human	t3	r3	BASE	staronepass	precision	0.9879000000000001	
+human	t3	r3	BASE	subread	precision	0.9728	grey
+human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	precision	0.9953	
+human	t3	r3	BASE	tophat2coveragesearch	precision	0.9952	
+human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	precision	0.9953	
+human	t3	r3	BASE	contextmap2	recall	0.5448	cadetblue1
+human	t3	r3	BASE	crac	recall	0.5802	seagreen1
+human	t3	r3	BASE	cracnoambiguity	recall	0.5796	
+human	t3	r3	BASE	gsnap	recall	0.8831	gold
+human	t3	r3	BASE	hisat	recall	0.3419	slateblue
+human	t3	r3	BASE	mapsplice2	recall	0.7448	yellowgreen
+human	t3	r3	BASE	olego	recall	0.23730000000000004	navy
+human	t3	r3	BASE	olegotwopass	recall	0.2375	
+human	t3	r3	BASE	rum	recall	0.8490000000000001	forestgreen
+human	t3	r3	BASE	soapsplice	recall	0.5247999999999999	black
+human	t3	r3	BASE	star	recall	0.787	blueviolet
+human	t3	r3	BASE	staronepass	recall	0.7853999999999999	
+human	t3	r3	BASE	subread	recall	0.433	grey
+human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r3	BASE	tophat2coveragesearch	recall	0.13269999999999996	
+human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	recall	0.13299999999999998	
+human	t3	r3	BASE	contextmap2	insertions_precision	0.9559	cadetblue1
+human	t3	r3	BASE	crac	insertions_precision	0.5785	seagreen1
+human	t3	r3	BASE	cracnoambiguity	insertions_precision	0.5911	
+human	t3	r3	BASE	gsnap	insertions_precision	0.767001	gold
+human	t3	r3	BASE	hisat	insertions_precision	0.974	slateblue
+human	t3	r3	BASE	mapsplice2	insertions_precision	0.8426009999999999	yellowgreen
+human	t3	r3	BASE	olego	insertions_precision	0.972301	navy
+human	t3	r3	BASE	olegotwopass	insertions_precision	0.9742	
+human	t3	r3	BASE	rum	insertions_precision	0.8297	forestgreen
+human	t3	r3	BASE	soapsplice	insertions_precision	0.09409999999999996	black
+human	t3	r3	BASE	star	insertions_precision	0.8360000000000001	blueviolet
+human	t3	r3	BASE	staronepass	insertions_precision	0.8360000000000001	
+human	t3	r3	BASE	subread	insertions_precision	0.798001	grey
+human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_precision	0.8247	
+human	t3	r3	BASE	tophat2coveragesearch	insertions_precision	0.8248	
+human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_precision	0.8247	
+human	t3	r3	BASE	contextmap2	insertions_recall	0.07680000000000009	cadetblue1
+human	t3	r3	BASE	crac	insertions_recall	0.021700000000000053	seagreen1
+human	t3	r3	BASE	cracnoambiguity	insertions_recall	0.021199999999999997	
+human	t3	r3	BASE	gsnap	insertions_recall	0.3891	gold
+human	t3	r3	BASE	hisat	insertions_recall	0.0031999999999999806	slateblue
+human	t3	r3	BASE	mapsplice2	insertions_recall	0.053100000000000036	yellowgreen
+human	t3	r3	BASE	olego	insertions_recall	0.012199999999999989	navy
+human	t3	r3	BASE	olegotwopass	insertions_recall	0.012199999999999989	
+human	t3	r3	BASE	rum	insertions_recall	0.03189999999999993	forestgreen
+human	t3	r3	BASE	soapsplice	insertions_recall	0.0023000000000000798	black
+human	t3	r3	BASE	star	insertions_recall	0.135	blueviolet
+human	t3	r3	BASE	staronepass	insertions_recall	0.13419999999999999	
+human	t3	r3	BASE	subread	insertions_recall	0.08750000000000002	grey
+human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798	
+human	t3	r3	BASE	tophat2coveragesearch	insertions_recall	0.0023000000000000798	
+human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	insertions_recall	0.0023000000000000798	
+human	t3	r3	BASE	contextmap2	deletions_precision	0.9639	cadetblue1
+human	t3	r3	BASE	crac	deletions_precision	0.75	seagreen1
+human	t3	r3	BASE	cracnoambiguity	deletions_precision	0.761801	
+human	t3	r3	BASE	gsnap	deletions_precision	0.6746000000000001	gold
+human	t3	r3	BASE	hisat	deletions_precision	0.9863	slateblue
+human	t3	r3	BASE	mapsplice2	deletions_precision	0.8335	yellowgreen
+human	t3	r3	BASE	olego	deletions_precision	0.972601	navy
+human	t3	r3	BASE	olegotwopass	deletions_precision	0.972601	
+human	t3	r3	BASE	rum	deletions_precision	0.6671	forestgreen
+human	t3	r3	BASE	soapsplice	deletions_precision	0.12660099999999996	black
+human	t3	r3	BASE	star	deletions_precision	0.824	blueviolet
+human	t3	r3	BASE	staronepass	deletions_precision	0.8238	
+human	t3	r3	BASE	subread	deletions_precision	0.770101	grey
+human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_precision	0.926201	
+human	t3	r3	BASE	tophat2coveragesearch	deletions_precision	0.926201	
+human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_precision	0.926301	
+human	t3	r3	BASE	contextmap2	deletions_recall	0.07569999999999988	cadetblue1
+human	t3	r3	BASE	crac	deletions_recall	0.01959999999999995	seagreen1
+human	t3	r3	BASE	cracnoambiguity	deletions_recall	0.019100000000000006	
+human	t3	r3	BASE	gsnap	deletions_recall	0.4266	gold
+human	t3	r3	BASE	hisat	deletions_recall	0.0030999999999999917	slateblue
+human	t3	r3	BASE	mapsplice2	deletions_recall	0.04909999999999992	yellowgreen
+human	t3	r3	BASE	olego	deletions_recall	0.012199999999999989	navy
+human	t3	r3	BASE	olegotwopass	deletions_recall	0.012199999999999989	
+human	t3	r3	BASE	rum	deletions_recall	0.2843009999999999	forestgreen
+human	t3	r3	BASE	soapsplice	deletions_recall	0.0023000000000000798	black
+human	t3	r3	BASE	star	deletions_recall	0.15790099999999996	blueviolet
+human	t3	r3	BASE	staronepass	deletions_recall	0.15689999999999993	
+human	t3	r3	BASE	subread	deletions_recall	0.08460099999999993	grey
+human	t3	r3	BASE	tophat2coveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797	
+human	t3	r3	BASE	tophat2coveragesearch	deletions_recall	0.0021999999999999797	
+human	t3	r3	BASE	tophat2nocoveragesearch-bowtie2sensitive	deletions_recall	0.0021999999999999797	

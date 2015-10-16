@@ -22,20 +22,27 @@ l  = spread(d[,c("species","dataset","replicate","level","algorithm","measuremen
 #          "tophat2coveragesearch",
 #          "tophat2nocoveragesearch-bowtie2sensitive",
 #          "tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist"),]
-k = l[l$algorithm %in% c("contextmap2","cracnoambiguity","gsnap",
-                         "hisat", "mapsplice2", "novoalign","olegotwopass","rum",                                                    
+k = l[l$algorithm %in% c("contextmap2","crac","gsnap",
+                         "hisat", "mapsplice2", "novoalign","olego","rum",                                                    
                          "soapsplice", "star", "subread",
                          "tophat2coveragesearch-bowtie2sensitive") &
         l$replicate == "r1" & l$level == "READ",]
+k$algorithm[k$algorithm == "tophat2coveragesearch-bowtie2sensitive"] = "tophat2"
 r = k[k$dataset=="t3",]
-ggplot(k,aes(x=algorithm, y=recall)) + 
+k$color = c("blue","black","grey","pink","forestgreen","chartreuse","cornsilk","coral","cyan","gold1","lavender")
+k = k[k$dataset == "t3",]
+ggplot(k,aes(x=algorithm, y=recall, fill = algorithm)) + 
   #coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
   #geom_bar(stat="identity",position="dodge")  + 
   #geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position="dodge") +
-  geom_bar(stat="identity",position="dodge",width = .5 , fill="grey") + 
-  facet_grid(dataset ~ .)   +  ggtitle("human read level") +
-  scale_x_discrete(limits=r[order(r$recall,decreasing = TRUE),]$algorithm)  +theme_light()+
-  theme(axis.text.x = element_text(angle = 90, hjust = 1)) #+ scale_fill_brewer(palette="Greys")
+  geom_bar(stat="identity",position="dodge",width = .9, colour="black") + 
+  #facet_grid(dataset ~ .)   +  
+  ggtitle("human read level") +
+  scale_x_discrete(limits=r[order(r$recall,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=20) +#theme_light()+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) + #scale_fill_brewer(palette="Accent") +
+  scale_fill_manual(values = k$color) +
+  guides(fill=FALSE) 
+  
 
 ggplot(k,aes(x=algorithm, y=precision)) + 
   #coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
