@@ -19,19 +19,20 @@ require 'set'
 # TODO filter for best outcome!!!!
 
 $colors = {
-  :clc => "pink",
+  :clc => "plum3",
   :contextmap2 => "cadetblue1",
-  :crac => "seagreen1",
+  :crac => "darkorange",
   :gsnap => "gold",
-  :hisat => "slateblue",
-  :hisat2 => "slateblue1",
-  :mapsplice2 => "yellowgreen",
+  :hisat => "maroon",
+  :hisat2 => "maroon3",
+  :mapsplice2 => "gray45",
+  :novoalign => "pink",
   :olego => "navy",
   :rum => "forestgreen",
   :soapsplice => "black",
   :star => "blueviolet",
   :subread => "grey",
-  :tophat2 => "brown"
+  :tophat2 => "sienna"
 }
 
 $logger = Logger.new(STDERR)
@@ -215,6 +216,7 @@ def read_files(argv)
   all
 end
 
+
 def print_all(all)
   #precision
   result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\n"
@@ -222,7 +224,43 @@ def print_all(all)
     e.levels.each_pair do |level, measurement|
       measurement.each_pair do |m, values|
         values.each_with_index do |v,i|
-          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{e.algorithms.to_a[i]}\t#{m}\t#{v}\t#{$colors[e.algorithms.to_a[i].to_sym]}\n"
+          name = e.algorithms.to_a[i]
+          if e.algorithms.to_a[i] =~ /^tophat2/
+            if e.algorithms.to_a[i] == "tophat2coveragesearch-bowtie2sensitive"
+              name = "tophat2"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /^star/
+            if e.algorithms.to_a[i] == "star"
+              name = "star"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /^olego/
+            if e.algorithms.to_a[i] == "olegotwopass"
+              name = "olego"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /^crac/
+            if e.algorithms.to_a[i] == "cracnoambiguity"
+              name = "crac"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /clc/
+            if e.algorithms.to_a[i] == "clcsimulated_reads_HG19t3r1-10multihits"
+              name = "clc"
+            else
+              next
+            end
+          end
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\n"
         end
       end
     end
