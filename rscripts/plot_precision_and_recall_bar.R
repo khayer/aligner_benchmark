@@ -2,10 +2,10 @@ library(ggplot2)
 library(tidyr)
 setwd("~/github/aligner_benchmark/rscripts")
 
-
 cols <- c('character','character','character','character','character','character',
-          'numeric')
+          'numeric','character')
 d = read.csv("../test_file", head =T,sep = "\t", colClasses = cols)
+
 d$mean = rep(0,dim(d)[1])
 d$sd = rep(0,dim(d)[1])
 
@@ -14,7 +14,39 @@ for (i in 1:dim(d)[1]) {
   d$mean[i] = mean(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value)
   d$sd[i] = sd(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value) 
 }
-l  = spread(d[,c("species","dataset","replicate","level","algorithm","measurement","mean")], measurement, mean)
+l  = spread(d[,c("species","dataset","replicate","level","algorithm",
+                 "color","measurement","mean")], measurement, mean)
+
+
+plot_my_data <- function(data, measurement, title, filename) {
+  # data = k 
+  # measurement one of #{recall, precision}
+  print(measurement)
+  data$tmp = data[,colnames(data) == measurement]
+  print(head(data))
+  print(data$tmp)
+  ggplot(data,aes(x=algorithm, y=tmp, fill = algorithm)) + 
+    geom_bar(stat="identity",position="dodge",width = .9, colour="black") + 
+    ggtitle(title) +
+    scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) + #scale_fill_brewer(palette="Accent") +
+    scale_fill_manual(values = data$color) +
+    guides(fill=FALSE) 
+  ggsave(
+    filename,
+    width = 6.25,
+    height = 6.75,
+    dpi = 300
+  )
+}
+
+
+l  = spread(d[,c("species","dataset","replicate","level","algorithm",
+                 "color","measurement","mean")], measurement, mean)
+k = l[l$species == "human" & l$level == "READ",]
+k = k[k$dataset == "t3",]
+plot_my_data(k,"recall","human read level","ggtest.pdf")
+plot_my_data(k,"precision","human read level","ggtest_precision.pdf")
 #ggplot(d[d$algorithm %in% c("contextmap2","crac","cracnoambiguity","gsnap",
 #          "hisat", "mapsplice2", "novoalign", "olego","olegotwopass","rum",                                                    
 #          "soapsplice", "star", "staronepass", "subread",
@@ -22,23 +54,35 @@ l  = spread(d[,c("species","dataset","replicate","level","algorithm","measuremen
 #          "tophat2coveragesearch",
 #          "tophat2nocoveragesearch-bowtie2sensitive",
 #          "tophat2nocoveragesearch-bowtie2sensitive-testNoMateDist"),]
-k = l[l$algorithm %in% c("contextmap2","crac","gsnap",
-                         "hisat", "mapsplice2", "novoalign","olego","rum",                                                    
-                         "soapsplice", "star", "subread",
-                         "tophat2coveragesearch-bowtie2sensitive") &
-        l$replicate == "r1" & l$level == "READ",]
-k$algorithm[k$algorithm == "tophat2coveragesearch-bowtie2sensitive"] = "tophat2"
+#k = l[l$algorithm %in% c("contextmap2","crac","gsnap",
+#                         "hisat", "mapsplice2", "novoalign","olego","rum",                                                    
+#                         "soapsplice", "star", "subread",
+#                         "tophat2coveragesearch-bowtie2sensitive") &
+#        l$replicate == "r1" & l$level == "READ",]
+
+#k$algorithm[k$algorithm == "tophat2coveragesearch-bowtie2sensitive"] = "tophat2"
 r = k[k$dataset=="t3",]
-k$color = c("blue","black","grey","pink","forestgreen","chartreuse","cornsilk","coral","cyan","gold1","lavender")
+#k$color = c("blue","black","grey","pink","forestgreen","chartreuse","cornsilk","coral","cyan","gold1","lavender")
 k = k[k$dataset == "t3",]
-ggplot(k,aes(x=algorithm, y=recall, fill = algorithm)) + 
+#png('../test.png',height=8400, width = 6000, res = 1200)
+
+#dev.off()
+ggsave(
+  "ggtest.pdf",
+  width = 6.25,
+  height = 6.75,
+  dpi = 300
+)
+
+
+ggplot(k,aes(x=algorithm, y=precision, fill = algorithm)) + 
   #coord_cartesian(ylim=c(-0.05,1.05),xlim = c(-0.05,1.05)) + 
   #geom_bar(stat="identity",position="dodge")  + 
   #geom_errorbar(aes(ymin = mean-sd, ymax = mean+sd), position="dodge") +
   geom_bar(stat="identity",position="dodge",width = .9, colour="black") + 
   #facet_grid(dataset ~ .)   +  
   ggtitle("human read level") +
-  scale_x_discrete(limits=r[order(r$recall,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=20) +#theme_light()+
+  scale_x_discrete(limits=k[order(k$precision,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=22) +#theme_light()+
   theme(axis.text.x = element_text(angle = 90, hjust = 1)) + #scale_fill_brewer(palette="Accent") +
   scale_fill_manual(values = k$color) +
   guides(fill=FALSE) 
