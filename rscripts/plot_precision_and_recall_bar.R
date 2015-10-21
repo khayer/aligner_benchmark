@@ -14,9 +14,6 @@ for (i in 1:dim(d)[1]) {
   d$mean[i] = mean(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value)
   d$sd[i] = sd(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value) 
 }
-l  = spread(d[,c("species","dataset","replicate","level","algorithm",
-                 "color","measurement","mean")], measurement, mean)
-
 
 plot_my_data <- function(data, measurement, title, filename) {
   # data = k 
@@ -46,141 +43,197 @@ l  = spread(d[,c("species","dataset","replicate","level","algorithm",
                  "color","measurement","mean")], measurement, mean)
 k = l[l$species == "human" & l$level == "READ",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","human read level","human_t3_READ_recall.pdf")
-plot_my_data(k,"precision","human read level","human_t3_READ_precision.pdf")
+plot_my_data(k,"recall","human read level","read_level/human_t3_READ_recall.pdf")
+plot_my_data(k,"precision","human read level","read_level/human_t3_READ_precision.pdf")
 k = l[l$species == "human" & l$level == "READ",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","human read level","human_t2_READ_recall.pdf")
-plot_my_data(k,"precision","human read level","human_t2_READ_precision.pdf")
+plot_my_data(k,"recall","human read level","read_level/human_t2_READ_recall.pdf")
+plot_my_data(k,"precision","human read level","read_level/human_t2_READ_precision.pdf")
 k = l[l$species == "human" & l$level == "READ",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","human read level","human_t1_READ_recall.pdf")
-plot_my_data(k,"precision","human read level","human_t1_READ_precision.pdf")
+plot_my_data(k,"recall","human read level","read_level/human_t1_READ_recall.pdf")
+plot_my_data(k,"precision","human read level","read_level/human_t1_READ_precision.pdf")
 
 
 k = l[l$species == "malaria" & l$level == "READ",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","malaria read level","malaria_t3_READ_recall.pdf")
-plot_my_data(k,"precision","malaria read level","malaria_t3_READ_precision.pdf")
+plot_my_data(k,"recall","malaria read level","read_level/malaria_t3_READ_recall.pdf")
+plot_my_data(k,"precision","malaria read level","read_level/malaria_t3_READ_precision.pdf")
 k = l[l$species == "malaria" & l$level == "READ",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","malaria read level","malaria_t2_READ_recall.pdf")
-plot_my_data(k,"precision","malaria read level","malaria_t2_READ_precision.pdf")
+plot_my_data(k,"recall","malaria read level","read_level/malaria_t2_READ_recall.pdf")
+plot_my_data(k,"precision","malaria read level","read_level/malaria_t2_READ_precision.pdf")
 k = l[l$species == "malaria" & l$level == "READ",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","malaria read level","malaria_t1_READ_recall.pdf")
-plot_my_data(k,"precision","malaria read level","malaria_t1_READ_precision.pdf")
+plot_my_data(k,"recall","malaria read level","read_level/malaria_t1_READ_recall.pdf")
+plot_my_data(k,"precision","malaria read level","read_level/malaria_t1_READ_precision.pdf")
 
 
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","human base level","human_t3_BASE_recall.pdf")
-plot_my_data(k,"precision","human base level","human_t3_BASE_precision.pdf")
+plot_my_data(k,"recall","human base level","base_level/human_t3_BASE_recall.pdf")
+plot_my_data(k,"precision","human base level","base_level/human_t3_BASE_precision.pdf")
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","human base level","human_t2_BASE_recall.pdf")
-plot_my_data(k,"precision","human base level","human_t2_BASE_precision.pdf")
+plot_my_data(k,"recall","human base level","base_level/human_t2_BASE_recall.pdf")
+plot_my_data(k,"precision","human base level","base_level/human_t2_BASE_precision.pdf")
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","human base level","human_t1_BASE_recall.pdf")
-plot_my_data(k,"precision","human base level","human_t1_BASE_precision.pdf")
+plot_my_data(k,"recall","human base level","base_level/human_t1_BASE_recall.pdf")
+plot_my_data(k,"precision","human base level","base_level/human_t1_BASE_precision.pdf")
 
 
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","malaria base level","malaria_t3_BASE_recall.pdf")
-plot_my_data(k,"precision","malaria base level","malaria_t3_BASE_precision.pdf")
+plot_my_data(k,"recall","malaria base level","base_level/malaria_t3_BASE_recall.pdf")
+plot_my_data(k,"precision","malaria base level","base_level/malaria_t3_BASE_precision.pdf")
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","malaria base level","malaria_t2_BASE_recall.pdf")
-plot_my_data(k,"precision","malaria base level","malaria_t2_BASE_precision.pdf")
+plot_my_data(k,"recall","malaria base level","base_level/malaria_t2_BASE_recall.pdf")
+plot_my_data(k,"precision","malaria base level","base_level/malaria_t2_BASE_precision.pdf")
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","malaria base level","malaria_t1_BASE_recall.pdf")
-plot_my_data(k,"precision","malaria base level","malaria_t1_BASE_precision.pdf")
+plot_my_data(k,"recall","malaria base level","base_level/malaria_t1_BASE_recall.pdf")
+plot_my_data(k,"precision","malaria base level","base_level/malaria_t1_BASE_precision.pdf")
 
 
 # BASE LEVEL AND DELETIONS
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"deletions_recall","human deletions base level","human_t3_BASE_deletions_recall.pdf")
-plot_my_data(k,"deletions_precision","human deletions base level","human_t3_BASE_deletions_precision.pdf")
+plot_my_data(k,"deletions_recall","human deletions base level","deletions/human_t3_BASE_deletions_recall.pdf")
+plot_my_data(k,"deletions_precision","human deletions base level","deletions/human_t3_BASE_deletions_precision.pdf")
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"deletions_recall","human deletions base level","human_t2_BASE_deletions_recall.pdf")
-plot_my_data(k,"deletions_precision","human deletions base level","human_t2_BASE_deletions_precision.pdf")
+plot_my_data(k,"deletions_recall","human deletions base level","deletions/human_t2_BASE_deletions_recall.pdf")
+plot_my_data(k,"deletions_precision","human deletions base level","deletions/human_t2_BASE_deletions_precision.pdf")
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"deletions_recall","human deletions base level","human_t1_BASE_deletions_recall.pdf")
-plot_my_data(k,"deletions_precision","human deletions base level","human_t1_BASE_deletions_precision.pdf")
+plot_my_data(k,"deletions_recall","human deletions base level","deletions/human_t1_BASE_deletions_recall.pdf")
+plot_my_data(k,"deletions_precision","human deletions base level","deletions/human_t1_BASE_deletions_precision.pdf")
 
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"deletions_recall","malaria deletions base level","malaria_t3_BASE_deletions_recall.pdf")
-plot_my_data(k,"deletions_precision","malaria deletions base level","malaria_t3_BASE_deletions_precision.pdf")
+plot_my_data(k,"deletions_recall","malaria deletions base level","deletions/malaria_t3_BASE_deletions_recall.pdf")
+plot_my_data(k,"deletions_precision","malaria deletions base level","deletions/malaria_t3_BASE_deletions_precision.pdf")
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"deletions_recall","malaria deletions base level","malaria_t2_BASE_deletions_recall.pdf")
-plot_my_data(k,"deletions_precision","malaria deletions base level","malaria_t2_BASE_deletions_precision.pdf")
+plot_my_data(k,"deletions_recall","malaria deletions base level","deletions/malaria_t2_BASE_deletions_recall.pdf")
+plot_my_data(k,"deletions_precision","malaria deletions base level","deletions/malaria_t2_BASE_deletions_precision.pdf")
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"deletions_recall","malaria deletions base level","malaria_t1_BASE_deletions_recall.pdf")
-plot_my_data(k,"deletions_precision","malaria deletions base level","malaria_t1_BASE_deletions_precision.pdf")
+plot_my_data(k,"deletions_recall","malaria deletions base level","deletions/malaria_t1_BASE_deletions_recall.pdf")
+plot_my_data(k,"deletions_precision","malaria deletions base level","deletions/malaria_t1_BASE_deletions_precision.pdf")
 
 # BASE LEVEL AND INSERTIONS
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"insertions_recall","human insertions base level","human_t3_BASE_insertions_recall.pdf")
-plot_my_data(k,"insertions_precision","human insertions base level","human_t3_BASE_insertions_precision.pdf")
+plot_my_data(k,"insertions_recall","human insertions base level","insertions/human_t3_BASE_insertions_recall.pdf")
+plot_my_data(k,"insertions_precision","human insertions base level","insertions/human_t3_BASE_insertions_precision.pdf")
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"insertions_recall","human insertions base level","human_t2_BASE_insertions_recall.pdf")
-plot_my_data(k,"insertions_precision","human insertions base level","human_t2_BASE_insertions_precision.pdf")
+plot_my_data(k,"insertions_recall","human insertions base level","insertions/human_t2_BASE_insertions_recall.pdf")
+plot_my_data(k,"insertions_precision","human insertions base level","insertions/human_t2_BASE_insertions_precision.pdf")
 k = l[l$species == "human" & l$level == "BASE",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"insertions_recall","human insertions base level","human_t1_BASE_insertions_recall.pdf")
-plot_my_data(k,"insertions_precision","human insertions base level","human_t1_BASE_insertions_precision.pdf")
+plot_my_data(k,"insertions_recall","human insertions base level","insertions/human_t1_BASE_insertions_recall.pdf")
+plot_my_data(k,"insertions_precision","human insertions base level","insertions/human_t1_BASE_insertions_precision.pdf")
 
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"insertions_recall","malaria insertions base level","malaria_t3_BASE_insertions_recall.pdf")
-plot_my_data(k,"insertions_precision","malaria insertions base level","malaria_t3_BASE_insertions_precision.pdf")
+plot_my_data(k,"insertions_recall","malaria insertions base level","insertions/malaria_t3_BASE_insertions_recall.pdf")
+plot_my_data(k,"insertions_precision","malaria insertions base level","insertions/malaria_t3_BASE_insertions_precision.pdf")
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"insertions_recall","malaria insertions base level","malaria_t2_BASE_insertions_recall.pdf")
-plot_my_data(k,"insertions_precision","malaria insertions base level","malaria_t2_BASE_insertions_precision.pdf")
+plot_my_data(k,"insertions_recall","malaria insertions base level","insertions/malaria_t2_BASE_insertions_recall.pdf")
+plot_my_data(k,"insertions_precision","malaria insertions base level","insertions/malaria_t2_BASE_insertions_precision.pdf")
 k = l[l$species == "malaria" & l$level == "BASE",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"insertions_recall","malaria insertions base level","malaria_t1_BASE_insertions_recall.pdf")
-plot_my_data(k,"insertions_precision","malaria insertions base level","malaria_t1_BASE_insertions_precision.pdf")
+plot_my_data(k,"insertions_recall","malaria insertions base level","insertions/malaria_t1_BASE_insertions_recall.pdf")
+plot_my_data(k,"insertions_precision","malaria insertions base level","insertions/malaria_t1_BASE_insertions_precision.pdf")
 
 
 k = l[l$species == "human" & l$level == "JUNC",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","human junction level","human_t3_JUNC_recall.pdf")
-plot_my_data(k,"precision","human junction level","human_t3_JUNC_precision.pdf")
+plot_my_data(k,"recall","human junction level","junctions/human_t3_JUNC_recall.pdf")
+plot_my_data(k,"precision","human junction level","junctions/human_t3_JUNC_precision.pdf")
 k = l[l$species == "human" & l$level == "JUNC",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","human junction level","human_t2_JUNC_recall.pdf")
-plot_my_data(k,"precision","human junction level","human_t2_JUNC_precision.pdf")
+plot_my_data(k,"recall","human junction level","junctions/human_t2_JUNC_recall.pdf")
+plot_my_data(k,"precision","human junction level","junctions/human_t2_JUNC_precision.pdf")
 k = l[l$species == "human" & l$level == "JUNC",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","human junction level","human_t1_JUNC_recall.pdf")
-plot_my_data(k,"precision","human junction level","human_t1_JUNC_precision.pdf")
+plot_my_data(k,"recall","human junction level","junctions/human_t1_JUNC_recall.pdf")
+plot_my_data(k,"precision","human junction level","junctions/human_t1_JUNC_precision.pdf")
 
 
 k = l[l$species == "malaria" & l$level == "JUNC",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","malaria junction level","malaria_t3_JUNC_recall.pdf")
-plot_my_data(k,"precision","malaria junction level","malaria_t3_JUNC_precision.pdf")
+plot_my_data(k,"recall","malaria junction level","junctions/malaria_t3_JUNC_recall.pdf")
+plot_my_data(k,"precision","malaria junction level","junctions/malaria_t3_JUNC_precision.pdf")
 k = l[l$species == "malaria" & l$level == "JUNC",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","malaria junction level","malaria_t2_JUNC_recall.pdf")
-plot_my_data(k,"precision","malaria junction level","malaria_t2_JUNC_precision.pdf")
+plot_my_data(k,"recall","malaria junction level","junctions/malaria_t2_JUNC_recall.pdf")
+plot_my_data(k,"precision","malaria junction level","junctions/malaria_t2_JUNC_precision.pdf")
 k = l[l$species == "malaria" & l$level == "JUNC",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","malaria junction level","malaria_t1_JUNC_recall.pdf")
-plot_my_data(k,"precision","malaria junction level","malaria_t1_JUNC_precision.pdf")
+plot_my_data(k,"recall","malaria junction level","junctions/malaria_t1_JUNC_recall.pdf")
+plot_my_data(k,"precision","malaria junction level","junctions/malaria_t1_JUNC_precision.pdf")
+
+
+# Plot the 100 plots
+l  = spread(d[,c("species","dataset","replicate","level","algorithm",
+                 "color","measurement","mean")], measurement, mean)
+l$aligned_correctly = 1-l$aligned_ambiguously-l$unaligned-l$aligned_incorrectly
+gat = gather(l,measurement,mean, -species, -dataset, -replicate, -level, -algorithm, -color)
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+gat = gat[gat$measurement %in% c("aligned_incorrectly","aligned_ambiguously","unaligned","aligned_correctly") ,]
+gat$measurement = factor(gat$measurement, levels = c("aligned_correctly","aligned_ambiguously","aligned_incorrectly","unaligned"))
+
+plot_100_plot <- function(data,ylabs,titles,file) {
+  ggplot(data, aes(x=algorithm, y=mean, fill=measurement, order = as.numeric(measurement))) + 
+    geom_bar(stat="identity",width= .9) + 
+    theme_gray(base_size=10) +#theme_light()+
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
+    ylab(ylabs) +  ggtitle(titles) +
+    scale_x_discrete(limits=data[order(data[data$measurement == "aligned_correctly",]$mean,decreasing = TRUE),]$algorithm) +
+    scale_fill_manual(values=cbPalette) 
+  ggsave(
+    file,
+    width = 6.25,
+    height = 5.25,
+    dpi = 300
+  )
+}
+
+r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level == "READ",]
+plot_100_plot(r,"percent of total reads","human read level","read_level/human_t3_READ.pdf")
+r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level == "READ",]
+plot_100_plot(r,"percent of total reads","human read level","read_level/human_t2_READ.pdf")
+r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level == "READ",]
+plot_100_plot(r,"percent of total reads","human read level","read_level/human_t1_READ.pdf")
+
+r = gat[gat$dataset == "t3"  & gat$species == "malaria" & gat$level == "READ",]
+plot_100_plot(r,"percent of total reads","malaria read level","read_level/malaria_t3_READ.pdf")
+r = gat[gat$dataset == "t2"  & gat$species == "malaria" & gat$level == "READ",]
+plot_100_plot(r,"percent of total reads","malaria read level","read_level/malaria_t2_READ.pdf")
+r = gat[gat$dataset == "t1"  & gat$species == "malaria" & gat$level == "READ",]
+plot_100_plot(r,"percent of total reads","malaria read level","read_level/malaria_t1_READ.pdf")
+
+r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level == "BASE",]
+plot_100_plot(r,"percent of total bases","human base level","base_level/human_t3_BASE.pdf")
+r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level == "BASE",]
+plot_100_plot(r,"percent of total bases","human base level","base_level/human_t2_BASE.pdf")
+r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level == "BASE",]
+plot_100_plot(r,"percent of total bases","human base level","base_level/human_t1_BASE.pdf")
+
+r = gat[gat$dataset == "t3"  & gat$species == "malaria" & gat$level == "BASE",]
+plot_100_plot(r,"percent of total bases","malaria base level","base_level/malaria_t3_BASE.pdf")
+r = gat[gat$dataset == "t2"  & gat$species == "malaria" & gat$level == "BASE",]
+plot_100_plot(r,"percent of total bases","malaria base level","base_level/malaria_t2_BASE.pdf")
+r = gat[gat$dataset == "t1"  & gat$species == "malaria" & gat$level == "BASE",]
+plot_100_plot(r,"percent of total bases","malaria base level","base_level/malaria_t1_BASE.pdf")
+
+
 
 #ggplot(d[d$algorithm %in% c("contextmap2","crac","cracnoambiguity","gsnap",
 #          "hisat", "mapsplice2", "novoalign", "olego","olegotwopass","rum",                                                    
@@ -231,6 +284,9 @@ ggplot(k,aes(x=algorithm, y=precision)) +
   facet_grid(dataset ~ .) + scale_color_brewer(palette="Paired")  +  ggtitle("human read level") +
   scale_x_discrete(limits=r[order(r$precision,decreasing = TRUE),]$algorithm) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+
+
 
 
 

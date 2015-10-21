@@ -19,18 +19,18 @@ require 'set'
 # TODO filter for best outcome!!!!
 
 $colors = {
-  :clc => "plum3",
-  :contextmap2 => "cadetblue1",
-  :crac => "darkorange",
-  :gsnap => "gold",
+  :clc => "#CC79A7",
+  :contextmap2 => "#F0E442",
+  :crac => "#D55E00",
+  :gsnap => "#999999",
   :hisat => "maroon",
   :hisat2 => "maroon3",
-  :mapsplice2 => "gray45",
-  :novoalign => "pink",
-  :olego => "navy",
+  :mapsplice2 => "#009E73",
+  :novoalign => "#0072B2",
+  :olego => "#56B4E9",
   :rum => "forestgreen",
   :soapsplice => "black",
-  :star => "blueviolet",
+  :star => "#E69F00",
   :subread => "grey",
   :tophat2 => "sienna"
 }
@@ -167,6 +167,36 @@ def read_files(argv)
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["recall"]  ||= []
           current_run.levels[level]["recall"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% reads aligned incorrectly:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["aligned_incorrectly"]  ||= []
+          current_run.levels[level]["aligned_incorrectly"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% reads aligned ambiguously:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["aligned_ambiguously"]  ||= []
+          current_run.levels[level]["aligned_ambiguously"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% reads unaligned:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["unaligned"]  ||= []
+          current_run.levels[level]["unaligned"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% bases aligned incorrectly:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["aligned_incorrectly"]  ||= []
+          current_run.levels[level]["aligned_incorrectly"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% bases aligned ambiguously:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["aligned_ambiguously"]  ||= []
+          current_run.levels[level]["aligned_ambiguously"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% bases unaligned:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["unaligned"]  ||= []
+          current_run.levels[level]["unaligned"]  << fields[current_mapping[n]].to_f / 100.0
         end
       when "accuracy over uniquely aligned bases:"
         current_run.algorithms.each_with_index do |n,i|
