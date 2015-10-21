@@ -39,3 +39,4 @@ build/
 *.png
 *.pdf
 *.jpeg
+.Rhistory
