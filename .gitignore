@@ -34,3 +34,12 @@ build/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+*.jpg
+*.png
+*.pdf
+*.jpeg
+.Rhistory
+test_file
+.DS_Store
+rscripts/read_level/
