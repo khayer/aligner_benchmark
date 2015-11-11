@@ -139,7 +139,7 @@ def check_if_results_exist(stats_path)
   !File.zero?("#{stats_path}/comp_res.txt") #&& File.exist?("#{stats_path}/junctions_stats.txt") && !File.zero?("#{stats_path}/junctions_stats.txt")
 end
 
-def get_truth_files(options, source_of_tree, dataset, mode = default)
+def get_truth_files(options, source_of_tree, dataset, mode = "default")
   cmd = "find #{source_of_tree}/jobs/settings/ -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
   l = `#{cmd}`
