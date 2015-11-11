@@ -41,7 +41,7 @@ def setup_options(args)
     :algorithm => "all", :transcripts => nil, :junctions_crossed => nil,
     :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
-    :species => "human", :debug => false
+    :species => "human", :debug => false, :short => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -63,6 +63,10 @@ def setup_options(args)
     opts.on("-d", "--debug", "Run in debug mode") do |v|
       options[:log_level] = "debug"
       options[:debug] = true
+    end
+
+    opts.on("-t", "--short", "Only first 1 Million reads") do |v|
+      options[:short] = true
     end
 
     #opts.on("-o", "--out_file [OUT_FILE]",
@@ -135,7 +139,7 @@ def check_if_results_exist(stats_path)
   !File.zero?("#{stats_path}/comp_res.txt") #&& File.exist?("#{stats_path}/junctions_stats.txt") && !File.zero?("#{stats_path}/junctions_stats.txt")
 end
 
-def get_truth_files(options, source_of_tree, dataset)
+def get_truth_files(options, source_of_tree, dataset, mode = default)
   cmd = "find #{source_of_tree}/jobs/settings/ -name \"*#{options[:species]}*#{dataset}*\""
   $logger.debug(cmd)
   l = `#{cmd}`
@@ -151,6 +155,7 @@ def get_truth_files(options, source_of_tree, dataset)
       dir = fields[1]
     when "CIG_FILE"
       options[:cig_file] = "#{dir}/#{fields[1]}"
+      options[:cig_file] = "#{dir}/#{fields[1]}_short" if mode == "short"
     when "TRANSCRIPTS"
       options[:transcripts] = "#{dir}/#{fields[1]}"
     when "JUNCTIONS_CROSSED"
@@ -990,7 +995,11 @@ def run(argv)
     algorithms = [options[:algorithm]]
   end
 
-  get_truth_files(options, source_of_tree, dataset)
+  if options[:short]
+    get_truth_files(options, source_of_tree, dataset, "short")
+  else
+    get_truth_files(options, source_of_tree, dataset)
+  end
 
   $logger.debug("Algorithms = #{algorithms}")
   options[:jobs] = []
