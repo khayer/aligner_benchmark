@@ -627,7 +627,7 @@ def run_olego(options, source_of_tree, dataset)
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/olego.sh"))
   Dir.glob("#{l}/*").each do |p|
     if File.directory? p
-      next unless File.exist?("#{p}/output.#{p.split("/")[-1]}.sam")
+      next unless File.exist?("#{p}/output.#{p.split("/")[-1]}.sam") || File.exist?("#{p}/output.sam")
       k = `ln -s #{p}/output.#{p.split("/")[-1]}.sam #{p}/output.sam`
       $logger.debug(p)
       options[:stats_path] = "#{options[:out_directory]}/olego/#{p.split("/")[-1]}".gsub(/[()]/,"")
