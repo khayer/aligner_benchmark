@@ -737,31 +737,56 @@ def run_rum(options, source_of_tree, dataset)
   end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/rum.sh"))
-  return unless File.exist?("#{l}/RUM.sam")
-  options[:stats_path] = "#{options[:out_directory]}/rum/"
-  begin
-    Dir.mkdir(options[:stats_path])
-  rescue SystemCallError
-    if Dir.exist?(options[:stats_path])
-      logger.warn("Directory #{options[:stats_path]} exists!")
+  #return unless File.exist?("#{l}/RUM.sam")
+  #options[:stats_path] = "#{options[:out_directory]}/rum/"
+  Dir.glob("#{l}/*").each do |p|
+    if File.directory? p
+      next unless File.exist?("#{p}/RUM.sam")
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/rum/#{p.split("/")[-1]}".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exist?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for details.")
+        end
+      end
+      options[:tool_result_path] = p
+      shell_file = "#{options[:jobs_path]}/rum_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
     else
-      logger.error("Can't create directory #{options[:stats_path]}!")
-      raise("Trouble creating directory, log for details.")
+      next unless p =~ /RUM\.sam$/
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/rum/".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exist?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for details.")
+        end
+      end
+      options[:tool_result_path] = p.gsub(/RUM\.sam$/,"")
+      shell_file = "#{options[:jobs_path]}/rum_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
+
+    next if check_if_results_exist(options[:stats_path])
+    clean_files(options[:stats_path])
+
+    o = File.open(shell_file,"w")
+    o.puts(erubis.evaluate(options))
+    o.close()
+    Dir.chdir "#{options[:jobs_path]}"
+    $logger.debug(Dir.pwd)
+    cmd = "bsub < #{shell_file}"
+    jobnumber = submit(cmd,options)
+    options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
   end
 
-  return if check_if_results_exist(options[:stats_path])
-  clean_files(options[:stats_path])
-  options[:tool_result_path] = l
-  shell_file = "#{options[:jobs_path]}/rum_statistics_#{options[:species]}_#{dataset}.sh"
-  o = File.open(shell_file,"w")
-  o.puts(erubis.evaluate(options))
-  o.close()
-  Dir.chdir "#{options[:jobs_path]}"
-  $logger.debug(Dir.pwd)
-  cmd = "bsub < #{shell_file}"
-  jobnumber = submit(cmd,options)
-  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
   $logger.debug(options[:jobs])
 end
 
@@ -816,36 +841,70 @@ def run_soapsplice(options, source_of_tree, dataset)
   end
   l = l[0]
   erubis = Erubis::Eruby.new(File.read("#{options[:aligner_benchmark]}/templates/soapsplice.sh"))
-  return unless File.exist?("#{l}/ucsc.hg19.sam") || File.exist?("#{l}/pfal.sam")
-  if File.exist?("#{l}/ucsc.hg19.sam")
-    k = `ln -s #{l}/ucsc.hg19.sam #{l}/output.sam`
-  else
-    k = `ln -s #{l}/pfal.sam #{l}/output.sam`
-  end
-  options[:stats_path] = "#{options[:out_directory]}/soapsplice/"
-  begin
-    Dir.mkdir(options[:stats_path])
-  rescue SystemCallError
-    if Dir.exist?(options[:stats_path])
-      logger.warn("Directory #{options[:stats_path]} exists!")
+  Dir.glob("#{l}/*").each do |p|
+    if File.directory? p
+      #next unless File.exist?("#{p}/RUM.sam")
+      return unless File.exist?("#{p}/ucsc.hg19.sam") || File.exist?("#{p}/pfal.sam")
+      if File.exist?("#{p}/ucsc.hg19.sam")
+        k = `ln -s #{p}/ucsc.hg19.sam #{p}/output.sam`
+      else
+        k = `ln -s #{p}/pfal.sam #{p}/output.sam`
+      end
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/soapsplice/#{p.split("/")[-1]}".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exist?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for details.")
+        end
+      end
+      options[:tool_result_path] = p
+      shell_file = "#{options[:jobs_path]}/soapsplice_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
     else
-      logger.error("Can't create directory #{options[:stats_path]}!")
-      raise("Trouble creating directory, log for details.")
+      next unless p =~ /ucsc\.hg19\.sam$/ || p =~ /pfal\.sam$/
+      if p =~ /ucsc\.hg19\.sam$/
+        k = `ln -s #{p} #{p.gsub(/ucsc\.hg19\.sam$/,"output.sam")}`
+      else
+        k = `ln -s #{p} #{p.gsub(/pfal\.sam$/,"output.sam")}`
+      end
+      $logger.debug(p)
+      options[:stats_path] = "#{options[:out_directory]}/soapsplice/".gsub(/[()]/,"")
+      begin
+        Dir.mkdir(options[:stats_path])
+      rescue SystemCallError
+        if Dir.exist?(options[:stats_path])
+          logger.warn("Directory #{options[:stats_path]} exists!")
+        else
+          logger.error("Can't create directory #{options[:stats_path]}!")
+          raise("Trouble creating directory, log for details.")
+        end
+      end
+      if File.exist?("#{p}/ucsc.hg19.sam")
+        options[:tool_result_path] = p.gsub(/ucsc\.hg19\.sam$/,"")
+      else
+        options[:tool_result_path] = p.gsub(/pfal\.sam$/,"")
+      end
+      shell_file = "#{options[:jobs_path]}/soapsplice_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
-  end
 
-  return if check_if_results_exist(options[:stats_path])
-  clean_files(options[:stats_path])
-  options[:tool_result_path] = l
-  shell_file = "#{options[:jobs_path]}/soapsplice_statistics_#{options[:species]}_#{dataset}.sh"
-  o = File.open(shell_file,"w")
-  o.puts(erubis.evaluate(options))
-  o.close()
-  Dir.chdir "#{options[:jobs_path]}"
-  $logger.debug(Dir.pwd)
-  cmd = "bsub < #{shell_file}"
-  jobnumber = submit(cmd,options)
-  options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+    next if check_if_results_exist(options[:stats_path])
+    clean_files(options[:stats_path])
+
+    o = File.open(shell_file,"w")
+    o.puts(erubis.evaluate(options))
+    o.close()
+    Dir.chdir "#{options[:jobs_path]}"
+    $logger.debug(Dir.pwd)
+    cmd = "bsub < #{shell_file}"
+    jobnumber = submit(cmd,options)
+    options[:jobs] << Job.new(jobnumber, cmd, "PEND",Dir.pwd)
+  end
+  #####
+
   $logger.debug(options[:jobs])
 end
 
