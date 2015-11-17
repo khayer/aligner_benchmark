@@ -509,7 +509,7 @@ def files_valid?(truth_cig,sam_file,options)
   l.chomp!
   l =~ /seq.(\d+)/
   last_sam = $1
-  unless last_sam == last_truth && first_sam == first_truth
+  unless last_sam == last_truth && first_sam == first_truth && last_sam &&  first_sam
     $logger.error("Sam file and cig file don't start and end in the same sequence!")
     $logger.debug("last_sam #{last_sam}, last_truth #{last_truth}")
     $logger.debug("first_sam #{first_sam}, first_truth #{first_truth}")
