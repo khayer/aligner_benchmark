@@ -41,7 +41,8 @@ def setup_options(args)
     :algorithm => "all", :transcripts => nil, :junctions_crossed => nil,
     :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
-    :species => "human", :debug => false, :short => false
+    :species => "human", :debug => false, :short => false,
+    :nummer => ""
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -67,6 +68,7 @@ def setup_options(args)
 
     opts.on("-t", "--short", "Only first 1 Million reads") do |v|
       options[:short] = true
+      options[:nummer] = "-n 1000000"
     end
 
     #opts.on("-o", "--out_file [OUT_FILE]",
