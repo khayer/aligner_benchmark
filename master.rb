@@ -154,7 +154,7 @@ def get_truth_files(options, source_of_tree, dataset, mode = "default")
     when "READS_PATH"
       dir = fields[1]
     when "CIG_FILE"
-      options[:cig_file] = "#{dir}/#{fields[1]}"
+      options[:cig_file] = "#{dir}/#{fields[1]}" if mode == "default"
       options[:cig_file] = "#{dir}/#{fields[1]}_short" if mode == "short"
     when "TRANSCRIPTS"
       options[:transcripts] = "#{dir}/#{fields[1]}"
