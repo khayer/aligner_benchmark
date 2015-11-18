@@ -787,7 +787,7 @@ def process(current_group, cig_group, stats,options)
       current_group.each do |s|
         s = s.split("\t")
         next unless l[0] == s[0]
-        if s[2] == "*"
+        if s[2] == "*" || s[5] == "*"
           stats.total_number_of_bases_unaligned += options[:read_length]
           stats.total_number_of_reads_unaligned += 1
         else
