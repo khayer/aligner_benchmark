@@ -1,7 +1,7 @@
 #!/bin/bash -e
-#BSUB -J star_stats              # LSF job name
-#BSUB -o star_stats.%J.out       # Name of the job output file
-#BSUB -e star_stats.%J.error     # Name of the job error file
+#BSUB -J star_stats<%= @run_name %>              # LSF job name
+#BSUB -o star_stats<%= @run_name %>.%J.out       # Name of the job output file
+#BSUB -e star_stats<%= @run_name %>.%J.error     # Name of the job error file
 
 cd <%= @stats_path %>
 

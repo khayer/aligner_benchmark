@@ -42,7 +42,8 @@ def setup_options(args)
     :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
     :species => "human", :debug => false, :short => false,
-    :nummer => ""
+    :nummer => "",
+    :run_name => ""
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -1071,6 +1072,7 @@ end
 def run(argv)
   options = setup_options(argv)
   run_name = argv[0]
+  options[:run_name] = "_#{run_name}"
   dataset = argv[1]
   source_of_tree = argv[2]
   options[:aligner_benchmark] = File.expand_path(File.dirname(__FILE__))
