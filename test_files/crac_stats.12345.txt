@@ -1,0 +1,51 @@
+Job <stats gtffq -n /home/hayer/itmat/benchmark_quantifiers/tools/benchmark_quantifiers/files/transcript_metrics_ENS.PD.txt -t result.gtf /project/itmatlab/for_katharina/greg_new/annotation/simulator_config_featurequantifications_mm9-ensembl-stdchr_ENS_PLD > stats_auto.txt> was submitted from host <node074.hpc.local> by user <hayer> in cluster <pennhpc>.
+Job was executed on host(s) <node022.hpc.local>, in queue <normal>, as user <hayer> in cluster <pennhpc>.
+</home/hayer> was used as the home directory.
+</home/hayer/itmat/benchmark_quantifiers/VC_ENSEMBL_PERFECT_LONG/ireckon/abinitio> was used as the working directory.
+Started at Wed Nov 18 11:05:36 2015
+Results reported on Wed Nov 18 12:38:09 2015
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+stats gtffq -n /home/hayer/itmat/benchmark_quantifiers/tools/benchmark_quantifiers/files/transcript_metrics_ENS.PD.txt -t result.gtf /project/itmatlab/for_katharina/greg_new/annotation/simulator_config_featurequantifications_mm9-ensembl-stdchr_ENS_PLD > stats_auto.txt
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   5539.78 sec.
+    Max Memory :                                 305 MB
+    Average Memory :                             185.78 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              3
+    Max Threads :                                5
+    Run time :                                   5552 sec.
+    Turnaround time :                            5554 sec.
+
+The output (if any) follows:
+
+I, [2015-11-18T11:05:37.499459 #31522]  INFO -- GTF: Creating index for result.gtf
+I, [2015-11-18T11:05:41.571160 #31522]  INFO -- GTF: Indexing of 59418 transcripts complete
+I, [2015-11-18T11:05:45.124083 #31522]  INFO -- FeatureQuantifications: Creating index for /project/itmatlab/for_katharina/greg_new/annotation/simulator_config_featurequantifications_mm9-ensembl-stdchr_ENS_PLD
+I, [2015-11-18T11:05:50.181902 #31522]  INFO -- FeatureQuantifications: Indexing of 58373 transcripts complete
+I, [2015-11-18T11:05:50.182150 #31522]  INFO -- FeatureQuantifications: Calculating M for /project/itmatlab/for_katharina/greg_new/annotation/simulator_config_featurequantifications_mm9-ensembl-stdchr_ENS_PLD
+I, [2015-11-18T11:05:52.605152 #31522]  INFO -- FeatureQuantifications: M is 2000.0
+I, [2015-11-18T11:06:08.184544 #31522]  INFO -- FeatureQuantifications: Searching for number of spliceforms for /project/itmatlab/for_katharina/greg_new/annotation/simulator_config_featurequantifications_mm9-ensembl-stdchr_ENS_PLD
+I, [2015-11-18T11:06:09.331641 #31522]  INFO -- FeatureQuantifications: Searching for number of spliceforms for /project/itmatlab/for_katharina/greg_new/annotation/simulator_config_featurequantifications_mm9-ensembl-stdchr_ENS_PLD complete!
+I, [2015-11-18T11:06:09.331741 #31522]  INFO -- FeatureQuantifications: determine_false_negatives for fq file!
+I, [2015-11-18T11:09:05.804207 #31522]  INFO -- FeatureQuantifications: determine_false_negatives for fq file completed!
+I, [2015-11-18T11:09:05.804503 #31522]  INFO -- CompareGenesFQGTF: statistics_fpkm FQGTF just started!
+I, [2015-11-18T11:30:20.766885 #31522]  INFO -- CompareGenesFQGTF: statistics_fpkm FQGTF just started!
+I, [2015-11-18T11:51:16.350234 #31522]  INFO -- CompareGenesFQGTF: Starting statistics now!
+I, [2015-11-18T12:21:04.082489 #31522]  INFO -- CompareGenesFQGTF: Statistics for strong true positives started!
+I, [2015-11-18T12:33:26.457562 #31522]  INFO -- CompareGenesFQGTF: Statistics for weak true positives started!
+I, [2015-11-18T12:36:31.108212 #31522]  INFO -- CompareGenesFQGTF: Statistics for false positives started!
+I, [2015-11-18T12:38:03.167309 #31522]  INFO -- CompareGenesFQGTF: Statistics for false negatives started!
+Could not find/open font when opening font "arial", using internal non-scalable font
+Could not find/open font when opening font "arial", using internal non-scalable font
+Could not find/open font when opening font "arial", using internal non-scalable font
+Could not find/open font when opening font "arial", using internal non-scalable font
