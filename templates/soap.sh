@@ -1,7 +1,7 @@
 #!/bin/bash -e
-#BSUB -J soap_stats              # LSF job name
-#BSUB -o soap_stats.%J.out       # Name of the job output file
-#BSUB -e soap_stats.%J.error     # Name of the job error file
+#BSUB -J soap_stats<%= @run_name %>              # LSF job name
+#BSUB -o soap_stats<%= @run_name %>.%J.out       # Name of the job output file
+#BSUB -e soap_stats<%= @run_name %>.%J.error     # Name of the job error file
 
 cd <%= @stats_path %>
 

@@ -1,7 +1,7 @@
 #!/bin/bash -e
-#BSUB -J clc_stats              # LSF job name
-#BSUB -o clc_stats.%J.out       # Name of the job output file
-#BSUB -e clc_stats.%J.error     # Name of the job error file
+#BSUB -J clc_stats<%= @run_name %>              # LSF job name
+#BSUB -o clc_stats<%= @run_name %>.%J.out       # Name of the job output file
+#BSUB -e clc_stats<%= @run_name %>.%J.error     # Name of the job error file
 
 cd <%= @stats_path %>
 
