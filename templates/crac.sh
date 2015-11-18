@@ -1,7 +1,7 @@
 #!/bin/bash -e
-#BSUB -J crac_stats              # LSF job name
-#BSUB -o crac_stats.%J.out       # Name of the job output file
-#BSUB -e crac_stats.%J.error     # Name of the job error file
+#BSUB -J crac_stats<%= @run_name %>              # LSF job name
+#BSUB -o crac_stats<%= @run_name %>.%J.out       # Name of the job output file
+#BSUB -e crac_stats<%= @run_name %>.%J.error     # Name of the job error file
 
 cd <%= @stats_path %>
 

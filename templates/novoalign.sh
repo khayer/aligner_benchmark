@@ -1,7 +1,7 @@
 #!/bin/bash -e
-#BSUB -J novoalign_stats              # LSF job name
-#BSUB -o novoalign_stats.%J.out       # Name of the job output file
-#BSUB -e novoalign_stats.%J.error     # Name of the job error file
+#BSUB -J novoalign_stats<%= @run_name %>              # LSF job name
+#BSUB -o novoalign_stats<%= @run_name %>.%J.out       # Name of the job output file
+#BSUB -e novoalign_stats<%= @run_name %>.%J.error     # Name of the job error file
 
 cd <%= @stats_path %>
 

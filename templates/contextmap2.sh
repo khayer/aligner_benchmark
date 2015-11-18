@@ -1,7 +1,7 @@
 #!/bin/bash -e
-#BSUB -J contextmap2_stats              # LSF job name
-#BSUB -o contextmap2_stats.%J.out       # Name of the job output file
-#BSUB -e contextmap2_stats.%J.error     # Name of the job error file
+#BSUB -J contextmap2_stats<%= @run_name %>              # LSF job name
+#BSUB -o contextmap2_stats<%= @run_name %>.%J.out       # Name of the job output file
+#BSUB -e contextmap2_stats<%= @run_name %>.%J.error     # Name of the job error file
 
 cd <%= @stats_path %>
 
