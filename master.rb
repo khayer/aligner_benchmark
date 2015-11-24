@@ -948,9 +948,9 @@ def run_subread(options, source_of_tree, dataset)
     if File.directory? p
       next unless File.exist?("#{p}/ucsc.hg19") || File.exist?("#{p}/pfal")
       if File.exist?("#{p}/ucsc.hg19")
-        k = `ln -s #{p}/ucsc.hg19 #{p}/output.sam`
+        k = `samtools view #{p}/ucsc.hg19 > #{p}/output.sam`
       else
-        k = `ln -s #{p}/pfal #{p}/output.sam`
+        k = `samtools view #{p}/pfal > #{p}/output.sam`
       end
       options[:stats_path] = "#{options[:out_directory]}/subread/#{p.split("/")[-1]}".gsub(/[()]/,"")
       begin
