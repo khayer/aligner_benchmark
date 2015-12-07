@@ -145,7 +145,8 @@ def read_files(argv)
       line.chomp!
       if line =~ /^Aligner/
         fields = line.split("\t")
-        fields[1...-1].each_with_index do |f, i|
+        fields[1..-1].each_with_index do |f, i|
+          #STDERR.puts f
           f.sub!(/#{species}_#{dataset}#{replicate}/,"")
           current_run.algorithms << f
           current_mapping[f] = i+1
@@ -240,8 +241,9 @@ def read_files(argv)
         end
       end
     end
-    STDERR.puts current_mapping
+
     all << current_run
+    STDERR.puts current_mapping
   end
   all
 end
@@ -298,13 +300,69 @@ def print_all(all)
  puts result
 end
 
+def print_all2(all)
+  #precision
+  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\tannotation\n"
+  all.each do |e|
+    e.levels.each_pair do |level, measurement|
+      measurement.each_pair do |m, values|
+        values.each_with_index do |v,i|
+          name = e.algorithms.to_a[i]
+          anno = false
+          if name =~ /anno$/
+            anno = true
+            name = name.sub(/anno$/,"")
+          end
+          if e.algorithms.to_a[i] =~ /^tophat2/
+            if name == "tophat2nocoveragesearch-bowtie2sensitive"
+              name = "tophat2"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /^star/
+            if name == "star"
+              name = "star"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /^olego/
+            if e.algorithms.to_a[i] == "olego-twopass"
+              name = "olego"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /^crac/
+            if name == "crac-noambiguity"
+              name = "crac"
+            else
+              next
+            end
+          end
+          if e.algorithms.to_a[i] =~ /clc/
+            if name == "clc"
+              name = "clc"
+            else
+              next
+            end
+          end
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{anno}\n"
+        end
+      end
+    end
+  end
+ puts result
+end
 
 def run(argv)
   options = setup_options(argv)
   $logger.debug(options)
   $logger.debug(argv)
   all = read_files(argv)
-  print_all(all)
+  #print_all(all)
+  print_all2(all)
   #puts options[:cut_off]
   $logger.info("All done!")
 end
