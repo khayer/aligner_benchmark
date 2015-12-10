@@ -131,7 +131,7 @@ def read_files(argv)
   all = []
   #names = ["Aligner"]
   argv[0..-1].each do |arg|
-    arg =~ /\/([a-z]*)_(t\d)(r\d).txt_final/
+    arg =~ /\/([a-z]*)_(t\d)(r\d).txt/
     species = $1
     dataset = $2
     replicate = $3
@@ -287,69 +287,13 @@ def print_all(all)
             end
           end
           if e.algorithms.to_a[i] =~ /clc/
-            if e.algorithms.to_a[i] == "clcsimulated_reads_HG19t3r1-10multihits"
+            if e.algorithms.to_a[i] =~ /^clcsimulated_reads_.*t.*r.*-10multihits$/
               name = "clc"
             else
               next
             end
           end
           result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\n"
-        end
-      end
-    end
-  end
- puts result
-end
-
-def print_all2(all)
-  #precision
-  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\tannotation\n"
-  all.each do |e|
-    e.levels.each_pair do |level, measurement|
-      measurement.each_pair do |m, values|
-        values.each_with_index do |v,i|
-          name = e.algorithms.to_a[i]
-          anno = false
-          if name =~ /anno$/
-            anno = true
-            name = name.sub(/anno$/,"")
-          end
-          if e.algorithms.to_a[i] =~ /^tophat2/
-            if name == "tophat2nocoveragesearch-bowtie2sensitive"
-              name = "tophat2"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /^star/
-            if name == "star"
-              name = "star"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /^olego/
-            if e.algorithms.to_a[i] == "olego-twopass"
-              name = "olego"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /^crac/
-            if name == "crac-noambiguity"
-              name = "crac"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /clc/
-            if name == "clc"
-              name = "clc"
-            else
-              next
-            end
-          end
-          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{anno}\n"
         end
       end
     end

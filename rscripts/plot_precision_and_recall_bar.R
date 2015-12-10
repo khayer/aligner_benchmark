@@ -4,7 +4,7 @@ setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','character',
           'numeric','character')
-d = read.csv("../test_file", head =T,sep = "\t", colClasses = cols)
+d = read.csv("/Users/hayer/Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
 
 d$mean = rep(0,dim(d)[1])
 d$sd = rep(0,dim(d)[1])
@@ -15,9 +15,6 @@ for (i in 1:dim(d)[1]) {
   d$mean[i] = mean(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value)
   d$sd[i] = sd(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value) 
 }
-
-
-
 
 plot_my_data <- function(data, measurement, title, filename) {
   # data = k 
