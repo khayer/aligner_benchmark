@@ -159,7 +159,7 @@ def read_files(argv)
     jobnumber, species, dataset, replicate, algorithm, time,
     cpu_time, max_memory, average_memory,max_processes,max_threads,run_time,
     turnaround_time = nil
-    arg =~ /\/(\w*)-align_job.(\d+).out$/
+    arg =~ /\/(\w*)-align\S*_job.(\d+).out$/
     algorithm = $1
     jobnumber = $2
     $logger.debug(algorithm)
