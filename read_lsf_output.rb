@@ -11,7 +11,7 @@ require 'time'
 ###
 #
 # IN:
-# [hayer@consign aligner_benchmark]$ find */LOG-*-align -name "*align_job.*.out"
+# [hayer@consign aligner_benchmark]$ find */LOG-*-align-default -name "*align_job.*.out"
 #     contextmap2/LOG-contextmap2-align/contextmap2-align_job.118736.out
 #     contextmap2/LOG-contextmap2-align/contextmap2-align_job.118738.out
 #     contextmap2/LOG-contextmap2-align/contextmap2-align_job.118768.out
