@@ -1,0 +1,38 @@
+Sender: LSF System <lsfadmin@node133.hpc.local>
+Subject: Job 107702: <crac-align_job> in cluster <pennhpc> Done
+
+Job <crac-align_job> was submitted from host <consign.hpc.local> by user <baruzzog> in cluster <pennhpc>.
+Job was executed on host(s) <16*node133.hpc.local>, in queue <normal>, as user <baruzzog> in cluster <pennhpc>.
+</home/baruzzog> was used as the home directory.
+</home/baruzzog/itmat/aligner_benchmark/jobs/crac> was used as the working directory.
+Started at Fri Nov 13 18:31:06 2015
+Results reported on Fri Nov 13 18:52:20 2015
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+sh crac-align.sh 16 /project/itmatlab/aligner_benchmark/jobs/settings/dataset_human_hg19_t2r2.sh
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   19627.78 sec.
+    Max Memory :                                 11550 MB
+    Average Memory :                             11064.89 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              4
+    Max Threads :                                21
+    Run time :                                   1274 sec.
+    Turnaround time :                            1276 sec.
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <crac-align_job.107702.err> for stderr output of this job.
