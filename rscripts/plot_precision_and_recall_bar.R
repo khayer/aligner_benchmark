@@ -4,7 +4,7 @@ setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','character',
           'numeric','character')
-d = read.csv("/Users/hayer/Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
+d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
 
 d$mean = rep(0,dim(d)[1])
 d$sd = rep(0,dim(d)[1])
@@ -12,8 +12,8 @@ d$sd = rep(0,dim(d)[1])
 
 for (i in 1:dim(d)[1]) {
   #print(i)
-  d$mean[i] = mean(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value)
-  d$sd[i] = sd(d[d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value) 
+  d$mean[i] = mean(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value)
+  d$sd[i] = sd(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] & d$level == d$level[i],]$value) 
 }
 
 plot_my_data <- function(data, measurement, title, filename) {
@@ -24,12 +24,14 @@ plot_my_data <- function(data, measurement, title, filename) {
   print(head(data))
   print(data$tmp)
   ggplot(data,aes(x=algorithm, y=tmp, fill = algorithm)) + 
-    geom_bar(stat="identity",position="dodge",width = .9, colour="black") + 
+    geom_bar(stat="identity",position="dodge",width = .9, colour="black") +
+    #geom_text(aes(label = tmp), size = 3) +
     ggtitle(title) +
     xlab("Algorithm") + ylab(measurement) + ylim(c(-0.0001,1.0001)) +
     scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
     scale_fill_manual(values = data$color) +
+    
     guides(fill=FALSE) 
   ggsave(
     filename,
@@ -37,6 +39,7 @@ plot_my_data <- function(data, measurement, title, filename) {
     height = 6.75,
     dpi = 300
   )
+  #data$tmp <- NULL
 }
 
 
