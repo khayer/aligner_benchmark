@@ -13,8 +13,12 @@ d = d[d$algorithm != "soap",]
 
 for (i in 1:dim(d)[1]) {
   #print(i)
-  d$mean[i] = mean(log(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value))
-  d$sd[i] = sd(log(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value) )
+  d$mean[i] = mean(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value/ 3600 / 16 * 60)
+  d$sd[i] = sd(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value/ 3600 / 16 * 60) 
+  if (d$algorithm[i] == "novoalign" & d$measurement[i] %in% c("cpu_time","run_time","turnaround_time") ) {
+    d$mean[i] = d$mean[i] / 16
+    d$sd[i] = d$sd[i]  / 16
+  }
 }
 
 test = c(28372.81,19481.55,22020.3)
@@ -30,13 +34,15 @@ plot_my_data <- function(data, measurement, title, filename) {
   #data$tmp = data[,colnames(data) == measurement]
   print(head(data))
   #print(data$tmp)
-  ggplot(data,aes(x=algorithm, y=mean, fill = algorithm)) + 
-    geom_bar(stat="identity",position="dodge",width = .9, colour="black") +
+  limits_new <- aes(ymax = mean + sd, ymin=mean - sd)
+  ggplot(data, aes(fill=algorithm, y=mean, x=algorithm)) +
+    geom_bar(stat="identity",position="dodge",width = .9) +
+    geom_errorbar(limits_new, position="dodge", width=0.25) + 
     #geom_errorbar(sd, position="dodge", width=0.25)
     #geom_text(aes(label = tmp), size = 3) +
     ggtitle(title) +
-    xlab("Algorithm") + ylab(measurement) + ylim(c(-0.0001,1.0001)) +
-    scale_x_discrete(limits=data[order(data$measurement,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
+    xlab("Algorithm") + ylab(measurement) + #ylim(c(-0.0001,1.0001)) +
+    scale_x_discrete(limits=data[order(data$mean,decreasing = FALSE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
     scale_fill_manual(values = data$color) +
     
@@ -51,11 +57,75 @@ plot_my_data <- function(data, measurement, title, filename) {
 }
 
 
+#k = d[d$species == "human" & d$measurement == "cpu_time",]
+#k = k[k$dataset == "t3" & k$replicate == "r1",]
+#p <- ggplot(k, aes(fill=algorithm, y=mean, x=algorithm))
+#limits_new <- aes(ymax = mean + sd, ymin=mean - sd)
+#p + geom_bar(position="dodge", stat="identity") + geom_errorbar(limits_new, position="dodge", width=0.25) + #+ scale_y_log10() +
+#scale_x_discrete(limits=k[order(k$mean,decreasing = FALSE),]$algorithm) + scale_fill_manual(values = k$color)
+
+k = d[d$species == "human" & d$measurement == "run_time",]
+k = k[k$dataset == "t3" & k$replicate == "r1",]
+plot_my_data(k,"run time (in minutes)","human t3","run_time/human_t3_run_time.pdf")
 k = d[d$species == "human" & d$measurement == "cpu_time",]
 k = k[k$dataset == "t3" & k$replicate == "r1",]
-p <- ggplot(k, aes(fill=algorithm, y=mean, x=algorithm))
-limits_new <- aes(ymax = mean + sd, ymin=mean - sd)
-p + geom_bar(position="dodge", stat="identity") + geom_errorbar(limits_new, position="dodge", width=0.25) + #+ scale_y_log10() +
-scale_x_discrete(limits=k[order(k$mean,decreasing = FALSE),]$algorithm) + scale_fill_manual(values = k$color)
-plot_my_data(k,"cpu_time","human t3","run_time/human_t3_cpu_time.pdf")
-plot_my_data(k,"precision","human read level","read_level/human_t3_READ_precision.pdf")
+plot_my_data(k,"cpu time  (in minutes)","human t3","run_time/human_t3_cpu_time.pdf")
+k = d[d$species == "human" & d$measurement == "max_memory",]
+k = k[k$dataset == "t3" & k$replicate == "r1",]
+plot_my_data(k,"max memory (in MB)","human t3","run_time/human_t3_max_memory.pdf")
+
+
+k = d[d$species == "malaria" & d$measurement == "run_time",]
+k = k[k$dataset == "t3" & k$replicate == "r1",]
+plot_my_data(k,"run time (in minutes)","malaria t3","run_time/malaria_t3_run_time.pdf")
+k = d[d$species == "malaria" & d$measurement == "cpu_time",]
+k = k[k$dataset == "t3" & k$replicate == "r1",]
+plot_my_data(k,"cpu time  (in minutes)","malaria t3","run_time/malaria_t3_cpu_time.pdf")
+k = d[d$species == "malaria" & d$measurement == "max_memory",]
+k = k[k$dataset == "t3" & k$replicate == "r1",]
+plot_my_data(k,"max memory (in MB)","malaria t3","run_time/malaria_t3_max_memory.pdf")
+
+
+
+k = d[d$species == "human" & d$measurement == "run_time",]
+k = k[k$dataset == "t2" & k$replicate == "r1",]
+plot_my_data(k,"run time (in minutes)","human t2","run_time/human_t2_run_time.pdf")
+k = d[d$species == "human" & d$measurement == "cpu_time",]
+k = k[k$dataset == "t2" & k$replicate == "r1",]
+plot_my_data(k,"cpu time  (in minutes)","human t2","run_time/human_t2_cpu_time.pdf")
+k = d[d$species == "human" & d$measurement == "max_memory",]
+k = k[k$dataset == "t2" & k$replicate == "r1",]
+plot_my_data(k,"max memory (in MB)","human t2","run_time/human_t2_max_memory.pdf")
+
+
+k = d[d$species == "malaria" & d$measurement == "run_time",]
+k = k[k$dataset == "t2" & k$replicate == "r1",]
+plot_my_data(k,"run time (in minutes)","malaria t2","run_time/malaria_t2_run_time.pdf")
+k = d[d$species == "malaria" & d$measurement == "cpu_time",]
+k = k[k$dataset == "t2" & k$replicate == "r1",]
+plot_my_data(k,"cpu time (in minutes)","malaria t2","run_time/malaria_t2_cpu_time.pdf")
+k = d[d$species == "malaria" & d$measurement == "max_memory",]
+k = k[k$dataset == "t2" & k$replicate == "r1",]
+plot_my_data(k,"max memory (in MB)","malaria t2","run_time/malaria_t2_max_memory.pdf")
+
+
+k = d[d$species == "human" & d$measurement == "run_time",]
+k = k[k$dataset == "t1" & k$replicate == "r1",]
+plot_my_data(k,"run time (in minutes)","human t1","run_time/human_t1_run_time.pdf")
+k = d[d$species == "human" & d$measurement == "cpu_time",]
+k = k[k$dataset == "t1" & k$replicate == "r1",]
+plot_my_data(k,"cpu time (in minutes)","human t1","run_time/human_t1_cpu_time.pdf")
+k = d[d$species == "human" & d$measurement == "max_memory",]
+k = k[k$dataset == "t1" & k$replicate == "r1",]
+plot_my_data(k,"max memory (in MB)","human t1","run_time/human_t1_max_memory.pdf")
+
+
+k = d[d$species == "malaria" & d$measurement == "run_time",]
+k = k[k$dataset == "t1" & k$replicate == "r1",]
+plot_my_data(k,"run time (in minutes)","malaria t1","run_time/malaria_t1_run_time.pdf")
+k = d[d$species == "malaria" & d$measurement == "cpu_time",]
+k = k[k$dataset == "t1" & k$replicate == "r1",]
+plot_my_data(k,"cpu time (in minutes)","malaria t1","run_time/malaria_t1_cpu_time.pdf")
+k = d[d$species == "malaria" & d$measurement == "max_memory",]
+k = k[k$dataset == "t1" & k$replicate == "r1",]
+plot_my_data(k,"max memory (in MB)","malaria t1","run_time/malaria_t1_max_memory.pdf")
