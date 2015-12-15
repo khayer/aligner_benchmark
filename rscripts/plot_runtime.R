@@ -4,7 +4,7 @@ setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','numeric','character')
 #d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
-d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/summary_default_running_stats.txt", head =T,sep = "\t", colClasses = cols)
+d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/summary_default_running_stats_new.txt", head =T,sep = "\t", colClasses = cols)
 
 d$mean = rep(0,dim(d)[1])
 d$sd = rep(0,dim(d)[1])
@@ -13,8 +13,13 @@ d = d[d$algorithm != "soap",]
 
 for (i in 1:dim(d)[1]) {
   #print(i)
-  d$mean[i] = mean(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value/ 3600 / 16 * 60)
-  d$sd[i] = sd(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value/ 3600 / 16 * 60) 
+  if (d$measurement[i] %in% c("cpu_time","run_time","turnaround_time")) {
+    d$mean[i] = mean(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value/ 3600 / 16 * 60)
+    d$sd[i] = sd(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value/ 3600 / 16 * 60) 
+  } else {
+    d$mean[i] = mean(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value)
+    d$sd[i] = sd(d[d$species == d$species[i] & d$dataset == d$dataset[i] & d$algorithm == d$algorithm[i] & d$measurement == d$measurement[i] ,]$value) 
+  }
   if (d$algorithm[i] == "novoalign" & d$measurement[i] %in% c("cpu_time","run_time","turnaround_time") ) {
     d$mean[i] = d$mean[i] / 16
     d$sd[i] = d$sd[i]  / 16
