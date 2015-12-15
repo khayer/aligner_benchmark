@@ -33,8 +33,8 @@ plot_100_plot <- function(data,ylabs,titles,file) {
   ggplot(data, aes(x=annotation, y=value, fill=measurement, order = as.numeric(measurement))) + 
     geom_bar(stat="identity",width= .85) + 
     theme_gray(base_size=10) +#theme_light()+
-    facet_grid(. ~ algorithm) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
+    facet_grid(. ~ algorithm) +
     scale_y_continuous(limits=c(0.0,1),oob = rescale_none) + 
     ylab(ylabs) +  ggtitle(titles) +
     #scale_x_discrete(limits=data[order(data[data$measurement == "aligned correctly",]$value,decreasing = TRUE),]$algorithm) +
