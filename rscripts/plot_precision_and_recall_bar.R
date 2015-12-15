@@ -199,7 +199,7 @@ l$"aligned correctly" = 1-l$"aligned ambiguously"-l$unaligned-l$"aligned incorre
 
 gat = gather(l,measurement,mean, -species, -dataset, -replicate, -level, -algorithm, -color)
 #cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-cbPalette <- c("#009E73", "#E69F00", "#CE3700", "#999999", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbPalette <- c("#009E73", "#E69F00", "#CE3700", "#C0C0C0", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 gat = gat[gat$measurement %in% c("aligned incorrectly","aligned ambiguously","unaligned","aligned correctly") ,]
 
 gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
