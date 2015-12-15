@@ -57,7 +57,8 @@ def setup_options(args)
     :algorithm => "all", :transcripts => nil, :junctions_crossed => nil,
     :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
-    :species => "human", :debug => false
+    :species => "human", :debug => false, :tuned => false, :default => true,
+    :annotation => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -86,10 +87,22 @@ def setup_options(args)
     #  options[:out_file] = anno_file
     #end
 
-    opts.on("-s", "--species [String]",
-      :REQUIRED,String,
-      "Spiecies, Default: human") do |s|
-      options[:species] = s
+    #opts.on("-s", "--species [String]",
+    #  :REQUIRED,String,
+    #  "Spiecies, Default: human") do |s|
+    #  options[:species] = s
+    #end
+
+    opts.on("-t", "--tuned", "Run in tuned vs default mode") do |t|
+      options[:tuned] = true
+      options[:annotation] = false
+      options[:default] = false
+    end
+
+    opts.on("-a", "--annotation", "Run in annotation vs no-annotation mode") do |t|
+      options[:tuned] = false
+      options[:annotation] = true
+      options[:default] = false
     end
 
     opts.on("-v", "--verbose", "Run verbosely") do |v|
@@ -131,7 +144,7 @@ def read_files(argv)
   all = []
   #names = ["Aligner"]
   argv[0..-1].each do |arg|
-    arg =~ /\/([a-z]*)_(t\d)(r\d).txt_final/
+    arg =~ /\/([a-z]*)_(t\d)(r\d).txt/
     species = $1
     dataset = $2
     replicate = $3
@@ -148,7 +161,7 @@ def read_files(argv)
         fields = line.split("\t")
         fields[1..-1].each_with_index do |f, i|
           #STDERR.puts f
-          f.sub!(/#{species}_#{dataset}#{replicate}/,"")
+          f.sub!(/#{species}_#{dataset}#{replicate}/," ")
           current_run.algorithms << f
           current_mapping[f] = i+1
         end
@@ -249,8 +262,7 @@ def read_files(argv)
   all
 end
 
-
-def print_all(all)
+def print_all_default(all)
   #precision
   result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\n"
   all.each do |e|
@@ -287,7 +299,7 @@ def print_all(all)
             end
           end
           if e.algorithms.to_a[i] =~ /clc/
-            if e.algorithms.to_a[i] == "clcsimulated_reads_HG19t3r1-10multihits"
+            if e.algorithms.to_a[i] =~ /^clcsimulated_reads_.*t.*r.*-10multihits$/
               name = "clc"
             else
               next
@@ -301,7 +313,7 @@ def print_all(all)
  puts result
 end
 
-def print_all2(all)
+def print_all_annotation(all)
   #precision
   result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\tannotation\n"
   all.each do |e|
@@ -357,12 +369,77 @@ def print_all2(all)
  puts result
 end
 
+# FOR DEFAUlT VS TUNED
+def print_all_tuned(all)
+  #precision
+  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\ttuned\n"
+  all.each do |e|
+    e.levels.each_pair do |level, measurement|
+      measurement.each_pair do |m, values|
+        values.each_with_index do |v,i|
+          name = e.algorithms.to_a[i]
+          tuned = false
+          if name =~ /tuned$/
+            tuned = true
+            #name = name.sub(/tuned$/,"")
+          end
+          #if e.algorithms.to_a[i] =~ /^tophat2/
+          #  if name == "tophat2nocoveragesearch-bowtie2sensitive"
+          #    name = "tophat2"
+          #  else
+          #    next
+          #  end
+          #end
+          #if e.algorithms.to_a[i] =~ /^star/
+          #  if name == "star"
+          #    name = "star"
+          #  else
+          #    next
+          #  end
+          #end
+          #if e.algorithms.to_a[i] =~ /^olego/
+          #  if e.algorithms.to_a[i] == "olego-twopass"
+          #    name = "olego"
+          #  else
+          #    next
+          #  end
+          #end
+          #if e.algorithms.to_a[i] =~ /^crac/
+          #  if name == "crac-noambiguity"
+          #    name = "crac"
+          #  else
+          #    next
+          #  end
+          #end
+          #if e.algorithms.to_a[i] =~ /clc/
+          #  if name == "clc"
+          #    name = "clc"
+          #  else
+          #    next
+          #  end
+          #end
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{tuned}\n"
+        end
+      end
+    end
+  end
+ puts result
+end
+
 def run(argv)
   options = setup_options(argv)
   $logger.debug(options)
   $logger.debug(argv)
   all = read_files(argv)
-  print_all(all)
+  case
+  when options[:default]
+    print_all_default(all)
+  when options[:annotation]
+    print_all_annotation(all)
+  when options[:tuned]
+    print_all_tuned(all)
+  end
+
   #print_all2(all)
   #puts options[:cut_off]
   $logger.info("All done!")
@@ -371,67 +448,3 @@ end
 if __FILE__ == $0
   run(ARGV)
 end
-
-
-=begin
-all = []
-names = ["Aligner"]
-count = 0
-borders = []
-first = true
-ARGV[0..-1].each do |arg|
-  info = []
-  info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
-  File.open(arg).each do |line|
-    line.chomp!
-    if line =~ /^------/
-      borders << count
-      next
-    end
-    count += 1
-    fields = line.split("\t")
-    if line =~ /exist in true data/
-      info << "NA"
-      info << "NA"
-      names << fields[0] if first
-      names << fields[0].gsub(/FD/, "FN") if first
-      count += 1
-      next
-    end
-    if line =~ /^Junctions\ Sides/
-      names << fields[0].split(/[\(\)]/)[1].split("|").map { |e| e = "Junction Sides #{e}" } if first
-      info << fields[-1].split("|")
-      count += 4
-      next
-    end
-    info << fields[-1]
-    names << fields[0] if first
-  end
-  first = false
-  all << info.flatten
-end
-
-names.flatten!
-#info.flatten!
-
-#puts "aligner\ttotal_number_of_bases_of_reads\taccuracy over all bases\taccuracy over uniquely aligned bases"
-
-names.each_with_index do |name, j|
-  print "#{name}\t"
-
-  res = []
-  for i in 0...ARGV.length
-    res << all[i][j]
-  end
-  print res.join("\t")
-  print "\n"
-  case j
-  when borders[0]
-    puts "---------------- READ LEVEL ---------------------"
-  when borders[1]
-    puts "---------------- BASE LEVEL ---------------------"
-  when borders[2]
-    puts "---------------- JUNC LEVEL ---------------------"
-  end
-end
-=end
