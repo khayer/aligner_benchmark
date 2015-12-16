@@ -3,8 +3,8 @@ library(tidyr)
 setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','numeric','character')
-#d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
-d = read.csv("/Users/hayer/Downloads/test500.tsv", head =T,sep = "\t", colClasses = cols)
+d = read.csv("~/Google Drive/AlignerBenchmarkLocal/run_metrics.tsv", head =T,sep = "\t", colClasses = cols)
+#d = read.csv("/Users/hayer/Downloads/test500.tsv", head =T,sep = "\t", colClasses = cols)
 
 d$mean = rep(0,dim(d)[1])
 d$sd = rep(0,dim(d)[1])
