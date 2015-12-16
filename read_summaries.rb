@@ -144,7 +144,7 @@ def read_files(argv)
   all = []
   #names = ["Aligner"]
   argv[0..-1].each do |arg|
-    arg =~ /\/([a-z]*)_(t\d)(r\d).txt/
+    arg =~ /\/([a-z]*)_(t\d)(r\d).t\w{2}$/
     species = $1
     dataset = $2
     replicate = $3
@@ -324,43 +324,9 @@ def print_all_annotation(all)
           anno = false
           if name =~ /anno$/
             anno = true
-            name = name.sub(/anno$/,"")
+            #name = name.sub(/anno$/,"")
           end
-          if e.algorithms.to_a[i] =~ /^tophat2/
-            if name == "tophat2nocoveragesearch-bowtie2sensitive"
-              name = "tophat2"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /^star/
-            if name == "star"
-              name = "star"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /^olego/
-            if e.algorithms.to_a[i] == "olego-twopass"
-              name = "olego"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /^crac/
-            if name == "crac-noambiguity"
-              name = "crac"
-            else
-              next
-            end
-          end
-          if e.algorithms.to_a[i] =~ /clc/
-            if name == "clc"
-              name = "clc"
-            else
-              next
-            end
-          end
+          
           result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{anno}\n"
         end
       end
