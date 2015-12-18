@@ -162,6 +162,7 @@ def read_files(argv)
         fields[1..-1].each_with_index do |f, i|
           #STDERR.puts f
           f.sub!(/#{species}_#{dataset}#{replicate}/," ")
+
           current_run.algorithms << f
           current_mapping[f] = i+1
         end
@@ -326,7 +327,7 @@ def print_all_annotation(all)
             anno = true
             #name = name.sub(/anno$/,"")
           end
-          
+
           result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{anno}\n"
         end
       end
@@ -344,10 +345,11 @@ def print_all_tuned(all)
       measurement.each_pair do |m, values|
         values.each_with_index do |v,i|
           name = e.algorithms.to_a[i]
-          tuned = false
+          tuned = "default"
           if name =~ /tuned$/
-            tuned = true
-            #name = name.sub(/tuned$/,"")
+            name =~ /_?(FNR|FDR)?_(tuned$)/
+            tuned = "#{$1} #{$2}"
+            name = name.sub(/_?(FNR|FDR)?_(tuned$)/, "").strip
           end
           #if e.algorithms.to_a[i] =~ /^tophat2/
           #  if name == "tophat2nocoveragesearch-bowtie2sensitive"
