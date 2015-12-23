@@ -204,6 +204,16 @@ def fix_lines(lines,current_name)
 
 end
 
+def last_name_equal?(lines)
+  lines[0][0] =~ /(\d+)/
+  name1 = $1
+  lines[-1][0] =~ /(\d+)/
+  name2 = $1
+  $logger.debug(name1)
+  $logger.debug(name2)
+  name1 == name2
+end
+
 def run_all(arguments)
   $logger.info(arguments)
   options = setup_option(arguments)
@@ -281,7 +291,9 @@ def run_all(arguments)
     end
     #STDERR.puts current_name
     $logger.debug old_name
-    lines = lines[0...-1] #if !sam_file.eof?
+    lines = lines[0...-1] if (!last_name_equal?(lines))
+    lines[0][0] =~ /(\d+)/
+    written = $1
     $logger.debug "MUHAHAHA #{lines.join(":::")}"
     fix_lines(lines,old_name)
 
@@ -289,7 +301,7 @@ def run_all(arguments)
     #current_name = fields[0]
     #puts current_name
     #puts lines[-1]
-    old_name =~ /(\d+)/
+    old_name =~ fields
     old_num = $1.to_i + 1
     while !(num <= old_num)
       $logger.debug "adding #{old_num}"
@@ -300,7 +312,16 @@ def run_all(arguments)
       #STDERR.puts "OLD_NAME: #{old_name}"
       #STDIN.gets
     end
-    lines = [fields]
+    #if last_name_equal?(lines) && lines.length > 1
+    #  lines = []
+    #else
+    fields[0] =~ /(\d+)/
+    if $1 == written
+      lines = []
+    else
+      lines = [fields]
+    end
+    #end
     $logger.debug lines.join(":::")
   end
   fix_lines(lines,current_name) if lines.length > 0
