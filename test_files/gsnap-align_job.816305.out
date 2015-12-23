@@ -1,0 +1,40 @@
+Sender: LSF System <lsfadmin@node025.hpc.local>
+Subject: Job 816305: <gsnap-align_job> in cluster <pennhpc> Done
+
+Job <gsnap-align_job> was submitted from host <node060.hpc.local> by user <baruzzog> in cluster <pennhpc>.
+Job was executed on host(s) <16*node025.hpc.local>, in queue <normal>, as user <baruzzog> in cluster <pennhpc>.
+</home/baruzzog> was used as the home directory.
+</home/baruzzog/itmat/aligner_benchmark/jobs/gsnap> was used as the working directory.
+Started at Fri Oct  9 13:58:05 2015
+Results reported on Fri Oct  10 17:16:39 2015
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+sh gsnap-align.sh 16 /project/itmatlab/aligner_benchmark/jobs/settings/dataset_malaria_pfal_t3r2.sh
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   191181.00 sec.
+    Max Memory :                                 10712 MB
+    Average Memory :                             9369.31 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   2 MB
+    Max Processes :                              4
+    Max Threads :                                22
+    Run time :                                   11913 sec.
+    Turnaround time :                            11915 sec.
+
+The output (if any) follows:
+
+dataset_malaria_pfal_t3r2
+
+
+PS:
+
+Read file <gsnap-align_job.816301.err> for stderr output of this job.

@@ -325,7 +325,11 @@ skipping_sides: #{@skipping_sides.join(":")}}
       out += "junctions FN rate:\t#{skipping_false_negative_rate}%\n"
     end
     out += "Junctions Sides (none|left|right|both):\t#{@skipping_sides.join("|")}\n"
-    out += "Junctions Sides (none|left|right|both)% of all called:\t#{@skipping_sides.map { |e| "#{(((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}%"}.join("|")}\n"
+    if total_number_of_bases_called_skipped_binary > 0
+      out += "Junctions Sides (none|left|right|both)% of all called:\t#{@skipping_sides.map { |e| "#{(((e.to_f/total_number_of_bases_called_skipped_binary.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0}%"}.join("|")}\n"
+    else
+      out += "Junctions Sides (none|left|right|both)% of all called:\tNaN|NaN|NaN|NaN"
+    end
     out
   end
 
@@ -505,7 +509,7 @@ def files_valid?(truth_cig,sam_file,options)
   l.chomp!
   l =~ /seq.(\d+)/
   last_sam = $1
-  unless last_sam == last_truth && first_sam == first_truth
+  unless last_sam == last_truth && first_sam == first_truth && last_sam &&  first_sam
     $logger.error("Sam file and cig file don't start and end in the same sequence!")
     $logger.debug("last_sam #{last_sam}, last_truth #{last_truth}")
     $logger.debug("first_sam #{first_sam}, first_truth #{first_truth}")
@@ -783,7 +787,7 @@ def process(current_group, cig_group, stats,options)
       current_group.each do |s|
         s = s.split("\t")
         next unless l[0] == s[0]
-        if s[2] == "*"
+        if s[2] == "*" || s[5] == "*"
           stats.total_number_of_bases_unaligned += options[:read_length]
           stats.total_number_of_reads_unaligned += 1
         else
