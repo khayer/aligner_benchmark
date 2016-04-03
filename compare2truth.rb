@@ -751,6 +751,7 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
   # How many clippings?
   $logger.debug("CLIPPING")
   unaligned = compare_ranges(c_cig_mo.unaligned.flatten, s_sam_mo.unaligned.flatten)
+  $logger.debug(unaligned.join(",,,"))
   stats.total_number_of_bases_unaligned += unaligned[1]
   #stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
   #puts unaligned
