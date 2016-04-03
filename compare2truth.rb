@@ -228,7 +228,11 @@ skipping_sides: #{@skipping_sides.join(":")}}
     out += "accuracy over all bases:\t#{percent_bases_aligned_correctly}%\n"
     total_num_unique_aligners = @total_number_of_bases_aligned_correctly + @total_number_of_bases_aligned_incorrectly
     $logger.debug("total_num_unique_aligners=#{total_num_unique_aligners}")
-    accuracy_on_unique_aligners = (@total_number_of_bases_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
+    if total_num_unique_aligners == 0
+      accuracy_on_unique_aligners = 0
+    else
+      accuracy_on_unique_aligners = (@total_number_of_bases_aligned_correctly.to_f / total_num_unique_aligners.to_f * 10000).to_i / 100.0
+    end
     ##print "% unique aligners correct:\t$accuracy_on_unique_aligners%\n";
     out += "accuracy over uniquely aligned bases:\t#{accuracy_on_unique_aligners}%\n"
     percent_bases_aligned_incorrectly = (@total_number_of_bases_aligned_incorrectly.to_f / @total_number_of_bases_of_reads.to_f * 10000.0).to_i / 100.0
