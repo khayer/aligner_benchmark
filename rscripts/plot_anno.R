@@ -22,7 +22,10 @@ l  = spread(d[,c("level","algorithm","annotation","species","dataset",
 
 l$"aligned correctly" = 1-l$"aligned ambiguously"-l$unaligned-l$"aligned incorrectly"
 
-l$"aligned correctly"[l$"aligned correctly" == 1] = 0
+l$"aligned correctly"[l$"aligned correctly" == 1] = NA
+l$"aligned ambiguously"[is.na(l$"aligned correctly")] = NA
+l$unaligned[is.na(l$unaligned)] = NA
+l$"aligned incorrectly"[is.na(l$"aligned correctly")] = NA
 
 gat = gather(l,measurement,value,-level, -algorithm, -annotation, -species, -dataset)
 #cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
@@ -107,7 +110,8 @@ plot_recall <- function(data,ylabs,titles,file) {
     dpi = 300
   )
 }
-
+l$recall[l$recall == 1] = NA
+l$precision[l$precision == 1] = NA
 gat = gather(l,measurement,value,-level, -algorithm, -annotation, -species, -dataset)
 #cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 gat = gat[gat$measurement %in% c("recall","precision") ,]
