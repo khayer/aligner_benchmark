@@ -712,7 +712,9 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
   matches_misaligned = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
   stats.total_number_of_bases_aligned_correctly += matches_misaligned[0]
   stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
-
+  if matches_misaligned[0] != 100
+    stats.total_number_of_bases_unaligned += 100 - matches_misaligned[0]
+  end
   if matches_misaligned[0] > 0
     stats.total_number_of_reads_aligned_correctly += 1
   else
