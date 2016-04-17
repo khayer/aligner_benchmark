@@ -1,6 +1,7 @@
 library(ggplot2)
 library(tidyr)
-setwd("~/github/aligner_benchmark/rscripts")
+library(dplyr)
+setwd("~/github/aligner_benchmark/")
 
 #plot_100_plot <- function(data,ylabs,titles,file) {
 #  ggplot(data, aes(x=algorithm, y=value, fill=measurement, order = as.numeric(measurement))) + 
@@ -20,7 +21,7 @@ setwd("~/github/aligner_benchmark/rscripts")
 
 
 plot_100_plot <- function(data,ylabs,titles,file) {
-  ggplot(data, aes(x=tuned, y=value, fill=measurement, order = as.numeric(measurement))) + 
+  ggplot(arrange(data, measurement), aes(x=tuned, y=value, fill=measurement)) + 
     geom_bar(stat="identity",width= .9) + 
     theme_gray(base_size=10) +#theme_light()+
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
@@ -39,8 +40,14 @@ plot_100_plot <- function(data,ylabs,titles,file) {
 # READ_LEVEL
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 #d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
-d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/tweaked_vs_default/read_level_r_in.txt", head =T,sep = "\t", colClasses = cols)
-d$tuned = sub("true", "tuned", d$tuned)
+#d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/tweaked_vs_default/read_level_r_in.txt", head =T,sep = "\t", colClasses = cols)
+#d = read.csv("files_to_plot/human_tweaked_vs_default_read_level_r_in.txt", head =T,sep = "\t", colClasses = cols)
+d = read.csv("files_to_plot/human_tweaked_vs_default_base_level_r_in.txt", head =T,sep = "\t", colClasses = cols)
+# malaria
+# files_to_plot/malaria_tweaked_vs_default_base_level_r_in.txt
+d = read.csv("files_to_plot/malaria_tweaked_vs_default_base_level_r_in.txt", head =T,sep = "\t", colClasses = cols)
+d$tuned
+d$tuned = sub(" ", "tuned", d$tuned)
 d$tuned = sub("false", "default", d$tuned)
 d$algorithm = sub(" tuned", "", d$algorithm)
 
@@ -57,6 +64,7 @@ l$"aligned correctly" = 1-l$"aligned ambiguously"-l$unaligned-l$"aligned incorre
 gat = gather(l,measurement,value, -level, -algorithm,-tuned)
 #cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 cbPalette <- c("#009E73", "#E69F00", "#CE3700", "#C0C0C0", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+#gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
 gat = gat[gat$measurement %in% c("aligned incorrectly","aligned ambiguously","unaligned","aligned correctly") ,]
 
 gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
@@ -65,10 +73,14 @@ gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligne
 
 
 r = gat[gat$level == "READ",]
-plot_100_plot(r,"percent of total reads","Effect of tuning - malaria t3 read level","default_vs_tuned/malaria_t3_READ.pdf")
+r = gat[gat$level == "BASE",]
+#plot_100_plot(r,"percent of total reads","Effect of tuning - malaria t3 read level","default_vs_tuned/malaria_t3_READ.pdf")
+#plot_100_plot(r,"percent of total reads","Effect of tuning - human t3 read level","rscripts/default_vs_tuned/human_t3_READ.pdf")
+#plot_100_plot(r,"percent of total reads","Effect of tuning - human t3 base level","rscripts/default_vs_tuned/human_t3_BASE.pdf")
+plot_100_plot(r,"percent of total reads","Effect of tuning - malaria t3 base level","rscripts/default_vs_tuned/malaria_t3_BASE.pdf")
 
 
-
+#r$measurement
 # BASE_LEVEL
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 #d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
@@ -229,4 +241,4 @@ gat = gat[gat$measurement %in% c("recall","precision") ,]
 
 
 r = gat[ gat$level == "JUNC" ,]
-plot_recall(r,"","Effect of tuning - human t3 junction level","default_vs_tuned/human_t3_JUNC.pdf")
+plot_recall(r,"","Effect of tuning - human t3 junction level","rscripts/default_vs_tuned/human_t3_JUNC.pdf")
