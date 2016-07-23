@@ -144,8 +144,8 @@ def fix_cigar(fields, read_length)
       num += cig_cigar_nums[i]
     end
   end
-  puts read_length
-  puts num
+  #puts read_length
+  #puts num
   if num == read_length
     return fields
   else 
