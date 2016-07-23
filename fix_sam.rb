@@ -135,6 +135,7 @@ def check_hi_tag(fields)
 end
 
 def fix_cigar(fields, read_length)
+  return fields if fields[5] == "*"
   cig_cigar_nums = fields[5].split(/\D/).map { |e|  e.to_i }
   cig_cigar_letters = fields[5].split(/\d+/).reject { |c| c.empty? }
   num = 0
