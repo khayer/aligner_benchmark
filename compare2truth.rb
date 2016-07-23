@@ -48,7 +48,7 @@ def setup_options(args)
     opts.separator "seq.1a  chr10 123502684 123502783 100M  123502684-123502783 - CTTAAGTATGGGGAAGGTAGAAAGTTCATTTCATTACTTATAAAATATGTCTTCTCAAGAACAAAACTGTGCTGTTACAACTCAGTGTTCAATGTGAAAT"
     opts.separator "seq.1b  chr10 123502530 123502629 100M  123502530-123502629 + AGGGAGTACTATATTCTAGGGGAAAAAACTATGCCAAGACAACAGACATGAACAGGACTGTCCTGAACAAATGGATTCCTGATGCTAACACAAGCTCCAT"
     opts.separator ""
-    opts.separator "sprted.sam:"
+    opts.separator "sorted.sam:"
     opts.separator "seq.1a  83  chr10 123502684 255 100M  = 123502530 -254  ATTTCACATTGAACACTGAGTTGTAACAGCACAGTTTTGTTCTTGAGAAGACATATTTTATAAGTAATGAAATGAACTTTCTACCTTCCCCATACTTAAG  * NH:i:1  HI:i:1  AS:i:192  nM:i:3"
     opts.separator "seq.1b  163 chr10 123502530 255 100M  = 123502684 254 AGGGAGTACTATATTCTAGGGGAAAAAACTATGCCAAGACAACAGACATGAACAGGACTGTCCTGAACAAATGGATTCCTGATGCTAACACAAGCTCCAT  * NH:i:1  HI:i:1  AS:i:192  nM:i:3"
     opts.separator ""
@@ -793,6 +793,7 @@ def process(current_group, cig_group, stats,options)
     end
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
+      ##### HERE MULTIMAPPER ROUTINE!
       stats.total_number_of_bases_aligned_ambiguously += options[:read_length]
       stats.total_number_of_reads_aligned_ambiguously += 1
     else

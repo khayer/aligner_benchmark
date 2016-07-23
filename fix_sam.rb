@@ -8,6 +8,8 @@
 # 4) NH and IH tag signalizing multi-mappers
 #
 ####
+
+#### TODO: Add S to soaplice to make sure there is enough bases
 require 'optparse'
 require "erubis"
 require 'logger'
@@ -35,7 +37,9 @@ def setup_option(args)
   options = {
     :loglevel => "error",
     :debug => false,
-    :nummer => 10000000
+    :nummer => 10000000,
+    :fill => true,
+    :read_length => 100
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -68,6 +72,17 @@ def setup_option(args)
       options[:nummer] = s
     end
 
+    opts.on("-r", "--read_length [INT]",
+      :REQUIRED,Integer,
+      "length of the reads, DEFAULT: 100") do |s|
+      options[:read_length] = s
+    end
+
+    opts.on("-f", "--dont_fill_in",
+      "fill in emty lines? Default true") do |s|
+      options[:fill] = false
+    end
+
     opts.on("-v", "--verbose", "Run verbosely") do |v|
       options[:log_level] = "info"
     end
@@ -91,6 +106,7 @@ def get_name(field_0)
 end
 
 def add_empty_lines(current_name)
+
   puts "seq.#{current_name}a\t77\t*\t0\t255\t*\t*\t0\t0\tNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\t."
   puts "seq.#{current_name}b\t141\t*\t0\t255\t*\t*\t0\t0\tNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN\t."
 end
@@ -116,6 +132,26 @@ def check_hi_tag(fields)
     end
   end
   fields << ih
+end
+
+def fix_cigar(fields, read_length)
+  cig_cigar_nums = fields[5].split(/\D/).map { |e|  e.to_i }
+  cig_cigar_letters = fields[5].split(/\d+/).reject { |c| c.empty? }
+  num = 0
+  cig_cigar_letters.each_with_index do |letter,i|
+    case letter
+    when "M" || "D" || "S" || "H"
+      num += cig_cigar_nums[i]
+    end
+  end
+  puts read_length
+  puts num
+  if num == read_length
+    return fields
+  else 
+    fields[5] += "#{read_length-num}S"
+    return fields
+  end
 end
 
 def rep_line(lines1, lines2)
@@ -147,7 +183,7 @@ def rep_line(lines1, lines2)
   new_line1
 end
 
-def fix_lines(lines,current_name)
+def fix_lines(lines,current_name,options)
   #number_of_hits = lines.length/2+1
   #STDERR.puts number_of_hits
   i = 0
@@ -163,6 +199,7 @@ def fix_lines(lines,current_name)
   lines.each do |line|
     l = fix_ab(line,current_name)
     #second = fix_ab(lines[i*2+1],current_name)
+    line = fix_cigar(line, options[:read_length])
     if l[0] =~ /a$/
       if l[-1] == -1
         l[-1] = fwd_count
@@ -231,11 +268,12 @@ def run_all(arguments)
     line.chomp!
     fields = line.split("\t")
     fields = check_hi_tag(fields)
+    
     num_out = nil
     if lines.length != 0
       #Contextmap2 case
       if get_name(lines[0][0]) != get_name(fields[0])
-        fix_lines(lines,current_name)
+        fix_lines(lines,current_name,options)
         current_name =~ /(\d+)/
         num_out = $1.to_i
         current_name = ""
@@ -274,7 +312,7 @@ def run_all(arguments)
       k = 1
       first = false
       while k < old_num
-        add_empty_lines(k)
+        add_empty_lines(k) if options[:fill]
         k += 1
       end
     end
@@ -282,7 +320,7 @@ def run_all(arguments)
     $logger.debug "NUM_OUT #{num_out}"
     while old_num > num_out+1 #&& #(num > num_out+1)
       $logger.debug "ADDING #{num_out+1}"
-      add_empty_lines(num_out+1)
+      add_empty_lines(num_out+1) if options[:fill]
       #num_out = "seq.#{num_out+1}"
       num_out += 1
       #STDERR.puts "HERE: #{num}"
@@ -295,7 +333,7 @@ def run_all(arguments)
     lines[0][0] =~ /(\d+)/
     written = $1
     $logger.debug "MUHAHAHA #{lines.join(":::")}"
-    fix_lines(lines,old_name)
+    fix_lines(lines,old_name,options)
 
     first = false
     #current_name = fields[0]
@@ -305,7 +343,7 @@ def run_all(arguments)
     old_num = $1.to_i + 1
     while !(num <= old_num)
       $logger.debug "adding #{old_num}"
-      add_empty_lines(old_num)
+      add_empty_lines(old_num) if options[:fill]
       old_name = "seq.#{old_num+1}"
       old_num += 1
       #STDERR.puts "HERE: #{num}"
@@ -324,13 +362,13 @@ def run_all(arguments)
     #end
     $logger.debug lines.join(":::")
   end
-  fix_lines(lines,current_name) if lines.length > 0
+  fix_lines(lines,current_name,options) if lines.length > 0
   $logger.debug "could be empty #{lines.join(":::")}"
   current_name =~ /(\d+)/
   old_num = $1.to_i+1
   endnum ||= 10000000
   while !(endnum+1 <= old_num)
-    add_empty_lines(old_num)
+    add_empty_lines(old_num) if options[:fill]
     old_name = "seq.#{old_num+1}"
     old_num += 1
     #STDERR.puts "HERE: #{num}"
