@@ -917,7 +917,7 @@ def run_soapsplice(options, source_of_tree, dataset)
       else
         options[:tool_result_path] = p.gsub(/pfal\.sam$/,"")
       end
-      $logger.dubug("outpath is #{options[:tool_result_path]}")
+      $logger.debug("outpath is #{options[:tool_result_path]}")
       shell_file = "#{options[:jobs_path]}/soapsplice_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
 
