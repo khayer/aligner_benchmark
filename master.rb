@@ -912,7 +912,7 @@ def run_soapsplice(options, source_of_tree, dataset)
           raise("Trouble creating directory, log for details.")
         end
       end
-      if File.exist?("#{p}/ucsc.hg19.sam")
+      if p =~ /ucsc\.hg19\.sam$/
         options[:tool_result_path] = p.gsub(/ucsc\.hg19\.sam$/,"")
       else
         options[:tool_result_path] = p.gsub(/pfal\.sam$/,"")
