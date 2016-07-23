@@ -937,6 +937,7 @@ def run_soapsplice(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
+## comment
 def run_subread(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/subread/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
