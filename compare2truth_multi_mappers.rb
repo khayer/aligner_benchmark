@@ -107,6 +107,14 @@ class Stats
     @total_number_of_reads_aligned_ambiguously = 0
     @total_number_of_bases_unaligned = 0
     @total_number_of_reads_unaligned = 0
+    @total_number_of_bases_aligned_correctly_pair = 0
+    @total_number_of_reads_aligned_correctly_pair = 0
+    @total_number_of_bases_aligned_incorrectly_pair = 0
+    @total_number_of_reads_aligned_incorrectly_pair = 0
+    @total_number_of_bases_aligned_ambiguously_pair = 0
+    @total_number_of_reads_aligned_ambiguously_pair = 0
+    @total_number_of_bases_unaligned_pair = 0
+    @total_number_of_reads_unaligned_pair = 0
     @total_number_of_bases_in_true_insertions = 0
     @total_number_of_bases_in_true_deletions = 0
     @total_number_of_bases_in_true_skipping = 0
@@ -134,6 +142,14 @@ class Stats
     :total_number_of_reads_aligned_ambiguously,
     :total_number_of_bases_unaligned,
     :total_number_of_reads_unaligned,
+    :total_number_of_bases_aligned_correctly_pair,
+    :total_number_of_reads_aligned_correctly_pair,
+    :total_number_of_bases_aligned_incorrectly_pair,
+    :total_number_of_reads_aligned_incorrectly_pair,
+    :total_number_of_bases_aligned_ambiguously_pair,
+    :total_number_of_reads_aligned_ambiguously_pair,
+    :total_number_of_bases_unaligned_pair,
+    :total_number_of_reads_unaligned_pair,
     :total_number_of_bases_in_true_insertions,
     :total_number_of_bases_in_true_deletions,
     :total_number_of_bases_in_true_skipping,
@@ -299,6 +315,8 @@ skipping_sides: #{@skipping_sides.join(":")}}
       skipping_false_negative_rate = ((1 - (@skipping_called_correctly.to_f / @total_number_of_bases_in_true_skipping.to_f * 10000).to_i / 10000.0) * 100 * 10000).to_i/10000.0
       out += "skipping FN rate:\t#{skipping_false_negative_rate}%\n"
     end
+    
+    #puts "number of bases in true insertions = #{@total_number_of_bases_in_true_insertions}"
 
     #if(@total_number_of_bases_in_true_skipping_binary==0)
     #  out += "skipping FN/FD rate:\tNo skipping exist in true data.\n"
@@ -338,6 +356,58 @@ skipping_sides: #{@skipping_sides.join(":")}}
     else
       out += "Junctions Sides (none|left|right|both)% of all called:\tNaN|NaN|NaN|NaN"
     end
+
+    out +=  "-------------------------------------- as pair\n"
+    out += "total_number_of_reads:\t#{@total_number_of_reads}\n"
+    percent_reads_aligned_correctly_pair = (@total_number_of_reads_aligned_correctly_pair.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
+    out += "accuracy over all reads pair:\t#{percent_reads_aligned_correctly_pair}%\n"
+    total_num_unique_aligners_pair = @total_number_of_reads_aligned_correctly_pair + @total_number_of_reads_aligned_incorrectly_pair
+    #$logger.debug("total_num_unique_aligned_reads=#{total_num_unique_aligners}")
+    if total_num_unique_aligners_pair == 0
+      accuracy_on_unique_aligners_pair = 0
+    else
+      accuracy_on_unique_aligners_pair = (@total_number_of_reads_aligned_correctly_pair.to_f / total_num_unique_aligners_pair.to_f * 10000).to_i / 100.0
+    end
+    ##print "% unique aligners correct:\t$accuracy_on_unique_aligners%\n";
+    out += "accuracy over uniquely aligned reads:\t#{accuracy_on_unique_aligners_pair}%\n"
+    percent_reads_aligned_incorrectly_pair = (@total_number_of_reads_aligned_incorrectly_pair.to_f / @total_number_of_reads.to_f * 10000.0).to_i / 100.0
+    ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
+    out += "% reads aligned incorrectly:\t#{percent_reads_aligned_incorrectly_pair}%\n"
+    percent_reads_aligned_ambiguously_pair = (@total_number_of_reads_aligned_ambiguously_pair.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
+    out += "% reads aligned ambiguously:\t#{percent_reads_aligned_ambiguously_pair}%\n"
+    percent_reads_unaligned_pair = (@total_number_of_reads_unaligned_pair.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
+    out += "% reads unaligned:\t#{percent_reads_unaligned_pair}%\n"
+    percent_reads_aligned_pair = 100 - percent_reads_unaligned_pair
+    out += "% reads aligned:\t#{percent_reads_aligned_pair}%\n"
+
+    # BASE LEVEL
+    out += "-------------------------------------- as pair\n"
+    out += "total_number_of_bases_of_reads:\t#{@total_number_of_bases_of_reads}\n"
+    percent_bases_aligned_correctly_pair = (@total_number_of_bases_aligned_correctly_pair.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    out += "accuracy over all bases:\t#{percent_bases_aligned_correctly_pair}%\n"
+    total_num_unique_aligners_pair = @total_number_of_bases_aligned_correctly_pair + @total_number_of_bases_aligned_incorrectly_pair
+    $logger.debug("total_num_unique_aligners=#{total_num_unique_aligners_pair}")
+    if total_num_unique_aligners_pair == 0
+      accuracy_on_unique_aligners = 0
+    else
+      accuracy_on_unique_aligners = (@total_number_of_bases_aligned_correctly_pair.to_f / total_num_unique_aligners_pair.to_f * 10000).to_i / 100.0
+    end
+    ##print "% unique aligners correct:\t$accuracy_on_unique_aligners%\n";
+    out += "accuracy over uniquely aligned bases:\t#{accuracy_on_unique_aligners}%\n"
+    percent_bases_aligned_incorrectly = (@total_number_of_bases_aligned_incorrectly_pair.to_f / @total_number_of_bases_of_reads.to_f * 10000.0).to_i / 100.0
+    ##print "total_number_of_bases_aligned_incorrectly = $total_number_of_bases_aligned_incorrectly\n";
+    out += "% bases aligned incorrectly:\t#{percent_bases_aligned_incorrectly}%\n"
+    percent_bases_aligned_ambiguously = (@total_number_of_bases_aligned_ambiguously_pair.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
+    out += "% bases aligned ambiguously:\t#{percent_bases_aligned_ambiguously}%\n"
+    percent_bases_unaligned = (@total_number_of_bases_unaligned_pair.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
+    ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
+    out += "% bases unaligned:\t#{percent_bases_unaligned}%\n"
+    percent_bases_aligned = 100 - percent_bases_unaligned
+    out += "% bases aligned:\t#{percent_bases_aligned}%\n"
+
     out
   end
 
@@ -584,7 +654,8 @@ def find_best_match(current_group,cig_group)
   #puts scores_pairs.join("PAIRS")
   ind2 = scores_pairs.find_index(scores_pairs.max)
   current_group = [current_group[ind2*2],current_group[ind2*2+1]]
-  return current_group
+  multi = true if scores.max == 3
+  return current_group, multi
 end
 
 # Returns [ #matches, #misaligned]
@@ -748,15 +819,20 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
   $logger.debug("MATCHES")
   matches_misaligned = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
   stats.total_number_of_bases_aligned_correctly += matches_misaligned[0]
+  stats.total_number_of_bases_aligned_correctly_pair += matches_misaligned[0]
   stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
+  stats.total_number_of_bases_aligned_incorrectly_pair += matches_misaligned[1]
 
   if matches_misaligned[0] > 0
     stats.total_number_of_reads_aligned_correctly += 1
+    stats.total_number_of_reads_aligned_correctly_pair += 1
     if matches_misaligned[0] != 100
       stats.total_number_of_bases_unaligned += 100 - matches_misaligned[0]
+      stats.total_number_of_bases_unaligned_pair += 100 - matches_misaligned[0]
     end
   else
     stats.total_number_of_reads_aligned_incorrectly += 1
+    stats.total_number_of_reads_aligned_incorrectly_pair += 1
   end
   # Insertions
   $logger.debug("INSERTIONS")
@@ -800,6 +876,7 @@ end
 def process(current_group, cig_group, stats,options)
   stats.total_number_of_reads += 2
   cig_group.each do |l|
+    multi = false
     l = l.split("\t")
     k = l[4].dup
     inserts = 0
@@ -831,9 +908,12 @@ def process(current_group, cig_group, stats,options)
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
       ##### HERE MULTIMAPPER ROUTINE!
+      
       stats.total_number_of_bases_aligned_ambiguously += 2*options[:read_length]
       stats.total_number_of_reads_aligned_ambiguously += 2
-      current_group = find_best_match(current_group,cig_group)
+      stats.total_number_of_bases_aligned_ambiguously_pair += 2*options[:read_length]
+      stats.total_number_of_reads_aligned_ambiguously_pair += 2
+      current_group, multi = find_best_match(current_group,cig_group)
     end
     current_group.each do |s|
       s = s.split("\t")
@@ -841,13 +921,18 @@ def process(current_group, cig_group, stats,options)
       if s[2] == "*" || s[5] == "*"
         stats.total_number_of_bases_unaligned += options[:read_length]
         stats.total_number_of_reads_unaligned += 1
+        stats.total_number_of_bases_unaligned_pair += options[:read_length] unless multi
+        stats.total_number_of_reads_unaligned_pair += 1 unless multi
       else
         if s[2] != l[1]
           stats.total_number_of_bases_aligned_incorrectly += options[:read_length]
           stats.total_number_of_reads_aligned_incorrectly += 1
+          tats.total_number_of_bases_aligned_incorrectly_pair += options[:read_length] unless multi
+          stats.total_number_of_reads_aligned_incorrectly_pair += 1 unless multi
         else
           if s[3] == l[2] && s[5] == l[4]
             stats.total_number_of_bases_aligned_correctly += options[:read_length]
+            stats.total_number_of_bases_aligned_correctly_pair += options[:read_length]
             stats.insertions_called_correctly += inserts
             stats.total_number_of_bases_called_insertions += inserts
             stats.deletions_called_correctly += deletions
@@ -860,6 +945,7 @@ def process(current_group, cig_group, stats,options)
             stats.fill_skipping_sides("both",skipping_binary)
             #end
             stats.total_number_of_reads_aligned_correctly += 1
+            stats.total_number_of_reads_aligned_correctly_pair += 1
           else
             $logger.debug("SKIPPING_LENGTH #{skipping}")
             comp_base_by_base(s,l,stats,skipping,skipping_binary)
