@@ -927,7 +927,7 @@ def process(current_group, cig_group, stats,options)
         if s[2] != l[1]
           stats.total_number_of_bases_aligned_incorrectly += options[:read_length]
           stats.total_number_of_reads_aligned_incorrectly += 1
-          tats.total_number_of_bases_aligned_incorrectly_pair += options[:read_length] unless multi
+          stats.total_number_of_bases_aligned_incorrectly_pair += options[:read_length] unless multi
           stats.total_number_of_reads_aligned_incorrectly_pair += 1 unless multi
         else
           if s[3] == l[2] && s[5] == l[4]
