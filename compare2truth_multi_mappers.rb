@@ -567,6 +567,7 @@ def find_best_match(current_group,cig_group)
   cig_group_a = cig_group.detect {|i| i.split("\t")[0] =~ /a$/ }
   cig_group_b = cig_group.detect {|i| i.split("\t")[0] =~ /b$/ }
   scores = []
+  scores_pairs = []
   current_group.each do |e|
     e_fields = e.split("\t")
     if e_fields[0] =~ /a$/
@@ -577,11 +578,12 @@ def find_best_match(current_group,cig_group)
     scores << score
   end
   ind = scores.find_index(scores.max)
-  if ind % 2 == 0
-    current_group = [current_group[ind],current_group[ind+1]]
-  else
-    current_group = [current_group[ind-1],current_group[ind]]
-  end
+  #puts scores
+  n = 2
+  scores_pairs = (n-2).step(scores.size - n, n).map { |i| scores[i]+ scores[i+1]}
+  #puts scores_pairs.join("PAIRS")
+  ind2 = scores_pairs.find_index(scores_pairs.max)
+  current_group = [current_group[ind2*2],current_group[ind2*2+1]]
   return current_group
 end
 
