@@ -139,14 +139,14 @@ def fix_cigar(fields, read_length)
   cig_cigar_nums = fields[5].split(/\D/).map { |e|  e.to_i }
   cig_cigar_letters = fields[5].split(/\d+/).reject { |c| c.empty? }
   num = 0
+  puts cig_cigar_nums.join(" NUM ")
+  puts cig_cigar_letters.join(" LET ")
   cig_cigar_letters.each_with_index do |letter,i|
     case letter
-    when "M" || "I" || "S" || "H"
+    when "M" , "I", "S", "H"
       num += cig_cigar_nums[i]
     end
   end
-  #puts read_length
-  #puts num
   if num == read_length
     return fields
   else 
