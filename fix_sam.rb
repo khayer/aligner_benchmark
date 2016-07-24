@@ -141,7 +141,7 @@ def fix_cigar(fields, read_length)
   num = 0
   cig_cigar_letters.each_with_index do |letter,i|
     case letter
-    when "M" || "D" || "S" || "H"
+    when "M" || "I" || "S" || "H"
       num += cig_cigar_nums[i]
     end
   end
