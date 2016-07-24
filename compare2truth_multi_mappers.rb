@@ -42,7 +42,7 @@ def setup_options(args)
   }
 
   opt_parser = OptionParser.new do |opts|
-    opts.banner = "\nUsage: ruby compare2truth.rb [options] truth.cig sorted.sam"
+    opts.banner = "\nUsage: ruby compare2truth_multi_mappers.rb [options] truth.cig sorted.sam"
     opts.separator ""
     opts.separator "truth.cig:"
     opts.separator "seq.1a  chr10 123502684 123502783 100M  123502684-123502783 - CTTAAGTATGGGGAAGGTAGAAAGTTCATTTCATTACTTATAAAATATGTCTTCTCAAGAACAAAACTGTGCTGTTACAACTCAGTGTTCAATGTGAAAT"
@@ -192,7 +192,7 @@ skipping_sides: #{@skipping_sides.join(":")}}
 
   def process
     # READ LEVEL
-    out = "--------------------------------------\n"
+    out = "-------------------------------------- Multi-Mappers!\n"
     out += "total_number_of_reads:\t#{@total_number_of_reads}\n"
     percent_reads_aligned_correctly = (@total_number_of_reads_aligned_correctly.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     out += "accuracy over all reads:\t#{percent_reads_aligned_correctly}%\n"
@@ -550,6 +550,41 @@ def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
   end
 end
 
+def compare_lines(cig_line,sam_line)
+  score = 0
+  cig_line_fields = cig_line.split("\t")
+  sam_line_fields = sam_line.split("\t")
+  # score is +1 if chr matches
+  score += 1 if cig_line_fields[1] == sam_line_fields[2]
+  # score is +1 if start position matches
+  score += 1 if cig_line_fields[2] == sam_line_fields[3]
+  # score is +1 if cigar string matches too
+  score += 1 if cig_line_fields[4] == sam_line_fields[5]
+  return score
+end
+
+def find_best_match(current_group,cig_group)
+  cig_group_a = cig_group.detect {|i| i.split("\t")[0] =~ /a$/ }
+  cig_group_b = cig_group.detect {|i| i.split("\t")[0] =~ /b$/ }
+  scores = []
+  current_group.each do |e|
+    e_fields = e.split("\t")
+    if e_fields[0] =~ /a$/
+      score = compare_lines(cig_group_a,e)
+    else
+      score = compare_lines(cig_group_b,e)
+    end
+    scores << score
+  end
+  ind = scores.find_index(scores.max)
+  if ind % 2 == 0
+    current_group = [current_group[ind],current_group[ind+1]]
+  else
+    current_group = [current_group[ind-1],current_group[ind]]
+  end
+  return current_group
+end
+
 # Returns [ #matches, #misaligned]
 def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
   matches = 0
@@ -794,38 +829,38 @@ def process(current_group, cig_group, stats,options)
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
       ##### HERE MULTIMAPPER ROUTINE!
-      stats.total_number_of_bases_aligned_ambiguously += options[:read_length]
-      stats.total_number_of_reads_aligned_ambiguously += 1
-    else
-      current_group.each do |s|
-        s = s.split("\t")
-        next unless l[0] == s[0]
-        if s[2] == "*" || s[5] == "*"
-          stats.total_number_of_bases_unaligned += options[:read_length]
-          stats.total_number_of_reads_unaligned += 1
+      stats.total_number_of_bases_aligned_ambiguously += 2*options[:read_length]
+      stats.total_number_of_reads_aligned_ambiguously += 2
+      current_group = find_best_match(current_group,cig_group)
+    end
+    current_group.each do |s|
+      s = s.split("\t")
+      next unless l[0] == s[0]
+      if s[2] == "*" || s[5] == "*"
+        stats.total_number_of_bases_unaligned += options[:read_length]
+        stats.total_number_of_reads_unaligned += 1
+      else
+        if s[2] != l[1]
+          stats.total_number_of_bases_aligned_incorrectly += options[:read_length]
+          stats.total_number_of_reads_aligned_incorrectly += 1
         else
-          if s[2] != l[1]
-            stats.total_number_of_bases_aligned_incorrectly += options[:read_length]
-            stats.total_number_of_reads_aligned_incorrectly += 1
+          if s[3] == l[2] && s[5] == l[4]
+            stats.total_number_of_bases_aligned_correctly += options[:read_length]
+            stats.insertions_called_correctly += inserts
+            stats.total_number_of_bases_called_insertions += inserts
+            stats.deletions_called_correctly += deletions
+            stats.total_number_of_bases_called_deletions += deletions
+            stats.skipping_called_correctly += skipping
+            stats.total_number_of_bases_called_skipped += skipping
+            #if skipping > 0
+            stats.skipping_called_correctly_binary += skipping_binary
+            stats.total_number_of_bases_called_skipped_binary += skipping_binary
+            stats.fill_skipping_sides("both",skipping_binary)
+            #end
+            stats.total_number_of_reads_aligned_correctly += 1
           else
-            if s[3] == l[2] && s[5] == l[4]
-              stats.total_number_of_bases_aligned_correctly += options[:read_length]
-              stats.insertions_called_correctly += inserts
-              stats.total_number_of_bases_called_insertions += inserts
-              stats.deletions_called_correctly += deletions
-              stats.total_number_of_bases_called_deletions += deletions
-              stats.skipping_called_correctly += skipping
-              stats.total_number_of_bases_called_skipped += skipping
-              #if skipping > 0
-              stats.skipping_called_correctly_binary += skipping_binary
-              stats.total_number_of_bases_called_skipped_binary += skipping_binary
-              stats.fill_skipping_sides("both",skipping_binary)
-              #end
-              stats.total_number_of_reads_aligned_correctly += 1
-            else
-              $logger.debug("SKIPPING_LENGTH #{skipping}")
-              comp_base_by_base(s,l,stats,skipping,skipping_binary)
-            end
+            $logger.debug("SKIPPING_LENGTH #{skipping}")
+            comp_base_by_base(s,l,stats,skipping,skipping_binary)
           end
         end
       end
