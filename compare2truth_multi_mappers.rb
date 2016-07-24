@@ -877,6 +877,7 @@ def process(current_group, cig_group, stats,options)
   stats.total_number_of_reads += 2
   cig_group.each do |l|
     multi = false
+    multi1 = false
     l = l.split("\t")
     k = l[4].dup
     inserts = 0
@@ -908,7 +909,7 @@ def process(current_group, cig_group, stats,options)
     stats.total_number_of_bases_of_reads += options[:read_length]
     if current_group.length > 2
       ##### HERE MULTIMAPPER ROUTINE!
-      
+      multi1 = true
       stats.total_number_of_bases_aligned_ambiguously += 2*options[:read_length]
       stats.total_number_of_reads_aligned_ambiguously += 2
       stats.total_number_of_bases_aligned_ambiguously_pair += 2*options[:read_length]
@@ -921,8 +922,8 @@ def process(current_group, cig_group, stats,options)
       if s[2] == "*" || s[5] == "*"
         stats.total_number_of_bases_unaligned += options[:read_length]
         stats.total_number_of_reads_unaligned += 1
-        stats.total_number_of_bases_unaligned_pair += options[:read_length] unless multi
-        stats.total_number_of_reads_unaligned_pair += 1 unless multi
+        stats.total_number_of_bases_unaligned_pair += options[:read_length] unless multi1
+        stats.total_number_of_reads_unaligned_pair += 1 unless multi1
       else
         if s[2] != l[1]
           stats.total_number_of_bases_aligned_incorrectly += options[:read_length]
