@@ -10,13 +10,15 @@ The master script runs both fix_sam.rb and compar2truth.rb for a given aligner.
         e.g. run_name = t3r1-test4
         e.g. dataset = t3r1
         e.g. source_of_tree = /project/itmatlab/aligner_benchmark
-
+        
             -a, --algorithm ENUM             Choose from below:
                                              all: DEFAULT
+                                             clc
                                              contextmap2
                                              crac
                                              gsnap
                                              hisat
+                                             hisat2
                                              mapsplice2
                                              novoalign
                                              olego
@@ -26,6 +28,7 @@ The master script runs both fix_sam.rb and compar2truth.rb for a given aligner.
                                              subread
                                              tophat2
             -d, --debug                      Run in debug mode
+            -t, --short                      Only first 1 Million reads
             -s, --species [String]           Spiecies, Default: human
             -v, --verbose                    Run verbosely
 
