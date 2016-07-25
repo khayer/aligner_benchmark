@@ -143,7 +143,7 @@ def check_if_results_exist(stats_path)
 end
 
 def get_truth_files(options, source_of_tree, dataset, mode = "default")
-  cmd = "find #{source_of_tree}/jobs/settings/ -name \"*#{options[:species]}*#{dataset}*\""
+  cmd = "find #{source_of_tree}/jobs/settings/ -name \"*#{options[:species]}*#{dataset}.sh\""
   $logger.debug(cmd)
   l = `#{cmd}`
   l = l.split("\n")
