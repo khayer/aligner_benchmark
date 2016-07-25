@@ -226,7 +226,7 @@ skipping_sides: #{@skipping_sides.join(":")}}
     out += "% reads aligned incorrectly:\t#{percent_reads_aligned_incorrectly}%\n"
     percent_reads_aligned_ambiguously = (@total_number_of_reads_aligned_ambiguously.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    out += "% reads aligned ambiguously:\t#{percent_reads_aligned_ambiguously}%\n"
+    out += "% reads aligned ambiguously:\t0(#{percent_reads_aligned_ambiguously})%\n"
     percent_reads_unaligned = (@total_number_of_reads_unaligned.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
     out += "% reads unaligned:\t#{percent_reads_unaligned}%\n"
@@ -256,7 +256,7 @@ skipping_sides: #{@skipping_sides.join(":")}}
     out += "% bases aligned incorrectly:\t#{percent_bases_aligned_incorrectly}%\n"
     percent_bases_aligned_ambiguously = (@total_number_of_bases_aligned_ambiguously.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    out += "% bases aligned ambiguously:\t#{percent_bases_aligned_ambiguously}%\n"
+    out += "% bases aligned ambiguously:\t0(#{percent_bases_aligned_ambiguously})%\n"
     percent_bases_unaligned = (@total_number_of_bases_unaligned.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
     out += "% bases unaligned:\t#{percent_bases_unaligned}%\n"
@@ -375,7 +375,7 @@ skipping_sides: #{@skipping_sides.join(":")}}
     out += "% reads aligned incorrectly:\t#{percent_reads_aligned_incorrectly_pair}%\n"
     percent_reads_aligned_ambiguously_pair = (@total_number_of_reads_aligned_ambiguously_pair.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    out += "% reads aligned ambiguously:\t#{percent_reads_aligned_ambiguously_pair}%\n"
+    out += "% reads aligned ambiguously:\t0(#{percent_reads_aligned_ambiguously_pair})%\n"
     percent_reads_unaligned_pair = (@total_number_of_reads_unaligned_pair.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
     out += "% reads unaligned:\t#{percent_reads_unaligned_pair}%\n"
@@ -401,7 +401,7 @@ skipping_sides: #{@skipping_sides.join(":")}}
     out += "% bases aligned incorrectly:\t#{percent_bases_aligned_incorrectly}%\n"
     percent_bases_aligned_ambiguously = (@total_number_of_bases_aligned_ambiguously_pair.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_aligned_ambiguously = $total_number_of_bases_aligned_ambiguously\n";
-    out += "% bases aligned ambiguously:\t#{percent_bases_aligned_ambiguously}%\n"
+    out += "% bases aligned ambiguously:\t0(#{percent_bases_aligned_ambiguously})%\n"
     percent_bases_unaligned = (@total_number_of_bases_unaligned_pair.to_f / @total_number_of_bases_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
     out += "% bases unaligned:\t#{percent_bases_unaligned}%\n"
