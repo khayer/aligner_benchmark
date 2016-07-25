@@ -379,7 +379,7 @@ skipping_sides: #{@skipping_sides.join(":")}}
     percent_reads_unaligned_pair = (@total_number_of_reads_unaligned_pair.to_f / @total_number_of_reads.to_f * 10000).to_i / 100.0
     ##print "total_number_of_bases_unaligned = $total_number_of_bases_unaligned\n";
     out += "% reads unaligned:\t#{percent_reads_unaligned_pair}%\n"
-    percent_reads_aligned_pair = 100 - percent_reads_unaligned_pair
+    percent_reads_aligned_pair = 100.0 - percent_reads_unaligned_pair
     out += "% reads aligned:\t#{percent_reads_aligned_pair}%\n"
 
     # BASE LEVEL
@@ -824,8 +824,8 @@ def process(current_group, cig_group, stats,options)
       if s[2] == "*" || s[5] == "*"
         stats.total_number_of_bases_unaligned += options[:read_length]
         stats.total_number_of_reads_unaligned += 1
-        stats.total_number_of_bases_unaligned_pair += options[:read_length] unless multi1
-        stats.total_number_of_reads_unaligned_pair += 1 unless multi1
+        stats.total_number_of_bases_unaligned_pair += options[:read_length] if !multi1
+        stats.total_number_of_reads_unaligned_pair += 1 if !multi1
       else
         if s[2] != l[1]
           stats.total_number_of_bases_aligned_incorrectly += options[:read_length]
