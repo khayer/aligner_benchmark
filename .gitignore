@@ -44,3 +44,5 @@ build/
 test_file
 .DS_Store
 rscripts/read_level/
+
+files_to_plot/*

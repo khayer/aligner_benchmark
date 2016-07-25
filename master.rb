@@ -887,7 +887,11 @@ def run_soapsplice(options, source_of_tree, dataset)
           raise("Trouble creating directory, log for details.")
         end
       end
-      options[:tool_result_path] = p
+      if File.exist?("#{p}/ucsc.hg19.sam")
+        options[:tool_result_path] = p.gsub(/ucsc\.hg19\.sam$/,"")
+      else
+        options[:tool_result_path] = p.gsub(/pfal\.sam$/,"")
+      end
       shell_file = "#{options[:jobs_path]}/soapsplice_statistics_#{options[:species]}_#{dataset}_#{p.split("/")[-1]}.sh".gsub(/[()]/,"")
     else
       next unless p =~ /ucsc\.hg19\.sam$/ || p =~ /pfal\.sam$/
@@ -908,11 +912,12 @@ def run_soapsplice(options, source_of_tree, dataset)
           raise("Trouble creating directory, log for details.")
         end
       end
-      if File.exist?("#{p}/ucsc.hg19.sam")
+      if p =~ /ucsc\.hg19\.sam$/
         options[:tool_result_path] = p.gsub(/ucsc\.hg19\.sam$/,"")
       else
         options[:tool_result_path] = p.gsub(/pfal\.sam$/,"")
       end
+      $logger.debug("outpath is #{options[:tool_result_path]}")
       shell_file = "#{options[:jobs_path]}/soapsplice_statistics_#{options[:species]}_#{dataset}_default.sh"
     end
 
@@ -933,6 +938,7 @@ def run_soapsplice(options, source_of_tree, dataset)
   $logger.debug(options[:jobs])
 end
 
+## comment
 def run_subread(options, source_of_tree, dataset)
   cmd = "find #{source_of_tree}/tool_results/subread/alignment -maxdepth 1 -name \"*#{options[:species]}*#{dataset}\""
   $logger.debug(cmd)
