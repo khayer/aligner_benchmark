@@ -777,9 +777,10 @@ end
 
 def process(current_group, cig_group, stats,options)
   stats.total_number_of_reads += 2
+  multi = false
+  multi1 = false
   cig_group.each do |l|
-    multi = false
-    multi1 = false
+    
     l = l.split("\t")
     k = l[4].dup
     inserts = 0
@@ -809,13 +810,13 @@ def process(current_group, cig_group, stats,options)
       stats.total_number_of_reads_in_true_skipping_binary += 1
     end
     stats.total_number_of_bases_of_reads += options[:read_length]
-    if current_group.length > 2
+    if current_group.length > 2 || multi1
       ##### HERE MULTIMAPPER ROUTINE!
       multi1 = true
-      stats.total_number_of_bases_aligned_ambiguously += 2*options[:read_length]
-      stats.total_number_of_reads_aligned_ambiguously += 2
-      stats.total_number_of_bases_aligned_ambiguously_pair += 2*options[:read_length]
-      stats.total_number_of_reads_aligned_ambiguously_pair += 2
+      stats.total_number_of_bases_aligned_ambiguously += 1*options[:read_length]
+      stats.total_number_of_reads_aligned_ambiguously += 1
+      stats.total_number_of_bases_aligned_ambiguously_pair += 1*options[:read_length]
+      stats.total_number_of_reads_aligned_ambiguously_pair += 1
       current_group, multi = find_best_match(current_group,cig_group)
     end
     current_group.each do |s|
