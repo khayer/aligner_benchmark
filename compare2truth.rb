@@ -719,7 +719,7 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
       stats.total_number_of_bases_unaligned += 100 - matches_misaligned[0]
     end
   else
-    stats.total_number_of_reads_aligned_incorrectly += 1
+    #stats.total_number_of_reads_aligned_incorrectly += 1
   end
   # Insertions
   $logger.debug("INSERTIONS")
