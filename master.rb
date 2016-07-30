@@ -72,6 +72,11 @@ def setup_options(args)
       options[:nummer] = "-n 1000000"
     end
 
+    opts.on("-r", "--shorter", "Only first 100K reads - adpater") do |v|
+      options[:short] = true
+      options[:nummer] = "-n 100000"
+    end
+
     #opts.on("-o", "--out_file [OUT_FILE]",
     #  :REQUIRED,String,
     #  "File for the output, Default: overview_table.xls") do |anno_file|
