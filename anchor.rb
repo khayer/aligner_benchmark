@@ -13,7 +13,7 @@ end
 
 files = {}
 filenames = []
-readnames_by_group.each_values do |names|
+readnames_by_group.each_value do |names|
 	puts names
 	filenames << "#{sam_file}_#{names}"
 	files[names] = File.open("#{sam_file}_#{names}", "w")
