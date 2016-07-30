@@ -43,7 +43,8 @@ def setup_options(args)
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
     :species => "human", :debug => false, :short => false,
     :nummer => "",
-    :run_name => ""
+    :run_name => "",
+    :shorter => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -73,7 +74,7 @@ def setup_options(args)
     end
 
     opts.on("-r", "--shorter", "Only first 100K reads - adpater") do |v|
-      options[:short] = true
+      options[:shorter] = true
       options[:nummer] = "-n 100000"
     end
 
@@ -164,6 +165,7 @@ def get_truth_files(options, source_of_tree, dataset, mode = "default")
     when "CIG_FILE"
       options[:cig_file] = "#{dir}/#{fields[1]}" if mode == "default"
       options[:cig_file] = "#{dir}/#{fields[1]}_short" if mode == "short"
+      options[:cig_file] = "#{dir}/#{fields[1]}_shorter" if mode == "shorter"
     when "TRANSCRIPTS"
       options[:transcripts] = "#{dir}/#{fields[1]}"
     when "JUNCTIONS_CROSSED"
@@ -1163,6 +1165,8 @@ def run(argv)
 
   if options[:short]
     get_truth_files(options, source_of_tree, dataset, "short")
+  elsif options[:shorter]
+    get_truth_files(options, source_of_tree, dataset, "shorter")
   else
     get_truth_files(options, source_of_tree, dataset)
   end
