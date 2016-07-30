@@ -10,7 +10,7 @@ Dir["/project/itmatlab/aligner_benchmark/dataset/human/dataset_t3r1/anchor/cig/*
 	end
 end
 
-files = []
+files = {}
 filenames = []
 readnames_by_group.values do |names|
 	filenames << "#{sam_file}_#{names}"
