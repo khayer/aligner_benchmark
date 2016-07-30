@@ -17,6 +17,8 @@ readnames_by_group.values do |names|
 	files[names] = File.open("#{sam_file}_#{names}", "w")
 end
 
+puts files
+
 File.open(sam_file).each do |line|
 	name = line.split("\t")[0]
 	if readnames_by_group[name]
