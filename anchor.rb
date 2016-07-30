@@ -13,7 +13,8 @@ end
 
 files = {}
 filenames = []
-readnames_by_group.each_value.uniq do |names|
+unique = readnames_by_group.values.uniq
+unique.each do |names|
 	puts names
 	filenames << "#{sam_file}_#{names}"
 	files[names] = File.open("#{sam_file}_#{names}", "w")
