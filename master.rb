@@ -45,7 +45,8 @@ def setup_options(args)
     :nummer => "",
     :run_name => "",
     :shorter => false,
-    :cut_bases => ""
+    :cut_bases => "",
+    :read_length => "-r 100"
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -70,8 +71,9 @@ def setup_options(args)
     end
 
     opts.on("-c", "--cut INTEGER",:REQUIRED,Integer, "Cut INT bases of end") do |v|
-      options[:short] = true
       options[:cut_bases] = "-c #{v}"
+      options[:shorter] = true
+      options[:nummer] = "-n 100000"
     end
 
     opts.on("-t", "--short", "Only first 1 Million reads") do |v|
@@ -79,9 +81,8 @@ def setup_options(args)
       options[:nummer] = "-n 1000000"
     end
 
-    opts.on("-r", "--shorter", "Only first 100K reads - adpater") do |v|
-      options[:shorter] = true
-      options[:nummer] = "-n 100000"
+    opts.on("-r", "--read_length",:REQUIRED,Integer, "Default 100 bases (cig file") do |v|
+      options[:read_length] = "-r #{v}"
     end
 
     #opts.on("-o", "--out_file [OUT_FILE]",

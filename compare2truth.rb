@@ -38,7 +38,8 @@ def setup_options(args)
   options = {
     :loglevel => "error",
     :debug => false,
-    :read_length => nil
+    :read_length => nil,
+    :cut_bases => 0
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -76,6 +77,12 @@ def setup_options(args)
       :REQUIRED,Integer,
       "read length, if not specified it will be taken from cig file") do |s|
       options[:read_length] = s
+    end
+
+    opts.on("-c", "--cut_bases [INT]",
+      :REQUIRED,Integer,
+      "cut bases of cig file") do |s|
+      options[:cut_bases] = s
     end
 
     opts.on("-v", "--verbose", "Run verbosely") do |v|
@@ -528,7 +535,76 @@ Unaligned: #{unaligned.join(":")}
 
 end
 
+def cut_adapters(cig_group,num_cut_bases)
+  $logger.debug("NiNA #{num_cut_bases}")
+  cig_group_new = []
 
+  cig_group.each do |line|
+    #forward = false
+    fields = line.split("\t")
+
+    cig_cigar_nums = fields[4].split(/\D/).map { |e|  e.to_i }
+    cig_cigar_letters = fields[4].split(/\d+/).reject { |c| c.empty? }
+    starts = fields[5].split(", ").map { |chr| chr.split("-")[0].to_i  }
+    ends = fields[5].split(", ").map { |chr| chr.split("-")[1].to_i  }
+    cig_cigar_nums_new = cig_cigar_nums.dup
+    cig_cigar_letters_new = cig_cigar_letters.dup
+    starts_dup = starts.dup
+    ends_dup = ends.dup
+
+    if fields[0] =~ /a$/ 
+      #forward = true
+      (cig_cigar_nums.length-1).downto(0) do |i|
+        e = cig_cigar_nums[i]
+        if ["D","I","S","H","N"].include?(cig_cigar_letters[i])
+          cig_cigar_nums_new.delete_at(i)
+          cig_cigar_letters_new.delete_at(i)
+        end
+        if e < num_cut_bases
+          cig_cigar_nums_new = num_cut_bases - e
+          cig_cigar_letters_new.delete_at(i)
+          starts_dup.delete_at(i)
+          ends_dup.delete_at(i)
+        else
+          cig_cigar_nums_new[i] = cig_cigar_nums_new[i]-num_cut_bases
+          ends_dup[i] = ends_dup[i]-num_cut_bases
+        end
+      end 
+    else
+      
+      cig_cigar_nums.each_with_index do |e,i|
+        if ["D","I","S","H","N"].include?(cig_cigar_letters[i])
+          cig_cigar_nums_new.delete_at(i)
+          cig_cigar_letters_new.delete_at(i)
+        end
+        if e < num_cut_bases
+          cig_cigar_nums_new = num_cut_bases - e
+          cig_cigar_letters_new.delete_at(i)
+          starts_dup.delete_at(i)
+          ends_dup.delete_at(i)
+        else
+          cig_cigar_nums_new[i] = cig_cigar_nums_new[i]-num_cut_bases
+          starts_dup[i] = starts_dup[i]+num_cut_bases
+        end
+      end
+
+    end
+    new_cig = ""
+    cig_cigar_nums_new.each_with_index do |e,i|
+      new_cig += "#{e}#{cig_cigar_letters_new[i]}"
+    end
+    fields[4] = new_cig
+    new_cig_range = []
+    starts_dup.each_with_index do |e,i|
+      new_cig_range << "#{e}-#{ends_dup[i]}"
+    end
+    fields[5] = new_cig_range.join(", ")
+    fields[2] = starts_dup[0]
+    fields[3] = ends_dup[-1]
+    cig_group_new << fields.join("\t")
+  end
+  cig_group_new
+end
 
 def files_valid?(truth_cig,sam_file,options)
   l = `grep ^seq #{truth_cig} | head -1`
@@ -667,10 +743,10 @@ def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
 end
 
 def fix_cigar(t_nums,t_letters,i_nums,i_letters)
-  $logger.debug t_nums.join("T")
-  $logger.debug t_letters.join("T")
-  $logger.debug i_nums.join("I")
-  $logger.debug i_letters.join("I")
+  #$logger.debug t_nums.join("T")
+  #$logger.debug t_letters.join("T")
+  #$logger.debug i_nums.join("I")
+  #$logger.debug i_letters.join("I")
   t_nums.each_with_index do |t_num, i|
     next if t_num == i_nums[i]
     case t_letters[i]
@@ -683,11 +759,11 @@ def fix_cigar(t_nums,t_letters,i_nums,i_letters)
       end
     end
   end
-  $logger.debug "LALA"
-  $logger.debug t_nums.join("T")
-  $logger.debug t_letters.join("T")
-  $logger.debug i_nums.join("I")
-  $logger.debug i_letters.join("I")
+  #$logger.debug "LALA"
+  #$logger.debug t_nums.join("T")
+  #$logger.debug t_letters.join("T")
+  #$logger.debug i_nums.join("I")
+  #$logger.debug i_letters.join("I")
 end
 
 # Returns [#matches, #misaligned]
@@ -725,7 +801,7 @@ def exists?(file)
   out
 end
 
-def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
+def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
   $logger.debug(s_sam.join("::"))
   $logger.debug(c_cig.join("::"))
   cig_cigar_nums = c_cig[4].split(/\D/).map { |e|  e.to_i }
@@ -759,13 +835,13 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
 
   if matches_misaligned[0] > 0
     stats.total_number_of_reads_aligned_correctly += 1
-    if matches_misaligned[0] != 100
-      stats.total_number_of_bases_unaligned += 100 - matches_misaligned[0]
+    if matches_misaligned[0] != options[:read_length]
+      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[0]
     end
   else
     stats.total_number_of_reads_aligned_incorrectly += 1
     if matches_misaligned[1] > 0
-      stats.total_number_of_bases_unaligned += 100 - matches_misaligned[1]
+      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[1]
     end
   end
 
@@ -811,6 +887,9 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
 end
 
 def process(current_group, cig_group, stats,options)
+  if options[:cut_bases] > 0
+    cig_group = cut_adapters(cig_group,options[:cut_bases])
+  end
   stats.total_number_of_reads += 2
   cig_group.each do |l|
     l = l.split("\t")
@@ -874,7 +953,7 @@ def process(current_group, cig_group, stats,options)
               stats.total_number_of_reads_aligned_correctly += 1
             else
               $logger.debug("SKIPPING_LENGTH #{skipping}")
-              comp_base_by_base(s,l,stats,skipping,skipping_binary)
+              comp_base_by_base(s,l,stats,skipping,skipping_binary,options)
             end
           end
         end
