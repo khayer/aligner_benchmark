@@ -317,6 +317,7 @@ def run_all(arguments)
       end
     end
     num_out ||= old_num
+    exit if num_out > endnum
     $logger.debug "NUM_OUT #{num_out}"
     while old_num > num_out+1 #&& #(num > num_out+1)
       $logger.debug "ADDING #{num_out+1}"
