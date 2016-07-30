@@ -889,12 +889,13 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
 end
 
 def process(current_group, cig_group, stats,options)
-  stats.total_number_of_reads += 2
-  multi = false
-  multi1 = false
   if options[:cut_bases] > 0
     cig_group = cut_adapters(cig_group,options[:cut_bases])
   end
+  stats.total_number_of_reads += 2
+  multi = false
+  multi1 = false
+  
   cig_group.each do |l|
     
     l = l.split("\t")
