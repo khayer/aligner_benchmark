@@ -39,7 +39,8 @@ def setup_options(args)
     :loglevel => "error",
     :debug => false,
     :read_length => nil,
-    :cut_bases => 0
+    :cut_bases => 0,
+    :single_end => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -83,6 +84,10 @@ def setup_options(args)
       :REQUIRED,Integer,
       "cut bases of cig file") do |s|
       options[:cut_bases] = s
+    end
+
+    opts.on("-s", "--single_end", "Run in single_end mode") do |v|
+      options[:single_end] = true
     end
 
     opts.on("-v", "--verbose", "Run verbosely") do |v|
@@ -996,7 +1001,7 @@ def compare(truth_cig, sam_file, options)
       current_group << line
     else
       cig_group << truth_cig_handler.readline.chomp
-      cig_group << truth_cig_handler.readline.chomp
+      cig_group << truth_cig_handler.readline.chomp unless options[:single_end]
       count += 1
       if (count % 50000 == 0)
         STDERR.puts "finished #{count} reads"
@@ -1010,7 +1015,7 @@ def compare(truth_cig, sam_file, options)
   end
 
   cig_group << truth_cig_handler.readline.chomp
-  cig_group << truth_cig_handler.readline.chomp
+  cig_group << truth_cig_handler.readline.chomp unless options[:single_end]
   process(current_group, cig_group,stats,options)
   stats
 end

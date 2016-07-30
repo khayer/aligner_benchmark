@@ -20,7 +20,7 @@ unique.each do |names|
 	files[names] = File.open("#{sam_file}_#{names}", "w")
 end
 
-puts files
+#puts files
 
 File.open(sam_file).each do |line|
 	name = line.split("\t")[0]
@@ -36,6 +36,6 @@ end
 
 Dir["/project/itmatlab/aligner_benchmark/dataset/human/dataset_t3r1/anchor/cig/*cig"].each do |fn|
 	ind = filenames.index {|x| x =~ /#{fn.split("/")[-1]}$/}
-	`ruby #{File.expand_path(File.dirname(__FILE__))}/compare2truth.rb #{fn} #{filenames[ind]} > #{filenames[ind]}_comp_res.txt`
+	`ruby #{File.expand_path(File.dirname(__FILE__))}/compare2truth.rb -s #{fn} #{filenames[ind]} > #{filenames[ind]}_comp_res.txt`
 end
 	
