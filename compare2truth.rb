@@ -462,6 +462,35 @@ class MappingObject
     :skipped,
     :unaligned
 
+
+  def melt_ranges()
+    $logger.debug("HERE #{matches.length} #{matches}")
+    if matches.length > 1
+      stops = []
+      starts = []
+      matches.each do |m|
+        starts << m[0]
+        stops << m[1]
+      end
+      $logger.debug("matches: #{starts.join("|")}; #{stops.join("|")}")
+      starts.each_with_index do |s,i|
+        next if i == 0
+        if s-stops[i-1] == 1
+          $logger.debug("GOT HERE")
+          starts.delete_at(i)
+          stops.delete_at(i-1)
+        end
+      end
+      $logger.debug("matches: #{starts.join("|")}; #{stops.join("|")}")
+      
+      matches_new = []
+      starts.each_with_index do |s,i|
+        matches_new << [s,stops[i]]
+      end
+      self.matches = matches_new
+    end
+  end
+
   def to_s
     %{Matches: #{matches.join(":")},
 Insertions: #{insertions.join(":")},
@@ -470,6 +499,7 @@ Skipped: #{skipped.join(":")},
 Unaligned: #{unaligned.join(":")}
 }
   end
+
 
   #def fix
   #  @matches = comp(@matches)
@@ -497,6 +527,8 @@ Unaligned: #{unaligned.join(":")}
   #end
 
 end
+
+
 
 def files_valid?(truth_cig,sam_file,options)
   l = `grep ^seq #{truth_cig} | head -1`
@@ -528,7 +560,9 @@ end
 def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
   current_pos = start
   add = 0
+  first = true
   cigar_nums.each_with_index do |num,i|
+    first = false if i > 0
     case cigar_letters[i]
     when "M"
       mo.matches << [current_pos, current_pos + num + add]
@@ -544,7 +578,12 @@ def fill_mapping_object(mo, start, cigar_nums, cigar_letters)
       mo.skipped << [current_pos, current_pos + num]
       current_pos += num
     when "H","S"
-      mo.unaligned << [current_pos, current_pos + num]
+      if first
+        $logger.debug("MEEEA")
+        mo.unaligned << [start-num, start]
+      else
+        mo.unaligned << [current_pos, current_pos + num]
+      end
       #current_pos += num
     end
   end
@@ -696,20 +735,25 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
 
   c_cig_mo = MappingObject.new()
   fill_mapping_object(c_cig_mo, c_cig[2].to_i, cig_cigar_nums, cig_cigar_letters)
+  c_cig_mo.melt_ranges()
   $logger.debug(c_cig_mo)
+
   #c_cig_mo.fix
   s_sam_mo = MappingObject.new()
   if (cig_cigar_letters & ["I","D","N"]).length > 0 && (sam_cigar_letters & ["I","D","N"]).length > 0 &&
     cig_cigar_letters == sam_cigar_letters
     # In case I, D or N is ambigous
+    $logger.debug("I,D,N ambigous")
     fix_cigar(cig_cigar_nums,cig_cigar_letters,sam_cigar_nums,sam_cigar_letters)
   end
   fill_mapping_object(s_sam_mo, s_sam[3].to_i, sam_cigar_nums, sam_cigar_letters)
   #s_sam_mo.fix
+  s_sam_mo.melt_ranges()
   $logger.debug(s_sam_mo)
   # How many matches?
   $logger.debug("MATCHES")
   matches_misaligned = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
+  $logger.debug("matches_misaligned #{matches_misaligned.join("|")}")
   stats.total_number_of_bases_aligned_correctly += matches_misaligned[0]
   stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
 
@@ -719,14 +763,20 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
       stats.total_number_of_bases_unaligned += 100 - matches_misaligned[0]
     end
   else
-    #stats.total_number_of_reads_aligned_incorrectly += 1
+    stats.total_number_of_reads_aligned_incorrectly += 1
+    if matches_misaligned[1] > 0
+      stats.total_number_of_bases_unaligned += 100 - matches_misaligned[1]
+    end
   end
+
+
   # Insertions
   $logger.debug("INSERTIONS")
   insertions_incorrect = compare_ranges(c_cig_mo.insertions.flatten, s_sam_mo.insertions.flatten,true)
+  $logger.debug("insertions_incorrect #{insertions_incorrect.join('|')}" )
   stats.insertions_called_correctly += insertions_incorrect[0]
   stats.total_number_of_bases_called_insertions += insertions_incorrect[1] + insertions_incorrect[0]
-  stats.total_number_of_bases_aligned_incorrectly += insertions_incorrect[1]
+  #stats.total_number_of_bases_aligned_incorrectly += insertions_incorrect[1]
   # Deletions
   $logger.debug("DELETIONS")
   deletions_incorrect = compare_ranges(c_cig_mo.deletions.flatten, s_sam_mo.deletions.flatten,true)
