@@ -259,6 +259,10 @@ def run_all(arguments)
   lines = []
   first = true
   while !sam_file.eof?
+    current_name =~ /(\d+)/
+    num_out = $1.to_i
+
+    exit if num_out > endnum
     line = sam_file.readline()
     if line =~ /^@/
       puts line
