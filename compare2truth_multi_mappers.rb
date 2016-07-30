@@ -511,13 +511,15 @@ def cut_adapters(cig_group,num_cut_bases)
   cig_group_new = []
 
   cig_group.each do |line|
-    #forward = false
+    $logger.debug(line)
     fields = line.split("\t")
 
     cig_cigar_nums = fields[4].split(/\D/).map { |e|  e.to_i }
     cig_cigar_letters = fields[4].split(/\d+/).reject { |c| c.empty? }
     starts = fields[5].split(", ").map { |chr| chr.split("-")[0].to_i  }
     ends = fields[5].split(", ").map { |chr| chr.split("-")[1].to_i  }
+    $logger.debug starts.length
+    $logger.debug ends
     cig_cigar_nums_new = cig_cigar_nums.dup
     cig_cigar_letters_new = cig_cigar_letters.dup
     starts_dup = starts.dup
@@ -525,38 +527,47 @@ def cut_adapters(cig_group,num_cut_bases)
 
     if fields[0] =~ /a$/ 
       #forward = true
+      count = 0
       (cig_cigar_nums.length-1).downto(0) do |i|
         e = cig_cigar_nums[i]
         if ["D","I","S","H","N"].include?(cig_cigar_letters[i])
           cig_cigar_nums_new.delete_at(i)
           cig_cigar_letters_new.delete_at(i)
+          count -= 1
+          next
         end
         if e < num_cut_bases
-          cig_cigar_nums_new = num_cut_bases - e
+          num_cut_bases = num_cut_bases - e
           cig_cigar_letters_new.delete_at(i)
           starts_dup.delete_at(i)
           ends_dup.delete_at(i)
         else
-          cig_cigar_nums_new[i] = cig_cigar_nums_new[i]-num_cut_bases
-          ends_dup[i] = ends_dup[i]-num_cut_bases
+          cig_cigar_nums_new[i] = cig_cigar_nums[i]-num_cut_bases
+          ends_dup[count] = ends_dup[count]-num_cut_bases
+          break
         end
+        count += 1
       end 
     else
-      
+      count = 0
       cig_cigar_nums.each_with_index do |e,i|
         if ["D","I","S","H","N"].include?(cig_cigar_letters[i])
           cig_cigar_nums_new.delete_at(i)
           cig_cigar_letters_new.delete_at(i)
+          count -= 1
+          next
         end
         if e < num_cut_bases
-          cig_cigar_nums_new = num_cut_bases - e
+          num_cut_bases = num_cut_bases - e
           cig_cigar_letters_new.delete_at(i)
           starts_dup.delete_at(i)
           ends_dup.delete_at(i)
         else
-          cig_cigar_nums_new[i] = cig_cigar_nums_new[i]-num_cut_bases
-          starts_dup[i] = starts_dup[i]+num_cut_bases
+          cig_cigar_nums_new[i] = cig_cigar_nums[i]-num_cut_bases
+          starts_dup[count] = starts_dup[count]+num_cut_bases
+          break
         end
+        count += 1
       end
 
     end
