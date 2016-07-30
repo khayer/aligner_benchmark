@@ -259,10 +259,7 @@ def run_all(arguments)
   lines = []
   first = true
   while !sam_file.eof?
-    current_name =~ /(\d+)/
-    num_out = $1.to_i
-
-    exit if num_out > endnum
+    
     line = sam_file.readline()
     if line =~ /^@/
       puts line
@@ -271,7 +268,9 @@ def run_all(arguments)
     line.chomp!
     fields = line.split("\t")
     fields = check_hi_tag(fields)
-    
+    fields[0] =~ /(\d+)/
+    num_out = $1.to_i
+    exit if num_out > endnum
     num_out = nil
     if lines.length != 0
       #Contextmap2 case
@@ -294,6 +293,9 @@ def run_all(arguments)
     end
     old_name = current_name
     while old_name == current_name && !sam_file.eof?
+      current_name =~ /(\d+)/
+      num_out = $1.to_i
+      exit if num_out > endnum
 
       line = sam_file.readline()
       $logger.debug "LINE #{line}"
