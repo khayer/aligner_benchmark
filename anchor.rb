@@ -14,7 +14,7 @@ files = []
 filenames = []
 readnames_by_group.values do |names|
 	filenames << "#{sam_file}_#{names}"
-	files << File.open("#{sam_file}_#{names}", "w")
+	files[names] File.open("#{sam_file}_#{names}", "w")
 end
 
 File.open(sam_file).each do |line|
@@ -24,7 +24,7 @@ File.open(sam_file).each do |line|
 	end
 end
 
-files.each do |f|
+files.each_value do |f|
 	f.close()
 end
 
