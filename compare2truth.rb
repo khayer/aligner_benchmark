@@ -908,7 +908,11 @@ def process(current_group, cig_group, stats,options)
   if options[:cut_bases] > 0
     cig_group = cut_adapters(cig_group,options[:cut_bases])
   end
-  stats.total_number_of_reads += 2
+  if options[:single_end]
+    stats.total_number_of_reads += 1
+  else
+    stats.total_number_of_reads += 2
+  end
   cig_group.each do |l|
     l = l.split("\t")
     k = l[4].dup
