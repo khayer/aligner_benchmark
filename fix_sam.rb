@@ -275,6 +275,7 @@ def run_all(arguments)
         fix_lines(lines,current_name,options)
         current_name =~ /(\d+)/
         num_out = $1.to_i
+        exit if num_out > endnum 
         current_name = ""
       end
     end
@@ -365,7 +366,7 @@ def run_all(arguments)
   $logger.debug "could be empty #{lines.join(":::")}"
   current_name =~ /(\d+)/
   old_num = $1.to_i+1
-  endnum ||= 10000000
+  #endnum ||= 10000000
   while !(endnum+1 <= old_num)
     add_empty_lines(old_num) if options[:fill]
     old_name = "seq.#{old_num+1}"
