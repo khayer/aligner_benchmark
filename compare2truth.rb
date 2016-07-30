@@ -719,14 +719,14 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary)
       stats.total_number_of_bases_unaligned += 100 - matches_misaligned[0]
     end
   else
-    #stats.total_number_of_reads_aligned_incorrectly += 1
+    stats.total_number_of_reads_aligned_incorrectly += 1
   end
   # Insertions
   $logger.debug("INSERTIONS")
   insertions_incorrect = compare_ranges(c_cig_mo.insertions.flatten, s_sam_mo.insertions.flatten,true)
   stats.insertions_called_correctly += insertions_incorrect[0]
   stats.total_number_of_bases_called_insertions += insertions_incorrect[1] + insertions_incorrect[0]
-  stats.total_number_of_bases_aligned_incorrectly += insertions_incorrect[1]
+  #stats.total_number_of_bases_aligned_incorrectly += insertions_incorrect[1]
   # Deletions
   $logger.debug("DELETIONS")
   deletions_incorrect = compare_ranges(c_cig_mo.deletions.flatten, s_sam_mo.deletions.flatten,true)
