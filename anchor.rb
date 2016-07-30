@@ -9,11 +9,12 @@ Dir["/project/itmatlab/aligner_benchmark/dataset/human/dataset_t3r1/anchor/cig/*
 		readnames_by_group[l.split("\t")[0]]  = fn.split("/")[-1]
 	end
 end
-puts readnames_by_group
+#puts readnames_by_group
 
 files = {}
 filenames = []
-readnames_by_group.values do |names|
+readnames_by_group.each_values do |names|
+	puts names
 	filenames << "#{sam_file}_#{names}"
 	files[names] = File.open("#{sam_file}_#{names}", "w")
 end
