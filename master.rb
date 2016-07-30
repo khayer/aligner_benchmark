@@ -44,7 +44,8 @@ def setup_options(args)
     :species => "human", :debug => false, :short => false,
     :nummer => "",
     :run_name => "",
-    :shorter => false
+    :shorter => false,
+    :cut_bases => ""
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -66,6 +67,11 @@ def setup_options(args)
     opts.on("-d", "--debug", "Run in debug mode") do |v|
       options[:log_level] = "debug"
       options[:debug] = true
+    end
+
+    opts.on("-c", "--cut INTEGER",:REQUIRED,Integer, "Cut INT bases of end") do |v|
+      options[:short] = true
+      options[:cut_bases] = "-c #{v}"
     end
 
     opts.on("-t", "--short", "Only first 1 Million reads") do |v|
