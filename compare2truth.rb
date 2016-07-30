@@ -584,15 +584,17 @@ def cut_adapters(cig_group,num_cut_bases)
           cig_cigar_nums_new.delete_at(i)
           cig_cigar_letters_new.delete_at(i)
           count -= 1
+          #count -= 1 if ["D","I","S","H"].include?(cig_cigar_letters[i])
           next
         end
         if e < num_cut_bases
           num_cut_bases = num_cut_bases - e
           cig_cigar_letters_new.delete_at(i)
-          starts_dup.delete_at(i)
-          ends_dup.delete_at(i)
+          starts_dup.delete_at(i) unless ["D","I","S","H"].include?(cig_cigar_letters[i+1])
+          ends_dup.delete_at(i) unless ["D","I","S","H"].include?(cig_cigar_letters[i+1])
         else
           cig_cigar_nums_new[i] = cig_cigar_nums[i]-num_cut_bases
+          $logger.debug "count #{count}"
           starts_dup[count] = starts_dup[count]+num_cut_bases
           break
         end
