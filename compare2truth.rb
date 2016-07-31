@@ -943,7 +943,7 @@ def process(current_group, cig_group, stats,options)
       stats.total_number_of_reads_in_true_skipping_binary += 1
     end
     stats.total_number_of_bases_of_reads += options[:read_length]
-    if current_group.length > 2
+    if current_group.length > 2 || (current_group.length > 1 && options[:single_end])
       ##### HERE MULTIMAPPER ROUTINE!
       stats.total_number_of_bases_aligned_ambiguously += options[:read_length]
       stats.total_number_of_reads_aligned_ambiguously += 1
