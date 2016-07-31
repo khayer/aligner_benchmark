@@ -994,6 +994,7 @@ def compare(truth_cig, sam_file, options)
   current_group = []
   cig_group = []
   current_num = nil
+  current_letter = nil
   count = 0
   while !sam_file_handler.eof?
     # process one sequence name at a time
@@ -1001,7 +1002,14 @@ def compare(truth_cig, sam_file, options)
     next unless line =~ /^seq/
     line =~ /seq.(\d+)/
     current_num ||= $1
-    if current_num == $1
+    now_num = $1
+    line =~ /seq.\d+(a|b)/
+    current_letter ||= $1
+    now_letter = $1
+    if current_num == now_num && !options[:single_end]
+
+      current_group << line
+    elsif current_num == now_num && options[:single_end] && current_letter == now_letter
       current_group << line
     else
       cig_group << truth_cig_handler.readline.chomp
