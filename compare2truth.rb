@@ -905,6 +905,7 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
 end
 
 def process(current_group, cig_group, stats,options)
+  $logger.debug("PROCESSING")
   if options[:cut_bases] > 0
     cig_group = cut_adapters(cig_group,options[:cut_bases])
   end
@@ -1006,20 +1007,32 @@ def compare(truth_cig, sam_file, options)
     line =~ /seq.\d+(a|b)/
     current_letter ||= $1
     now_letter = $1
+    $logger.debug("current_num: #{current_num}, current_letter #{current_letter}")
+    $logger.debug("current_num: #{current_num}, current_letter #{current_letter}")
     if current_num == now_num && !options[:single_end]
-
+      $logger.debug("this happened2!")
+      exit
       current_group << line
-    elsif current_num == now_num && options[:single_end] && current_letter == now_letter
+    elsif current_num == now_num && options[:single_end] && current_letter == now_letter 
+      $logger.debug("this happened!")
+      #exit
       current_group << line
     else
+      $logger.debug("HERE")
+      $logger.debug(current_group)
+      
       cig_group << truth_cig_handler.readline.chomp
       cig_group << truth_cig_handler.readline.chomp unless options[:single_end]
       count += 1
+      $logger.debug(cig_group)
       if (count % 50000 == 0)
         STDERR.puts "finished #{count} reads"
       end
+      #STDIN.gets
+      exit if current_group[0].split("\t")[0] != cig_group[0].split("\t")[0]
       process(current_group, cig_group,stats,options)
-      current_num = $1
+      current_num = now_num
+      current_letter = now_letter
       current_group = []
       cig_group = []
       current_group << line

@@ -36,6 +36,7 @@ end
 
 Dir["/project/itmatlab/aligner_benchmark/dataset/human/dataset_t3r1/anchor/cig/*cig"].each do |fn|
 	ind = filenames.index {|x| x =~ /#{fn.split("/")[-1]}$/}
-	`ruby #{File.expand_path(File.dirname(__FILE__))}/compare2truth.rb -s #{fn} #{filenames[ind]} > #{filenames[ind]}_comp_res.txt`
+	`sort -t'.' -k 2n #{filenames[ind]} > #{filenames[ind]}_s`
+	`ruby #{File.expand_path(File.dirname(__FILE__))}/compare2truth.rb -s #{fn} #{filenames[ind]}_s > #{filenames[ind]}_comp_res.txt`
 end
 	
