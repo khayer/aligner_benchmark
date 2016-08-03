@@ -5,13 +5,15 @@ dataset = ARGV[1]
 species = ARGV[2]
 
 readnames_by_group = {}
+d = "/project/itmatlab/aligner_benchmark/dataset/#{species}/dataset_#{dataset}/anchor/cig/*cig"
+puts d
 # This yields full path and file name
-Dir["/project/itmatlab/aligner_benchmark/dataset/#{species}/dataset_#{dataset}/anchor/cig/*cig"].each do |fn|
+Dir[d].each do |fn|
 	File.open(fn).each do |l|
 		readnames_by_group[l.split("\t")[0]]  = fn.split("/")[-1]
 	end
 end
-#puts readnames_by_group
+puts readnames_by_group
 
 files = {}
 filenames = []
