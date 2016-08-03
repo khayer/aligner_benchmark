@@ -13,7 +13,7 @@ Dir[d].each do |fn|
 		readnames_by_group[l.split("\t")[0]]  = fn.split("/")[-1]
 	end
 end
-puts readnames_by_group
+# puts readnames_by_group
 
 files = {}
 filenames = []
