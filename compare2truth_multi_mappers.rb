@@ -39,7 +39,8 @@ def setup_options(args)
     :loglevel => "error",
     :debug => false,
     :read_length => nil,
-    :cut_bases => 0
+    :cut_bases => 0,
+    :single_end => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -83,6 +84,10 @@ def setup_options(args)
       :REQUIRED,Integer,
       "cut bases of cig file") do |s|
       options[:cut_bases] = s
+    end
+
+    opts.on("-s", "--single_end", "Run in single_end mode") do |v|
+      options[:single_end] = true
     end
 
     opts.on("-v", "--verbose", "Run verbosely") do |v|
@@ -680,6 +685,22 @@ def find_best_match(current_group,cig_group)
   return current_group, multi
 end
 
+def find_best_match_single(current_group,cig_group)
+  
+  scores = []
+  current_group.each do |e|
+    e_fields = e.split("\t")
+    score = compare_lines(cig_group[0],e)
+    scores << score
+  end
+  ind = scores.find_index(scores.max)
+  #puts scores
+  
+  current_group = [current_group[ind]]
+  multi = true if scores.max == 3
+  return current_group, multi
+end
+
 # Returns [ #matches, #misaligned]
 def compare_ranges(true_ranges, inferred_ranges, insertion_mode = false)
   matches = 0
@@ -905,7 +926,11 @@ def process(current_group, cig_group, stats,options)
   if options[:cut_bases] > 0
     cig_group = cut_adapters(cig_group,options[:cut_bases])
   end
-  stats.total_number_of_reads += 2
+  if options[:single_end]
+    stats.total_number_of_reads += 1
+  else
+    stats.total_number_of_reads += 2
+  end
   multi = false
   multi1 = false
   
@@ -940,14 +965,18 @@ def process(current_group, cig_group, stats,options)
       stats.total_number_of_reads_in_true_skipping_binary += 1
     end
     stats.total_number_of_bases_of_reads += options[:read_length]
-    if current_group.length > 2 || multi1
+    if current_group.length > 2 || multi1 || (current_group.length > 1 && options[:single_end])
       ##### HERE MULTIMAPPER ROUTINE!
       multi1 = true
       stats.total_number_of_bases_aligned_ambiguously += 1*options[:read_length]
       stats.total_number_of_reads_aligned_ambiguously += 1
       stats.total_number_of_bases_aligned_ambiguously_pair += 1*options[:read_length]
       stats.total_number_of_reads_aligned_ambiguously_pair += 1
-      current_group, multi = find_best_match(current_group,cig_group)
+      if options[:single_end]
+        current_group, multi = find_best_match_single(current_group,cig_group)
+      else
+        current_group, multi = find_best_match(current_group,cig_group)
+      end
     end
     current_group.each do |s|
       s = s.split("\t")
@@ -1000,6 +1029,7 @@ def compare(truth_cig, sam_file, options)
   current_group = []
   cig_group = []
   current_num = nil
+  current_letter = nil
   count = 0
   while !sam_file_handler.eof?
     # process one sequence name at a time
@@ -1007,17 +1037,24 @@ def compare(truth_cig, sam_file, options)
     next unless line =~ /^seq/
     line =~ /seq.(\d+)/
     current_num ||= $1
-    if current_num == $1
+    now_num = $1
+    line =~ /seq.\d+(a|b)/
+    current_letter ||= $1
+    now_letter = $1 
+    if current_num == now_num && !options[:single_end]
+      current_group << line
+    elsif current_num == now_num && options[:single_end] && current_letter == now_letter 
       current_group << line
     else
       cig_group << truth_cig_handler.readline.chomp
-      cig_group << truth_cig_handler.readline.chomp
+      cig_group << truth_cig_handler.readline.chomp unless options[:single_end]
       count += 1
       if (count % 50000 == 0)
         STDERR.puts "finished #{count} reads"
       end
       process(current_group, cig_group,stats,options)
-      current_num = $1
+      current_num = now_num
+      current_letter = now_letter
       current_group = []
       cig_group = []
       current_group << line
@@ -1025,7 +1062,7 @@ def compare(truth_cig, sam_file, options)
   end
 
   cig_group << truth_cig_handler.readline.chomp
-  cig_group << truth_cig_handler.readline.chomp
+  cig_group << truth_cig_handler.readline.chomp unless options[:single_end]
   process(current_group, cig_group,stats,options)
   stats
 end
