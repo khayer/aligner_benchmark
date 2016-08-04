@@ -994,8 +994,26 @@ def process(current_group, cig_group, stats,options)
         if s[2] != l[1]
           stats.total_number_of_bases_aligned_incorrectly += options[:read_length]
           stats.total_number_of_reads_aligned_incorrectly += 1
-          stats.total_number_of_bases_aligned_incorrectly_pair += options[:read_length] unless multi
-          stats.total_number_of_reads_aligned_incorrectly_pair += 1 unless multi
+          if multi 
+            stats.total_number_of_bases_aligned_correctly += options[:read_length]
+            stats.total_number_of_bases_aligned_correctly_pair += options[:read_length]
+            stats.insertions_called_correctly += inserts
+            stats.total_number_of_bases_called_insertions += inserts
+            stats.deletions_called_correctly += deletions
+            stats.total_number_of_bases_called_deletions += deletions
+            stats.skipping_called_correctly += skipping
+            stats.total_number_of_bases_called_skipped += skipping
+            #if skipping > 0
+            stats.skipping_called_correctly_binary += skipping_binary
+            stats.total_number_of_bases_called_skipped_binary += skipping_binary
+            stats.fill_skipping_sides("both",skipping_binary)
+            #end
+            stats.total_number_of_reads_aligned_correctly += 1
+            stats.total_number_of_reads_aligned_correctly_pair += 1
+          else
+            stats.total_number_of_bases_aligned_incorrectly_pair += options[:read_length] 
+            stats.total_number_of_reads_aligned_incorrectly_pair += 1
+          end
         else
           if s[3] == l[2] && s[5] == l[4]
             stats.total_number_of_bases_aligned_correctly += options[:read_length]
