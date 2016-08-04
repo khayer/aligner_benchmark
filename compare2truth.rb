@@ -755,7 +755,7 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
   if matches_misaligned[0] > 0
     stats.total_number_of_reads_aligned_correctly += 1
     if matches_misaligned[0] != options[:read_length]
-      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[0]
+      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[1]- matches_misaligned[0]
     end
   else
     stats.total_number_of_reads_aligned_incorrectly += 1
