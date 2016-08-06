@@ -263,7 +263,7 @@ def run_all(arguments)
   options = setup_option(arguments)
   sam_file = File.open(arguments[0])
   endnum = options[:nummer]
-  startnum = options[:start]
+  startnum = options[:start]-1
   current_name = ""
   lines = []
   first = true
