@@ -47,6 +47,12 @@ After master.rb is complete, this code combines the stats of all the given comp_
 
         find . -name comp_res.txt |sort | xargs ruby /path/to/read_stats.rb
 
+## Anchors
+
+### Anchor junction
+
+        ruby anchor_junction.rb /project/itmatlab/aligner_benchmark/statistics/human_t1r1/tophat2/nocoveragesearch-bowtie2sensitive/fixed.sam t1r1 human
+
 
 ## ToDo
 

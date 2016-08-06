@@ -24,12 +24,12 @@ unique.each do |names|
 	files[names] = File.open("#{sam_file}_#{names}", "w")
 end
 
-#puts files
+puts "files: #{files}"
+puts "filenames: #{filenames.join("\t")}"
 
 File.open(sam_file).each do |line|
 	name = line.split("\t")[0]
 	if readnames_by_group[name]
-
 		files[readnames_by_group[name]].puts line
 	end
 end
@@ -40,6 +40,7 @@ end
 
 Dir["/project/itmatlab/aligner_benchmark/dataset/#{species}/dataset_#{dataset}/anchor/cig/*cig"].each do |fn|
 	ind = filenames.index {|x| x =~ /#{fn.split("/")[-1]}$/}
+	puts ind
 	`sort -t'.' -k 2n #{filenames[ind]} > #{filenames[ind]}_s`
 	`ruby #{File.expand_path(File.dirname(__FILE__))}/compare2truth_multi_mappers.rb -s #{fn} #{filenames[ind]}_s > #{filenames[ind]}_comp_res_multi_mappers.txt`
 	`ruby #{File.expand_path(File.dirname(__FILE__))}/compare2truth.rb -s #{fn} #{filenames[ind]}_s > #{filenames[ind]}_comp_res.txt`
