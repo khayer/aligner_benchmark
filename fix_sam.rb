@@ -328,6 +328,7 @@ def run_all(arguments)
     if old_num > 1 && first
       k = 1
       first = false
+      next if num_out < startnum
       while k < old_num
         add_empty_lines(k) if options[:fill]
         k += 1
@@ -338,6 +339,7 @@ def run_all(arguments)
     $logger.debug "NUM_OUT #{num_out}"
     while old_num > num_out+1 #&& #(num > num_out+1)
       $logger.debug "ADDING #{num_out+1}"
+      next if num_out < startnum
       add_empty_lines(num_out+1) if options[:fill]
       #num_out = "seq.#{num_out+1}"
       num_out += 1
@@ -351,6 +353,7 @@ def run_all(arguments)
     lines[0][0] =~ /(\d+)/
     written = $1
     $logger.debug "MUHAHAHA #{lines.join(":::")}"
+    next if num_out < startnum
     fix_lines(lines,old_name,options)
 
     first = false
@@ -380,6 +383,7 @@ def run_all(arguments)
     #end
     $logger.debug lines.join(":::")
   end
+  next if num_out < startnum
   fix_lines(lines,current_name,options) if lines.length > 0
   $logger.debug "could be empty #{lines.join(":::")}"
   current_name =~ /(\d+)/
