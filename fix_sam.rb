@@ -279,8 +279,6 @@ def run_all(arguments)
     fields = check_hi_tag(fields)
     fields[0] =~ /(\d+)/
     num_out = $1.to_i
-    next if num_out < startnum
-    exit if num_out > endnum
     num_out = nil
     if lines.length != 0
       #Contextmap2 case
@@ -288,7 +286,7 @@ def run_all(arguments)
         fix_lines(lines,current_name,options)
         current_name =~ /(\d+)/
         num_out = $1.to_i
-        exit if num_out > endnum 
+        #exit if num_out > endnum 
         current_name = ""
       end
     end
@@ -328,9 +326,10 @@ def run_all(arguments)
     if old_num > 1 && first
       k = 1
       first = false
-      next if num_out < startnum
-      while k < old_num
-        add_empty_lines(k) if options[:fill]
+      while k < old_num 
+        if k > startnum
+          add_empty_lines(k) if options[:fill]
+        end
         k += 1
       end
     end
@@ -339,8 +338,10 @@ def run_all(arguments)
     $logger.debug "NUM_OUT #{num_out}"
     while old_num > num_out+1 #&& #(num > num_out+1)
       $logger.debug "ADDING #{num_out+1}"
-      next if num_out < startnum
-      add_empty_lines(num_out+1) if options[:fill]
+      if num_out > startnum
+        add_empty_lines(num_out+1) if options[:fill]
+      end
+      
       #num_out = "seq.#{num_out+1}"
       num_out += 1
       #STDERR.puts "HERE: #{num}"
@@ -353,7 +354,6 @@ def run_all(arguments)
     lines[0][0] =~ /(\d+)/
     written = $1
     $logger.debug "MUHAHAHA #{lines.join(":::")}"
-    next if num_out < startnum
     fix_lines(lines,old_name,options)
 
     first = false
@@ -364,7 +364,9 @@ def run_all(arguments)
     old_num = $1.to_i + 1
     while !(num <= old_num)
       $logger.debug "adding #{old_num}"
-      add_empty_lines(old_num) if options[:fill]
+      if num_out > startnum
+        add_empty_lines(old_num) if options[:fill]
+      end
       old_name = "seq.#{old_num+1}"
       old_num += 1
       #STDERR.puts "HERE: #{num}"
@@ -383,14 +385,15 @@ def run_all(arguments)
     #end
     $logger.debug lines.join(":::")
   end
-  next if num_out < startnum
   fix_lines(lines,current_name,options) if lines.length > 0
   $logger.debug "could be empty #{lines.join(":::")}"
   current_name =~ /(\d+)/
   old_num = $1.to_i+1
   #endnum ||= 10000000
   while !(endnum+1 <= old_num)
-    add_empty_lines(old_num) if options[:fill]
+    if num_out > startnum
+      add_empty_lines(old_num) if options[:fill]
+    end
     old_name = "seq.#{old_num+1}"
     old_num += 1
     #STDERR.puts "HERE: #{num}"
