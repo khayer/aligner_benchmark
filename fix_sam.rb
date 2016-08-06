@@ -303,7 +303,7 @@ def run_all(arguments)
     while old_name == current_name && !sam_file.eof?
       current_name =~ /(\d+)/
       num_out = $1.to_i
-      next if num_out < startnum
+      #next if num_out < startnum
       exit if num_out > endnum
 
       line = sam_file.readline()
@@ -338,7 +338,7 @@ def run_all(arguments)
     $logger.debug "NUM_OUT #{num_out}"
     while old_num > num_out+1 #&& #(num > num_out+1)
       $logger.debug "ADDING #{num_out+1}"
-      if num_out > startnum
+      if num_out+1 > startnum
         add_empty_lines(num_out+1) if options[:fill]
       end
       
@@ -364,7 +364,7 @@ def run_all(arguments)
     old_num = $1.to_i + 1
     while !(num <= old_num)
       $logger.debug "adding #{old_num}"
-      if num_out > startnum
+      if old_num > startnum
         add_empty_lines(old_num) if options[:fill]
       end
       old_name = "seq.#{old_num+1}"
