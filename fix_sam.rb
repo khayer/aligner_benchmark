@@ -39,7 +39,8 @@ def setup_option(args)
     :debug => false,
     :nummer => 10000000,
     :fill => true,
-    :read_length => 100
+    :read_length => 100,
+    :start => 1
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -70,6 +71,13 @@ def setup_option(args)
       :REQUIRED,Integer,
       "number of reads that should be in the fixed.sam, DEFAULT: 10,000,000") do |s|
       options[:nummer] = s
+    end
+
+
+    opts.on("-s", "--start [INT]",
+      :REQUIRED,Integer,
+      "start number of framgment that should be in the fixed.sam, DEFAULT: 1") do |s|
+      options[:start] = s
     end
 
     opts.on("-r", "--read_length [INT]",
@@ -255,6 +263,7 @@ def run_all(arguments)
   options = setup_option(arguments)
   sam_file = File.open(arguments[0])
   endnum = options[:nummer]
+  startnum = options[:start]
   current_name = ""
   lines = []
   first = true
@@ -270,6 +279,7 @@ def run_all(arguments)
     fields = check_hi_tag(fields)
     fields[0] =~ /(\d+)/
     num_out = $1.to_i
+    next if num_out < startnum
     exit if num_out > endnum
     num_out = nil
     if lines.length != 0
@@ -295,6 +305,7 @@ def run_all(arguments)
     while old_name == current_name && !sam_file.eof?
       current_name =~ /(\d+)/
       num_out = $1.to_i
+      next if num_out < startnum
       exit if num_out > endnum
 
       line = sam_file.readline()

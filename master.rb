@@ -44,9 +44,10 @@ def setup_options(args)
     :species => "human", :debug => false, :short => false,
     :nummer => "",
     :run_name => "",
-    :shorter => false,
+    :adapter => false,
     :cut_bases => "",
-    :read_length => "-r 100"
+    :read_length => "-r 100",
+    :start => ""
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -72,8 +73,12 @@ def setup_options(args)
 
     opts.on("-c", "--cut INTEGER",:REQUIRED,Integer, "Cut INT bases of end") do |v|
       options[:cut_bases] = "-c #{v}"
-      options[:shorter] = true
-      options[:nummer] = "-n 100000"
+      options[:adapter] = true
+    end
+
+    opts.on("-n", "--range X-Y",:REQUIRED,String, "Use fragment number X to Y") do |v|
+      options[:nummer] = "-n #{v.split("-")[1].to_i}"
+      options[:start] = "-s #{v.split("-")[0].to_i}"
     end
 
     opts.on("-t", "--short", "Only first 1 Million reads") do |v|
@@ -155,7 +160,7 @@ def check_if_results_exist(stats_path)
   !File.zero?("#{stats_path}/comp_res.txt") #&& File.exist?("#{stats_path}/junctions_stats.txt") && !File.zero?("#{stats_path}/junctions_stats.txt")
 end
 
-def get_truth_files(options, source_of_tree, dataset, mode = "default")
+def get_truth_files(options, source_of_tree, dataset, mode = "default", cut = 10)
   cmd = "find #{source_of_tree}/jobs/settings/ -name \"*#{options[:species]}*#{dataset}.sh\""
   $logger.debug(cmd)
   l = `#{cmd}`
@@ -172,7 +177,7 @@ def get_truth_files(options, source_of_tree, dataset, mode = "default")
     when "CIG_FILE"
       options[:cig_file] = "#{dir}/#{fields[1]}" if mode == "default"
       options[:cig_file] = "#{dir}/#{fields[1]}_short" if mode == "short"
-      options[:cig_file] = "#{dir}/#{fields[1]}_shorter" if mode == "shorter"
+      options[:cig_file] = "#{dir}/#{cut}.adapter.#{fields[1]}" if mode == "adapter"
     when "TRANSCRIPTS"
       options[:transcripts] = "#{dir}/#{fields[1]}"
     when "JUNCTIONS_CROSSED"
@@ -1172,8 +1177,8 @@ def run(argv)
 
   if options[:short]
     get_truth_files(options, source_of_tree, dataset, "short")
-  elsif options[:shorter]
-    get_truth_files(options, source_of_tree, dataset, "shorter")
+  elsif options[:adapter]
+    get_truth_files(options, source_of_tree, dataset, "adapter", options[:cut_bases].split(" ")[1])
   else
     get_truth_files(options, source_of_tree, dataset)
   end
