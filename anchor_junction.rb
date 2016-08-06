@@ -38,7 +38,7 @@ files.each_value do |f|
 	f.close()
 end
 
-Dir["/project/itmatlab/aligner_benchmark/dataset/#{species}/dataset_#{dataset}/anchor/cig/*cig"].each do |fn|
+Dir["/project/itmatlab/aligner_benchmark/dataset/#{species}/dataset_#{dataset}/junction/*cig"].each do |fn|
 	ind = filenames.index {|x| x =~ /#{fn.split("/")[-1]}$/}
 	puts ind
 	`sort -t'.' -k 2n #{filenames[ind]} > #{filenames[ind]}_s`
