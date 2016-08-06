@@ -968,14 +968,16 @@ def process(current_group, cig_group, stats,options)
     if current_group.length > 2 || multi1 || (current_group.length > 1 && options[:single_end])
       ##### HERE MULTIMAPPER ROUTINE!
       #multi1 = true
+      all_unaligned = true
       current_group.each do |s|
         s = s.split("\t")
         multi1 = true unless s[2] == "*" || s[5] == "*"
+        all_unaligned = false unless s[2] == "*" || s[5] == "*"
       end
-      stats.total_number_of_bases_aligned_ambiguously += 1*options[:read_length]
-      stats.total_number_of_reads_aligned_ambiguously += 1
-      stats.total_number_of_bases_aligned_ambiguously_pair += 1*options[:read_length]
-      stats.total_number_of_reads_aligned_ambiguously_pair += 1
+      stats.total_number_of_bases_aligned_ambiguously += 1*options[:read_length] unless all_unaligned
+      stats.total_number_of_reads_aligned_ambiguously += 1 unless all_unaligned
+      stats.total_number_of_bases_aligned_ambiguously_pair += 1*options[:read_length] unless all_unaligned
+      stats.total_number_of_reads_aligned_ambiguously_pair += 1 unless all_unaligned
       if options[:single_end]
         current_group, multi = find_best_match_single(current_group,cig_group)
       else
