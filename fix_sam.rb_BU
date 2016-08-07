@@ -265,7 +265,6 @@ def run_all(arguments)
   endnum = options[:nummer]
   startnum = options[:start]-1
   current_name = ""
-  last_written = nil
   lines = []
   first = true
   while !sam_file.eof?
@@ -280,27 +279,16 @@ def run_all(arguments)
     fields = check_hi_tag(fields)
     fields[0] =~ /(\d+)/
     num_out = $1.to_i
-    last_written ||= num_out
-    
-    #num_out = nil
+    num_out = nil
     if lines.length != 0
       #Contextmap2 case
-      $logger.debug("KAFKA")
       if get_name(lines[0][0]) != get_name(fields[0])
-        exit if num_out > endnum 
-        fix_lines(lines,current_name,options) if num_out > startnum
-
+        fix_lines(lines,current_name,options)
         current_name =~ /(\d+)/
-        #num_out = to_i
-        last_written = $1.to_i
+        num_out = $1.to_i
+        #exit if num_out > endnum 
         current_name = ""
       end
-    end
-
-    $logger.debug "LAST WRITTEN #{last_written}"
-    while last_written+1 < num_out && last_written > startnum
-      add_empty_lines(last_written+1)
-      last_written += 1
     end
 
     if current_name == ""
@@ -341,19 +329,17 @@ def run_all(arguments)
       while k < old_num 
         if k > startnum
           add_empty_lines(k) if options[:fill]
-          last_written = k
         end
         k += 1
       end
     end
     num_out ||= old_num
-    exit if num_out > endnum
+    #exit if num_out > endnum
     $logger.debug "NUM_OUT #{num_out}"
     while old_num > num_out+1 #&& #(num > num_out+1)
       $logger.debug "ADDING #{num_out+1}"
       if num_out+1 > startnum
         add_empty_lines(num_out+1) if options[:fill]
-        last_written = num_out+1
       end
       
       #num_out = "seq.#{num_out+1}"
@@ -366,10 +352,9 @@ def run_all(arguments)
     $logger.debug old_name
     lines = lines[0...-1] if (!last_name_equal?(lines))
     lines[0][0] =~ /(\d+)/
-    written = $1.to_i
+    written = $1
     $logger.debug "MUHAHAHA #{lines.join(":::")}"
-    fix_lines(lines,old_name,options) if num_out > startnum
-    last_written = written
+    fix_lines(lines,old_name,options)
 
     first = false
     #current_name = fields[0]
@@ -381,7 +366,6 @@ def run_all(arguments)
       $logger.debug "adding #{old_num}"
       if old_num > startnum
         add_empty_lines(old_num) if options[:fill]
-        last_written = old_num
       end
       old_name = "seq.#{old_num+1}"
       old_num += 1
@@ -393,14 +377,13 @@ def run_all(arguments)
     #  lines = []
     #else
     fields[0] =~ /(\d+)/
-
-    if $1.to_i == written
+    if $1 == written
       lines = []
     else
       lines = [fields]
     end
     #end
-    $logger.debug "END of while #{lines.join(':::')}"
+    $logger.debug lines.join(":::")
   end
   fix_lines(lines,current_name,options) if lines.length > 0
   $logger.debug "could be empty #{lines.join(":::")}"
