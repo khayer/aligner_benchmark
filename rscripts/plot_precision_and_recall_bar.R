@@ -5,10 +5,11 @@ setwd("~/github/aligner_benchmark/rscripts")
 cols <- c('character','character','character','character','character','character',
           'numeric','character')
 #d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
-d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
+#d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
+d = read.csv("~/Google Drive/AlignerBenchmarkLocal/default_summary.txt", head =T,sep = "\t", colClasses = cols)
 
-
-
+d$algorithm = factor(d$algorithm)
+nlevels(d$algorithm)
 d$mean = rep(0,dim(d)[1])
 d$sd = rep(0,dim(d)[1])
 
@@ -45,63 +46,106 @@ plot_my_data <- function(data, measurement, title, filename) {
   #data$tmp <- NULL
 }
 
+plot_my_data_scatter <- function(data, measurement1, measurement2, title, filename) {
+  # data = k 
+  # measurement one of #{recall, precision}
+  print(measurement1)
+  data$tmp1= data[,colnames(data) == measurement1]
+  print(measurement2)
+  data$tmp2 = data[,colnames(data) == measurement2]
+  print(head(data))
+  print(data$tmp2)
+  data$algorithm = factor(data$algorithm)
+  print(levels(data$algorithm))
+  ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm)) + 
+    geom_point(size=3) +
+    #geom_text(aes(label = tmp), size = 3) +
+    ggtitle(title) +
+    scale_shape_manual(values=1:nlevels(data$algorithm)) +
+    xlab("Algorithm") + xlab(measurement1)+ ylab(measurement2)+ #ylim(c(-0.0001,1.0001)) +
+    #scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
+    #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
+    scale_fill_manual(values = data$color) +
+    
+    guides(fill=FALSE) 
+  ggsave(
+    filename,
+    width = 6.25,
+    height = 6.75,
+    dpi = 300
+  )
+  #data$tmp <- NULL
+}
+
 
 l  = spread(d[,c("species","dataset","replicate","level","algorithm",
                  "color","measurement","mean")], measurement, mean)
-k = l[l$species == "human" & l$level == "READ",]
+k = l[l$species == "human" & l$level == "READLEVEL",]
 k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","human read level","read_level/human_t3_READ_recall.pdf")
 plot_my_data(k,"precision","human read level","read_level/human_t3_READ_precision.pdf")
-k = l[l$species == "human" & l$level == "READ",]
+plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t3_READ_scatter.pdf")
+k = l[l$species == "human" & l$level == "READLEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","human read level","read_level/human_t2_READ_recall.pdf")
 plot_my_data(k,"precision","human read level","read_level/human_t2_READ_precision.pdf")
-k = l[l$species == "human" & l$level == "READ",]
+plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t2_READ_scatter.pdf")
+k = l[l$species == "human" & l$level == "READLEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","human read level","read_level/human_t1_READ_recall.pdf")
 plot_my_data(k,"precision","human read level","read_level/human_t1_READ_precision.pdf")
+plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t1_READ_scatter.pdf")
 
 
-k = l[l$species == "malaria" & l$level == "READ",]
+k = l[l$species == "malaria" & l$level == "READLEVEL",]
 k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","malaria read level","read_level/malaria_t3_READ_recall.pdf")
 plot_my_data(k,"precision","malaria read level","read_level/malaria_t3_READ_precision.pdf")
-k = l[l$species == "malaria" & l$level == "READ",]
+plot_my_data_scatter(k,"precision","recall","malaria read level","read_level/malaria_t3_READ_scatter.pdf")
+k = l[l$species == "malaria" & l$level == "READLEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","malaria read level","read_level/malaria_t2_READ_recall.pdf")
 plot_my_data(k,"precision","malaria read level","read_level/malaria_t2_READ_precision.pdf")
-k = l[l$species == "malaria" & l$level == "READ",]
+plot_my_data_scatter(k,"precision","recall","malaria read level","read_level/malaria_t2_READ_scatter.pdf")
+k = l[l$species == "malaria" & l$level == "READLEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","malaria read level","read_level/malaria_t1_READ_recall.pdf")
 plot_my_data(k,"precision","malaria read level","read_level/malaria_t1_READ_precision.pdf")
+plot_my_data_scatter(k,"precision","recall","malaria read level","read_level/malaria_t1_READ_scatter.pdf")
 
 
-k = l[l$species == "human" & l$level == "BASE",]
+k = l[l$species == "human" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","human base level","base_level/human_t3_BASE_recall.pdf")
 plot_my_data(k,"precision","human base level","base_level/human_t3_BASE_precision.pdf")
-k = l[l$species == "human" & l$level == "BASE",]
+plot_my_data_scatter(k,"precision","recall","human base level","base_level/human_t3_BASE_scatter.pdf")
+k = l[l$species == "human" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","human base level","base_level/human_t2_BASE_recall.pdf")
 plot_my_data(k,"precision","human base level","base_level/human_t2_BASE_precision.pdf")
-k = l[l$species == "human" & l$level == "BASE",]
+plot_my_data_scatter(k,"precision","recall","human base level","base_level/human_t2_BASE_scatter.pdf")
+k = l[l$species == "human" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","human base level","base_level/human_t1_BASE_recall.pdf")
 plot_my_data(k,"precision","human base level","base_level/human_t1_BASE_precision.pdf")
+plot_my_data_scatter(k,"precision","recall","human base level","base_level/human_t1_BASE_scatter.pdf")
 
 
-k = l[l$species == "malaria" & l$level == "BASE",]
+k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","malaria base level","base_level/malaria_t3_BASE_recall.pdf")
 plot_my_data(k,"precision","malaria base level","base_level/malaria_t3_BASE_precision.pdf")
-k = l[l$species == "malaria" & l$level == "BASE",]
+plot_my_data_scatter(k,"precision","recall","malaria base level","base_level/malaria_t3_BASE_scatter.pdf")
+k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","malaria base level","base_level/malaria_t2_BASE_recall.pdf")
 plot_my_data(k,"precision","malaria base level","base_level/malaria_t2_BASE_precision.pdf")
-k = l[l$species == "malaria" & l$level == "BASE",]
+plot_my_data_scatter(k,"precision","recall","malaria base level","base_level/malaria_t2_BASE_scatter.pdf")
+k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","malaria base level","base_level/malaria_t1_BASE_recall.pdf")
 plot_my_data(k,"precision","malaria base level","base_level/malaria_t1_BASE_precision.pdf")
+plot_my_data_scatter(k,"precision","recall","malaria base level","base_level/malaria_t1_BASE_scatter.pdf")
 
 
 # BASE LEVEL AND DELETIONS

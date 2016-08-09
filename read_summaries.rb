@@ -128,7 +128,10 @@ class Run
     @dataset = dataset
     @replicate = replicate
     @algorithms = Set.new
-    @levels = {"READ" => {}, "JUNC" => {}, "BASE" => {} }
+    #@levels = {"READ" => {}, "JUNC" => {}, "BASE" => {} }
+    @levels = {"READLEVEL" => {}, "READLEVEL(multimappers)" => {},
+      "BASELEVEL" => {},  "BASELEVEL(multimappers)" => {},
+      "JUNCLEVEL" => {} }
   end
 
   attr_accessor :species, :dataset, :replicate, :algorithms, :levels
@@ -169,17 +172,24 @@ def read_files(argv)
         next
       end
       if line =~ /^------/
-        level = line.split(" ")[1]
+        k = line.split("\t")
+        level = k[0].delete("- ")
+        $logger.debug(level)
         next
       end
       fields = line.split("\t")
       case fields[0]
-      when "accuracy over uniquely aligned reads:"
+      when "% reads aligned correctly (over aligned reads) [PRECISION]:"#"accuracy over uniquely aligned reads:"
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["precision"]  ||= []
           current_run.levels[level]["precision"]  << fields[current_mapping[n]].to_f / 100.0
         end
-      when "accuracy over all reads:"
+      when "% reads aligned correctly (over uniquely aligned reads) [PRECISION]:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["precision"]  ||= []
+          current_run.levels[level]["precision"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% reads aligned correctly [RECALL]:" #"accuracy over all reads:"
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["recall"]  ||= []
           current_run.levels[level]["recall"]  << fields[current_mapping[n]].to_f / 100.0
@@ -214,45 +224,53 @@ def read_files(argv)
           current_run.levels[level]["unaligned"]  ||= []
           current_run.levels[level]["unaligned"]  << fields[current_mapping[n]].to_f / 100.0
         end
-      when "accuracy over uniquely aligned bases:"
+      when "% bases aligned correctly (over aligned bases) [PRECISION]:"
+      #when "accuracy over uniquely aligned bases:"
+        #$logger.debug("mee #{current_run.levels[level]["precision"]}")
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["precision"]  ||= []
           current_run.levels[level]["precision"]  << fields[current_mapping[n]].to_f / 100.0
         end
-      when "accuracy over all bases:"
+      when "% bases aligned correctly (over uniquely aligned bases) [PRECISION]:"
         current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["precision"]  ||= []
+          current_run.levels[level]["precision"]  << fields[current_mapping[n]].to_f / 100.0
+        end
+      when "% bases aligned correctly [RECALL]:"
+        current_run.algorithms.each_with_index do |n,i|
+          #$logger.debug("here #{current_run.levels[level]["recall"]}")
           current_run.levels[level]["recall"]  ||= []
           current_run.levels[level]["recall"]  << fields[current_mapping[n]].to_f / 100.0
         end
-      when "insertions FD rate:"
+      when "insertions FD rate [1 - PRECISION]:"#"insertions FD rate:"
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["insertions_precision"]  ||= []
           current_run.levels[level]["insertions_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
         end
-      when "insertions FN rate:"
+      when "insertions FN rate [1 - RECALL]:"#"insertions FN rate:"
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["insertions_recall"]  ||= []
           current_run.levels[level]["insertions_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
         end
-      when "deletions FD rate:"
+      when "deletions FD rate [1 - PRECISION]:"#"deletions FD rate:"
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["deletions_precision"]  ||= []
           current_run.levels[level]["deletions_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
         end
-      when "deletions FN rate:"
+      when "deletions FN rate [1 - RECALL]:"
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["deletions_recall"]  ||= []
           current_run.levels[level]["deletions_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
         end
-      when "junctions FD rate:"
+      when "skipping FD rate [1 - PRECISION]:"
         current_run.algorithms.each_with_index do |n,i|
-          current_run.levels[level]["precision"]  ||= []
-          current_run.levels[level]["precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
+          current_run.levels[level]["insertion_precision"]  ||= []
+          current_run.levels[level]["insertion_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
         end
-      when "junctions FN rate:"
+      when "skipping FN rate [1 - RECALL]:"
         current_run.algorithms.each_with_index do |n,i|
-          current_run.levels[level]["recall"]  ||= []
-          current_run.levels[level]["recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
+          current_run.levels[level]["insertion_recall"]  ||= []
+          current_run.levels[level]["insertion_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
         end
       end
     end
@@ -270,9 +288,12 @@ def print_all_default(all)
     e.levels.each_pair do |level, measurement|
       measurement.each_pair do |m, values|
         values.each_with_index do |v,i|
+          #$logger.debug("#{m} and #{values}")
+          #$logger.debug("#{v} and #{i}")
           name = e.algorithms.to_a[i]
           if e.algorithms.to_a[i] =~ /^tophat2/
-            if e.algorithms.to_a[i] == "tophat2coveragesearch-bowtie2sensitive"
+            if e.algorithms.to_a[i] == "tophat2coveragesearch-bowtie2sensitive" ||
+              e.algorithms.to_a[i] == "tophat2"
               name = "tophat2"
             else
               next
@@ -286,21 +307,24 @@ def print_all_default(all)
             end
           end
           if e.algorithms.to_a[i] =~ /^olego/
-            if e.algorithms.to_a[i] == "olegotwopass"
+            if e.algorithms.to_a[i] == "olegotwopass" || 
+              e.algorithms.to_a[i] == "olego"
               name = "olego"
             else
               next
             end
           end
           if e.algorithms.to_a[i] =~ /^crac/
-            if e.algorithms.to_a[i] == "cracnoambiguity"
+            if e.algorithms.to_a[i] == "cracnoambiguity" ||
+              e.algorithms.to_a[i] == "crac"
               name = "crac"
             else
               next
             end
           end
           if e.algorithms.to_a[i] =~ /clc/
-            if e.algorithms.to_a[i] =~ /^clcsimulated_reads_.*t.*r.*-10multihits$/
+            if e.algorithms.to_a[i] =~ /^clcsimulated_reads_.*t.*r.*-10multihits$/ ||
+              e.algorithms.to_a[i] == "clc"
               name = "clc"
             else
               next
