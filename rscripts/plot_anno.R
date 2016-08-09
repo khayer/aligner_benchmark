@@ -1,6 +1,7 @@
 library(ggplot2)
 library(tidyr)
 library(scales)
+library(dplyr)
 setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','character',
@@ -36,7 +37,7 @@ gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligne
 
 
 plot_100_plot <- function(data,ylabs,titles,file) {
-  ggplot(data, aes(x=annotation, y=value, fill=measurement, order = as.numeric(measurement))) + 
+  ggplot(arrange(data, measurement), aes(x=annotation, y=value, fill=measurement, order = as.numeric(measurement))) + 
     geom_bar(stat="identity",width= .85) + 
     theme_gray(base_size=10) +#theme_light()+
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
