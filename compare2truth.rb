@@ -749,18 +749,29 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
   $logger.debug("MATCHES")
   matches_misaligned = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
   $logger.debug("matches_misaligned #{matches_misaligned.join("|")}")
+  if matches_misaligned[0]  > options[:read_length]
+    matches_misaligned[0] = options[:read_length]  
+  end
+  if matches_misaligned[0] + matches_misaligned[1] > options[:read_length]
+    
+    matches_misaligned[1] = options[:read_length] - matches_misaligned[0]
+    #puts matches_misaligned
+    #STDIN.gets
+  end
   stats.total_number_of_bases_aligned_correctly += matches_misaligned[0]
   stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
 
   if matches_misaligned[0] > 0
     stats.total_number_of_reads_aligned_correctly += 1
     if matches_misaligned[0] != options[:read_length]
-      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[1]- matches_misaligned[0]
+      #cur_sum = options[:read_length] - matches_misaligned[1]- matches_misaligned[0]
+      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[1]- matches_misaligned[0] #if cur_sum > 0
     end
   else
     stats.total_number_of_reads_aligned_incorrectly += 1
     if matches_misaligned[1] > 0
-      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[1]
+      #cur_sum = options[:read_length] - matches_misaligned[1]
+      stats.total_number_of_bases_unaligned += options[:read_length] - matches_misaligned[1] #if cur_sum > 0
     end
   end
 

@@ -863,6 +863,16 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
   # How many matches?
   $logger.debug("MATCHES")
   matches_misaligned = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
+  if matches_misaligned[0]  > options[:read_length]
+    matches_misaligned[0] = options[:read_length]  
+  end
+  if matches_misaligned[0] + matches_misaligned[1] > options[:read_length]
+    
+    matches_misaligned[1] = options[:read_length] - matches_misaligned[0]
+    #puts matches_misaligned
+    #STDIN.gets
+  end
+
   stats.total_number_of_bases_aligned_correctly += matches_misaligned[0]
   stats.total_number_of_bases_aligned_correctly_pair += matches_misaligned[0]
   stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
