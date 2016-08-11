@@ -1,5 +1,6 @@
 library(ggplot2)
 library(tidyr)
+library(dplyr)
 setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','character',
@@ -248,56 +249,82 @@ plot_my_data(k,"insertions_precision","human insertions base level","insertions/
 plot_my_data_scatter(k,"insertions_precision","insertions_recall","human insertions base level","insertions/human_t3_BASE_insertions_scatter.pdf")
 plot_my_data_bars(k,"insertions_precision","insertions_recall","human insertions base level","insertions/human_t3_BASE_insertions_bars.pdf")
 
-k = l[l$species == "human" & l$level == "BASE",]
+k = l[l$species == "human" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"insertions_recall","human insertions base level","insertions/human_t2_BASE_insertions_recall.pdf")
 plot_my_data(k,"insertions_precision","human insertions base level","insertions/human_t2_BASE_insertions_precision.pdf")
-k = l[l$species == "human" & l$level == "BASE",]
+plot_my_data_scatter(k,"insertions_precision","insertions_recall","human insertions base level","insertions/human_t2_BASE_insertions_scatter.pdf")
+plot_my_data_bars(k,"insertions_precision","insertions_recall","human insertions base level","insertions/human_t2_BASE_insertions_bars.pdf")
+
+k = l[l$species == "human" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"insertions_recall","human insertions base level","insertions/human_t1_BASE_insertions_recall.pdf")
 plot_my_data(k,"insertions_precision","human insertions base level","insertions/human_t1_BASE_insertions_precision.pdf")
+plot_my_data_scatter(k,"insertions_precision","insertions_recall","human insertions base level","insertions/human_t1_BASE_insertions_scatter.pdf")
+plot_my_data_bars(k,"insertions_precision","insertions_recall","human insertions base level","insertions/human_t1_BASE_insertions_bars.pdf")
 
-k = l[l$species == "malaria" & l$level == "BASE",]
+k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t3",]
 plot_my_data(k,"insertions_recall","malaria insertions base level","insertions/malaria_t3_BASE_insertions_recall.pdf")
 plot_my_data(k,"insertions_precision","malaria insertions base level","insertions/malaria_t3_BASE_insertions_precision.pdf")
-k = l[l$species == "malaria" & l$level == "BASE",]
+plot_my_data_scatter(k,"insertions_precision","insertions_recall","malaria insertions base level","insertions/malaria_t3_BASE_insertions_scatter.pdf")
+plot_my_data_bars(k,"insertions_precision","insertions_recall","malaria insertions base level","insertions/malaria_t3_BASE_insertions_bars.pdf")
+
+k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"insertions_recall","malaria insertions base level","insertions/malaria_t2_BASE_insertions_recall.pdf")
 plot_my_data(k,"insertions_precision","malaria insertions base level","insertions/malaria_t2_BASE_insertions_precision.pdf")
-k = l[l$species == "malaria" & l$level == "BASE",]
+plot_my_data_scatter(k,"insertions_precision","insertions_recall","malaria insertions base level","insertions/malaria_t2_BASE_insertions_scatter.pdf")
+plot_my_data_bars(k,"insertions_precision","insertions_recall","malaria insertions base level","insertions/malaria_t2_BASE_insertions_bars.pdf")
+k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"insertions_recall","malaria insertions base level","insertions/malaria_t1_BASE_insertions_recall.pdf")
 plot_my_data(k,"insertions_precision","malaria insertions base level","insertions/malaria_t1_BASE_insertions_precision.pdf")
+plot_my_data_scatter(k,"insertions_precision","insertions_recall","malaria insertions base level","insertions/malaria_t1_BASE_insertions_scatter.pdf")
+plot_my_data_bars(k,"insertions_precision","insertions_recall","malaria insertions base level","insertions/malaria_t1_BASE_insertions_bars.pdf")
 
-
-k = l[l$species == "human" & l$level == "JUNC",]
+# JUNCTIONS
+k = l[l$species == "human" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","human junction level","junctions/human_t3_JUNC_recall.pdf")
-plot_my_data(k,"precision","human junction level","junctions/human_t3_JUNC_precision.pdf")
-k = l[l$species == "human" & l$level == "JUNC",]
+plot_my_data(k,"skipping_recall","human junction level","junctions/human_t3_JUNC_recall.pdf")
+plot_my_data(k,"skipping_precision","human junction level","junctions/human_t3_JUNC_precision.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t3_JUNC_insertions_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t3_JUNC_insertions_bars.pdf")
+
+k = l[l$species == "human" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","human junction level","junctions/human_t2_JUNC_recall.pdf")
 plot_my_data(k,"precision","human junction level","junctions/human_t2_JUNC_precision.pdf")
-k = l[l$species == "human" & l$level == "JUNC",]
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t2_JUNC_insertions_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t2_JUNC_insertions_bars.pdf")
+
+k = l[l$species == "human" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","human junction level","junctions/human_t1_JUNC_recall.pdf")
 plot_my_data(k,"precision","human junction level","junctions/human_t1_JUNC_precision.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t1_JUNC_insertions_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t1_JUNC_insertions_bars.pdf")
 
 
-k = l[l$species == "malaria" & l$level == "JUNC",]
+k = l[l$species == "malaria" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","malaria junction level","junctions/malaria_t3_JUNC_recall.pdf")
 plot_my_data(k,"precision","malaria junction level","junctions/malaria_t3_JUNC_precision.pdf")
-k = l[l$species == "malaria" & l$level == "JUNC",]
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t3_JUNC_insertions_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t3_JUNC_insertions_bars.pdf")
+
+k = l[l$species == "malaria" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","malaria junction level","junctions/malaria_t2_JUNC_recall.pdf")
 plot_my_data(k,"precision","malaria junction level","junctions/malaria_t2_JUNC_precision.pdf")
-k = l[l$species == "malaria" & l$level == "JUNC",]
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t2_JUNC_insertions_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t2_JUNC_insertions_bars.pdf")
+k = l[l$species == "malaria" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","malaria junction level","junctions/malaria_t1_JUNC_recall.pdf")
 plot_my_data(k,"precision","malaria junction level","junctions/malaria_t1_JUNC_precision.pdf")
-
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t1_JUNC_insertions_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t1_JUNC_insertions_bars.pdf")
 
 # Plot the 100 plots
 d$measurement[d$measurement == "aligned_correctly"] = "aligned correctly"
@@ -318,7 +345,7 @@ gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligne
 
 
 plot_100_plot <- function(data,ylabs,titles,file) {
-  ggplot(data, aes(x=algorithm, y=mean, fill=measurement, order = as.numeric(measurement))) + 
+  ggplot(arrange(data, measurement), aes(x=algorithm, y=mean, fill=measurement, order = as.numeric(measurement))) + 
     geom_bar(stat="identity",width= .9) + 
     theme_gray(base_size=10) +#theme_light()+
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
@@ -333,30 +360,53 @@ plot_100_plot <- function(data,ylabs,titles,file) {
   )
 }
 
-r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level == "READ",]
+r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","human read level","read_level/human_t3_READ.pdf")
-r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level == "READ",]
+r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","human read level","read_level/human_t2_READ.pdf")
-r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level == "READ",]
+r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","human read level","read_level/human_t1_READ.pdf")
 
-r = gat[gat$dataset == "t3"  & gat$species == "malaria" & gat$level == "READ",]
+r = gat[gat$dataset == "t3"  & gat$species == "malaria" & gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","malaria read level","read_level/malaria_t3_READ.pdf")
-r = gat[gat$dataset == "t2"  & gat$species == "malaria" & gat$level == "READ",]
+r = gat[gat$dataset == "t2"  & gat$species == "malaria" & gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","malaria read level","read_level/malaria_t2_READ.pdf")
-r = gat[gat$dataset == "t1"  & gat$species == "malaria" & gat$level == "READ",]
+r = gat[gat$dataset == "t1"  & gat$species == "malaria" & gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","malaria read level","read_level/malaria_t1_READ.pdf")
 
-r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level == "BASE",]
+r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","human base level","base_level/human_t3_BASE.pdf")
-r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level == "BASE",]
+r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","human base level","base_level/human_t2_BASE.pdf")
-r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level == "BASE",]
+r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","human base level","base_level/human_t1_BASE.pdf")
 
-r = gat[gat$dataset == "t3"  & gat$species == "malaria" & gat$level == "BASE",]
+r = gat[gat$dataset == "t3"  & gat$species == "malaria" & gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","malaria base level","base_level/malaria_t3_BASE.pdf")
-r = gat[gat$dataset == "t2"  & gat$species == "malaria" & gat$level == "BASE",]
+r = gat[gat$dataset == "t2"  & gat$species == "malaria" & gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","malaria base level","base_level/malaria_t2_BASE.pdf")
-r = gat[gat$dataset == "t1"  & gat$species == "malaria" & gat$level == "BASE",]
+r = gat[gat$dataset == "t1"  & gat$species == "malaria" & gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","malaria base level","base_level/malaria_t1_BASE.pdf")
+
+
+plot_100_plot_multi <- function(data,ylabs,titles,file) {
+  ggplot(arrange(data, measurement), aes(x=multi, y=mean, fill=measurement, order = as.numeric(measurement))) + 
+    geom_bar(stat="identity",width= .9) + 
+    theme_gray(base_size=10) +#theme_light()+
+    #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
+    ylab(ylabs) +  ggtitle(titles) + facet_grid(. ~ algorithm) +
+    #scale_x_discrete(limits=data[order(data[data$measurement == "aligned correctly",]$mean,decreasing = TRUE),]$algorithm) +
+    scale_fill_manual(values=cbPalette) 
+  ggsave(
+    file,
+    width = 6.25,
+    height = 5.25,
+    dpi = 300
+  )
+}
+
+r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level %in% c("READLEVEL","READLEVEL(multimappers)"),]
+r$multi = TRUE
+r[r$level == "READLEVEL",]$multi = FALSE
+plot_100_plot_multi(r,"percent of total reads","human read level","read_level/human_t3_READ_multi.pdf")

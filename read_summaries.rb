@@ -198,6 +198,8 @@ def read_files(argv)
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["aligned_incorrectly"]  ||= []
           current_run.levels[level]["aligned_incorrectly"]  << fields[current_mapping[n]].to_f / 100.0
+          current_run.levels[level]["aligned_ambiguously"]  ||= [] if level == "READLEVEL(multimappers)"
+          current_run.levels[level]["aligned_ambiguously"]  << 0.0 if level == "READLEVEL(multimappers)"
         end
       when "% reads aligned ambiguously:"
         current_run.algorithms.each_with_index do |n,i|
@@ -264,13 +266,23 @@ def read_files(argv)
         end
       when "skipping FD rate [1 - PRECISION]:"
         current_run.algorithms.each_with_index do |n,i|
-          current_run.levels[level]["insertion_precision"]  ||= []
-          current_run.levels[level]["insertion_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
+          current_run.levels[level]["skipping_precision"]  ||= []
+          current_run.levels[level]["skipping_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
         end
       when "skipping FN rate [1 - RECALL]:"
         current_run.algorithms.each_with_index do |n,i|
-          current_run.levels[level]["insertion_recall"]  ||= []
-          current_run.levels[level]["insertion_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
+          current_run.levels[level]["skipping_recall"]  ||= []
+          current_run.levels[level]["skipping_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
+        end
+      when "junctions FD rate [1 - PRECISION]:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["skipping_precision"]  ||= []
+          current_run.levels[level]["skipping_precision"]  <<  1.0 - fields[current_mapping[n]].to_f / 100.0
+        end
+      when "junctions FN rate [1 - RECALL]:"
+        current_run.algorithms.each_with_index do |n,i|
+          current_run.levels[level]["skipping_recall"]  ||= []
+          current_run.levels[level]["skipping_recall"]  << 1.0 - fields[current_mapping[n]].to_f / 100.0
         end
       end
     end
