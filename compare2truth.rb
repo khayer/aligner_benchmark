@@ -749,6 +749,12 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
   $logger.debug("MATCHES")
   matches_misaligned = compare_ranges(c_cig_mo.matches.flatten, s_sam_mo.matches.flatten)
   $logger.debug("matches_misaligned #{matches_misaligned.join("|")}")
+  $logger.debug("DELETIONS")
+  deletions_incorrect = compare_ranges(c_cig_mo.deletions.flatten, s_sam_mo.deletions.flatten,true)
+  stats.deletions_called_correctly += deletions_incorrect[0]
+  stats.total_number_of_bases_called_deletions += deletions_incorrect[1] + deletions_incorrect[0]
+  stats.total_number_of_bases_aligned_incorrectly += deletions_incorrect[1]
+  
   if matches_misaligned[0]  > options[:read_length]
     matches_misaligned[0] = options[:read_length]  
   end
@@ -758,7 +764,7 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
     #puts matches_misaligned
     #STDIN.gets
   end
-  stats.total_number_of_bases_aligned_correctly += matches_misaligned[0]
+  stats.total_number_of_bases_aligned_correctly += matches_misaligned[0] - deletions_incorrect[1]
   stats.total_number_of_bases_aligned_incorrectly += matches_misaligned[1]
 
   if matches_misaligned[0] > 0
@@ -784,11 +790,6 @@ def comp_base_by_base(s_sam,c_cig,stats,skipping_length,skipping_binary,options)
   stats.total_number_of_bases_called_insertions += insertions_incorrect[1] + insertions_incorrect[0]
   #stats.total_number_of_bases_aligned_incorrectly += insertions_incorrect[1]
   # Deletions
-  $logger.debug("DELETIONS")
-  deletions_incorrect = compare_ranges(c_cig_mo.deletions.flatten, s_sam_mo.deletions.flatten,true)
-  stats.deletions_called_correctly += deletions_incorrect[0]
-  stats.total_number_of_bases_called_deletions += deletions_incorrect[1] + deletions_incorrect[0]
-  stats.total_number_of_bases_aligned_incorrectly += deletions_incorrect[1]
   # Skipping
   $logger.debug("SKIPPING")
   skipping_incorrect = compare_ranges(c_cig_mo.skipped.flatten, s_sam_mo.skipped.flatten)
