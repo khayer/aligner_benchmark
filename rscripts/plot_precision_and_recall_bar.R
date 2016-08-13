@@ -1,6 +1,8 @@
 library(ggplot2)
 library(tidyr)
 library(dplyr)
+library(RColorBrewer)
+library(ggrepel)
 setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','character',
@@ -53,26 +55,33 @@ plot_my_data_scatter <- function(data, measurement1, measurement2, title, filena
   print(measurement1)
   data$tmp1= data[,colnames(data) == measurement1]
   print(measurement2)
+  data$color[data$color == "#F0E442"] = "cornflowerblue"
   data$tmp2 = data[,colnames(data) == measurement2]
   print(head(data))
   print(data$tmp2)
   data$algorithm = factor(data$algorithm)
   print(levels(data$algorithm))
-  ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm)) + 
-    geom_point(size=3) +
+  ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm, label = algorithm)) + 
+    geom_point(size=5) +
     #geom_text(aes(label = tmp), size = 3) +
-    ggtitle(title) + theme_gray(base_size=20) +
-    scale_shape_manual(values=1:nlevels(data$algorithm)) +
+    ggtitle(title) + theme_gray(base_size=20) + 
+    scale_shape_manual(values=1:nlevels(data$algorithm) ) +
     xlab("Algorithm") + xlab(measurement1)+ ylab(measurement2)+ #ylim(c(-0.0001,1.0001)) +
     #scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
     #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
-    scale_fill_manual(values = data$color) +
+    #scale_fill_manual(values = data$color) +
+    scale_color_manual(values = data$color) + 
+    #scale_colour_brewer(palette = "Dark2") +
+    #geom_text(hjust = 0, nudge_x = 0.005, check_overlap = TRUE) +
+    #xlim(c(.875,1.03)) +
+    theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
+    geom_text_repel(point.padding = unit(0.25, "lines")) +
     
     guides(fill=FALSE) 
   ggsave(
     filename,
-    width = 6.25,
-    height = 6.75,
+    width = 8.25,
+    height = 5.75,
     dpi = 300
   )
   #data$tmp <- NULL
@@ -91,8 +100,10 @@ plot_my_data_bars <- function(data, measurement1, measurement2, title, filename)
   data[data$thing == "tmp1",]$thing = "precision"
   data[data$thing == "tmp2",]$thing = "recall" 
   print(head(data))
-  data$algorithm = factor(data$algorithm)
+  data$algorithm = factor(data$algorithm,level = unique(data[order(data$recall,decreasing = TRUE),]$algorithm))
   print(levels(data$algorithm))
+  data$color = factor(data$color,level = unique(data[order(data$recall,decreasing = TRUE),]$color))
+  print(levels(data$color))
   ggplot(data,aes(x=thing, y=values, fill = algorithm)) + 
     geom_bar(stat="identity",position="dodge",width = .9, colour="black") +
   #ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm)) + 
@@ -100,18 +111,19 @@ plot_my_data_bars <- function(data, measurement1, measurement2, title, filename)
     #geom_text(aes(label = tmp), size = 3) +
     ggtitle(title) + theme_gray(base_size=20) +
     scale_shape_manual(values=1:nlevels(data$algorithm)) +
-    theme(axis.text.x = element_text(size = 10,angle = 90, hjust = 1, vjust = .5)) +
+    theme(axis.text.x = element_text(size = 15,angle = 90, hjust = 1, vjust = .5,face ="bold",colour = "black")) +
     xlab("Algorithm") + #ylim(c(-0.0001,1.0001)) +
+    #scale_x_discrete(limits=data[order(data$recall,decreasing = TRUE),]$algorithm)  +
     #scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
     #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
-    scale_fill_manual(values = data$color) +
+    scale_fill_manual(values = levels(data$color)) +
     facet_grid(~algorithm) +
-    theme(strip.text.x = element_text(size = 12, colour = "black", angle = 90)) + 
+    theme(strip.text.x = element_text(size = 15, colour = "black", angle = 90, face = "bold")) + 
     
     guides(fill=FALSE) 
   ggsave(
     filename,
-    width = 8.25,
+    width = 9.25,
     height = 6.75,
     dpi = 300
   )
@@ -347,7 +359,7 @@ gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligne
 plot_100_plot <- function(data,ylabs,titles,file) {
   ggplot(arrange(data, measurement), aes(x=algorithm, y=mean, fill=measurement, order = as.numeric(measurement))) + 
     geom_bar(stat="identity",width= .9) + 
-    theme_gray(base_size=10) +#theme_light()+
+    theme_gray(base_size=12) +#theme_light()+
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
     ylab(ylabs) +  ggtitle(titles) +
     scale_x_discrete(limits=data[order(data[data$measurement == "aligned correctly",]$mean,decreasing = TRUE),]$algorithm) +
@@ -392,7 +404,7 @@ plot_100_plot(r,"percent of total bases","malaria base level","base_level/malari
 plot_100_plot_multi <- function(data,ylabs,titles,file) {
   ggplot(arrange(data, measurement), aes(x=multi, y=mean, fill=measurement, order = as.numeric(measurement))) + 
     geom_bar(stat="identity",width= .9) + 
-    theme_gray(base_size=10) +#theme_light()+
+    theme_gray(base_size=12) +#theme_light()+
     #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
     ylab(ylabs) +  ggtitle(titles) + facet_grid(. ~ algorithm) +

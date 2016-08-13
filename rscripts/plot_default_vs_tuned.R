@@ -1,7 +1,7 @@
 library(ggplot2)
 library(tidyr)
 library(dplyr)
-setwd("~/github/aligner_benchmark/")
+setwd("~/github/aligner_benchmark/rscripts/")
 
 #plot_100_plot <- function(data,ylabs,titles,file) {
 #  ggplot(data, aes(x=algorithm, y=value, fill=measurement, order = as.numeric(measurement))) + 
@@ -23,20 +23,23 @@ setwd("~/github/aligner_benchmark/")
 plot_100_plot <- function(data,ylabs,titles,file) {
   ggplot(arrange(data, measurement), aes(x=tuned, y=value, fill=measurement)) + 
     geom_bar(stat="identity",width= .9) + 
-    theme_gray(base_size=10) +#theme_light()+
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
+    theme_gray(base_size=15) +#theme_light()+
+    theme(axis.text.x = element_text(size=15, face ="bold", angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
     facet_grid(. ~ algorithm) +
     ylab(ylabs) +  ggtitle(titles) + xlab("") +
+    theme(strip.text.x = element_text(size = 15, colour = "black", angle = 90, face = "bold"))  +
     #scale_x_discrete(limits=data[order(data[data$measurement == "aligned correctly",]$mean,decreasing = TRUE),]$algorithm) +
     scale_fill_manual(values=cbPalette) 
   ggsave(
     file,
-    width = 6.25,
-    height = 5.25,
+    width = 9.25,
+    height = 6.75,
     dpi = 300
   )
 }
 
+
+## MALARIA 1st
 # READ_LEVEL
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 #d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
@@ -84,9 +87,9 @@ plot_100_plot(r,"percent of total reads","Effect of tuning - malaria t3 base lev
 # BASE_LEVEL
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 #d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
-d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/tweaked_vs_default/base_level_r_in.txt", head =T,sep = "\t", colClasses = cols)
-d$tuned = sub("true", "tuned", d$tuned)
-d$tuned = sub("false", "default", d$tuned)
+d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_human_t3r1_base_level_recall.txt", head =T,sep = "\t", colClasses = cols)
+#d$tuned = sub("true", "tuned", d$tuned)
+#d$tuned = sub("false", "default", d$tuned)
 d$algorithm = sub(" tuned", "", d$algorithm)
 
 # Plot the 100 plots
@@ -107,8 +110,8 @@ gat = gat[gat$measurement %in% c("aligned incorrectly","aligned ambiguously","un
 gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
 
 
-r = gat[gat$level == "BASE",]
-plot_100_plot(r,"percent of total bases","Effect of tuning - malaria t3 base level","default_vs_tuned/malaria_t3_BASE.pdf")
+r = gat[gat$level == "BASELEVEL",]
+plot_100_plot(r,"percent of total bases","Effect of tuning - human t3 base level","default_vs_tuned/human_t3_BASE.pdf")
 
 
 # JUNC_LEVEL
@@ -205,9 +208,9 @@ plot_100_plot(r,"percent of total reads","Effect of tuning - human t3 read level
 # HUMAN_BASE_LEVEL
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 #d = read.csv("/Users/kat//Google Drive/AlignerBenchmarkLocal/summary/summary_for_R_default.txt", head =T,sep = "\t", colClasses = cols)
-d = read.csv("/Users/hayer//Google Drive/AlignerBenchmarkLocal/tweaked_vs_default/human_t3r1_base_level_r_in.txt", head =T,sep = "\t", colClasses = cols)
-d$tuned = sub("true", "tuned", d$tuned)
-d$tuned = sub("false", "default", d$tuned)
+d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_human_t3r1_base_level_recall.txt", head =T,sep = "\t", colClasses = cols)
+#d$tuned = sub("true", "tuned", d$tuned)
+#d$tuned = sub("false", "default", d$tuned)
 d$algorithm = sub(" tuned", "", d$algorithm)
 
 # Plot the 100 plots

@@ -97,20 +97,23 @@ plot_100_plot(r,"percent of total reads","Effect of annotation - malaria t1 read
 plot_recall <- function(data,ylabs,titles,file) {
   ggplot(data, aes(x=annotation, y=value, fill=measurement)) + 
     geom_bar(stat="identity",position="dodge",width= .85) + 
-    theme_gray(base_size=10) +#theme_light()+
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
+    theme_gray(base_size=15) +#theme_light()+
+    theme(axis.text.x = element_text(size=15, face ="bold",angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
     facet_grid(. ~ algorithm) +
     #scale_y_continuous(limits=c(0.0,1),oob = rescale_none) + 
     ylab(ylabs) +  ggtitle(titles) + xlab("") +
+    theme(strip.text.x = element_text(size = 15, colour = "black", angle = 90, face = "bold"))  +
     #scale_x_discrete(limits=data[order(data[data$measurement == "aligned correctly",]$value,decreasing = TRUE),]$algorithm) +
     scale_fill_manual(values=cbPalette) 
   ggsave(
     file,
-    width = 7.75,
-    height = 5.25,
+    width = 9.25,
+    height = 6.75,
     dpi = 300
   )
 }
+l  = spread(d[,c("level","algorithm","annotation","species","dataset",
+                 "measurement","value")], measurement, value)
 l$skipping_recall[l$skipping_recall == 1] = NA
 l$skipping_precision[l$skipping_precision == 1] = NA
 gat = gather(l,measurement,value,-level, -algorithm, -annotation, -species, -dataset)
@@ -133,3 +136,34 @@ r = gat[ gat$level == "JUNCLEVEL" & gat$species == "human" & gat$dataset == "t2"
 plot_recall(r,"","Effect of annotation - human t2 junction level","anno/human_t2_JUNC.pdf")
 r = gat[ gat$level == "JUNCLEVEL" & gat$species == "human" & gat$dataset == "t1",]
 plot_recall(r,"","Effect of annotation - human t1 junction level","anno/human_t1_JUNC.pdf")
+
+l  = spread(d[,c("level","algorithm","annotation","species","dataset",
+                 "measurement","value")], measurement, value)
+gat = gather(l,measurement,value,-level, -algorithm, -annotation, -species, -dataset)
+gat = gat[gat$measurement %in% c("recall","precision") ,]
+r = gat[ gat$level == "READLEVEL" & gat$species == "malaria" & gat$dataset == "t3",]
+plot_recall(r,"","Effect of annotation - malaria t3 read level","anno/malaria_t3_READ_BAR.pdf")
+r = gat[ gat$level == "READLEVEL" & gat$species == "malaria" & gat$dataset == "t2",]
+plot_recall(r,"","Effect of annotation - malaria t2 read level","anno/malaria_t2_READ_BAR.pdf")
+r = gat[ gat$level == "READLEVEL" & gat$species == "malaria" & gat$dataset == "t1",]
+plot_recall(r,"","Effect of annotation - malaria t1 read level","anno/malaria_t1_READ_BAR.pdf")
+r = gat[ gat$level == "READLEVEL" & gat$species == "human" & gat$dataset == "t3",]
+plot_recall(r,"","Effect of annotation - human t3 read level","anno/human_t3_READ_BAR.pdf")
+r = gat[ gat$level == "READLEVEL" & gat$species == "human" & gat$dataset == "t2",]
+plot_recall(r,"","Effect of annotation - human t2 read level","anno/human_t2_READ_BAR.pdf")
+r = gat[ gat$level == "READLEVEL" & gat$species == "human" & gat$dataset == "t1",]
+plot_recall(r,"","Effect of annotation - human t1 read level","anno/human_t1_READ_BAR.pdf")
+
+
+r = gat[ gat$level == "BASELEVEL" & gat$species == "malaria" & gat$dataset == "t3",]
+plot_recall(r,"","Effect of annotation - malaria t3 base level","anno/malaria_t3_BASE_BAR.pdf")
+r = gat[ gat$level == "BASELEVEL" & gat$species == "malaria" & gat$dataset == "t2",]
+plot_recall(r,"","Effect of annotation - malaria t2 base level","anno/malaria_t2_BASE_BAR.pdf")
+r = gat[ gat$level == "BASELEVEL" & gat$species == "malaria" & gat$dataset == "t1",]
+plot_recall(r,"","Effect of annotation - malaria t1 base level","anno/malaria_t1_BASE_BAR.pdf")
+r = gat[ gat$level == "BASELEVEL" & gat$species == "human" & gat$dataset == "t3",]
+plot_recall(r,"","Effect of annotation - human t3 base level","anno/human_t3_BASE_BAR.pdf")
+r = gat[ gat$level == "BASELEVEL" & gat$species == "human" & gat$dataset == "t2",]
+plot_recall(r,"","Effect of annotation - human t2 base level","anno/human_t2_BASE_BAR.pdf")
+r = gat[ gat$level == "BASELEVEL" & gat$species == "human" & gat$dataset == "t1",]
+plot_recall(r,"","Effect of annotation - human t1 base level","anno/human_t1_BASE_BAR.pdf")

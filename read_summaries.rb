@@ -383,9 +383,10 @@ def print_all_tuned(all)
           name = e.algorithms.to_a[i]
           tuned = "default"
           if name =~ /tuned$/
-            name =~ /_?(FNR|FDR)?_(tuned$)/
-            tuned = "#{$1} #{$2}"
-            name = name.sub(/_?(FNR|FDR)?_(tuned$)/, "").strip
+            tuned = "tuned"
+            #name =~ /_?(FNR|FDR)?_(tuned$)/
+            #tuned = "#{$1} #{$2}"
+            #name = name.sub(/_?(FNR|FDR)?_(tuned$)/, "").strip
           end
           #if e.algorithms.to_a[i] =~ /^tophat2/
           #  if name == "tophat2nocoveragesearch-bowtie2sensitive"
