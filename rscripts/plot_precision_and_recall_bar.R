@@ -350,43 +350,43 @@ k = l[l$species == "human" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t3",]
 plot_my_data(k,"skipping_recall","human junction level","junctions/human_t3_JUNC_recall.pdf")
 plot_my_data(k,"skipping_precision","human junction level","junctions/human_t3_JUNC_precision.pdf")
-plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t3_JUNC_insertions_scatter.pdf")
-plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t3_JUNC_insertions_bars.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t3_JUNC_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t3_JUNC_bars.pdf")
 
 k = l[l$species == "human" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","human junction level","junctions/human_t2_JUNC_recall.pdf")
-plot_my_data(k,"precision","human junction level","junctions/human_t2_JUNC_precision.pdf")
-plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t2_JUNC_insertions_scatter.pdf")
-plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t2_JUNC_insertions_bars.pdf")
+plot_my_data(k,"skipping_recall","human junction level","junctions/human_t2_JUNC_recall.pdf")
+plot_my_data(k,"skipping_precision","human junction level","junctions/human_t2_JUNC_precision.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t2_JUNC_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t2_JUNC_bars.pdf")
 
 k = l[l$species == "human" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","human junction level","junctions/human_t1_JUNC_recall.pdf")
-plot_my_data(k,"precision","human junction level","junctions/human_t1_JUNC_precision.pdf")
-plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t1_JUNC_insertions_scatter.pdf")
-plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t1_JUNC_insertions_bars.pdf")
+plot_my_data(k,"skipping_recall","human junction level","junctions/human_t1_JUNC_recall.pdf")
+plot_my_data(k,"skipping_precision","human junction level","junctions/human_t1_JUNC_precision.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t1_JUNC_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","human junction level","junctions/human_t1_JUNC_bars.pdf")
 
 
 k = l[l$species == "malaria" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t3",]
-plot_my_data(k,"recall","malaria junction level","junctions/malaria_t3_JUNC_recall.pdf")
-plot_my_data(k,"precision","malaria junction level","junctions/malaria_t3_JUNC_precision.pdf")
-plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t3_JUNC_insertions_scatter.pdf")
-plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t3_JUNC_insertions_bars.pdf")
+plot_my_data(k,"skipping_recall","malaria junction level","junctions/malaria_t3_JUNC_recall.pdf")
+plot_my_data(k,"skipping_precision","malaria junction level","junctions/malaria_t3_JUNC_precision.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t3_JUNC_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t3_JUNC_bars.pdf")
 
 k = l[l$species == "malaria" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t2",]
-plot_my_data(k,"recall","malaria junction level","junctions/malaria_t2_JUNC_recall.pdf")
-plot_my_data(k,"precision","malaria junction level","junctions/malaria_t2_JUNC_precision.pdf")
-plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t2_JUNC_insertions_scatter.pdf")
-plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t2_JUNC_insertions_bars.pdf")
+plot_my_data(k,"skipping_recall","malaria junction level","junctions/malaria_t2_JUNC_recall.pdf")
+plot_my_data(k,"skipping_precision","malaria junction level","junctions/malaria_t2_JUNC_precision.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t2_JUNC_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t2_JUNC_bars.pdf")
 k = l[l$species == "malaria" & l$level == "JUNCLEVEL",]
 k = k[k$dataset == "t1",]
-plot_my_data(k,"recall","malaria junction level","junctions/malaria_t1_JUNC_recall.pdf")
-plot_my_data(k,"precision","malaria junction level","junctions/malaria_t1_JUNC_precision.pdf")
-plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t1_JUNC_insertions_scatter.pdf")
-plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t1_JUNC_insertions_bars.pdf")
+plot_my_data(k,"skipping_recall","malaria junction level","junctions/malaria_t1_JUNC_recall.pdf")
+plot_my_data(k,"skipping_precision","malaria junction level","junctions/malaria_t1_JUNC_precision.pdf")
+plot_my_data_scatter(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t1_JUNC_scatter.pdf")
+plot_my_data_bars(k,"skipping_precision","skipping_recall","malaria junction level","junctions/malaria_t1_JUNC_bars.pdf")
 
 # Plot the 100 plots
 d$measurement[d$measurement == "aligned_correctly"] = "aligned correctly"

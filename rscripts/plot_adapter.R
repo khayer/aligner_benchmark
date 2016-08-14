@@ -83,7 +83,7 @@ plot_100_plot(r,"percent of total bases","Effect of adapters - human t1 base lev
 gat = gather(l,measurement,value,-level, -algorithm,-trimmed,-adapter_length)
 gat = gat[gat$measurement %in% c("recall","precision") ,]
 r = gat[ gat$level == "READLEVEL" ,]
-plot_recall(r,"","Effect of tuning - human t1 read level","adapter/adapter_READ_bar.pdf")
+plot_recall(r,"","Effect of adapters - human t1 read level","adapter/adapter_READ_bar.pdf")
 r = gat[ gat$level == "BASELEVEL" ,]
-plot_recall(r,"","Effect of tuning - human t1 base level","adapter/adapter_BASE_bar.pdf")
+plot_recall(r,"","Effect of adapters - human t1 base level","adapter/adapter_BASE_bar.pdf")
 
