@@ -58,7 +58,8 @@ def setup_options(args)
     :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
     :species => "human", :debug => false, :tuned => false, :default => true,
-    :annotation => false, :adapter => false, :anchor => false
+    :annotation => false, :adapter => false, :anchor => false,
+    :versions => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -101,6 +102,13 @@ def setup_options(args)
 
     opts.on("-r", "--adapter", "Run in adapter mode") do |t|
       options[:adapter] = true
+      options[:annotation] = false
+      options[:default] = false
+      options[:tuned] = false
+    end
+
+    opts.on("-e", "--versions", "Run in versions mode") do |t|
+      options[:versions] = true
       options[:annotation] = false
       options[:default] = false
       options[:tuned] = false
@@ -169,8 +177,8 @@ def read_files(argv, options)
     replicate = "NA"
     adapter_length = "NA"
     anchor_length = "NA"
-    if options[:default]
-     arg =~ /\/([a-z]*)_(t\d)(r\d).t\w{2}$/
+    if options[:default] || options[:versions]
+     arg =~ /\/([a-z]*)_([t|T]\d)([r|R]\d).t\w{2}$/
      species = $1
      dataset = $2
      replicate = $3
@@ -408,6 +416,30 @@ def print_all_annotation(all)
  puts result
 end
 
+def print_all_versions(all)
+  #precision
+  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\tversions\n"
+  all.each do |e|
+    e.levels.each_pair do |level, measurement|
+      measurement.each_pair do |m, values|
+        values.each_with_index do |v,i|
+          name = e.algorithms.to_a[i]
+          versions = "latest"
+          if name =~ /Tested$/
+            versions = "tested"
+            #name = name.sub(/anno$/,"")
+          end
+          name = name.split("_")[0]
+          $logger.debug("#{versions}")
+          $logger.debug("#{e.algorithms.to_a[i]}")
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{versions}\n"
+        end
+      end
+    end
+  end
+ puts result
+end
+
 # FOR DEFAUlT VS TUNED
 def print_all_tuned(all)
   #precision
@@ -538,6 +570,8 @@ def run(argv)
     print_all_adapter(all)
   when options[:anchor]
     print_all_anchor(all)
+  when options[:versions]
+    print_all_versions(all)
   end
 
   #print_all2(all)
