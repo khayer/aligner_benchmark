@@ -75,8 +75,46 @@ plot_my_data_scatter <- function(data, measurement1, measurement2, title, filena
     #geom_text(hjust = 0, nudge_x = 0.005, check_overlap = TRUE) +
     #xlim(c(.875,1.03)) +
     theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
-    geom_text_repel(point.padding = unit(0.25, "lines")) +
     
+    
+    guides(fill=FALSE) 
+  ggsave(
+    filename,
+    width = 8.25,
+    height = 5.75,
+    dpi = 300
+  )
+  #data$tmp <- NULL
+}
+
+plot_my_data_scatter_labels <- function(data, measurement1, measurement2, title, filename) {
+  # data = k 
+  # measurement one of #{recall, precision}
+  print(measurement1)
+  data$tmp1= data[,colnames(data) == measurement1]
+  print(measurement2)
+  data$color[data$color == "#F0E442"] = "cornflowerblue"
+  data$tmp2 = data[,colnames(data) == measurement2]
+  print(head(data))
+  print(data$tmp2)
+  data$algorithm = factor(data$algorithm)
+  print(levels(data$algorithm))
+  ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm, label = algorithm)) + 
+    geom_point(size=5) +
+    #geom_text(aes(label = tmp), size = 3) +
+    ggtitle(title) + theme_gray(base_size=20) + 
+    scale_shape_manual(values=1:nlevels(data$algorithm) ) +
+    xlab("Algorithm") + xlab(measurement1)+ ylab(measurement2)+ #ylim(c(-0.0001,1.0001)) +
+    #scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
+    #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
+    #scale_fill_manual(values = data$color) +
+    scale_color_manual(values = data$color) + 
+    #scale_colour_brewer(palette = "Dark2") +
+    #geom_text(hjust = 0, nudge_x = 0.005, check_overlap = TRUE) +
+    #xlim(c(.875,1.03)) +
+    theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
+    #geom_text_repel(point.padding = unit(0.25, "lines")) +
+    geom_text_repel(point.padding = unit(0.25, "lines")) +
     guides(fill=FALSE) 
   ggsave(
     filename,
@@ -96,14 +134,15 @@ plot_my_data_bars <- function(data, measurement1, measurement2, title, filename)
   data$tmp2 = data[,colnames(data) == measurement2]
   print(head(data))
   print(data$tmp2)
+  data$algorithm = factor(data$algorithm,level = unique(data[order(data$tmp2,decreasing = TRUE),]$algorithm))
+  print(levels(data$algorithm))
+  data$color = factor(data$color,level = unique(data[order(data$tmp2,decreasing = TRUE),]$color))
+  print(levels(data$color))
   data = gather(data, thing, values, tmp1 , tmp2)
   data[data$thing == "tmp1",]$thing = "precision"
   data[data$thing == "tmp2",]$thing = "recall" 
   print(head(data))
-  data$algorithm = factor(data$algorithm,level = unique(data[order(data$recall,decreasing = TRUE),]$algorithm))
-  print(levels(data$algorithm))
-  data$color = factor(data$color,level = unique(data[order(data$recall,decreasing = TRUE),]$color))
-  print(levels(data$color))
+  
   ggplot(data,aes(x=thing, y=values, fill = algorithm)) + 
     geom_bar(stat="identity",position="dodge",width = .9, colour="black") +
   #ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm)) + 
@@ -137,19 +176,21 @@ k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","human read level","read_level/human_t3_READ_recall.pdf")
 plot_my_data(k,"precision","human read level","read_level/human_t3_READ_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t3_READ_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","human read level","read_level/human_t3_READ_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","human read level","read_level/human_t3_READ_bars.pdf")
-
 k = l[l$species == "human" & l$level == "READLEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","human read level","read_level/human_t2_READ_recall.pdf")
 plot_my_data(k,"precision","human read level","read_level/human_t2_READ_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t2_READ_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","human read level","read_level/human_t2_READ_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","human read level","read_level/human_t2_READ_bars.pdf")
 k = l[l$species == "human" & l$level == "READLEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","human read level","read_level/human_t1_READ_recall.pdf")
 plot_my_data(k,"precision","human read level","read_level/human_t1_READ_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t1_READ_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","human read level","read_level/human_t1_READ_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","human read level","read_level/human_t1_READ_bars.pdf")
 
 
@@ -158,18 +199,21 @@ k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","malaria read level","read_level/malaria_t3_READ_recall.pdf")
 plot_my_data(k,"precision","malaria read level","read_level/malaria_t3_READ_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","malaria read level","read_level/malaria_t3_READ_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","malaria read level","read_level/malaria_t3_READ_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","malaria read level","read_level/malaria_t3_READ_bars.pdf")
 k = l[l$species == "malaria" & l$level == "READLEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","malaria read level","read_level/malaria_t2_READ_recall.pdf")
 plot_my_data(k,"precision","malaria read level","read_level/malaria_t2_READ_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","malaria read level","read_level/malaria_t2_READ_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","malaria read level","read_level/malaria_t2_READ_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","malaria read level","read_level/malaria_t2_READ_bars.pdf")
 k = l[l$species == "malaria" & l$level == "READLEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","malaria read level","read_level/malaria_t1_READ_recall.pdf")
 plot_my_data(k,"precision","malaria read level","read_level/malaria_t1_READ_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","malaria read level","read_level/malaria_t1_READ_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","malaria read level","read_level/malaria_t1_READ_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","malaria read level","read_level/malaria_t1_READ_bars.pdf")
 
 k = l[l$species == "human" & l$level == "BASELEVEL",]
@@ -177,18 +221,21 @@ k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","human base level","base_level/human_t3_BASE_recall.pdf")
 plot_my_data(k,"precision","human base level","base_level/human_t3_BASE_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","human base level","base_level/human_t3_BASE_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","human base level","base_level/human_t3_BASE_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","human base level","base_level/human_t3_BASE_bars.pdf")
 k = l[l$species == "human" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","human base level","base_level/human_t2_BASE_recall.pdf")
 plot_my_data(k,"precision","human base level","base_level/human_t2_BASE_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","human base level","base_level/human_t2_BASE_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","human base level","base_level/human_t2_BASE_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","human base level","base_level/human_t2_BASE_bars.pdf")
 k = l[l$species == "human" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","human base level","base_level/human_t1_BASE_recall.pdf")
 plot_my_data(k,"precision","human base level","base_level/human_t1_BASE_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","human base level","base_level/human_t1_BASE_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","human base level","base_level/human_t1_BASE_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","human base level","base_level/human_t1_BASE_bars.pdf")
 
 
@@ -197,18 +244,21 @@ k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","malaria base level","base_level/malaria_t3_BASE_recall.pdf")
 plot_my_data(k,"precision","malaria base level","base_level/malaria_t3_BASE_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","malaria base level","base_level/malaria_t3_BASE_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","malaria base level","base_level/malaria_t3_BASE_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","malaria base level","base_level/malaria_t3_BASE_bars.pdf")
 k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t2",]
 plot_my_data(k,"recall","malaria base level","base_level/malaria_t2_BASE_recall.pdf")
 plot_my_data(k,"precision","malaria base level","base_level/malaria_t2_BASE_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","malaria base level","base_level/malaria_t2_BASE_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","malaria base level","base_level/malaria_t2_BASE_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","malaria base level","base_level/malaria_t2_BASE_bars.pdf")
 k = l[l$species == "malaria" & l$level == "BASELEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data(k,"recall","malaria base level","base_level/malaria_t1_BASE_recall.pdf")
 plot_my_data(k,"precision","malaria base level","base_level/malaria_t1_BASE_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","malaria base level","base_level/malaria_t1_BASE_scatter.pdf")
+plot_my_data_scatter_labels(k,"precision","recall","malaria base level","base_level/malaria_t1_BASE_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","malaria base level","base_level/malaria_t1_BASE_bars.pdf")
 
 # BASE LEVEL AND DELETIONS
@@ -404,21 +454,52 @@ plot_100_plot(r,"percent of total bases","malaria base level","base_level/malari
 plot_100_plot_multi <- function(data,ylabs,titles,file) {
   ggplot(arrange(data, measurement), aes(x=multi, y=mean, fill=measurement, order = as.numeric(measurement))) + 
     geom_bar(stat="identity",width= .9) + 
-    theme_gray(base_size=12) +#theme_light()+
+    theme_gray(base_size=15) +#theme_light()+
     #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) +
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
+    theme(axis.text.x = element_text(size=15, face ="bold",angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
     ylab(ylabs) +  ggtitle(titles) + facet_grid(. ~ algorithm) +
+    theme(strip.text.x = element_text(size = 15, colour = "black", angle = 90, face = "bold"))  +
     #scale_x_discrete(limits=data[order(data[data$measurement == "aligned correctly",]$mean,decreasing = TRUE),]$algorithm) +
-    scale_fill_manual(values=cbPalette) 
+    scale_fill_manual(values=cbPalette) +
+    xlab("multi-mappers")
   ggsave(
     file,
-    width = 6.25,
-    height = 5.25,
+    width = 9.75,
+    height = 6.75,
     dpi = 300
   )
 }
 
 r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level %in% c("READLEVEL","READLEVEL(multimappers)"),]
-r$multi = TRUE
-r[r$level == "READLEVEL",]$multi = FALSE
-plot_100_plot_multi(r,"percent of total reads","human read level","read_level/human_t3_READ_multi.pdf")
+r$multi = "included"
+r[r$level == "READLEVEL",]$multi = "not included"
+r$multi = factor(r$multi, levels = c("not included", "included"))
+plot_100_plot_multi(r,"percent of total reads","human read level","multimapper/human_t3_READ_multi.pdf")
+r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level %in% c("READLEVEL","READLEVEL(multimappers)"),]
+r$multi = "included"
+r[r$level == "READLEVEL",]$multi = "not included"
+r$multi = factor(r$multi, levels = c("not included", "included"))
+plot_100_plot_multi(r,"percent of total reads","human read level","multimapper/human_t2_READ_multi.pdf")
+r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level %in% c("READLEVEL","READLEVEL(multimappers)"),]
+r$multi = "included"
+r[r$level == "READLEVEL",]$multi = "not included"
+r$multi = factor(r$multi, levels = c("not included", "included"))
+plot_100_plot_multi(r,"percent of total reads","human read level","multimapper/human_t1_READ_multi.pdf")
+
+r = gat[gat$dataset == "t3"  & gat$species == "human" & gat$level %in% c("BASELEVEL","BASELEVEL(multimappers)"),]
+r$multi = "included"
+r[r$level == "BASELEVEL",]$multi = "not included"
+r$multi = factor(r$multi, levels = c("not included", "included"))
+plot_100_plot_multi(r,"percent of total reads","human base level","multimapper/human_t3_BASE_multi.pdf")
+
+r = gat[gat$dataset == "t2"  & gat$species == "human" & gat$level %in% c("BASELEVEL","BASELEVEL(multimappers)"),]
+r$multi = "included"
+r[r$level == "BASELEVEL",]$multi = "not included"
+r$multi = factor(r$multi, levels = c("not included", "included"))
+plot_100_plot_multi(r,"percent of total reads","human base level","multimapper/human_t2_BASE_multi.pdf")
+
+r = gat[gat$dataset == "t1"  & gat$species == "human" & gat$level %in% c("BASELEVEL","BASELEVEL(multimappers)"),]
+r$multi = "included"
+r[r$level == "BASELEVEL",]$multi = "not included"
+r$multi = factor(r$multi, levels = c("not included", "included"))
+plot_100_plot_multi(r,"percent of total reads","human base level","multimapper/human_t1_BASE_multi.pdf")

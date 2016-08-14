@@ -58,7 +58,7 @@ def setup_options(args)
     :cig_file => nil, :stats_path => nil, :tool_result_path => nil,
     :aligner_benchmark => nil, :samtools => "samtools", :jobs_path => nil,
     :species => "human", :debug => false, :tuned => false, :default => true,
-    :annotation => false
+    :annotation => false, :adapter => false, :anchor => false
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -99,6 +99,20 @@ def setup_options(args)
       options[:default] = false
     end
 
+    opts.on("-r", "--adapter", "Run in adapter mode") do |t|
+      options[:adapter] = true
+      options[:annotation] = false
+      options[:default] = false
+      options[:tuned] = false
+    end
+
+    opts.on("-n", "--anchor", "Run in anchor mode") do |t|
+      options[:anchor] = true
+      options[:annotation] = false
+      options[:default] = false
+      options[:tuned] = false
+    end
+
     opts.on("-a", "--annotation", "Run in annotation vs no-annotation mode") do |t|
       options[:tuned] = false
       options[:annotation] = true
@@ -123,10 +137,12 @@ def setup_options(args)
 end
 
 class Run
-  def initialize(species, dataset, replicate)
+  def initialize(species, dataset, replicate, adapter_length,anchor_length)
     @species = species
     @dataset = dataset
     @replicate = replicate
+    @adapter_length = adapter_length
+    @anchor_length = anchor_length
     @algorithms = Set.new
     #@levels = {"READ" => {}, "JUNC" => {}, "BASE" => {} }
     @levels = {"READLEVEL" => {}, "READLEVEL(multimappers)" => {},
@@ -134,7 +150,8 @@ class Run
       "JUNCLEVEL" => {} }
   end
 
-  attr_accessor :species, :dataset, :replicate, :algorithms, :levels
+  attr_accessor :species, :dataset, :replicate, :adapter_length, 
+    :anchor_length, :algorithms, :levels
 
   def to_s
     "species #{@species}; dataset: #{@dataset}; replicate: #{@replicate}; Levels: #{@levels}; algorithms #{@algorithms.to_a.join("|")}"
@@ -143,19 +160,36 @@ class Run
 
 end
 
-def read_files(argv)
+def read_files(argv, options)
   all = []
   #names = ["Aligner"]
   argv[0..-1].each do |arg|
-    arg =~ /\/([a-z]*)_(t\d)(r\d).t\w{2}$/
-    species = $1
-    dataset = $2
-    replicate = $3
-    $logger.debug(replicate)
+    species = "NA"
+    dataset = "NA"
+    replicate = "NA"
+    adapter_length = "NA"
+    anchor_length = "NA"
+    if options[:default]
+     arg =~ /\/([a-z]*)_(t\d)(r\d).t\w{2}$/
+     species = $1
+     dataset = $2
+     replicate = $3
+     $logger.debug(replicate)
+    end
+    if options[:adapter]
+      arg =~ /\/([a-z]*)_(\d+).t\w{2}$/
+      adapter_length = $2
+      $logger.debug("adapter_length #{adapter_length}") 
+    end
+    if options[:anchor]
+      arg =~ /\/([a-z]*)_(\d+).t\w{2}$/
+      anchor_length = $2
+      $logger.debug("anchor_length #{anchor_length}") 
+    end
     level = nil
     names = []
     first = true
-    current_run = Run.new(species, dataset, replicate)
+    current_run = Run.new(species, dataset, replicate, adapter_length,anchor_length)
     #info << arg.gsub(/([\.\/]|comp_res.txt$)/,"")
     current_mapping = {}
     File.open(arg).each do |line|
@@ -215,6 +249,8 @@ def read_files(argv)
         current_run.algorithms.each_with_index do |n,i|
           current_run.levels[level]["aligned_incorrectly"]  ||= []
           current_run.levels[level]["aligned_incorrectly"]  << fields[current_mapping[n]].to_f / 100.0
+          current_run.levels[level]["aligned_ambiguously"]  ||= [] if level == "BASELEVEL(multimappers)"
+          current_run.levels[level]["aligned_ambiguously"]  << 0.0 if level == "BASELEVEL(multimappers)"
         end
       when "% bases aligned ambiguously:"
         current_run.algorithms.each_with_index do |n,i|
@@ -431,11 +467,66 @@ def print_all_tuned(all)
  puts result
 end
 
+def print_all_adapter(all)
+  #precision
+  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\ttrimmed\tadapter_length\n"
+  all.each do |e|
+    e.levels.each_pair do |level, measurement|
+      measurement.each_pair do |m, values|
+        values.each_with_index do |v,i|
+          name = e.algorithms.to_a[i]
+          trimmed = "trimmed"
+          if name =~ /_not removed$/
+            trimmed = "not trimmed"
+            #name =~ /_?(FNR|FDR)?_(tuned$)/
+            #tuned = "#{$1} #{$2}"
+            #name = name.sub(/_?(FNR|FDR)?_(tuned$)/, "").strip
+          end
+          name = name.split("_")[0]
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{trimmed}\t#{e.adapter_length}\n"
+        end
+      end
+    end
+  end
+ puts result
+end
+
+def print_all_anchor(all)
+  #precision
+  result = "species\tdataset\treplicate\tlevel\talgorithm\tmeasurement\tvalue\tcolor\tannotation\tanchor_length\n"
+  all.each do |e|
+    e.levels.each_pair do |level, measurement|
+      measurement.each_pair do |m, values|
+        values.each_with_index do |v,i|
+          name = e.algorithms.to_a[i]
+          annotation = "true"
+          if name =~ /NO annotation/
+            annotation = "false"
+            #name =~ /_?(FNR|FDR)?_(tuned$)/
+            #tuned = "#{$1} #{$2}"
+            #name = name.sub(/_?(FNR|FDR)?_(tuned$)/, "").strip
+          end
+          name = name.split("anno")[0]
+          name = name.split("N")[0]
+          if name == "olego (2-pass)" || name == "star"
+            next
+          end
+          if name == "star (2-pass)"
+            name = "star"
+          end
+          result << "#{e.species}\t#{e.dataset}\t#{e.replicate}\t#{level}\t#{name}\t#{m}\t#{v}\t#{$colors[name.to_sym]}\t#{annotation}\t#{e.anchor_length}\n"
+        end
+      end
+    end
+  end
+ puts result
+end
+
 def run(argv)
   options = setup_options(argv)
   $logger.debug(options)
   $logger.debug(argv)
-  all = read_files(argv)
+  all = read_files(argv,options)
   case
   when options[:default]
     print_all_default(all)
@@ -443,6 +534,10 @@ def run(argv)
     print_all_annotation(all)
   when options[:tuned]
     print_all_tuned(all)
+  when options[:adapter]
+    print_all_adapter(all)
+  when options[:anchor]
+    print_all_anchor(all)
   end
 
   #print_all2(all)
