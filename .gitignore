@@ -46,3 +46,7 @@ test_file
 rscripts/read_level/
 
 files_to_plot/*
+*cig
+*sam
+notes*
+

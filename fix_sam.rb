@@ -39,7 +39,8 @@ def setup_option(args)
     :debug => false,
     :nummer => 10000000,
     :fill => true,
-    :read_length => 100
+    :read_length => 100,
+    :start => 1
   }
 
   opt_parser = OptionParser.new do |opts|
@@ -70,6 +71,13 @@ def setup_option(args)
       :REQUIRED,Integer,
       "number of reads that should be in the fixed.sam, DEFAULT: 10,000,000") do |s|
       options[:nummer] = s
+    end
+
+
+    opts.on("-s", "--start [INT]",
+      :REQUIRED,Integer,
+      "start number of framgment that should be in the fixed.sam, DEFAULT: 1") do |s|
+      options[:start] = s
     end
 
     opts.on("-r", "--read_length [INT]",
@@ -255,10 +263,13 @@ def run_all(arguments)
   options = setup_option(arguments)
   sam_file = File.open(arguments[0])
   endnum = options[:nummer]
+  startnum = options[:start]-1
   current_name = ""
+  last_written = nil
   lines = []
   first = true
   while !sam_file.eof?
+    
     line = sam_file.readline()
     if line =~ /^@/
       puts line
@@ -267,16 +278,29 @@ def run_all(arguments)
     line.chomp!
     fields = line.split("\t")
     fields = check_hi_tag(fields)
+    fields[0] =~ /(\d+)/
+    num_out = $1.to_i
+    last_written ||= num_out
     
-    num_out = nil
+    #num_out = nil
     if lines.length != 0
       #Contextmap2 case
+      $logger.debug("KAFKA")
       if get_name(lines[0][0]) != get_name(fields[0])
-        fix_lines(lines,current_name,options)
+        exit if num_out > endnum 
+        fix_lines(lines,current_name,options) if num_out > startnum
+
         current_name =~ /(\d+)/
-        num_out = $1.to_i
+        #num_out = to_i
+        last_written = $1.to_i
         current_name = ""
       end
+    end
+
+    $logger.debug "LAST WRITTEN #{last_written}"
+    while last_written+1 < num_out && last_written > startnum
+      add_empty_lines(last_written+1)
+      last_written += 1
     end
 
     if current_name == ""
@@ -289,6 +313,10 @@ def run_all(arguments)
     end
     old_name = current_name
     while old_name == current_name && !sam_file.eof?
+      current_name =~ /(\d+)/
+      num_out = $1.to_i
+      #next if num_out < startnum
+      #exit if num_out > endnum
 
       line = sam_file.readline()
       $logger.debug "LINE #{line}"
@@ -310,16 +338,24 @@ def run_all(arguments)
     if old_num > 1 && first
       k = 1
       first = false
-      while k < old_num
-        add_empty_lines(k) if options[:fill]
+      while k < old_num 
+        if k > startnum
+          add_empty_lines(k) if options[:fill]
+          last_written = k
+        end
         k += 1
       end
     end
     num_out ||= old_num
+    exit if num_out > endnum
     $logger.debug "NUM_OUT #{num_out}"
     while old_num > num_out+1 #&& #(num > num_out+1)
       $logger.debug "ADDING #{num_out+1}"
-      add_empty_lines(num_out+1) if options[:fill]
+      if num_out+1 > startnum
+        add_empty_lines(num_out+1) if options[:fill]
+        last_written = num_out+1
+      end
+      
       #num_out = "seq.#{num_out+1}"
       num_out += 1
       #STDERR.puts "HERE: #{num}"
@@ -330,9 +366,10 @@ def run_all(arguments)
     $logger.debug old_name
     lines = lines[0...-1] if (!last_name_equal?(lines))
     lines[0][0] =~ /(\d+)/
-    written = $1
+    written = $1.to_i
     $logger.debug "MUHAHAHA #{lines.join(":::")}"
-    fix_lines(lines,old_name,options)
+    fix_lines(lines,old_name,options) if num_out > startnum
+    last_written = written
 
     first = false
     #current_name = fields[0]
@@ -342,7 +379,10 @@ def run_all(arguments)
     old_num = $1.to_i + 1
     while !(num <= old_num)
       $logger.debug "adding #{old_num}"
-      add_empty_lines(old_num) if options[:fill]
+      if old_num > startnum
+        add_empty_lines(old_num) if options[:fill]
+        last_written = old_num
+      end
       old_name = "seq.#{old_num+1}"
       old_num += 1
       #STDERR.puts "HERE: #{num}"
@@ -353,21 +393,24 @@ def run_all(arguments)
     #  lines = []
     #else
     fields[0] =~ /(\d+)/
-    if $1 == written
+
+    if $1.to_i == written
       lines = []
     else
       lines = [fields]
     end
     #end
-    $logger.debug lines.join(":::")
+    $logger.debug "END of while #{lines.join(':::')}"
   end
   fix_lines(lines,current_name,options) if lines.length > 0
   $logger.debug "could be empty #{lines.join(":::")}"
   current_name =~ /(\d+)/
   old_num = $1.to_i+1
-  endnum ||= 10000000
+  #endnum ||= 10000000
   while !(endnum+1 <= old_num)
-    add_empty_lines(old_num) if options[:fill]
+    if old_num > startnum
+      add_empty_lines(old_num) if options[:fill]
+    end
     old_name = "seq.#{old_num+1}"
     old_num += 1
     #STDERR.puts "HERE: #{num}"
