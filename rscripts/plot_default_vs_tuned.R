@@ -2,8 +2,8 @@ library(ggplot2)
 library(tidyr)
 library(dplyr)
 setwd("~/github/aligner_benchmark/rscripts/")
-cbPalette <- c("#009E73", "#E69F00", "#CE3700", "#C0C0C0", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-
+#cbPalette <- c("#009E73", "#E69F00", "#CE3700", "#C0C0C0", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbPalette <- c("#C0C0C0","#CE3700" , "#E69F00", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
 #plot_100_plot <- function(data,ylabs,titles,file) {
 #  ggplot(data, aes(x=algorithm, y=value, fill=measurement, order = as.numeric(measurement))) + 
@@ -23,13 +23,14 @@ cbPalette <- c("#009E73", "#E69F00", "#CE3700", "#C0C0C0", "#F0E442", "#0072B2",
 
 
 plot_100_plot <- function(data,ylabs,titles,file) {
-  ggplot(arrange(data, measurement), aes(x=tuned, y=value, fill=measurement)) + 
+
+  ggplot(arrange(data, measurement), aes(x=tuned, y=value*100, fill=measurement)) + 
     geom_bar(stat="identity",width= .9) + 
-    theme_gray(base_size=15) +#theme_light()+
-    theme(axis.text.x = element_text(size=15, face ="bold", angle = 90, hjust = 1, vjust = .5),strip.text.x = element_text( angle = 90)) +
+    theme_light(base_size=15) +#theme_light()+
+    theme(axis.text.x = element_text(size=15, face ="bold", angle = 0, hjust = .5, vjust = -1),strip.text.x = element_text( angle = 90)) +
     facet_grid(. ~ algorithm) +
     ylab(ylabs) +  ggtitle(titles) + xlab("") +
-    theme(strip.text.x = element_text(size = 15, colour = "black", angle = 90, face = "bold"))  +
+    theme(strip.text.x = element_text(size = 15, colour = "black", angle = 90, face = "bold"),panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank())  +
     #scale_x_discrete(limits=data[order(data[data$measurement == "aligned correctly",]$mean,decreasing = TRUE),]$algorithm) +
     scale_fill_manual(values=cbPalette) 
   ggsave(
@@ -65,6 +66,8 @@ plot_recall <- function(data,ylabs,titles,file) {
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_malaria_t3r1_read_level_recall.txt", head =T,sep = "\t", colClasses = cols)
 d$algorithm = sub(" tuned", "", d$algorithm)
+d[d$tuned == "default",]$tuned= "d"
+d[d$tuned == "tuned",]$tuned  = "t"
 
 # Plot the 100 plots
 d$measurement[d$measurement == "aligned_correctly"] = "aligned correctly"
@@ -75,7 +78,8 @@ l  = spread(d[,c("level","algorithm","tuned",
 l$"aligned correctly" = 1-l$"aligned ambiguously"-l$unaligned-l$"aligned incorrectly"
 gat = gather(l,measurement,value, -level, -algorithm,-tuned)
 gat = gat[gat$measurement %in% c("aligned incorrectly","aligned ambiguously","unaligned","aligned correctly") ,]
-gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
+#gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
+gat$measurement = factor(gat$measurement, levels = c("unaligned","aligned incorrectly","aligned ambiguously","aligned correctly"))
 r = gat[gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","Effect of tuning - malaria t3 read level","default_vs_tuned/malaria_t3_READ.pdf")
 gat = gather(l,measurement,value,-level, -algorithm, -tuned)
@@ -88,7 +92,8 @@ plot_recall(r,"","Effect of tuning - malaria t3 read level","default_vs_tuned/ma
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_malaria_t3r1_base_level_recall.txt", head =T,sep = "\t", colClasses = cols)
 d$algorithm = sub(" tuned", "", d$algorithm)
-
+d[d$tuned == "default",]$tuned= "d"
+d[d$tuned == "tuned",]$tuned  = "t"
 # Plot the 100 plots
 d$measurement[d$measurement == "aligned_correctly"] = "aligned correctly"
 d$measurement[d$measurement == "aligned_ambiguously"] = "aligned ambiguously"
@@ -98,7 +103,8 @@ l  = spread(d[,c("level","algorithm","tuned",
 l$"aligned correctly" = 1-l$"aligned ambiguously"-l$unaligned-l$"aligned incorrectly"
 gat = gather(l,measurement,value, -level, -algorithm,-tuned)
 gat = gat[gat$measurement %in% c("aligned incorrectly","aligned ambiguously","unaligned","aligned correctly") ,]
-gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
+#gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
+gat$measurement = factor(gat$measurement, levels = c("unaligned","aligned incorrectly","aligned ambiguously","aligned correctly"))
 r = gat[gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","Effect of tuning - malaria t3 base level","default_vs_tuned/malaria_t3_BASE.pdf")
 gat = gather(l,measurement,value,-level, -algorithm, -tuned)
@@ -110,6 +116,8 @@ plot_recall(r,"","Effect of tuning - malaria t3 base level","default_vs_tuned/ma
 # JUNC_LEVEL
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_malaria_t3r1_junction_level_recall.txt", head =T,sep = "\t", colClasses = cols)
+d[d$tuned == "default",]$tuned= "d"
+d[d$tuned == "tuned",]$tuned  = "t"
 d$algorithm = sub(" tuned", "", d$algorithm)
 # Plot the 100 plots
 d=d[d$level == "JUNCLEVEL",]
@@ -134,7 +142,8 @@ plot_recall(r,"","Effect of tuning - malaria t3 junction level","default_vs_tune
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_human_t3r1_read_level_recall.txt", head =T,sep = "\t", colClasses = cols)
 d$algorithm = sub(" tuned", "", d$algorithm)
-
+d[d$tuned == "default",]$tuned= "d"
+d[d$tuned == "tuned",]$tuned  = "t"
 # Plot the 100 plots
 d$measurement[d$measurement == "aligned_correctly"] = "aligned correctly"
 d$measurement[d$measurement == "aligned_ambiguously"] = "aligned ambiguously"
@@ -144,7 +153,7 @@ l  = spread(d[,c("level","algorithm","tuned",
 l$"aligned correctly" = 1-l$"aligned ambiguously"-l$unaligned-l$"aligned incorrectly"
 gat = gather(l,measurement,value, -level, -algorithm,-tuned)
 gat = gat[gat$measurement %in% c("aligned incorrectly","aligned ambiguously","unaligned","aligned correctly") ,]
-gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
+gat$measurement = factor(gat$measurement, levels = c("unaligned","aligned incorrectly","aligned ambiguously","aligned correctly"))
 r = gat[gat$level == "READLEVEL",]
 plot_100_plot(r,"percent of total reads","Effect of tuning - human t3 base level","default_vs_tuned/human_t3_READ.pdf")
 gat = gather(l,measurement,value,-level, -algorithm, -tuned)
@@ -157,7 +166,8 @@ plot_recall(r,"","Effect of tuning - human t3 read level","default_vs_tuned/huma
 cols <- c('character','character','character','character','character','character','numeric','character','character')
 d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_human_t3r1_base_level_recall.txt", head =T,sep = "\t", colClasses = cols)
 d$algorithm = sub(" tuned", "", d$algorithm)
-
+d[d$tuned == "default",]$tuned= "d"
+d[d$tuned == "tuned",]$tuned  = "t"
 # Plot the 100 plots
 d$measurement[d$measurement == "aligned_correctly"] = "aligned correctly"
 d$measurement[d$measurement == "aligned_ambiguously"] = "aligned ambiguously"
@@ -167,7 +177,7 @@ l  = spread(d[,c("level","algorithm","tuned",
 l$"aligned correctly" = 1-l$"aligned ambiguously"-l$unaligned-l$"aligned incorrectly"
 gat = gather(l,measurement,value, -level, -algorithm,-tuned)
 gat = gat[gat$measurement %in% c("aligned incorrectly","aligned ambiguously","unaligned","aligned correctly") ,]
-gat$measurement = factor(gat$measurement, levels = c("aligned correctly","aligned ambiguously","aligned incorrectly","unaligned"))
+gat$measurement = factor(gat$measurement, levels = c("unaligned","aligned incorrectly","aligned ambiguously","aligned correctly"))
 r = gat[gat$level == "BASELEVEL",]
 plot_100_plot(r,"percent of total bases","Effect of tuning - human t3 base level","default_vs_tuned/human_t3_BASE.pdf")
 gat = gather(l,measurement,value,-level, -algorithm, -tuned)
@@ -182,6 +192,8 @@ d = read.csv("/Users/hayerk/Google Drive/AlignerBenchmarkLocal/tuning/summary_hu
 d$algorithm = sub(" tuned", "", d$algorithm)
 # Plot the 100 plots
 d=d[d$level == "JUNCLEVEL",]
+d[d$tuned == "default",]$tuned= "d"
+d[d$tuned == "tuned",]$tuned  = "t"
 d = d[!duplicated(d), ]
 d$measurement[d$measurement =="skipping_recall"] = "recall"
 d$measurement[d$measurement =="skipping_precision"] = "precision"

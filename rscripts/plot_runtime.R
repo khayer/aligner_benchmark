@@ -3,7 +3,7 @@ library(tidyr)
 setwd("~/github/aligner_benchmark/rscripts")
 
 cols <- c('character','character','character','character','character','numeric','character')
-d = read.csv("~/Google Drive/AlignerBenchmarkLocal/run_metrics.tsv", head =T,sep = "\t", colClasses = cols)
+d = read.csv("~/Google Drive/AlignerBenchmarkLocal/old/run_metrics.tsv", head =T,sep = "\t", colClasses = cols)
 #d = read.csv("/Users/hayer/Downloads/test500.tsv", head =T,sep = "\t", colClasses = cols)
 
 d$mean = rep(0,dim(d)[1])
@@ -50,8 +50,9 @@ plot_my_data <- function(data, measurement, title, filename) {
     #geom_text(aes(label = tmp), size = 3) +
     ggtitle(title) +
     xlab("Algorithm") + ylab(measurement) + #ylim(c(-0.0001,1.0001)) +
-    scale_x_discrete(limits=data[order(data$mean,decreasing = FALSE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
-    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
+    theme_bw(base_size=17) + 
+    scale_x_discrete(limits=data[order(data$mean,decreasing = FALSE),]$algorithm)  + #theme_gray(base_size=17) +#theme_light()+
+    theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5),panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + #scale_fill_brewer(palette="Accent") +
     scale_fill_manual(values = data$color) +
     
     guides(fill=FALSE) 

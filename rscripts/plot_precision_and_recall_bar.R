@@ -87,62 +87,101 @@ plot_my_data_scatter_labels <- function(data, measurement1, measurement2, title,
   #data$tmp <- NULL
 }
 
-#plot_my_data_scatter_labels <- function(data, measurement1, measurement2, title, filename) {
-  # data = k 
-  # measurement one of #{recall, precision}
-  print(measurement1)
-  data$tmp1= data[,colnames(data) == measurement1]
-  print(measurement2)
-  data$color[data$color == "#F0E442"] = "cornflowerblue"
-  data$tmp2 = data[,colnames(data) == measurement2]
-  print(head(data))
-  print(data$tmp2)
-  data$algorithm = factor(data$algorithm)
-  print(levels(data$algorithm))
-  ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm, label = algorithm)) + 
-    geom_point(size=5) +
-    #geom_text(aes(label = tmp), size = 3) +
-    ggtitle(title) + theme_gray(base_size=20) + 
-    scale_shape_manual(values=1:nlevels(data$algorithm) ) +
-    xlab("Algorithm") + xlab(measurement1)+ ylab(measurement2)+ #ylim(c(-0.0001,1.0001)) +
-    #scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
-    #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
-    #scale_fill_manual(values = data$color) +
-    scale_color_manual(values = data$color) + 
-    #scale_colour_brewer(palette = "Dark2") +
-    #geom_text(hjust = 0, nudge_x = 0.005, check_overlap = TRUE) +
-    #xlim(c(.875,1.03)) +
-    theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
-    #geom_text_repel(point.padding = unit(0.25, "lines")) +
-    geom_text_repel(point.padding = unit(0.25, "lines")) +
-    guides(fill=FALSE) 
-  ggsave(
-    filename,
-    width = 8.25,
-    height = 5.75,
-    dpi = 300
-  )
-  #data$tmp <- NULL
-}
+##plot_my_data_scatter_labels <- function(data, measurement1, measurement2, title, filename) {
+#  # data = k 
+#  # measurement one of #{recall, precision}
+#  print(measurement1)
+#  data$tmp1= data[,colnames(data) == measurement1]
+#  print(measurement2)
+#  data$color[data$color == "#F0E442"] = "cornflowerblue"
+#  data$tmp2 = data[,colnames(data) == measurement2]
+#  print(head(data))
+#  print(data$tmp2)
+#  data$algorithm = factor(data$algorithm)
+#  print(levels(data$algorithm))
+#  ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm, label = algorithm)) + 
+#    geom_point(size=5) +
+#    #geom_text(aes(label = tmp), size = 3) +
+#    ggtitle(title) + theme_gray(base_size=20) + 
+#    scale_shape_manual(values=1:nlevels(data$algorithm) ) +
+#    xlab("Algorithm") + xlab(measurement1)+ ylab(measurement2)+ #ylim(c(-0.0001,1.0001)) +
+#    #scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
+#    #theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5)) + #scale_fill_brewer(palette="Accent") +
+#    #scale_fill_manual(values = data$color) +
+#    scale_color_manual(values = data$color) + 
+#    #scale_colour_brewer(palette = "Dark2") +
+#    #geom_text(hjust = 0, nudge_x = 0.005, check_overlap = TRUE) +
+#    #xlim(c(.875,1.03)) +
+#    theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
+#    #geom_text_repel(point.padding = unit(0.25, "lines")) +
+#    geom_text_repel(point.padding = unit(0.25, "lines")) +
+#    guides(fill=FALSE) 
+#  ggsave(
+#    filename,
+#    width = 8.25,
+#    height = 5.75,
+#    dpi = 300
+#  )
+#  #data$tmp <- NULL
+#}
 
 plot_my_data_scatter <- function(data, measurement1, measurement2, title, filename, write_file = TRUE) {
   # data = k 
   # measurement one of #{recall, precision}
   print(measurement1)
-  data$tmp1= data[,colnames(data) == measurement1]
+  data$tmp1= data[,colnames(data) == measurement1] * 100
   print(measurement2)
   data$color[data$color == "#F0E442"] = "cornflowerblue"
-  data$tmp2 = data[,colnames(data) == measurement2]
+  data$tmp2 = data[,colnames(data) == measurement2] * 100
   print(head(data))
   print(data$tmp2)
   data$algorithm = factor(data$algorithm)
   print(levels(data$algorithm))
   xlim <- range( data$tmp1 )
   ylim <- range( data$tmp2 )
-  xlim[2] = 1.01
-  ylim[2] = 1.01
-  p = ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, label = algorithm)) + 
-    geom_point(size=3,alpha = 0.85) +
+  xlim[2] = 100
+  ylim[2] = 100
+  # 40%
+  #if ((5*ylim[1]-200)/3 > 0) {
+  #  ylim[1] = (5*ylim[1]-200)/3 
+  #} else {
+  #  ylim[1] = 1
+  #}
+  #  
+  #if ((5*xlim[1]-200)/3 > 0) {
+  #  xlim[1] = (5*xlim[1]-200)/3 
+  #} else {
+  #  xlim[1] = 0
+  #}
+  # 30% Ok let's try 30%.  change the formula to (10x-300)/9
+  #distance = ylim[2] - ylim[1]
+  # 40% (10x - 300) / 7
+  if ((10*ylim[1]-300)/7 > 0) {
+    ylim[1] = (10*ylim[1]-300)/7 
+  } else {
+    ylim[1] = 1
+  }
+    
+  if ((10*xlim[1]-300)/7 > 0) {
+    xlim[1] = (10*xlim[1]-300)/7 
+  } else {
+    xlim[1] = 0
+  }
+  #if ((ylim[1]-(distance*(30/100))) > 0) {
+  #  ylim[1] = ylim[1]-(distance*(30/100))
+  #} else {
+  #  ylim[1] = 0
+  #}
+  #distance = xlim[2] - xlim[1]
+  #if ((xlim[1]-(distance*(40/100))) > 0) {
+  #  xlim[1] = xlim[1]-(distance*(40/100))
+  #} else {
+  #  xlim[1] = 0
+  #}
+  #ylim[1] = 0
+  #xlim[1] = 0
+  p = ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm, label = algorithm)) + 
+    geom_point(size=5,alpha = 0.85) +
     #geom_text(aes(label = tmp), size = 3) +
     ggtitle(title) + theme_bw(base_size=20) + 
     scale_shape_manual(values=1:nlevels(data$algorithm) ) +
@@ -154,9 +193,9 @@ plot_my_data_scatter <- function(data, measurement1, measurement2, title, filena
     #scale_colour_brewer(palette = "Dark2") +
     #geom_text(hjust = 0, nudge_x = 0.005, check_overlap = TRUE) +
     #xlim(c(.875,1.03)) +
-    theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
+    theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + 
     #geom_text_repel(point.padding = unit(0.25, "lines")) +
-    geom_text_repel(force = 5, point.padding = unit(0.65, "lines"),arrow = arrow(length = unit(0.01, 'npc'))) +
+    #geom_text_repel(force = 5, point.padding = unit(0.65, "lines"),arrow = arrow(length = unit(0.01, 'npc'))) +
     ylim(ylim) + xlim(xlim) + 
     guides(fill=FALSE) 
   print(p)
@@ -222,6 +261,7 @@ k = k[k$dataset == "t3",]
 plot_my_data(k,"recall","human read level","read_level/human_t3_READ_recall.pdf")
 plot_my_data(k,"precision","human read level","read_level/human_t3_READ_precision.pdf")
 plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t3_READ_scatter.pdf")
+#plot_my_data_scatter(k,"precision","recall","human read level","read_level/0_1_scatter.pdf")
 plot_my_data_scatter_labels(k,"precision","recall","human read level","read_level/human_t3_READ_scatter_labels.pdf")
 plot_my_data_bars(k,"precision","recall","human read level","read_level/human_t3_READ_bars.pdf")
 k = l[l$species == "human" & l$level == "READLEVEL",]

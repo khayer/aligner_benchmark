@@ -50,10 +50,10 @@ plot_my_data_scatter <- function(data, measurement1, measurement2, title, filena
   # data = k 
   # measurement one of #{recall, precision}
   print(measurement1)
-  data$tmp1= data[,colnames(data) == measurement1]
+  data$tmp1= data[,colnames(data) == measurement1] * 100
   print(measurement2)
   data$color[data$color == "#F0E442"] = "cornflowerblue"
-  data$tmp2 = data[,colnames(data) == measurement2]
+  data$tmp2 = data[,colnames(data) == measurement2] * 100
   print(head(data))
   print(data$tmp2)
   data$algorithm = factor(data$algorithm)
@@ -61,7 +61,8 @@ plot_my_data_scatter <- function(data, measurement1, measurement2, title, filena
   p = ggplot(data,aes(x=tmp1, y=tmp2, col = algorithm, shape= algorithm, label = algorithm)) + 
     geom_point(size=5) +
     #geom_text(aes(label = tmp), size = 3) +
-    ggtitle(title) + theme_gray(base_size=20) + 
+    ggtitle(title) + theme_bw(base_size=20) + 
+    theme(panel.border = element_blank(), panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black")) + 
     scale_shape_manual(values=1:nlevels(data$algorithm) ) +
     xlab("Algorithm") + xlab(measurement1)+ ylab(measurement2)+ #ylim(c(-0.0001,1.0001)) +
     #scale_x_discrete(limits=data[order(data$tmp,decreasing = TRUE),]$algorithm)  + theme_gray(base_size=17) +#theme_light()+
@@ -71,8 +72,9 @@ plot_my_data_scatter <- function(data, measurement1, measurement2, title, filena
     #scale_colour_brewer(palette = "Dark2") +
     #geom_text(hjust = 0, nudge_x = 0.005, check_overlap = TRUE) +
     #xlim(c(.875,1.03)) +
-    theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
-    guides(fill=FALSE) 
+    #theme(panel.background = element_rect(colour = "gray97", fill="gray97")) + 
+    guides(fill=FALSE)  + 
+    xlim(0,100) + ylim(0,100)
   print(p)
   if (write_file) {
     ggsave(
@@ -254,9 +256,9 @@ plot_my_data_scatter_bw_theme(k,"precision","recall","human read level","read_le
 k = l[l$species == "human" & l$level == "READLEVEL",]
 k = k[k$dataset == "t1",]
 plot_my_data_scatter(k,"precision","recall","human read level","read_level/human_t1_READ_scatter.pdf",TRUE)
-plot_my_data_scatter_labels(k,"precision","recall","human read level","read_level/human_t1_READ_scatter_labels.pdf", TRUE)
-plot_my_data_scatter_labels_shapes(k,"precision","recall","human read level","read_level/human_t1_READ_scatter_labels_shapes.pdf", TRUE)
-plot_my_data_scatter_bw_theme(k,"precision","recall","human read level","read_level/human_t1_READ_scatter_bw_theme.pdf", TRUE)
+plot_my_data_scatter_labels(k,"precision","recall","human read level","read_level/human_t1_READ_scatter_labels.pdf")
+plot_my_data_scatter_labels_shapes(k,"precision","recall","human read level","read_level/human_t1_READ_scatter_labels_shapes.pdf")
+plot_my_data_scatter_bw_theme(k,"precision","recall","human read level","read_level/human_t1_READ_scatter_bw_theme.pdf")
 
 ```
 
